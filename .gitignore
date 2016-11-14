@@ -1,0 +1,12 @@
+.idea
+
+*.pyc
+__pycache__
+
+node_modules
+npm_debug.log*
+bower_components
+
+*.sqlite3
+
+build

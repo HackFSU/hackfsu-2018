@@ -1,0 +1,20 @@
+block vars
+    - var pageTitle = ""
+
+doctype html
+html
+    head
+        title= getTitle(pageTitle)
+
+        //- CSS
+        link(type="text/css" href="/static/views/main.css")
+        block localCSS
+
+    body
+        block content
+
+
+
+        //- JavaScript
+        script(src="/static/views/main.js")
+        block localJS

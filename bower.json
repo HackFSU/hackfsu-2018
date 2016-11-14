@@ -1,0 +1,23 @@
+{
+  "name": "hackfsu-com",
+  "description": "tessbennett.com",
+  "main": "",
+  "authors": [
+    "jrdbnntt <jrdbnntt@gmail.com>"
+  ],
+  "license": "Apache 2.0",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "build",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7"
+  }
+}

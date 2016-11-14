@@ -1,0 +1,22 @@
+{
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "forin": true,
+  "freeze": true,
+  "funcscope": true,
+  "futurehostile": true,
+  "latedef": true,
+  "noarg": true,
+  "nocomma": true,
+  "nonbsp": true,
+  "nonew": true,
+  "singleGroups": true,
+  "undef": true,
+  "unused": true,
+
+  "strict" : false,
+  "browser": false,
+  "jquery": false,
+  "node": true
+}

@@ -10,3 +10,7 @@ bower_components
 *.sqlite3
 
 build
+
+scripts/data
+
+secret_keys.json

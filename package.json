@@ -1,9 +1,9 @@
 {
-  "name": "tessbennett-com",
-  "version": "1.0.0",
-  "homepage": "tessbennett.com",
+  "name": "hackfsu.com",
+  "version": "4.0.0",
+  "homepage": "hackfsu.com",
   "description": "tessbennett.com",
-  "repository": "https://github.com/jrdbnntt/tessbennett-com",
+  "repository": "https://github.com/HackFSU/hackfsu_com",
   "main": "",
   "scripts": {
     "build": "gulp build"

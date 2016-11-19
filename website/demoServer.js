@@ -32,7 +32,6 @@ app.get('/', function(req, res) { res.sendFile(path.join(__dirname, './build/vie
 app.get('/register', function(req, res) { res.sendFile(path.join(__dirname, './build/views/register/register.html')); } );
 
 
-
 /**
  * Mock api
  */

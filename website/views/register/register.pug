@@ -1,4 +1,7 @@
-extend ../_pug/mainLayout
+extends ../_pug/standardLayout.pug
+
+block vars
+    - var pageTitle = "Register"
 
 block localJS
     script(src="/static/views/register/register.js")

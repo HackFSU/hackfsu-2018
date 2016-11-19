@@ -1,7 +1,32 @@
-extend ../_pug/mainLayout
+extends ../_pug/baseLayout.pug
 
 block localJS
     script(src="/static/views/index/index.js")
 
+block navbar
+    +navbar(navLinks.index)
+
 block content
-    h1 TODasdasdsa
+    .section.section-title
+        h1 HackFSU
+        p
+            span: img.img-responsive(src="#" alt="logo")
+            span FEB. 17-19
+        
+    .section.section-block-right
+        .section-title FAQS
+        .section-content
+            .faq-container
+                include ./_faqs.pug
+
+    .section.section-block-left
+        .section-title THE HACKING CULTURE
+        .section-content
+            p Todo. Rutrum quod eligendi deleniti lectus, autem? Delectus libero, quos nullam sint officiis aperiam, dui, quo mattis, wisi? Necessitatibus voluptatibus reiciendis morbi repellat commodi quasi. Convallis lorem ab? Augue proident iure. Dolor nullam eros quo a sollicitudin. Penatibus interdum quasi integer, vitae vulputate mollitia, erat delectus ligula quidem phasellus sollicitudin habitant, nam nihil odio eum error distinctio, elementum non reprehenderit varius blanditiis ipsam, autem occaecat bibendum molestias platea suspendisse mi, nonummy scelerisque molestias? Sagittis earum lacinia quia incididunt, ullam nisl voluptatibus, assumenda aliquid scelerisque eos, litora cum aptent eaque curabitur auctor, odit dolorem? Placeat vitae hymenaeos integer molestiae maiores dolore, dignissimos.
+            
+    .section.section-sponsors
+        .section-title SPONSORS
+        .section-content
+            p Todo. Some messege about becoming a sponsor and that our sponsors will be announced soon.
+            //- Sponsor image blob to add later
+                .sponsor-container

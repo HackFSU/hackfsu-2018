@@ -1,16 +1,15 @@
+# Editor/Enviroment
 .idea
-
 *.pyc
 __pycache__
-
 node_modules
-npm_debug.log*
+npm-debug.log*
 bower_components
-
 *.sqlite3
 
+
+# Project
 build
-
 scripts/data
-
 secret_keys.json
+

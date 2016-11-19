@@ -100,6 +100,11 @@ gulp.task('bower', function() {
     return bower();
 });
 
+gulp.task('demo', ['bower'], function() {
+    var demoServer = require('./website/demoServer');
+    demoServer.boot();
+});
+
 gulp.task('build', ['css', 'html', 'js']);
 
 gulp.task('watch', ['build'], function(){

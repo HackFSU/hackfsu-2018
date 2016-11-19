@@ -1,0 +1,34 @@
+include mixins/navbar.pug
+
+block vars
+    - var pageTitle = ""
+
+include ./includes/ascii-logo.pug
+doctype html
+html
+    head
+        title= getTitle(pageTitle)
+        
+        include ./includes/metadata.pug
+        
+        //- CSS
+        link(rel="stylesheet" type="text/css" href="/static/bower_components/font-awesome/css/font-awesome.min.css")
+        link(rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css")
+        link(rel="stylesheet" type="text/css" href="/static/views/main.css")
+        block localCSS
+
+    body
+        block navbar
+        
+        block page
+            .content-container
+                block content
+
+
+        include includes/footer.pug
+
+        //- JavaScript
+        script(src="/static/bower_components/jquery/dist/jquery.min.js")
+        script(src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js")
+        script(src="/static/views/main.js")
+        block localJS

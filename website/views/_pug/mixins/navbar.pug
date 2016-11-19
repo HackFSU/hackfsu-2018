@@ -1,0 +1,16 @@
+//- Bootstrap navbar with overwridden styles
+mixin navbar(links)
+    nav.nabar-navbar-default
+        .navbar-header
+            button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false")
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+
+            .navbar-brand HackFSU
+
+        #nav-collapse.collapse.navbar-collapse
+            ul.nav.navbar-nav
+               each link in links
+                    li: a(href=link.url) #{link.name}

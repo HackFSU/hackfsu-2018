@@ -6,7 +6,7 @@ node_modules
 npm-debug.log*
 bower_components
 *.sqlite3
-
+/venv
 
 # Project
 build

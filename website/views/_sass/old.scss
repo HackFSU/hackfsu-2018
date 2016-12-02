@@ -1,6 +1,9 @@
 /*
  Old Css from 2016 Site. Needs to be striped of anything useful
 */
+body {
+    background: #fff ;
+}
 
 #error-page, #help-request-page {
     min-height: 500px;
@@ -27,17 +30,15 @@
 
 #confirmation {
     min-height: 400px;
-}
-
-#confirmation h2 {
+    h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
-}
-
-#confirmation p.strong {
+    }
+    p.strong {
     font-size: 1em;
     font-weight: 500;
     margin-top: 5px;
+    }
 }
 
 #error-messages {
@@ -56,6 +57,22 @@
 
 #availability {
     margin-top: -10px;
+    margin-left: 30px;
+    .one_fourth {
+    text-align: left !important;
+    }
+    h2 {
+    font-weight: 400;
+    font-size: 1.25em;
+    }
+    .side-list {
+    //margin-left: 70px;
+      margin-left: 0;
+    }
+}
+
+#availability-blurb {
+    margin-top: 10px;
 }
 
 #mentor textarea, #help textarea {
@@ -70,24 +87,11 @@
     margin-top: 10px;
 }
 
-#availability .one_fourth {
-    text-align: left !important;
-}
-
-#availability h2 {
-    font-weight: 400;
-    font-size: 1.25em;
-}
-
-#availability .side-list {
-    margin-left: 70px;
-}
-
-#availability-blurb {
-    margin-top: 10px;
-}
-
 @media screen and (max-width: 960px) {
+    #helpreq-section {
+        margin-top: 0
+    }
+
     .footer-copyright {
         font-size: 1em;
     }
@@ -115,13 +119,6 @@
         margin-top: 30px;
     }
 
-    #availability {
-        margin-left: 30px;
-    }
-    #availability .side-list {
-        margin-left: 0;
-    }
-
     h2.section-title {
         line-height: 55px;
     }
@@ -130,14 +127,14 @@
         font-size: 2em !important;
     }
 
-
-    .hero.date {
+    .hero{
+        &.date {
         font-size: 2.5em !important;
         margin-bottom: 0.25em !important;
-    }
-
-    .hero.fsu {
+        }
+        &.fsu {
         font-size: 1.3em;
+        }
     }
 
     .margin-left-15 {
@@ -158,6 +155,59 @@
 
     .margin-right-15 {
         margin-right: 0 !important;
+    }
+
+    #sponsor-logos {
+        margin-top: -70px;
+    }
+    .apple-logo img {
+        margin: 110px;
+    }
+
+    a.state-farm-logo > img {
+        max-width: 350px !important;
+    }
+
+    a.jmi-logo > img {
+        margin-left: 0px;
+        padding-bottom: 0px;
+        padding-right: 0px;
+        max-width: 300px !important;
+    }
+
+    a.domi-logo > img {
+        padding-bottom: 0;
+    }
+
+    a.seminole-dining-logo > img {
+        padding-bottom: 0;
+    }
+
+    a.soylent-logo > img {
+        max-width: 200px !important;
+    }
+    a#mlh-trust-badge {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 841px) {
+    #schedule .three_fourth {
+        width: 75%;
+        float: right;
+    }
+    #schedule .one_fourth {
+        width: 25%;
+        float: left;
+    }
+    p.schedule-time {
+        overflow: auto;
+    }
+    #schedule .one_half {
+        padding-top: 20px;
+    }
+    .schedule-events {
+        margin-top: -15px;
     }
 }
 
@@ -208,19 +258,19 @@
 .social {
     margin-top: 0.5em;
     font-size: 0.6em;
-}
-
-.social i.fa {
-    color: white;
-    padding-right: 1em;
-    font-size: 3em;
-}
-
-.social i.fa:hover {
-    color: #a8d3f1;
-}
-.social i.fa.last {
-    padding-right: 0;
+    i{
+        &.fa {
+        color: white;
+        padding-right: 1em;
+        font-size: 3em;
+        }
+        &.fa:hover {
+        color: #a8d3f1;
+        }
+        &.fa.last {
+        padding-right: 0;
+        }
+    }
 }
 
 .half input {
@@ -230,105 +280,91 @@
 a {
     color: #eecdb5;
     font-weight: 400;
-}
-
-a:visited {
+    &:visited{
+       color: #eecdb5;
+    }
+    &:link {
     color: #eecdb5;
+    }
 }
-
-a:link {
-    color: #eecdb5;
-}
-
 
 .hero {
     color: #fff;
     font-family: 'Uni Sans', sans-serif;
     font-weight: 700;
     font-size: 3em;
-}
-
-.hero .register-closed {
+    .register-closed {
     opacity: 0.6;
     border: 0.15em solid #f2f2f2;
     border-radius: 4px;
     padding: 0 0.25em;
     line-height: normal;
     color: #f2f2f2;
-}
+    }
+    &.topRight{
+        .register {
+            border: 0.15em solid #fff;
+            border-radius: 4px;
+            padding: 0em 0.25em;
+            line-height: normal;
+            transition: 200ms all;
+            -webkit-transition: 200ms all;
+            -moz-transition: 200ms all;
+            -o-transition: 200ms all;
+            &:hover{
+                background: #fff;
+                color: #a8d3f1;
+                cursor: pointer;
+            }
+            a:hover {
+                color: #a8d3f1;
+            }
+        }
+        .thinUni {
+            font-weight: 100;
+            font-size: 0.5em;
+            vertical-align: 13%;
+            margin-right: 3px;
+        }
+    }
+    &.sponsor {
+        margin-top: 15px;
+        font-size: 2em;
+        text-align: right;
+    }
+    &.topRight {
+        float: right;
+        font-size: 16px;
+    }
+    &.bottomLeft {
+        position: absolute;
+        bottom: 40px;
+        font-size: 20px;
+        .date {
+            font-size: 4em;
+            margin-bottom: 40px;
+        }
+        .fsu {
+            font-weight: 100;
+        }
+    }
+    a {
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
 
-.hero.topRight .register {
-    border: 0.15em solid #fff;
-    border-radius: 4px;
-    padding: 0em 0.25em;
-    line-height: normal;
-    transition: 200ms all;
-    -webkit-transition: 200ms all;
-    -moz-transition: 200ms all;
-    -o-transition: 200ms all;
-}
-
-.hero.topRight .register:hover {
-    background: #fff;
-    color: #a8d3f1;
-    cursor: pointer;
-}
-
-.hero.topRight .register a:hover {
-    color: #a8d3f1;
-}
-
-.hero.topRight .thinUni {
-    font-weight: 100;
-    font-size: 0.5em;
-    vertical-align: 13%;
-    margin-right: 3px;
-}
-
-.hero.sponsor {
-    margin-top: 15px;
-    font-size: 2em;
-    text-align: right;
-}
-
-.hero.topRight {
-    float: right;
-    font-size: 16px;
-}
-
-.hero.bottomLeft {
-    position: absolute;
-    bottom: 40px;
-    font-size: 20px;
-}
-
-.hero.bottomLeft .date {
-    font-size: 4em;
-    margin-bottom: 40px;
-}
-
-.hero.bottomLeft .fsu {
-    font-weight: 100;
-}
-
-.hero a {
-    font-weight: 700;
-    color: #fff;
-    text-decoration: none;
-}
-
-.hero a:visited {
-    color: #fff;
-    text-decoration: none;
-}
-
-.hero a:link {
-    color: #fff;
-    text-decoration: none;
-}
-
-.hero a:hover {
-    color: rgba(255, 255, 255, 0.7);
+        &:visited {
+            color: #fff;
+            text-decoration: none;
+        }
+        &:link {
+            color: #fff;
+            text-decoration: none;
+        }
+        &:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+    }
 }
 
 .logotext {
@@ -354,10 +390,6 @@ a:link {
     margin: 10px;
 }
 
-body {
-    background: #fff ;
-}
-
 
 .main-menu-fixbg {
     background-color: #303030;
@@ -374,24 +406,24 @@ body {
 .margin-right-15 {
     margin-right: 13%;
 }
-
+ @mixin form-col-font-and-padding{
+     font-size: 18px;
+     font-family: 'Open Sans', sans-serif;
+     padding: 8px;
+ }
 .form-col-left {
     float: left !important;
     width: 25%;
-    padding: 8px;
-    font-size: 18px;
-    font-family: 'Open Sans', sans-serif;
+    @include("form-col-font");
     text-align: right;
     color: #8bd1c9;
     font-weight: 400;
 }
 .form-col-right {
+    @include("form-col-font");
     float: right;
     width: 60%;
     margin-right: 10%;
-    padding: 8px;
-    font-size: 18px;
-    font-family: 'Open Sans', sans-serif;
 }
 
 #application, #mentor, #help, #login {
@@ -412,11 +444,10 @@ body {
     background-color: #eecdb5;
     font-weight: 400;
     font-size: 1em;
-}
-
-#travel h1 {
-    font-family: 'Uni Sans';
-    font-size: 1.4em;
+    h1 {
+        font-family: 'Uni Sans';
+        font-size: 1.4em;
+    }
 }
 
 #titlePiece {
@@ -438,13 +469,14 @@ body {
     color: #fff;
 }
 
-.white-section a {
-    color: #fff;
-    font-weight: 700;
-}
-
-.white-section .title-separator {
-    border-color: #fff;
+.white-section{
+    a {
+        color: #fff;
+        font-weight: 700;
+    }
+    .title-separator {
+        border-color: #fff;
+    }
 }
 
 
@@ -463,10 +495,9 @@ body {
     background-position: top right;
     background-repeat: no-repeat;
     padding-bottom: 200px;
-}
-
-.hackingDiv p {
-    font-size: 24px;
+    p {
+        font-size: 24px;
+    }
 }
 
 
@@ -476,11 +507,11 @@ body {
     background-position: bottom;
     background-repeat: no-repeat;
     padding-bottom: 150px;
+    p {
+        font-size: 24px;
+    }
 }
 
-.registerDiv p {
-    font-size: 24px;
-}
 
 h2.section-title {
     letter-spacing: normal;
@@ -563,7 +594,6 @@ button[type="submit"]:disabled {
 }
 
 .btn:hover,
-
 .btn:active,
 .btn.active {
     background-image: none;
@@ -589,13 +619,32 @@ button[type="submit"]:disabled {
     margin-bottom: 100px;
     font-size: 16px;
 }
+
 .btn-form:hover:not(:disabled) {
     background-color: #8bd1c9;
     color: #fff;
     box-shadow: none;
 }
 
-
+.btn-help {
+    background-color: transparent;
+    border-radius: 3px;
+    border: 0.2em solid #8bd1c9;
+    padding: 10px;
+    outline: 0;
+    font-weight: 600;
+    transition: 200ms all;
+    -webkit-transition: 200ms all;
+    -moz-transition: 200ms all;
+    -o-transition: 200ms all;
+    color: #8bd1c9;
+    font-size: 16px;
+}
+.btn-help:hover:not(:disabled) {
+    background-color: #8bd1c9;
+    color: #fff;
+    box-shadow: none;
+}
 .form-error {
     color: #ef626c;
 }
@@ -662,8 +711,6 @@ button[type="submit"]:disabled {
 [type="checkbox"]:disabled + label {
     color: #aaa;
 }
-
-
 
 
 /*****************************************************************************
@@ -741,7 +788,9 @@ button[type="submit"]:disabled {
 }
 
 
-
+/*****************************************************************************
+ * ANIMATIONS
+ */
 
 
 .shakeText {
@@ -795,7 +844,7 @@ button[type="submit"]:disabled {
     100% { -webkit-transform:     translate(1px, 0px) rotate(0deg); transform:     translate(1px, 0px) rotate(0deg); }
 }
 
-/**
+/**********************************************
  * GEOLOCATION LOADING
  */
 
@@ -809,16 +858,14 @@ button[type="submit"]:disabled {
     animation-iteration-count: infinite;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-}
-
-.saving span:nth-child(2) {
-    -webkit-animation-delay: .2s;
-    animation-delay: .2s;
-}
-
-.saving span:nth-child(3) {
-    -webkit-animation-delay: .4s;
-    animation-delay: .4s;
+    &:nth-child(2) {
+        -webkit-animation-delay: .2s;
+        animation-delay: .2s;
+    }
+    &:nth-child(3) {
+        -webkit-animation-delay: .4s;
+        animation-delay: .4s;
+    }
 }
 
 .footer-copyright {
@@ -940,31 +987,6 @@ sup {
     font-size: 0.6em;
 }
 
-@media screen and (max-width: 841px) {
-    #schedule .three_fourth {
-        width: 75%;
-        float: right;
-    }
-    #schedule .one_fourth {
-        width: 25%;
-        float: left;
-    }
-    p.schedule-time {
-        overflow: auto;
-    }
-    #schedule .one_half {
-        padding-top: 20px;
-    }
-    .schedule-events {
-        margin-top: -15px;
-    }
-}
-
-@media screen and (max-width: 960px) {
-    a#mlh-trust-badge {
-        display: none !important;
-    }
-}
 
 /**
 * Stuff for sponsors
@@ -986,42 +1008,38 @@ h3#partners {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-}
-
-#partners-logos .logo {
-    max-width: 250px;
-    margin: 30px 50px;
+    .logo {
+        max-width: 250px;
+        margin: 30px 50px;
+    }
 }
 
 #sponsor-logos {
     padding-top: 30px;
+    .logo {
+        margin: 27.5px 55px;
+    }
+    img {
+        max-width: 325px;
+    }
 }
 
-#sponsor-logos .logo {
-    margin: 27.5px 55px;
-}
-
-#sponsor-logos img {
-    max-width: 325px;
-}
-
-#tier2 {
+@mixin tier() {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: center
+}
+#tier2 {
+    @include tier;
 }
 
 /* How to make this better i wonder ? */
 #tier1 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
-#tier1 img {
-    max-width: 200px;
+    @include tier;
+    img {
+        max-width: 200px;
+    }
 }
 
 .apple-logo img {
@@ -1066,39 +1084,8 @@ a.soylent-logo > img {
     max-width: 280px !important;
 }
 
-@media screen and (max-width: 960px) {
-    #sponsor-logos {
-        margin-top: -70px;
-    }
-    .apple-logo img {
-        margin: 110px;
-    }
 
-    a.state-farm-logo > img {
-        max-width: 350px !important;
-    }
-
-    a.jmi-logo > img {
-        margin-left: 0px;
-        padding-bottom: 0px;
-        padding-right: 0px;
-        max-width: 300px !important;
-    }
-
-    a.domi-logo > img {
-        padding-bottom: 0;
-    }
-
-    a.seminole-dining-logo > img {
-        padding-bottom: 0;
-    }
-
-    a.soylent-logo > img {
-        max-width: 200px !important;
-    }
-}
-
-/**
+/*********************************************
 * Confirmation page
 */
 #mlh-data-sharing {
@@ -1107,7 +1094,7 @@ a.soylent-logo > img {
 }
 
 
-/**
+/************************************
 * Stuff for helpreqs
 */
 #helpreq-section {
@@ -1129,34 +1116,9 @@ table#helpreqs td {
     padding: 10px;
 }
 
-.btn-help {
-    background-color: transparent;
-    border-radius: 3px;
-    border: 0.2em solid #8bd1c9;
-    padding: 10px;
-    outline: 0;
-    font-weight: 600;
-    transition: 200ms all;
-    -webkit-transition: 200ms all;
-    -moz-transition: 200ms all;
-    -o-transition: 200ms all;
-    color: #8bd1c9;
-    font-size: 16px;
-}
-.btn-help:hover:not(:disabled) {
-    background-color: #8bd1c9;
-    color: #fff;
-    box-shadow: none;
-}
-
-@media screen and (max-width: 960px) {
-    #helpreq-section {
-        margin-top: 0
-    }
-}
-
 
 /*	PROFILE	*/
+$profilered:#ef626c;
 
 .userprofile{
     margin-left: 7%;
@@ -1166,42 +1128,40 @@ table#helpreqs td {
     margin-bottom: 5%;
     /*padding-bottom: 150px;
     height:100%;*/
-}
-.userprofile h1{
-    font-size:2.7em !important;
-    margin-bottom: 0;
-    line-height: 100%;
-    font-weight:600;
-    color: #303030;
+    h1{
+        font-size:2.7em !important;
+        margin-bottom: 0;
+        line-height: 100%;
+        font-weight:600;
+        color: #303030;
+    }
+    h2{
+        font-size:2em !important;
+        margin-bottom: .5em;
+        line-height: 100%;
+        color: #303030;
+    }
+    h3 {
+        font-size: 1.5em;
+        line-height: 100%;
+    }
+    p {
+        font-size: 1.5em;
+        line-height: 120%;
+    }
+    a {
+        color: $profilered;
+        font-size: 2em;
+        margin-bottom:.5em !important;
+        font-weight:700;
+        text-decoration: none;
+        line-height: 100%;
+    }
 }
 
-.userprofile h2{
-    font-size:2em !important;
-    margin-bottom: .5em;
-    line-height: 100%;
-    color: #303030;
-}
-.userprofile h3 {
-    font-size: 1.5em;
-    line-height: 100%;
-}
-
-.userprofile p {
-    font-size: 1.5em;
-    line-height: 120%;
-}
-
-.userprofile a {
-    color: #ef626c;
-    font-size: 2em;
-    margin-bottom:.5em !important;
-    font-weight:700;
-    text-decoration: none;
-    line-height: 100%;
-}
 
 .accessdeniedstyle {
-    color: #ef626c;
+    color: $profilered;
     font-size: 3em;
     margin-bottom: .5em;
     font-weight:700;
@@ -1209,7 +1169,7 @@ table#helpreqs td {
 }
 
 .adminlink {
-    color: #ef626c;
+    color: $profilered;
     font-size: 1em;
     margin-bottom: .5em;
     font-weight:700;
@@ -1228,7 +1188,6 @@ table#helpreqs td {
 .eventinfop {
     font-size: 22px;
 }
-
 
 .open-sans {
     font-family: 'Open Sans';

@@ -26,7 +26,7 @@ def load_secret_keys():
     global DB_USER
     global DB_PASSWORD
 
-    with open('secret_keys.json') as file:
+    with open(os.path.dirname(os.path.abspath(__file__)) + '/secret_keys.json') as file:
         secret_keys = json.load(file)
 
         def set_if_exists(current, key):

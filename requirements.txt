@@ -1,2 +1,4 @@
+paramiko
 requests
 django
+simple-crypt

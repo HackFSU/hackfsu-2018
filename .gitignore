@@ -7,6 +7,7 @@ npm-debug.log*
 bower_components
 *.sqlite3
 /venv
+*.tmp
 
 # Project
 build

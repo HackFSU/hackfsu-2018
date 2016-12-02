@@ -22,6 +22,7 @@ git fetch --all
 git reset --hard
 git checkout live
 git reset --hard origin/live
+git merge origin/live
 
 # Update dependencies
 ./venv/bin/pip3.5 install -r ./requirements.txt

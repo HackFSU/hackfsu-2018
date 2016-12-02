@@ -1,8 +1,17 @@
+"""
+    An attempt to make an auto-deploy that logs in via ssh and then runs the deploy.sh.
+
+    Does not fully work, could not get the git creds to inject. Just log in and run the deploy.sh manually for now.
+"""
+
+
 import os
 import paramiko
 import getpass
 import simplecrypt
 import pickle
+import signal
+import sys
 
 CONFIG_CACHE_FILE = os.path.dirname(os.path.abspath(__file__)) + '/config_cache.tmp'
 CONFIG_CACHE_SECRET = 'secret'
@@ -35,6 +44,23 @@ def prompt_input():
     print()
 
 
+def config(key):
+    if len(CONFIG[key]) == 0:
+        CONFIG[key] = getpass.getpass('Enter "'+key+'": ')
+    return CONFIG[key]
+
+def print_safe_config():
+    """ Prints non-password config data """
+    safe_keys = [
+        'host',
+        'host_username',
+        'github_username',
+        'deploy_script_path'
+    ]
+    for key in safe_keys:
+        print('{} = "{}"'.format(key, CONFIG[key]))
+
+
 def load_cache():
     print('Checking for config cache file ' + CONFIG_CACHE_FILE)
 
@@ -65,6 +91,16 @@ def save_cache():
     print('New config cache file created ' + CONFIG_CACHE_FILE)
 
 
+def build_input():
+    input_lines = [
+        config('host_sudo_password'),
+        config('github_username'),
+        config('github_password')
+    ]
+
+    return 'echo -e "' + '\\n'.join(str(line).replace('"', '\"') for line in input_lines) + '\\n"'
+
+
 def deploy():
     if not load_cache():
         prompt_input()
@@ -72,29 +108,50 @@ def deploy():
     else:
         print('Using config cache ' + CONFIG_CACHE_FILE)
 
+    print_safe_config()
+
     ssh = paramiko.SSHClient()
     ssh.load_system_host_keys()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(CONFIG['host'], username=CONFIG['host_username'], password=CONFIG['host_password'])
+    ssh.connect(config('host'), username=config('host_username'), password=config('host_password'))
 
-    cmd = 'sudo /bin/bash ' + CONFIG['deploy_script_path']
+    cmd = 'sudo -S /bin/bash ' + config('deploy_script_path')
 
-    print(CONFIG['host_username'] + '@' + CONFIG['host'] + '# ' + cmd)
+    print('\n[{}@{}]# {}\n'.format(config('host_username'), config('host'), cmd))
 
+    cmd = build_input() + ' | ' + cmd
     stdin, stdout, stderr = ssh.exec_command(cmd, get_pty=True)
 
-    stdin.write(CONFIG['host_sudo_password'] + '\n')
-    stdin.write(CONFIG['github_username'] + '\n')
-    stdin.write(CONFIG['github_password'] + '\n')
-    stdin.flush()
+    def print_lines(prefix, lines):
+        print()
+        for line in lines:
+            line = line.decode('utf-8')
+            print(prefix + line)
 
-    for line in stdout.read().splitlines():
-        line = line.decode('utf-8')
-        print(line)
-    for line in stderr.read().splitlines():
-        line = line.decode('utf-8')
-        print('ERROR: ' + line)
+    def stop(reason, output):
+        ssh.close()
+        print('\n--- Remote host closed (' + reason + ') ---')
+        sys.exit(output)
 
+    def kill_handler(signal, frame):
+        print_lines('REMOTE STDOUT: ', stdout.read().splitlines())
+        print_lines('REMOTE STDERR: ', stderr.read().splitlines())
+        stop('SIGINT', 1)
+
+    # Allow the results of the command to be printed before process exits with an interrupt
+    signal.signal(signal.SIGINT, kill_handler)
+
+    # Continuously grab output
+    for stdout_line in iter(lambda: stdout.readline(2048), ""):
+        print(stdout_line, end="")
+
+    error_lines = stderr.read().splitlines()
+    if len(error_lines) != 0:
+        # An error has occurred somewhere
+        print_lines('REMOTE STDERR: ', error_lines)
+        stop('remote error', 1)
+    else:
+        stop('successful completion', 0)
 
 if __name__ == '__main__':
     deploy()

@@ -18,7 +18,7 @@ cd ${GIT_DIRECTORY}
 systemctl stop ${SYSTEMD_SERVICE}
 
 # Pull from git and make sure on a fresh live branch
-git fetch live
+git fetch
 git reset --hard
 git checkout live
 
@@ -28,3 +28,4 @@ npm install
 npm run build
 
 systemctl start ${SYSTEMD_SERVICE}
+systemctl status ${SYSTEMD_SERVICE}

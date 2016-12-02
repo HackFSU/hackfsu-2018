@@ -6,9 +6,12 @@
   "repository": "https://github.com/HackFSU/hackfsu_com",
   "main": "",
   "scripts": {
-    "build": "gulp build",
-    "watch": "gulp watch",
-    "demo": "gulp bower; concurrently --kill-others \"gulp watch\" \"gulp demo\""
+    "gulp-bower": "gulp bower",
+    "gulp-build": "gulp build",
+    "gulp-watch": "gulp watch",
+    "gulp-demo": "gulp demo",
+    "build": "npm run gulp-bower; npm run gulp-build",
+    "demo": "npm run gulp-bower; concurrently --kill-others \"npm run gulp-watch\" \"npm run gulp-demo\""
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +30,8 @@
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^2.0.0",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "reverse-tunnel-ssh": "^1.1.0",
+    "tunnel-ssh": "^4.1.1"
   }
 }

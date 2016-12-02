@@ -18,9 +18,10 @@ cd ${GIT_DIRECTORY}
 systemctl stop ${SYSTEMD_SERVICE}
 
 # Pull from git and make sure on a fresh live branch
-git fetch
+git fetch --all
 git reset --hard
-git checkout -f live
+git checkout live
+git reset --hard origin/live
 
 # Update dependencies
 ./venv/bin/pip3.5 install -r ./requirements.txt

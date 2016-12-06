@@ -19,7 +19,7 @@ var banner =
 
 var dirs = {};
 dirs.website = __dirname + '/website';
-dirs.build = dirs.website + '/build';
+dirs.build = dirs.website + '/static_build';
 dirs.viewsSrc = dirs.website + '/views';
 dirs.viewsDest = dirs.build + '/views';
 

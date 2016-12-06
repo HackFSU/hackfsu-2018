@@ -82,8 +82,12 @@ TEMPLATES = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': keys.DB_NAME,
+        'USER': keys.DB_USER,
+        'PASSWORD': keys.DB_PASSWORD,
+        'HOST': keys.DB_HOST,
+        'PORT': keys.DB_PORT
     }
 }
 
@@ -127,6 +131,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'website/build'),
-    os.path.join(BASE_DIR, 'website/static')
+    os.path.join(BASE_DIR, 'website/static'),
+    os.path.join(BASE_DIR, 'website/static_build'),
 ]

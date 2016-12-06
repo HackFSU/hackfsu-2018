@@ -1,3 +1,3 @@
 {
-  "directory": "website/build/bower_components"
+  "directory": "website/static_build/bower_components"
 }

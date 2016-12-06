@@ -22,7 +22,7 @@ class Hackathon(models.Model):
     current = models.BooleanField(default=False)
     start_date = models.DateField()
     end_date = models.DateField()
-    statistics = JSONField()    # Snapshot of info grabbed from db
+    statistics = JSONField(default=None, null=True, blank=True)    # Snapshot of info grabbed from db
     # mentors = 0
     # judges = 0
     # hackers_registered = 0
@@ -74,12 +74,12 @@ class UserInfo(models.Model):
     )
 
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
-    last_hackathon = models.ForeignKey(to=Hackathon, on_delete=models.SET_NULL, null=True)
     phone_number = models.CharField(max_length=20)
     shirt_size = models.CharField(max_length=3, choices=SHIRT_SIZE_CHOICES)
     waiver_signature = models.CharField(max_length=100)
-    diet = models.CharField(null=True, max_length=500)
-    github = models.CharField(null=True, max_length=100)
+    diet = models.CharField(max_length=500, default='', blank=True)
+    github = models.CharField(max_length=100, default='', blank=True)
+    last_hackathon = models.ForeignKey(to=Hackathon, on_delete=models.SET_NULL, default=None, null=True, blank=True)
 
 
 class HackerInfo(models.Model):
@@ -106,20 +106,20 @@ class JudgeInfo(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
     affiliation = models.CharField(max_length=100)
-    comments = models.CharField(null=True, max_length=1000)
+    comments = models.CharField(max_length=1000, default='', blank=True)
 
 
 class MentorInfo(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     affiliation = models.CharField(max_length=100)
-    comments = models.CharField(null=True, max_length=1000)
+    comments = models.CharField(max_length=1000, default='', blank=True)
 
 
 class HelpRequest(models.Model):
     description = models.CharField(max_length=1000)
     location = models.CharField(max_length=100)
     attendee_name = models.CharField(max_length=100)
-    assigned_mentor = models.ForeignKey(to=MentorInfo, on_delete=models.SET_NULL, null=True)
+    assigned_mentor = models.ForeignKey(to=MentorInfo, on_delete=models.SET_NULL, default=None, null=True, blank=True)
 
 
 class School(models.Model):
@@ -129,18 +129,18 @@ class School(models.Model):
     )
     type = models.CharField(max_length=1, choices=TYPE_CHOICES, default='C')
     name = models.CharField(max_length=100)
-    address = models.CharField(max_length=100, null=True)
+    address = models.CharField(max_length=100, default='', blank=True)
 
 
 class Subscriber(models.Model):
-    hackathon = models.ForeignKey(to=Hackathon, on_delete=models.SET_NULL, null=True)
+    hackathon = models.ForeignKey(to=Hackathon, on_delete=models.SET_NULL, null=True, blank=True)
     email = models.EmailField()
 
 
 class WifiCred(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
-    assigned_user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
+    assigned_user = models.OneToOneField(User, on_delete=models.SET_NULL, default=None, null=True, blank=True)
 
 
 # class Hack(models.Model):

@@ -60,7 +60,7 @@ ROOT_URLCONF = 'hackfsu_com.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'website/build/views')],
+        'DIRS': [os.path.join(BASE_DIR, 'website/static_build/views')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

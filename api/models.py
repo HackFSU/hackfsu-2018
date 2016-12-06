@@ -142,7 +142,7 @@ class Subscriber(models.Model):
 
     def __str__(self):
         return 'id={}, hackathon.name={}, email={}'.format(
-            self.id, self.hackathon.name, self.email
+            self.id, str(self.hackathon), self.email
         )
 
 

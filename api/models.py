@@ -19,7 +19,8 @@ from django.contrib.postgres.fields import JSONField
 
 
 class Hackathon(models.Model):
-    current = models.BooleanField(default=False)
+    current = models.BooleanField(default=False)    # Only one should be current
+    name = models.CharField(max_length=100, unique=True)
     start_date = models.DateField()
     end_date = models.DateField()
     statistics = JSONField(default=None, null=True, blank=True)    # Snapshot of info grabbed from db
@@ -30,6 +31,9 @@ class Hackathon(models.Model):
     # hackers_attended = 0
     # anon_stats = JSONField()
     # attendee_shirt_sizes = JSONField()
+
+    def __str__(self):
+        return self.name + (' [CURRENT]' if self.current else '')
 
 
 class AnonStat(models.Model):
@@ -135,6 +139,11 @@ class School(models.Model):
 class Subscriber(models.Model):
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.SET_NULL, null=True, blank=True)
     email = models.EmailField()
+
+    def __str__(self):
+        return 'id={}, hackathon.name={}, email={}'.format(
+            self.id, self.hackathon.name, self.email
+        )
 
 
 class WifiCred(models.Model):

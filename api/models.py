@@ -18,7 +18,14 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 
 
+class HackathonManager(models.Manager):
+    def current(self):
+        """ Selects the current hackathon. Will throw an error if no single current hackathons exist """
+        return self.get(current=True)
+
+
 class Hackathon(models.Model):
+    objects = HackathonManager()
     current = models.BooleanField(default=False)    # Only one should be current
     name = models.CharField(max_length=100, unique=True)
     start_date = models.DateField()

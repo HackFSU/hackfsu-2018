@@ -8,6 +8,5 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns.extend([
-        # url(r'debug/test', views.debug.test),
-        # url(r'debug/save', views.debug.save)
+        url(r'hackathon/subscribe$', views.hackathon.subscribe)
     ])

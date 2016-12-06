@@ -16,12 +16,13 @@ User groups:
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from . import cache
 
 
 class HackathonManager(models.Manager):
     def current(self):
         """ Selects the current hackathon. Will throw an error if no single current hackathons exist """
-        return self.get(current=True)
+        return cache.get('HackathonManager.current_hackathon', self.get, current=True)
 
 
 class Hackathon(models.Model):

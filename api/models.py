@@ -15,73 +15,148 @@ User groups:
 
 from django.db import models
 from django.contrib.auth.models import User
-# from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import JSONField
 
 
-class Test(models.Model):
-    some_str = models.CharField(max_length=100)
+class Hackathon(models.Model):
+    current = models.BooleanField(default=False)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    statistics = JSONField()    # Snapshot of info grabbed from db
+    # mentors = 0
+    # judges = 0
+    # hackers_registered = 0
+    # hackers_rsvp = 0
+    # hackers_attended = 0
+    # anon_stats = JSONField()
+    # attendee_shirt_sizes = JSONField()
 
-# class AnonStat(models.Model):
-#     """ TODO """
-#     name = ""
-#     option = ""
-#
-#
+
+class AnonStat(models.Model):
+    KEY_CHOICES = (
+        ('GEN', 'Gender'),
+        ('ETH', 'Ethnicity')
+    )
+
+    VALUE_CHOICES = (
+        ('Gender', (
+            ('MAL', 'Male'),
+            ('FEM', 'Female'),
+            ('OTH', 'Other')
+        )),
+        ('Ethnicity', (
+            ('ASI', 'Asian'),
+            ('BLK', 'Black'),
+            ('HIS', 'Hispanic'),
+            ('MLT', 'Multicultural'),
+            ('WHT', 'White'),
+            ('OTH', 'Other')
+        ))
+    )
+
+    hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
+    key = models.CharField(max_length=3, choices=KEY_CHOICES)
+    value = models.CharField(max_length=3, choices=VALUE_CHOICES)
+
+
+class UserInfo(models.Model):
+    SHIRT_SIZE_CHOICES = (
+        ('m-s',     'Men\'s Small'),
+        ('m-m',     'Men\'s Medium'),
+        ('m-l',     'Men\'s Large'),
+        ('m-xl',    'Men\'s XL'),
+        ('m-2xl',   'Men\'s XXL'),
+        ('m-3xl',   'Men\'s XXXL'),
+        ('w-s',     'Women\'s Small'),
+        ('w-m',     'Women\'s Medium'),
+        ('w-l',     'Women\'s Large'),
+        ('w-xl',    'Women\'s XL')
+    )
+
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    last_hackathon = models.ForeignKey(to=Hackathon, on_delete=models.SET_NULL, null=True)
+    phone_number = models.CharField(max_length=20)
+    shirt_size = models.CharField(max_length=3, choices=SHIRT_SIZE_CHOICES)
+    waiver_signature = models.CharField(max_length=100)
+    diet = models.CharField(null=True, max_length=500)
+    github = models.CharField(null=True, max_length=100)
+
+
+class HackerInfo(models.Model):
+    SCHOOL_YEAR_CHOICES = (
+        ('FR', 'Freshman'),
+        ('SO', 'Sophomore'),
+        ('JR', 'Junior'),
+        ('SR', 'Senior')
+    )
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    hackathon = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
+    is_first_hackathon = models.BooleanField()
+    is_adult = models.BooleanField()
+    agreed_to_mlh_data_sharing = models.BooleanField()
+    school_name = models.CharField(max_length=100)
+    school_year = models.CharField(max_length=2, choices=SCHOOL_YEAR_CHOICES)
+    school_major = models.CharField(max_length=100)
+    rsvp = models.BooleanField(default=False)
+    checked_in = models.BooleanField(default=False)
+
+
+class JudgeInfo(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
+    affiliation = models.CharField(max_length=100)
+    comments = models.CharField(null=True, max_length=1000)
+
+
+class MentorInfo(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    affiliation = models.CharField(max_length=100)
+    comments = models.CharField(null=True, max_length=1000)
+
+
+class HelpRequest(models.Model):
+    description = models.CharField(max_length=1000)
+    location = models.CharField(max_length=100)
+    attendee_name = models.CharField(max_length=100)
+    assigned_mentor = models.ForeignKey(to=MentorInfo, on_delete=models.SET_NULL, null=True)
+
+
+class School(models.Model):
+    TYPE_CHOICES = (
+        ('H', 'High School'),
+        ('C', 'College')
+    )
+    type = models.CharField(max_length=1, choices=TYPE_CHOICES, default='C')
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100, null=True)
+
+
+class Subscriber(models.Model):
+    hackathon = models.ForeignKey(to=Hackathon, on_delete=models.SET_NULL, null=True)
+    email = models.EmailField()
+
+
+class WifiCred(models.Model):
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    assigned_user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
+
+
 # class Hack(models.Model):
-#     """ TODO """
 #     categories = []
 #     name = ""
 #     table_number = 0
 #     team = []
 #
 #
-# class Hackathon(models.Model):
+# class Sponsor(models.Model):
 #     """ TODO """
-#     current = False
-#     start_date = ""
-#     end_date = ""
-#     mentors = 0
-#     judges = 0
-#     hackers_registered = 0
-#     hackers_rsvp = 0
-#     hackers_attended = 0
-#     anon_stats = JSONField()
-#     attendee_shirt_sizes = JSONField()
 #
 #
-# class HackerInfo(models.Model):
+# class Update(models.Model):
 #     """ TODO """
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     is_first_hackathon = False
-#     is_adult = True
-#     agreed_to_mlh_data_sharing = False
-#     school_name = ""
-#     school_year = ""
-#     school_major = ""
-#     rsvp = False
-#     checked_in = False
 #
-#
-# class HelpRequest(models.Model):
-#     """ TODO """
-#     assigned_mentor = "user"
-#     description = ""
-#     location = ""
-#     name = ""
-#
-#
-# class JudgeInfo(models.Model):
-#     """ TODO """
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     affiliation = ""
-#     comments = ""
-#
-#
-# class MentorInfo(models.Model):
-#     """ TODO """
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     affiliation = ""
-#     comments = ""
 #
 #
 # class OldParseHacker(models.Model):
@@ -108,33 +183,4 @@ class Test(models.Model):
 #     phone = ""
 #     shirt_size = ""
 #     diet = ""
-#
-#
-# class Subscriber(models.Model):
-#     """ TODO """
-#     hackathon = "id"
-#     email = ""
-#
-#
-# class Sponsor(models.Model):
-#     """ TODO """
-#
-#
-# class Update(models.Model):
-#     """ TODO """
-#
-#
-# class UserInfo(models.Model):
-#     """ TODO """
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     last_hackathon = "hackathon link"
-#     phone_number = ""
-#     shirt_size = ""
-#     diet = ""
-#     waiver_signature = ""
-#     github = ""
-#
-#
-# class WifiCred(models.Model):
-#     """ TODO """
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+

@@ -25,6 +25,6 @@ urlpatterns = [
     url(r'^$', views.index),
 
     # Special root-only static files
-    url('favicon.ico', views.static_redirect('img/favicon/favicon.ico')),
-    url('browserconfig.xml', views.static_redirect('img/favicon/browserconfig.xml'))
+    url('^favicon.ico$', views.static_redirect('img/favicon/favicon.ico')),
+    url('^browserconfig.xml$', views.static_redirect('img/favicon/browserconfig.xml'))
 ]

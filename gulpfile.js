@@ -19,15 +19,17 @@ var banner =
 
 var dirs = {};
 dirs.website = __dirname + '/website';
-dirs.build = dirs.website + '/static_build';
-dirs.src = dirs.website + '/static_src';
+dirs.build = dirs.website + '/build/static';
+dirs.src = dirs.website + '/src';
+dirs.viewSrc = dirs.src + '/views';
+dirs.viewDst = dirs.website + '/build/views';
 
-function getViewFiles(extension) {
+function getViewFiles(directory, extension) {
     return [
-        dirs.src + '/**/*.' + extension,
-        '!' + dirs.src + '/**/_*',
-        '!' + dirs.src + '/_*',
-        '!' + dirs.src + '/_*/**'
+        directory + '/**/*.' + extension,
+        '!' + directory + '/**/_*',
+        '!' + directory + '/_*',
+        '!' + directory + '/_*/**'
     ];
 }
 
@@ -40,7 +42,7 @@ gulp.task('css', function() {
     var autoPrefixer = require('gulp-autoprefixer');
     var sourceMaps = require('gulp-sourcemaps');
 
-    return gulp.src(getViewFiles('scss'))
+    return gulp.src(getViewFiles(dirs.src, 'scss'))
         .pipe(sourceMaps.init())
         .pipe(sass.sync({
             outputStyle: 'compact',
@@ -58,16 +60,17 @@ gulp.task('css', function() {
 
 /**
  * HTML
+ * These are separated from the rest to be loaded by Django individually.
  */
 gulp.task('html', function() {
     var pug = require('gulp-pug');
 
-    return gulp.src(getViewFiles('pug'))
+    return gulp.src(getViewFiles(dirs.viewSrc, 'pug'))
         .pipe(pug({
             pretty: true,
             locals: require(dirs.src + '/_pug/locals.js')
         }))
-        .pipe(gulp.dest(dirs.build));
+        .pipe(gulp.dest(dirs.viewDst));
 });
 
 
@@ -79,7 +82,7 @@ gulp.task('js', function() {
     var uglify = require('gulp-uglify');
     var header = require('gulp-header');
 
-    return gulp.src(getViewFiles('js'))
+    return gulp.src(getViewFiles(dirs.src, 'js'))
         .pipe(sourceMaps.init())
         .pipe(header(banner, {pkg : pkg}))
         .pipe(uglify({

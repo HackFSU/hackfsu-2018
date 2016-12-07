@@ -25,8 +25,9 @@ git reset --hard origin/live
 git merge origin/live
 
 # Update dependencies
-./venv/bin/pip3.5 install -r ./requirements.txt
+${GIT_DIRECTORY}/venv/bin/pip3.5 install -r ${GIT_DIRECTORY}/requirements.txt
 npm install
+rm -rf ${GIT_DIRECTORY}/website/build
 npm run build
 
 systemctl start ${SYSTEMD_SERVICE}

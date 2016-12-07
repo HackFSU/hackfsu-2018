@@ -15,6 +15,7 @@
   "undef": true,
   "unused": true,
 
+  "devel": true,
   "strict" : false,
   "browser": false,
   "jquery": false,

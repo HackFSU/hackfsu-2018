@@ -1,4 +1,4 @@
-extends ../_pug/baseLayout.pug
+extends ../../_pug/baseLayout.pug
 
 block localJS
     script(src="/static/views/index/index.js")
@@ -13,6 +13,10 @@ block content
             span: img.img-responsive(src="#" alt="logo")
             span FEB. 17-19
         
+    form#subscribe(data-parsley-ui-enabled="false")
+        input(type="text" name="email" data-parsley-type="email" placeholder="Your Email" maxlength="100" required)
+        button(type="submit") Subscribe
+    
     .section.section-block-right
         .section-title FAQS
         .section-content

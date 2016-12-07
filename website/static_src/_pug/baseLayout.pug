@@ -8,18 +8,18 @@ doctype html
 html
     head
         title= getTitle(pageTitle)
-        
+
         include ./includes/metadata.pug
-        
+
         //- CSS
         link(rel="stylesheet" type="text/css" href="/static/bower_components/font-awesome/css/font-awesome.min.css")
         link(rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css")
-        link(rel="stylesheet" type="text/css" href="/static/views/main.css")
+        link(rel="stylesheet" type="text/css" href="/static/css/main.css")
         block localCSS
 
     body
         block navbar
-        
+
         block page
             .content-container
                 block content
@@ -30,5 +30,8 @@ html
         //- JavaScript
         script(src="/static/bower_components/jquery/dist/jquery.min.js")
         script(src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js")
-        script(src="/static/views/main.js")
+        script(src="/static/bower_components/parsleyjs/dist/parsley.min.js")
+        script(src="/static/js/plugins/ajaxForm.js")
+        script(src="/static/js/main.js")
+        
         block localJS

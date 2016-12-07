@@ -20,15 +20,14 @@ var banner =
 var dirs = {};
 dirs.website = __dirname + '/website';
 dirs.build = dirs.website + '/static_build';
-dirs.viewsSrc = dirs.website + '/views';
-dirs.viewsDest = dirs.build + '/views';
+dirs.src = dirs.website + '/static_src';
 
 function getViewFiles(extension) {
     return [
-        dirs.viewsSrc + '/**/*.' + extension,
-        '!' + dirs.viewsSrc + '/**/_*',
-        '!' + dirs.viewsSrc + '/_*',
-        '!' + dirs.viewsSrc + '/_*/**'
+        dirs.src + '/**/*.' + extension,
+        '!' + dirs.src + '/**/_*',
+        '!' + dirs.src + '/_*',
+        '!' + dirs.src + '/_*/**'
     ];
 }
 
@@ -53,7 +52,7 @@ gulp.task('css', function() {
             addComment: true,
             includeContent: true
         }))
-        .pipe(gulp.dest(dirs.viewsDest));
+        .pipe(gulp.dest(dirs.build));
 });
 
 
@@ -66,9 +65,9 @@ gulp.task('html', function() {
     return gulp.src(getViewFiles('pug'))
         .pipe(pug({
             pretty: true,
-            locals: require(dirs.viewsSrc + '/_pug/locals.js')
+            locals: require(dirs.src + '/_pug/locals.js')
         }))
-        .pipe(gulp.dest(dirs.viewsDest));
+        .pipe(gulp.dest(dirs.build));
 });
 
 
@@ -91,7 +90,7 @@ gulp.task('js', function() {
             addComment: true,
             includeContent: true
         }))
-        .pipe(gulp.dest(dirs.viewsDest));
+        .pipe(gulp.dest(dirs.build));
 });
 
 
@@ -108,7 +107,7 @@ gulp.task('demo', ['bower'], function() {
 gulp.task('build', ['css', 'html', 'js']);
 
 gulp.task('watch', ['build'], function(){
-    return gulp.watch([dirs.viewsSrc + '/**/*'], ['build']);
+    return gulp.watch([dirs.src + '/**/*'], ['build']);
 });
 
 gulp.task('default', ['build']);

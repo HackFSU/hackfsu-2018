@@ -21,7 +21,7 @@ function boot() {
 }
 
 app.use(morgan('dev'));
-app.use('/static', express.static(path.join(__dirname, './build')));
+app.use('/static', express.static(path.join(__dirname, './build/static')));
 app.use('/static', express.static(path.join(__dirname, './static')));
 
 

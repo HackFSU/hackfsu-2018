@@ -102,12 +102,12 @@ gulp.task('bower', function() {
     return bower();
 });
 
-gulp.task('demo', ['bower'], function() {
+gulp.task('demo', function() {
     var demoServer = require('./website/demoServer');
     demoServer.boot();
 });
 
-gulp.task('build', ['css', 'html', 'js']);
+gulp.task('build', ['bower', 'css', 'html', 'js']);
 
 gulp.task('watch', ['build'], function(){
     return gulp.watch([dirs.src + '/**/*'], ['build']);

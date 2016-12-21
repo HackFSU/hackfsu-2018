@@ -10,7 +10,7 @@
     "gulp-build": "gulp build",
     "gulp-watch": "gulp watch",
     "gulp-demo": "gulp demo",
-    "build": "npm run gulp-bower; npm run gulp-build",
+    "build": "npm run gulp-build",
     "demo": "npm run gulp-bower; concurrently --kill-others \"npm run gulp-watch\" \"npm run gulp-demo\""
   },
   "author": "",

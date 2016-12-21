@@ -45,17 +45,12 @@ nav.navbar-custom {
             background-color: transparent;
         }
 
-        &.active {
-            text-shadow: -1px 0 $color-light, 0 1px $color-light,
-                1px 0 $color-light, 0 -1px $color-light;
-        }
     }
 
     .collapse:not([aria-expanded="true"]) {
         // Styles when not in dropdown
 
         li {
-            &.active,
             > a:hover {
                 &:after {
                     position: absolute;
@@ -63,6 +58,21 @@ nav.navbar-custom {
                     width: 80%;
                     margin-left: 10%;
                     bottom: 10px;
+                    left: 0;
+                    right: 0;
+                    content: '';
+                    background-color: $color-light;
+                }
+            }
+
+            &.active,
+            &.active > a:hover {
+                &:after {
+                    position: absolute;
+                    height: 5px;
+                    width: 80%;
+                    margin-left: 10%;
+                    bottom: 7px;
                     left: 0;
                     right: 0;
                     content: '';

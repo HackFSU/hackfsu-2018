@@ -1,9 +1,8 @@
-
-// Lib
+@import '../_sass/vars';
 @import '../_sass/fonts';
-
-// Global Variables
-
-// Main Style Sheets
-
-@import '../_sass/main';
+@import '../_sass/layout';
+@import '../_sass/text';
+@import '../_sass/navbar';
+@import '../_sass/footer';
+@import '../_sass/util';
+@import '../_sass/forms';

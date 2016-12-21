@@ -19,7 +19,8 @@ locals.getTitle = function(subtitle) {
 locals.links = {
     twitter: 'http://www.twitter.com/HackFSU',
     facebook: 'https://www.facebook.com/hackfsu',
-    instagram: 'https://www.instagram.com/hackfsu'
+    instagram: 'https://www.instagram.com/hackfsu',
+    github: 'https://github.com/HackFSU'
 };
 
 locals.navLinks = {

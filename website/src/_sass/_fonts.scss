@@ -4,28 +4,28 @@
 
 
 @font-face {
-	font-family: 'Uni Sans Heavy CAPS';
-	src: url('/static/UniSansHeavyCAPS.eot');
-	src: url('/static/UniSansHeavyCAPS.eot?#iefix') format('embedded-opentype'),
-		url('/static/UniSansHeavyCAPS.woff2') format('woff2'),
-		url('/static/UniSansHeavyCAPS.woff') format('woff'),
-		url('/static/UniSansHeavyCAPS.ttf') format('truetype'),
-		url('/static/UniSansHeavyCAPS.svg#UniSansHeavyCAPS') format('svg');
-	font-weight: 900;
-	font-style: normal;
+    font-family: 'Uni Sans Heavy CAPS';
+    src: url('/static/fonts/UniSansHeavyCAPS.eot');
+    src: url('/static/fonts/UniSansHeavyCAPS.eot?#iefix') format('embedded-opentype'),
+        url('/static/fonts/UniSansHeavyCAPS.woff2') format('woff2'),
+        url('/static/fonts/UniSansHeavyCAPS.woff') format('woff'),
+        url('/static/fonts/UniSansHeavyCAPS.ttf') format('truetype'),
+        url('/static/fonts/UniSansHeavyCAPS.svg#UniSansHeavyCAPS') format('svg');
+    font-weight: 900;
+    font-style: normal;
 }
 
 
 /* If we use it later, uncomment
 @font-face {
-	font-family: 'Uni Sans Thin CAPS';
-	src: url('/static/UniSansThinCAPS.eot');
-	src: url('/static/UniSansThinCAPS.eot?#iefix') format('embedded-opentype'),
-		url('/static/UniSansThinCAPS.woff2') format('woff2'),
-		url('/static/UniSansThinCAPS.woff') format('woff'),
-		url('/static/UniSansThinCAPS.ttf') format('truetype'),
-		url('/static/UniSansThinCAPS.svg#UniSansThinCAPS') format('svg');
-	font-weight: 100;
-	font-style: normal;
+    font-family: 'Uni Sans Thin CAPS';
+    src: url('/static/fonts/UniSansThinCAPS.eot');
+    src: url('/static/fonts/UniSansThinCAPS.eot?#iefix') format('embedded-opentype'),
+        url('/static/fonts/UniSansThinCAPS.woff2') format('woff2'),
+        url('/static/fonts/UniSansThinCAPS.woff') format('woff'),
+        url('/static/fonts/UniSansThinCAPS.ttf') format('truetype'),
+        url('/static/fonts/UniSansThinCAPS.svg#UniSansThinCAPS') format('svg');
+    font-weight: 100;
+    font-style: normal;
 }
 */

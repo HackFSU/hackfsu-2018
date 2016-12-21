@@ -1,16 +1,17 @@
 //- Bootstrap navbar with overwridden styles
 mixin navbar(links)
-    nav.nabar-navbar-default
+    nav.nabar.navbar-custom
+        .navbar-brand
+            a(href="/")
+                //- img.img-reponsive(src="#logo")
+                | HackFSU
+
         .navbar-header
             button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false")
                 span.sr-only Toggle navigation
-                span.icon-bar
-                span.icon-bar
-                span.icon-bar
-
-            .navbar-brand HackFSU
+                .fa.fa-bars
 
         #nav-collapse.collapse.navbar-collapse
-            ul.nav.navbar-nav
-               each link in links
-                    li: a(href=link.url) #{link.name}
+            ul.nav.navbar-nav.navbar-right
+                each link in links
+                    li(class=(pageName === link.name? 'active' : '')): a(href=link.url) #{link.name}

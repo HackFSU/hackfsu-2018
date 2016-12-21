@@ -1,7 +1,8 @@
-.footer
-    .center-block
-        p
-            a(href=links.twitter): i.fa.fa-twitter
-            a(href=links.facebook): i.fa.fa-facebook
-            a(href=links.instagram): i.fa.fa-instagram
-        p © #{((new Date()).getYear() + 1900)} HackFSU
+
+.logo-links
+    a(href=links.twitter target="_blank" title="@HackFSU on Twitter"): i.fa.fa-twitter
+    a(href=links.facebook target="_blank" title="HackFSU on Facebook"): i.fa.fa-facebook
+    a(href=links.instagram target="_blank" title="HackFSU on Instagram"): i.fa.fa-instagram
+    a(href=links.github target="_blank" title="HackFSU on GitHub"): i.fa.fa-github
+
+.copyright &copy; #{moment().format('YYYY')} HackFSU

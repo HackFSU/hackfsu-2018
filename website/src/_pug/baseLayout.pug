@@ -18,14 +18,20 @@ html
         block localCSS
 
     body
-        block navbar
+        include ./includes/googleAnalytics.html
 
-        block page
-            .content-container
-                block content
-
-
-        include includes/footer.pug
+        #page-container
+            #header-container
+                #header.container
+                    block navbar
+                        +navbar(navLinks.standard)
+            #content-container
+                #content.container
+                    block content
+                        h1 TODO
+            #footer-container
+                #footer.container
+                    include ./includes/footer.pug
 
         //- JavaScript
         script(src="/static/bower_components/jquery/dist/jquery.min.js")
@@ -33,5 +39,5 @@ html
         script(src="/static/bower_components/parsleyjs/dist/parsley.min.js")
         script(src="/static/js/plugins/ajaxForm.js")
         script(src="/static/js/main.js")
-        
+
         block localJS

@@ -2,7 +2,11 @@
  * Pug build locals
  */
 
+var moment = require('moment');
+
 var locals = {};
+
+locals.moment = moment;
 
 locals.baseTitle = 'HackFSU';
 locals.getTitle = function(subtitle) {

@@ -1,3 +1,4 @@
 requests
 django
 psycopg2
+pylint

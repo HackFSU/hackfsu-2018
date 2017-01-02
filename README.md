@@ -66,16 +66,16 @@ Website pages people can access. In the format "`<path>` -> `<django view path>`
 Anyone can access these. Pages with forms will require a captcha submission as well. Registration pages can be disabled/enabled by admins.
 * `/` -> `index` - Homepage
 * `/help` -> `help` - Help request submission page for day of
-* `/register` -> `register` - Hacker registration form (Creates new user)
+* `/register` -> `register/hacker` - Hacker registration form (Creates new user)
     - Page may be disabled/enabled by an admin.
     - Logged in users will be redirected to `/user/hack`
-* `/mentor` -> `mentor` - Mentor registration form (Creates new user)
+* `/mentor` -> `register/mentor` - Mentor registration form (Creates new user)
     - Page may be disabled/enabled by an admin.
     - Logged in users will be redirected to `/user/mentor`
-* `/judge` -> `judge` - Judge registration (Creates new user)
+* `/judge` -> `register/judge` - Judge registration (Creates new user)
     - Page may be disabled/enabled by an admin.
     - Logged in users will be redirected to `/user/judge`
-* `/organize` -> `organize` - Organizer registration (Creates new user)
+* `/organize` -> `register/organize` - Organizer registration (Creates new user)
     - Page may be disabled/enabled by an admin.
     - Logged in users will be redirected to `/user/organize`
 * `/login` or `/user/login` -> `user/login` - User Login
@@ -193,4 +193,51 @@ Must be an admin to access these pages.
 
 
 # API Informal SRS
+A list of all requests handled by the api in the format "<ACL> <REQUEST_TYPE> <REQUEST_PATH> - <DESCRIPTION>".
+
+ACL Examples:
+* * => unrestricted
+* [] => cannot be logged in at all
+* [user] => must be logged in and belong to the user group (any logged in user should belong to this group)
+* [user,!hacker] => must be logged in and belong to the user group but not the hacker group
+* [admin] => must be logged in and belong to the admin group.
+
+## General
+* * GET `/hackathon/schedule/get` - Returns current hackathon's schedule items in a list
+* * GET `/hackathon/sponsors/get` - Returns current hackathon's public sponsor list with logo image links
+* * GET `/hackathon/stats/get` - Returns current hackathon's public statistics
+* * POST `/hackathon/subscribe` - Subscribes an email for updates about the current hackathon
+
+## User management
+* [] POST `/user/login` - Logs in a user for the session
+    * Must be a existing, enabled, email verified user.
+* [] POST `/user/initialize_password_reset` - Sends a password reset email with a link for reset page
+* [] POST `/user/finalize_password_reset` - Completes a password reset, setting a new password for the user
+* [user] GET `/user/profile` - Returns profile data of logged in user (can handle non-user info properties as well if applicable)
+* [user] POST `/user/change_password` - Changes user password and logs user out
+* [user] POST `/user/edit` - Changes user properties (can handle non-user info properties as well if applicable)
+* [] POST `/user/resend_email_confirmation` - Resends the email confirmation email for the account creation process
+* [] POST `/user/confirm_email` - Submits an email confirmation for a pending user
+* [] POST `/user/register/hacker` - Hacker new account registration
+    * Email confirmation required
+* [] POST `/user/register/judge` - Judge new account registration
+* [] POST `/user/register/mentor` - Mentor new account registration
+* [] POST `/user/register/organizer` - Organizer new account registration
+* [user,!hacker] POST `/user/join/hackers` - Register current account for hacker status
+* [user,!organizer] POST `/user/join/organizers` - Register current account for organizer status
+* [user,!judge] POST `/user/join/judges` - Register current account for judge status
+* [user,!mentor] POST `/user/join/mentors` - Register current account for mentor status
+
+## Mentor
+* [mentor] GET `/mentor/get_requests` - Returns all of the help requests for the current hackathon
+* [mentor] POST `/mentor/claim_request` - Claims a help request
+* [mentor] POST `/mentor/release_request` - Releases a claimed help request for other mentors
+
+## Judge
+TODO
+
+## Organize
+TODO
+
+## Administration
 TODO

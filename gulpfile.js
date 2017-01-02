@@ -74,7 +74,7 @@ gulp.task('html', function() {
     return gulp.src(getViewFiles(dirs.viewSrc, 'pug'))
         .pipe(pug({
             pretty: true,
-            locals: require(locals)
+            locals: locals
         }))
         .pipe(gulp.dest(dirs.viewDst));
 });

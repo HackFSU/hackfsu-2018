@@ -1,7 +1,36 @@
-HackFSU Website
-===============
+HackFSU Hackathon Management System - API & Website
+===================================================
+# About
+## Main Features
+* Multi-hackathon management
+    * Can use the same system every hackathon
+    * Can view statistics of current and past hackathons
+* User accounts for all attendees: Hackers, Judges, Organizers, and Mentors
+    * Users can be different types of attendees every hackathon
+    * Users can use the same account for different hackathons
+    * Users can be combinations of different attendees for the same hackathon (Although hackers may only be hackers)
+        * Mentors can be Judges, Judges can be Organizers, etc.
+* Hacker registration & management
+* Automated mentor system built on simple, easy to submit, help requests
+* Judging system to help make the judging process smoother, faster, more fair, and more accurate.
+    * Takes the logistical hassle out of the judging process, allowing for every judges to judge more hacks and thus teams seen by more judges.
+    * Partial Devpost integration to allow hacks to be submitted and shared using hacker's DevPost accounts
+* Organizers can manage the all different
+* Admins can manage high-level site settings without changing any code
 
-Remake of previous node version for 2017, now written in Django.
+## Technical Overview
+* Single API to allow support the website and iOS/Android apps
+* Back-end written in Python with the battle-tested, comprehensive Django framework
+    * Simple, uses well-established standards, and organized into different components
+    * Django models make databases easy
+    * Django has integrated sessions and user authentication
+* Front-end compiled from modern templating languages and served using Django views
+    * Using Gulp, the complicated, time-consuming compiling is done only once before the Django server boots
+        * Allows for complex builds involving many organized files to decrease development and debugging time
+        * Django mostly just serves static files with minor changes
+    * Custom project configuration is friendly to new developers
+        * Can have a revolving team so that the site can be maintained after people graduate/leave
+
 
 # Contributing
 ## Development Requirements

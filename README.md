@@ -88,7 +88,7 @@ All registrations of any type must be approved/activated by an organizer or admi
 
 
 # Website Informal SRS
-Most of the pages are dynamic in nature, and rely on the API which is specified in the next section. Redirects are in the form <MATCHING_ACL> -> <DESTINATiON>.
+Most of the pages are dynamic in nature, and rely on the API which is specified in the next section. Redirects are in the form `<MATCHING_ACL> -> <DESTINATiON>`.
 
 ## Shortcuts
 There are some simple redirect paths for ease of use, specified below. The ACL of the destination page will be used for determining access, although the redirect itself is unrestricted.
@@ -220,7 +220,7 @@ These pages are used to manage the website as a whole, so that the server does n
 
 
 # API Informal SRS
-A list of all requests handled by the api in the format "<REQUEST_TYPE> <REQUEST_PATH> <ACL> - <DESCRIPTION>".
+A list of all requests handled by the api in the format `<REQUEST_TYPE> <REQUEST_PATH> <ACL> - <DESCRIPTION>`.
 
 ## General
 * GET `/api/hackathon/schedule/get` [] - Returns current hackathon's schedule items in a list

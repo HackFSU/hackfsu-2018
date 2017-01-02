@@ -28,8 +28,28 @@ app.use('/static', express.static(path.join(__dirname, './static')));
 /**
  * Render static views
  */
-app.get('/', function(req, res) { res.sendFile(path.join(__dirname, './build/views/index/index.html')); } );
-app.get('/register', function(req, res) { res.sendFile(path.join(__dirname, './build/views/register/register.html')); } );
+function getStaticView(getPath, viewPath) {
+    app.get(getPath, function(req, res) {
+        res.sendFile(path.join(__dirname, './build/views/'+viewPath+'/index.html'));
+    });
+}
+
+var staticViews = [
+    { getPath: '/', viewPath: 'index' },
+    { getPath: '/register', viewPath: 'register' },
+    { getPath: '/help', viewPath: 'help' },
+    { getPath: '/user/login', viewPath: 'user/login' },
+    { getPath: '/user/profile', viewPath: 'user/profile' },
+    { getPath: '/error/404', viewPath: 'error/404' },
+    { getPath: '/error/500', viewPath: 'error/500' }
+];
+
+staticViews.forEach(function(view) {
+    getStaticView(view.getPath, view.viewPath);
+});
+
+// Redirect shortcuts
+app.get('/login', function(req, res) { res.redirect('/user/login'); });
 
 
 /**

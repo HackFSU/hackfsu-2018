@@ -1,0 +1,44 @@
+include mixins/navbar.pug
+
+block vars
+    -
+        var pageName = ""
+
+include ./includes/ascii-logo.pug
+doctype html
+html
+    head
+        title=getTitle(pageName)
+
+        include ./includes/metadata.pug
+
+        //- CSS
+        block styles
+            link(rel="stylesheet" type="text/css" href="/static/bower_components/font-awesome/css/font-awesome.min.css")
+            link(rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css")
+            link(rel="stylesheet" type="text/css" href="/static/css/main.css")
+
+    body
+
+        include ./includes/googleAnalytics.html
+
+        #page-container
+            #header-container
+                #header.container
+                    block navbar
+                        +navbar(navLinks.standard)
+            #content-container
+                #content.container
+                    block content
+                        h1 TODO
+            #footer-container
+                #footer.container
+                    include ./includes/footer.pug
+
+        //- JavaScript
+        block scripts
+            script(src="/static/bower_components/jquery/dist/jquery.min.js")
+            script(src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js")
+            script(src="/static/bower_components/parsleyjs/dist/parsley.min.js")
+            script(src="/static/js/plugins/ajaxForm.js")
+            script(src="/static/js/main.js")

@@ -28,16 +28,14 @@
             data: JSON.stringify(data),
             success: function(response) {
                 if (response.error) {
-                    console.error('Server Error:',
-                        'dataSent=', data, 'response=', response);
+                    console.error('Server Error:', response.error);
                     dfd.reject(response.error);
                 } else {
                     dfd.resolve(response);
                 }
             },
             error: function(response) {
-                console.error('Server Error:',
-                    'dataSent=', data, 'response=', response);
+                console.error('Server Error:', response);
                 dfd.reject(response);
             }
         });
@@ -50,7 +48,6 @@
         }
 
         var o = $.extend({}, defaultOptions, options);
-        console.log('options', o);
         var parsleyFormInstance = this.parsley(o.parsleyOptions);
         var canSubmit = true;
 
@@ -67,12 +64,12 @@
                 var data = o.getData();
                 ajaxJsonSubmit(o.url, data)
                 .done(function(response) {
-                    o.onAjaxComplete(data, response);
+                    o.onAjaxComplete(response, data);
                 })
                 .fail(function(error) {
                     canSubmit = true;
                     o.setDisabled(false);
-                    o.onAjaxError(data, error);
+                    o.onAjaxError(error, data);
                 });
             });
 
@@ -84,19 +81,19 @@
          */
 
         parsleyFormInstance.on('form:error', function(parsleyForm) {
-            console.log('parsley:form:error', parsleyForm);
+            console.error('parsley:form:error', parsleyForm);
         });
 
         parsleyFormInstance.on('form:success', function(parsleyForm) {
-            console.log('parsley:form:success', parsleyForm);
+            // console.log('parsley:form:success', parsleyForm);
         });
 
         parsleyFormInstance.on('field:error', function(parsleyField) {
-            console.log('parsley:field:error', parsleyField);
+            console.error('parsley:field:error', parsleyField);
         });
 
         parsleyFormInstance.on('field:success', function(parsleyField) {
-            console.log('parsley:field:success', parsleyField);
+            // console.log('parsley:field:success', parsleyField);
         });
 
         return parsleyFormInstance;

@@ -14,7 +14,7 @@ class JsonLoader(object):
         if request.content_type == 'application/json':
             body = request.body.decode('utf-8')
             try:
-                request.JSON = json.loads(body)
+                request.POST = json.loads(body)
             except json.decoder.JSONDecodeError:
                 return JsonResponse({
                     'error': 'Invalid JSON request',

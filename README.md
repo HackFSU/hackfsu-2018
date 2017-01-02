@@ -263,6 +263,37 @@ TODO
 TODO
 
 
+# Project Structure
+This project basic structure is that of a Django project, but it does not exactly follow all the 'Django' ways of doing things. The project is split up into two main sections, the API and the webapp.
+
+## API
+The API is the main powerhouse of any backend service call, including the managment of all the data modules. The Django Webapp, iOS app, and Android app all use this same API for accessing and managing the application data.
+
+## Webapp
+The webapp serves the front-end templates. Page content is dynamically populated via AJAX calls to the API.
+
+If you take a look into the `/webapp/` folder you will see many different types of files. If you are unfamiliar with ANY of these technologies, please learn them via their respective documentation BEFORE working on this website. You can ask someone for help if you are having trouble, though it is recommended that you read through their docs a bit first. They docs are pretty good, and the tools are fairly simple once you get the hang of them.
+    * [Sass](http://sass-lang.com/) files, `*.scss`, are used to create Cascading Style Sheet (CSS) files. We use this because Sass is an awesome tool that allows for nesting, variables, math, importing other sass files, and much more.
+        * In addition to Sass, we use the [AutoPrefixer](https://autoprefixer.github.io/) tool in our build step so you don't have to worry that much about browser incompatibilities
+    * [Pug](https://pugjs.org) (formally known as Jade) files, `*.pug`, are used to create Hypertext Markup Language (HTML) files. We use these as HTML template files so that we can make pages that are consistent, easy to write, and easy to read. We make extensive use of pug variables, extension, and blocks in order to abstract out most of the repetitive tasks required when adding/editing new pages, which allows us to focus on just the page content. This is a custom setup that has been found effective.
+        * **Note** Django does indeed have its [own templating system](https://docs.djangoproject.com/en/1.10/topics/templates/#the-django-template-language), which is actually still being used. There is a pug engine that we could replace it with to have it compile entirely in django, but it does not have all the necessary support as its main JavaScript compiler. However, we can still allow the backend view to modify the HTML by writing unbuffered django templating language constructs directly in the pug files (just be careful).
+    * Python files, `*.py`, are the backend files used to serve the templated HTML files. These will be pretty small in most cases, and you should not touch these unless you are changing the backend.
+
+The `webapp/views` folder acts as a base for all views and corresponds to different URL paths. For example `/index.pug` is the pug template for path `/` and `/registration/hacker/index.pug` is the pug template for path `/registration/hacker/`.
+
+For each path, the `index.pug`, `script.js`, and `style.scss` files are all kept in the same directory to keep things simple. Keeping page-specific source files in one place is better than separating them by file type (like `/js/views/registration/hacker/script.js` and `/css/views/registration/hacker/style.js`) because with many views there just gets to be so many mirrored directories, breeding errors and annoyances. With a sophisticated front-end builder like Gulp, we can automatically place the generated JS, CSS, and HTML files where they need to go but still keep the like-minded source files together.
+
+### Building
+The `.scss`, `.js`, and `.pug` built using Gulp, a very handy task runner. Gulp has been setup in this project to adhere to the following rules:
+* `.scss` files will be compiled, then auto-prefixed to `.css` files into the build folder to be accessed as static files (like `/static/view/registration/hacker/style.css`)
+* `.js` files will be [uglified](http://lisperator.net/uglifyjs/) and copied into the build folder to be accessed as static files (like `/static/view/registration/hacker/script.js`)
+* `.pug` files will be compiled to `.html` files into the build folder to be accessed as Django template files (like `registration/hacker/index.html`)
+* Files or folders starting with an underscore (`_`) will not be built by Gulp. This is particularly useful for pug/sass files that are just used to compile other pug/sass files by their respective compilers.
+
+The JS/CSS files must be accessed by the HTML pages using absolute paths from the Django static folder, `/static/`. If your page is 404'ing on a static resource be sure to check if the path is correct and that it was actually built (if it needed to)
+
+Files located in the `/static/` project folder are not compiled and can be accessed as-is. Use this for images and other non-compiled files.
+
 # TODO
 * Page alerts
     - Backend can trigger the creation of alerts that appear at the top of the page, and are dismissable
@@ -273,3 +304,8 @@ TODO
     - Could be dynamically added instead
 * ACL enforcement
     - Should be done with a custom view class
+* Add Django template support functions to Pug
+    - Should be as minimal as possible as to keep it as pug-like as possible
+    - Something like `django('some_var')` should compile down to `{{ some_var }}`
+    - If/else construct support would be nice as well
+    - Might be able to just put in raw, unbuffered text as an option too

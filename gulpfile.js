@@ -1,7 +1,7 @@
 /**
  * Gulp Configuration
  *
- * Builds website, deploys server
+ * Builds webapp, deploys server
  */
 
 'use strict';
@@ -18,18 +18,22 @@ var banner =
     ' */\n\n';
 
 var dirs = {};
-dirs.website = __dirname + '/website';
-dirs.build = dirs.website + '/build/static';
-dirs.src = dirs.website + '/src';
+dirs.webapp = __dirname + '/webapp';
+dirs.build = dirs.webapp + '/build/static';
+dirs.src = dirs.webapp;
 dirs.viewSrc = dirs.src + '/views';
-dirs.viewDst = dirs.website + '/build/views';
+dirs.viewDst = dirs.webapp + '/build/views';
 
 function getViewFiles(directory, extension) {
     return [
         directory + '/**/*.' + extension,
         '!' + directory + '/**/_*',
         '!' + directory + '/_*',
-        '!' + directory + '/_*/**'
+        '!' + directory + '/_*/**',
+        '!' + dirs.build + '/*',
+        '!' + dirs.build + '/**/*',
+        '!' + dirs.static + '/*',
+        '!' + dirs.static + '/**/*'
     ];
 }
 
@@ -61,14 +65,16 @@ gulp.task('css', function() {
 /**
  * HTML
  * These are separated from the rest to be loaded by Django individually.
+ * Each html file is run through the Django template engine.
  */
 gulp.task('html', function() {
     var pug = require('gulp-pug');
+    var locals = require(dirs.src + '/_pug/locals.js');
 
     return gulp.src(getViewFiles(dirs.viewSrc, 'pug'))
         .pipe(pug({
             pretty: true,
-            locals: require(dirs.src + '/_pug/locals.js')
+            locals: require(locals)
         }))
         .pipe(gulp.dest(dirs.viewDst));
 });
@@ -81,6 +87,7 @@ gulp.task('js', function() {
     var sourceMaps = require('gulp-sourcemaps');
     var uglify = require('gulp-uglify');
     var header = require('gulp-header');
+    var gutil = require('gulp-util');
 
     return gulp.src(getViewFiles(dirs.src, 'js'))
         .pipe(sourceMaps.init())
@@ -88,7 +95,7 @@ gulp.task('js', function() {
         .pipe(uglify({
             mangle: true,
             compress: true
-        }))
+        }).on('error', gutil.log))
         .pipe(sourceMaps.write('./', {
             addComment: true,
             includeContent: true
@@ -103,7 +110,7 @@ gulp.task('bower', function() {
 });
 
 gulp.task('demo', function() {
-    var demoServer = require('./website/demoServer');
+    var demoServer = require('./demoServer');
     demoServer.boot();
 });
 

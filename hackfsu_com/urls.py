@@ -9,22 +9,25 @@ Function views
 Class-based views
     1. Add an import:  from other_app.views import Home
     2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
+Including another URL conf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
 from django.conf.urls import include, url
 from django.contrib import admin
-from . import views
+from django.views.generic.base import RedirectView
+from django.urls import reverse
 
+app_name = 'hackfsu'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('api.urls')),
-
-    # Static Website Pages
-    url(r'^$', views.index),
-
-    # Special root-only static files
-    url('^favicon.ico$', views.static_redirect('img/favicon/favicon.ico')),
-    url('^browserconfig.xml$', views.static_redirect('img/favicon/browserconfig.xml'))
+    url(r'^api/', include('api.urls', namespace='api')),
+    url('', include('webapp.urls', namespace='webapp'))
 ]
+
+# Shortcuts
+urlpatterns.extend([
+    url(r'^register$', RedirectView.as_view(url=reverse('webapp:registration-hacker'))),
+    url(r'^login$', RedirectView.as_view(url=reverse('webapp:user-login')))
+])

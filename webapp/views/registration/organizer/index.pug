@@ -1,0 +1,15 @@
+extends ../../../_pug/standardLayout.pug
+
+block vars
+    -
+        var pageName = "Organizer Registration"
+        var viewDir = "/static/views/registration/organizer"
+
+block append styles
+    link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
+
+block append scripts
+    script(src=`${viewDir}/script.css`)
+
+block content
+    h1 TODO: #{pageName}

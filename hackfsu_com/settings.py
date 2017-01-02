@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'webapp'
 ]
 
 MIDDLEWARE = [
@@ -53,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'hackfsu_com.middleware.JsonLoader'
+    'api.middleware.JsonLoader'
 ]
 
 ROOT_URLCONF = 'hackfsu_com.urls'
@@ -62,7 +63,9 @@ ROOT_URLCONF = 'hackfsu_com.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'website/build/views')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'webapp/build/views')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,8 +134,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'website/static'),
-    os.path.join(BASE_DIR, 'website/build/static'),
+    os.path.join(BASE_DIR, 'webapp/static'),
+    os.path.join(BASE_DIR, 'webapp/build/static'),
 ]
 
 

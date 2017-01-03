@@ -117,7 +117,12 @@ gulp.task('demo', function() {
 gulp.task('build', ['bower', 'css', 'html', 'js']);
 
 gulp.task('watch', ['build'], function(){
-    return gulp.watch([dirs.src + '/**/*'], ['build']);
+    return gulp.watch([
+        dirs.src + '/**/*.pug',
+        dirs.src + '/**/*.scss',
+        dirs.src + '/**/*.js',
+        '!' + dirs.build + '/**/*'
+    ], ['build']);
 });
 
 gulp.task('default', ['build']);

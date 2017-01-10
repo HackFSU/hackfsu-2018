@@ -28,9 +28,10 @@ html
                     block navbar
                         +navbar(navLinks.standard)
             #content-container
-                #content.container
-                    block content
-                        h1 TODO
+                block page
+                    #content.container
+                        block content
+                            h1 TODO
             #footer-container
                 #footer.container
                     include ./includes/footer.pug

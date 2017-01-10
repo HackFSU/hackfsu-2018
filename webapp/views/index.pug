@@ -9,31 +9,99 @@ block append scripts
 block navbar
     +navbar(navLinks.index)
 
-block content
-    .section.section-title
-        h1 HackFSU
-        p
-            span: img.img-responsive(src="#" alt="logo")
-            span FEB. 17-19
+block page
+    #title-section
+        .container
+            .title-images-container
+                .title-images
+                    .title-image.title-image-one: img(src="/static/img/pictures/oculus-yellow.jpg")
+                    .title-image.title-image-two: img(src="/static/img/pictures/rutherford.jpg")
+                    .title-image.title-image-three: img(src="/static/img/pictures/camera.jpg")
+            .title-content
+                .title-buttons-container
+                    .title-buttons
+                        a.no-underline(href="/registration/hacker"): .button.button-light Register
+                        a.no-underline(href="/sponsor"): .button.button-light Sponsor
+                .title-text
+                    p.title-text-title.uni-fix HackFSU
+                    p.title-text-date
+                        img(src="/static/img/logos/hackfsu-white.png")
+                        span.uni-fix FEB. 17-19
 
-    form#subscribe(data-parsley-ui-enabled="false")
-        input(type="text" name="email" data-parsley-type="email" placeholder="Your Email" maxlength="100" required)
-        button(type="submit") Subscribe
+    a#about
+    #what-is-section.section
+        .section-title-container: .section-title
+            .section-title-spacer-empty
+            .section-title-text: .uni-fix SO, WHAT'S A HACKATHON?
+            .section-title-spacer-filled
+        .section-content-container: .container
+            .what-is-info
+                .icon-container: .icon.icon-computer-chip
+                .description
+                    h3 A PLACE TO #[span CREATE]
+                    p: i
+                        | At hackathons, you have the ability to build on any idea you can come up with. Web design, frontend/backend development, iOS and Android apps, hardware hacks, and server management are just a few of the possibilities!
+            .what-is-info
+                .icon-container: .icon.icon-laptop
+                .description
+                    h3 AN OPPORTUNITY FOR #[span EXPERIENCE]
+                    p: i
+                        | Workshops, tech talks, and access to mentors allows both beginning and experienced students to learn new technologies. Head over to our sponsor tables and find out about potential internship and career opportunities!
+            .what-is-info
+                .icon-container: .icon.icon-gameboy
+                .description
+                    h3 A CHANCE TO #[span COLLABORATE]
+                    p: i
+                        | Working alongside equally passionate people allows you to become encouraged to keep building and learning. You’ll be amazed what you can accomplish as a team.
 
-    .section.section-block-right
-        .section-title FAQS
-        .section-content
-            .faq-container
+
+    a#schedule
+    #schedule-section.section.section-left
+        .section-title-container: .section-title
+            .section-title-spacer-filled
+            .section-title-text: .uni-fix SCHEDULE
+            .section-title-spacer-empty
+        .section-content-container: .container
+            h1 COMING SOON
+    a#faq
+    #faq-section.section
+        .section-title-container: .section-title
+            .section-title-spacer-empty
+            .section-title-text: .uni-fix FAQ
+            .section-title-spacer-filled
+        .section-content-container: .container
+            .faq-item-container
                 include ./_faqs.pug
 
-    .section.section-block-left
-        .section-title THE HACKING CULTURE
-        .section-content
-            p Todo. Rutrum quod eligendi deleniti lectus, autem? Delectus libero, quos nullam sint officiis aperiam, dui, quo mattis, wisi? Necessitatibus voluptatibus reiciendis morbi repellat commodi quasi. Convallis lorem ab? Augue proident iure. Dolor nullam eros quo a sollicitudin. Penatibus interdum quasi integer, vitae vulputate mollitia, erat delectus ligula quidem phasellus sollicitudin habitant, nam nihil odio eum error distinctio, elementum non reprehenderit varius blanditiis ipsam, autem occaecat bibendum molestias platea suspendisse mi, nonummy scelerisque molestias? Sagittis earum lacinia quia incididunt, ullam nisl voluptatibus, assumenda aliquid scelerisque eos, litora cum aptent eaque curabitur auctor, odit dolorem? Placeat vitae hymenaeos integer molestiae maiores dolore, dignissimos.
+    a#culture
+    #culture-section.section.section-left
+        .section-title-container: .section-title
+            .section-title-spacer-filled
+            .section-title-text: .uni-fix THE HACKING CULTURE
+            .section-title-spacer-empty
+        .section-content-container: .container
+            .col-md-8.pull-right
+                img.img-responsive(src="/static/img/pictures/trio.jpg")
+                .hidden-md-up.image-spacer
+            p.col-md-4
+                | Each year, we set out to build a culture of creation. Students put aside their weekend for the opportunity to build whatever they can think of alongside hundreds of other students from around the country. Mentors from the industry volunteer their knowledge to support your crazy ideas. All we ask is that you come prepared with an open mind, ready to dedicate thirty hours to learn something new.
 
-    .section.section-sponsors
-        .section-title SPONSORS
-        .section-content
-            p Todo. Some messege about becoming a sponsor and that our sponsors will be announced soon.
-            //- Sponsor image blob to add later
-                .sponsor-container
+
+    #sponsors-section.section.section-center
+        .section-title-container: .section-title
+            .section-title-text: .uni-fix SPONSORS
+        .section-content-container: .container
+            .sponsor-tiers
+                //- All current tiers in order
+                each sponsors, tier in currentSponsors
+                    div(class=`sponsor-tier sponsor-tier-${tier}`)
+                        each sponsor in sponsors
+                            a(href=sponsor.href alt=sponsor.name target="_blank")
+                                img.img-responsive(title=sponsor.name alt=sponsor.name src=sponsor.imgSrc)
+            .sponsors-past
+                //- All past years in order
+                each sponsors, year in pastSponsors
+                    h3=year
+                    each sponsor in sponsors
+                        a(href=sponsor.href alt=sponsor.name target="_blank")
+                            img.img-responsive(title=sponsor.name alt=sponsor.name src=sponsor.imgSrc)

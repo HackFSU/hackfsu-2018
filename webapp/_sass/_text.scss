@@ -32,6 +32,10 @@ a:active {
     a:focus,
     a:active {
         text-decoration: underline;
+
+        &.no-underline {
+            text-decoration: none;
+        }
     }
 
 }
@@ -44,4 +48,10 @@ a:active {
     font-size: 0.8em;
     text-align: right;
     opacity: 0.5;
+}
+
+.uni-fix {
+    margin-bottom: -0.05em;
+    line-height: 0.8em;
+    padding-top: 0.05em;
 }

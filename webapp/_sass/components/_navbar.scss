@@ -22,6 +22,10 @@ nav.navbar-custom {
         font-size: 30px;
         font-family: $font-header;
         color: $color-light;
+
+        img {
+            height: 20px;
+        }
     }
 
     .nav > li {

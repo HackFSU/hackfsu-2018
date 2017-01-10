@@ -1,0 +1,36 @@
+.button {
+    font-family: $font-header;
+    font-size: 20px;
+    border: 3px solid;
+    border-radius: 2px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    margin: 5px;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.4em; /* differend because of font's baseline shift */
+
+    &.button-light {
+        color: $color-light;
+        border-color: $color-light;
+        background-color: transparent;
+
+        &:hover {
+            color: $color-dark;
+            background-color: $color-light;
+        }
+    }
+
+    &.button-dark {
+        color: $color-dark;
+        border-color: $color-dark;
+        background-color: transparent;
+
+        &:hover {
+            color: $color-light;
+            background-color: $color-dark;
+        }
+    }
+}

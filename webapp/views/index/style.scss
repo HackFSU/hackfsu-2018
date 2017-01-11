@@ -111,7 +111,7 @@
 .section {
     width: 100%;
     margin-top: 140px;
-    font-size: 25px;
+    font-size: 24px;
 
     .section-title-container {
         position: relative;
@@ -172,8 +172,9 @@
         .section-title-container {
             margin-bottom: 0;
         }
-        .section-title > * {
-            background-color: transparent;
+        .section-title > *,
+        .section-content-container {
+            background-color: $color-light;
         }
         .section-title-text {
             flex-grow: 1;
@@ -305,6 +306,47 @@
     }
 }
 
+#sponsors-section {
+    .section-title-text {
+        padding-top: 1.5em;
+    }
+
+    .sponsor-tier {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .sponsor-logo-image {
+        // Note: AdBlock will block the "sponsor-logo" class
+        display: block;
+        height: auto;
+        margin: 20px;
+        width: 100%;
+        max-width: 150px;
+    }
+    .sponsor-tier-3 .sponsor-logo-image {
+        max-width: 300px;
+    }
+    .sponsor-tier-2 .sponsor-logo-image {
+        max-width: 200px;
+    }
+    .sponsor-tier-1 .sponsor-logo-image {
+        max-width: 150px;
+    }
+
+    .sponsors-past {
+        margin-top: 100px;
+        text-align: center;
+    }
+
+    p {
+        max-width: 900px;
+    }
+
+}
+
 
 @media(max-width: $screen-sm-min) {
     // Mobile
@@ -330,7 +372,7 @@
     }
 
     .section {
-        font-size: 14px;
+        font-size: 20px;
         .section-title {
             font-size: 30px;
         }
@@ -346,9 +388,6 @@
         .description {
             h3 {
                 font-size: 25px;
-            }
-            p {
-                font-size: 1.2em;
             }
         }
     }
@@ -377,13 +416,11 @@
             }
         }
         .faq-item-text {
-            font-size: inherit;
+            font-size: 0.85;
         }
     }
 
-    #culture-section {
-        font-size: 1.2em;
-    }
+
 }
 
 @media(min-width: $screen-sm-min) {

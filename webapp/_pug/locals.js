@@ -20,7 +20,15 @@ locals.links = {
     twitter: 'http://www.twitter.com/HackFSU',
     facebook: 'https://www.facebook.com/hackfsu',
     instagram: 'https://www.instagram.com/hackfsu',
-    github: 'https://github.com/HackFSU'
+    github: 'https://github.com/HackFSU',
+    sponsorshipPacket: '/static/res/HackFSU_sponsorship_options_spring_2017.pdf'
+};
+
+locals.emails = {
+    info: 'info@hackfsu.com',
+    sponsors: 'sponsors@hackfsu.com',
+    travel: 'travel@hackfsu.com',
+    dev: 'dev@hackfsu.com'
 };
 
 locals.navLinks = {
@@ -66,8 +74,9 @@ var sponsorData = {
     },
     apple: {
         name: 'Apple',
-        href: 'http://www.apple.com/jobs/students',
-        logo: '/static/img/logos/apple.png'
+        href: 'http://www.apple.com/',
+        logo: '/static/img/logos/apple.png',
+        logoStyle: 'padding: 0 75px;'
     },
     codeSchool: {
         name: 'Code School',
@@ -137,7 +146,8 @@ var sponsorData = {
     oei: {
         name: 'Office of Entrepreneurship and Innovation (OEI)',
         href: 'http://sga.fsu.edu/oei/',
-        logo: '/static/img/logos/oei.png'
+        logo: '/static/img/logos/oei.png',
+        logoStyle: 'padding: 0 40px;'
     },
     sds: {
         name: 'Strategic Digital Services (SDS)',
@@ -204,28 +214,28 @@ var sponsorData = {
 // Locals for pug use
 locals.sponsors = {
     // TODO TBD
-    2017: {
+    '2017': {
         sponsors: {
-            3: [],
-            2: [],
-            1: []
+            '3': [],
+            '2': [],
+            '1': []
         },
         partners: [
 
         ]
     },
 
-    2016: {
+    '2016': {
         sponsors: {
-            3: [
+            '3': [
                 sponsorData.apple
             ],
-            2: [
+            '2': [
                 sponsorData.stateFarm,
                 sponsorData.accenture,
                 sponsorData.jmi
             ],
-            1: [
+            '1': [
                 sponsorData.genivia,
                 sponsorData.sds,
                 sponsorData.codeSchool,
@@ -241,46 +251,57 @@ locals.sponsors = {
         ]
     },
 
-    2015: {
-        3: [
-            sponsorData.mailChimp,
-            sponsorData.ionicSecurity
-        ],
-        2: [
-            sponsorData.valeFoodCo,
+    '2015': {
+        sponsors: {
+            '3': [
+                sponsorData.mailChimp,
+                sponsorData.ionicSecurity
+            ],
+            '2': [
+                sponsorData.valeFoodCo,
+                sponsorData.domiStation,
+                sponsorData.starbucksAndRenegadeRunner,
+                sponsorData.codeSchool
+            ],
+            '1': [
+                sponsorData.uberOperations,
+                sponsorData.oei,
+                sponsorData.fitc,
+                sponsorData.jmi,
+                sponsorData.sds,
+                sponsorData.talTech
+            ]
+        },
+        partners: [
             sponsorData.techNole,
-            sponsorData.domiStation,
-            sponsorData.starbucksAndRenegadeRunner,
-            sponsorData.codeSchool
-        ],
-        1: [
-            sponsorData.uberOperations,
-            sponsorData.oei,
-            sponsorData.fitc,
-            sponsorData.jmi,
-            sponsorData.sds,
-            sponsorData.talTech,
             sponsorData.mlh
         ]
     },
 
     // TODO Still need some images
-    2014: {
-        2: [
-            sponsorData.domiStation
-        ],
-        1: [
-            // sponsorData.selenko,
-            // sponsorData.theCrepeVine,
-            sponsorData.jmi,
-            // sponsorData.hashrocket,
-            // sponsorData.wolfram,
-            // sponsorData.namecheap,
-            // sponsorData.lob,
-            // sponsorData.giantIvy
+    '2014': {
+        sponsors: {
+            '2': [
+                sponsorData.domiStation
+            ],
+            '1': [
+                // sponsorData.selenko,
+                // sponsorData.theCrepeVine,
+                sponsorData.jmi,
+                // sponsorData.hashrocket,
+                // sponsorData.wolfram,
+                // sponsorData.namecheap,
+                // sponsorData.lob,
+                // sponsorData.giantIvy
+            ]
+        },
+        partners: [
+            sponsorData.techNole
         ]
     }
 };
+
+
 
 
 module.exports = locals;

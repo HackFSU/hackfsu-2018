@@ -28,34 +28,37 @@
 
     .title-images {
         display: flex;
-        max-height: 500px;
+        height: 500px;
+        align-content: stretch;
+    }
 
-        .title-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            flex-grow: 1;
-        }
+    .title-image {
+        display: inline-block;
+        height: 100%;
+        flex-grow: 1;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        background-clip: content-box;
+    }
 
-        img {
-            flex-shrink: 0;
-            min-width: 100%;
-            min-height: 100%;
-        }
+    .title-image-one {
+        background-image: url('/static/img/pictures/oculus-yellow.jpg');
+        background-position: 39% 50%;
+        border-right: $title-image-border/2 solid transparent;
+    }
 
-        .title-image-one {
-            border-right: $title-image-border/2 solid transparent;
-        }
+    .title-image-two {
+        background-image: url('/static/img/pictures/rutherford.jpg');
+        background-position: 50% 50%;
+        border-left: $title-image-border/2 solid transparent;
+        border-right: $title-image-border/2 solid transparent;
+    }
 
-        .title-image-two {
-            border-left: $title-image-border/2 solid transparent;
-            border-right: $title-image-border/2 solid transparent;
-        }
-
-        .title-image-three {
-            border-left: $title-image-border/2 solid transparent;
-        }
+    .title-image-three {
+        background-image: url('/static/img/pictures/camera.jpg');
+        background-position: 74% 50%;
+        border-left: $title-image-border/2 solid transparent;
     }
 
 
@@ -68,42 +71,42 @@
             display: inline-block;
             height: 150px;
         }
+    }
 
-        .title-buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-            margin-right: 25px;
+    .title-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        margin-right: 25px;
 
-            .button {
-                font-size: 25px;
-            }
+        .button {
+            font-size: 25px;
+        }
+    }
+
+    .title-text {
+        text-align: left;
+        font-size: 50px;
+
+        .title-text-title {
+            font-family: $font-header;
+            font-size: 2.5em;
         }
 
-        .title-text {
-            text-align: left;
-            font-size: 50px;
+        .title-text-date {
+            font-family: $font-header;
+            font-style: italic;
+            font-size: 1em;
+            margin: 0px;
+        }
 
-            .title-text-title {
-                font-family: $font-header;
-                font-size: 2.5em;
-            }
-
-            .title-text-date {
-                font-family: $font-header;
-                font-style: italic;
-                font-size: 1em;
-                margin: 0px;
-            }
-
-            img {
-                height: 0.75em;
-                margin-top: -0.25em;
-                width: auto;
-                padding-right: 0.25em;
-            }
+        img {
+            height: 0.75em;
+            margin-top: -0.25em;
+            width: auto;
+            padding-right: 0.25em;
         }
     }
 }
@@ -352,23 +355,33 @@
     // Mobile
 
     #title-section {
+        padding-top: 0;
+        
         .title-images-container {
             display: none;
         }
         .title-content {
-            padding-top: 0px;
             flex-direction: column-reverse;
+            padding-top: 0;
+            padding-bottom: 15px;
 
-            .title-text {
-                font-size: 30px;
-            }
-
-            .title-buttons {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: space-around;
+            > * {
+                height: auto;
             }
         }
+        .title-buttons-container {
+            padding: 15px 0px;
+        }
+        .title-text {
+            font-size: 30px;
+        }
+        .title-buttons {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+
     }
 
     .section {
@@ -424,10 +437,32 @@
 }
 
 @media(min-width: $screen-sm-min) {
-    // Tablet +
+    // >= Tablet
     #title-section {
         .button {
             margin: 0px;
+        }
+    }
+}
+
+@media(max-width: $screen-md-min) {
+    // < Tablet
+    #title-section {
+        .title-images {
+            height: 400px;
+        }
+    }
+}
+
+
+@media(max-width: $screen-lg-min) {
+    // < Desktop
+    #title-section {
+        .title-image-two {
+            border-right: 0;
+        }
+        .title-image-three {
+            display: none;
         }
     }
 }

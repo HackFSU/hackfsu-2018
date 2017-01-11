@@ -10,8 +10,11 @@
     "gulp-build": "gulp build",
     "gulp-watch": "gulp watch",
     "gulp-demo": "gulp demo",
-    "build": "npm run gulp-build",
-    "update": "npm install; ./venv/bin/pip3.5 install -r ./requirements.txt",
+    "gulp-clean": "gulp clean",
+    "build": "npm run gulp-clean; npm run gulp-build",
+    "npm-install": "npm install",
+    "pip-install": "./venv/bin/pip3.5 install -r ./requirements.txt",
+    "update": "npm run npm-install; npm run pip-install",
     "demo": "npm run gulp-bower; concurrently --kill-others \"npm run gulp-watch\" \"npm run gulp-demo\""
   },
   "author": "",
@@ -20,6 +23,7 @@
     "*/**"
   ],
   "dependencies": {
+    "fs-extra": "^1.0.0",
     "moment": "^2.17.1"
   },
   "devDependencies": {

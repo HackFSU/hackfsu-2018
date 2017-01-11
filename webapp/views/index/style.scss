@@ -266,19 +266,35 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        align-items: flex-start;
+        align-items: stretch;
     }
-
-    .faq-item {
+    .faq-item-box {
+        width: 330px;
         margin: 20px;
         padding: 20px;
         background-color: $color-light;
-        max-width: 340px;
         color: $color-purple;
-        h4 {
-            font-weight: bold;
+        cursor: pointer;
+
+        &.active {
+            .faq-item-text {
+                max-height: 275px;
+            }
         }
     }
+    .faq-item-title {
+        font-weight: bold;
+        margin: 0;
+    }
+    .faq-item-text {
+        width: 100%;
+        transition: max-height 0.75s ease;
+        font-size: 18px;
+        max-height: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+
 }
 
 #culture-section {
@@ -343,6 +359,25 @@
         }
         .container {
             padding-bottom: 0;
+        }
+    }
+
+    #faq-section {
+        .faq-item-container {
+            flex-direction: column;
+        }
+        .faq-item-box {
+            margin: 5px 10px;
+            width: auto;
+
+            &.active {
+                .faq-item-text {
+                    max-height: 200px;
+                }
+            }
+        }
+        .faq-item-text {
+            font-size: inherit;
         }
     }
 

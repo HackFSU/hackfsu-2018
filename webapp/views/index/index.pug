@@ -70,7 +70,7 @@ block page
             .section-title-text: .uni-fix FAQ
             .section-title-spacer-filled
         .section-content-container: .container
-            .faq-item-container
+            .row: .faq-item-container
                 include ./_faqs.pug
 
     a#culture
@@ -91,14 +91,14 @@ block page
         .section-title-container: .section-title
             .section-title-text: .uni-fix SPONSORS
         .section-content-container: .container
-            .sponsor-tiers
+            //- .sponsor-tiers
                 //- All current tiers in order
                 each sponsors, tier in currentSponsors
                     div(class=`sponsor-tier sponsor-tier-${tier}`)
                         each sponsor in sponsors
                             a(href=sponsor.href alt=sponsor.name target="_blank")
                                 img.img-responsive(title=sponsor.name alt=sponsor.name src=sponsor.imgSrc)
-            .sponsors-past
+            //- .sponsors-past
                 //- All past years in order
                 each sponsors, year in pastSponsors
                     h3=year

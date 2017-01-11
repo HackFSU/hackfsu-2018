@@ -10,4 +10,6 @@
         faqs.filter('.' + activeClass).not(this).removeClass(activeClass);
         $(this).toggleClass(activeClass);
     });
+
+    $('#content-container').parallaxIt();
 })();

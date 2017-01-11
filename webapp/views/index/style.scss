@@ -5,7 +5,8 @@
  */
 #page-container #content-container {
     background: url('/static/img/patterns/tech-pattern-white-blue.png');
-    background-size: 600px 600px;
+    background-size: 800px 800px;
+    background-position: 50% 0;
 }
 
 #title-section {
@@ -356,7 +357,7 @@
 
     #title-section {
         padding-top: 0;
-        
+
         .title-images-container {
             display: none;
         }

@@ -11,6 +11,7 @@
     "gulp-watch": "gulp watch",
     "gulp-demo": "gulp demo",
     "build": "npm run gulp-build",
+    "update": "npm install; ./venv/bin/pip3.5 install -r ./requirements.txt",
     "demo": "npm run gulp-bower; concurrently --kill-others \"npm run gulp-watch\" \"npm run gulp-demo\""
   },
   "author": "",

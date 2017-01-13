@@ -19,10 +19,11 @@ var banner =
 
 var dirs = {};
 dirs.webapp = __dirname + '/webapp';
-dirs.build = dirs.webapp + '/build/static';
+dirs.buildRoot = dirs.webapp + '/build';
+dirs.build = dirs.buildRoot + '/static';
 dirs.src = dirs.webapp;
 dirs.viewSrc = dirs.src + '/views';
-dirs.viewDst = dirs.webapp + '/build/views';
+dirs.viewDst = dirs.buildRoot + '/views';
 
 function getViewFiles(directory, extension) {
     return [
@@ -109,6 +110,19 @@ gulp.task('bower', function() {
     return bower();
 });
 
+
+// Remove built files so they can be re-built freshly
+gulp.task('clean', function(done) {
+    var fs = require('fs-extra');
+    console.log('rm -rf ' + dirs.buildRoot);
+    fs.remove(dirs.buildRoot, function(err) {
+        if (err) {
+            console.log('Error:', err);
+        }
+        done();
+    });
+});
+
 gulp.task('demo', function() {
     var demoServer = require('./demoServer');
     demoServer.boot();
@@ -124,5 +138,6 @@ gulp.task('watch', ['build'], function(){
         '!' + dirs.build + '/**/*'
     ], ['build']);
 });
+
 
 gulp.task('default', ['build']);

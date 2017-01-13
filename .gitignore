@@ -10,6 +10,7 @@ bower_components
 *.tmp
 
 # Project
+/static_collected
 /webapp/build
 scripts/data
 secret_keys.json

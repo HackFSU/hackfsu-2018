@@ -14,7 +14,8 @@
     "build": "npm run gulp-clean; npm run gulp-build",
     "npm-install": "npm install",
     "pip-install": "./venv/bin/pip3.5 install -r ./requirements.txt",
-    "update": "npm run npm-install; npm run pip-install",
+    "django-collectstatic": "rm -rf static_collected; ./venv/bin/python3.5 manage.py collectstatic --noinput",
+    "update": "npm run npm-install; npm run pip-install; npm run django-collectstatic",
     "demo": "npm run gulp-bower; concurrently --kill-others \"npm run gulp-watch\" \"npm run gulp-demo\""
   },
   "author": "",

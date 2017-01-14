@@ -31,14 +31,22 @@ urlpatterns = [
 
     # Static Website Pages
     url(r'^$', views.IndexPage.as_view(), name='index'),
-    url(r'^help$', views.HelpPage.as_view(), name='help'),
+    # url(r'^help$', views.HelpPage.as_view(), name='help'),
 
-    url(r'^registration/hacker', views.registration.HackerRegistrationPage.as_view(), name='registration-hacker'),
-    url(r'^registration/judge', views.registration.JudgeRegistrationPage.as_view(), name='registration-judge'),
-    url(r'^registration/mentor', views.registration.MentorRegistrationPage.as_view(), name='registration-mentor'),
-    url(r'^registration/organizer', views.registration.OrganizerRegistrationPage.as_view(),
-        name='registration-organizer'),
+    url(r'^registration/hacker/$', views.registration.HackerRegistrationPage.as_view(), name='registration-hacker'),
+    # url(r'^registration/judge/$', views.registration.JudgeRegistrationPage.as_view(), name='registration-judge'),
+    # url(r'^registration/mentor/$', views.registration.MentorRegistrationPage.as_view(), name='registration-mentor'),
+    # url(r'^registration/organizer/$', views.registration.OrganizerRegistrationPage.as_view(),
+    #     name='registration-organizer'),
 
-    url(r'^user/login$', views.user.LoginPage.as_view(), name='user-login'),
-    url(r'^user/profile$', views.user.ProfilePage.as_view(), name='user-profile')
+    # url(r'^user/login/$', views.user.LoginPage.as_view(), name='user-login'),
+    # url(r'^user/profile/$', views.user.ProfilePage.as_view(), name='user-profile')
 ]
+
+if settings.DEBUG:
+    urlpatterns.extend([
+        url(r'^error/404/$', views.handler404),
+        url(r'^error/500/$', views.handler500),
+    ])
+
+

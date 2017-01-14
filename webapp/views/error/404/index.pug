@@ -1,7 +1,11 @@
 extends ../../../_pug/standardLayout.pug
 
 block vars
-    - var pageName = "404 Page Not Found"
+    -
+        var pageName = "404 Page Not Found"
+
+block navbar
+    +navbar(navLinks.error)
 
 block content
     h1 404 It's a trap!

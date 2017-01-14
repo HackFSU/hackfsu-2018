@@ -48,6 +48,10 @@ locals.navLinks = {
         { name: 'Login', url: '/user/login' }
     ],
 
+    error: [
+        { name: 'Home', url: '/' }
+    ],
+
     // For regular non-index pages
     standard: [
         { name: 'Register', url: '/register' },

@@ -1,7 +1,11 @@
 extends ../../../_pug/standardLayout.pug
 
 block vars
-    - var pageName = "500 Server Error"
+    -
+        var pageName = "500 Server Error"
+
+block navbar
+    +navbar(navLinks.error)
 
 block content
     h1 Oh no!

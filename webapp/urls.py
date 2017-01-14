@@ -33,7 +33,8 @@ urlpatterns = [
     url(r'^$', views.IndexPage.as_view(), name='index'),
     # url(r'^help$', views.HelpPage.as_view(), name='help'),
 
-    url(r'^registration/hacker/$', views.registration.HackerRegistrationPage.as_view(), name='registration-hacker'),
+    url(r'^registration/user/$', views.registration.UserRegistrationPage.as_view(), name='registration-user'),
+    # url(r'^registration/hacker/$', views.registration.HackerRegistrationPage.as_view(), name='registration-hacker'),
     # url(r'^registration/judge/$', views.registration.JudgeRegistrationPage.as_view(), name='registration-judge'),
     # url(r'^registration/mentor/$', views.registration.MentorRegistrationPage.as_view(), name='registration-mentor'),
     # url(r'^registration/organizer/$', views.registration.OrganizerRegistrationPage.as_view(),

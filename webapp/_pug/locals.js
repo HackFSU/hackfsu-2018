@@ -106,12 +106,12 @@ var sponsorData = {
     giantIvy: {
         name: 'GiantIVY',
         href: 'http://www.giantivy.com/',
-        logo: '/static/img/logos/giant-ivy.png' // TODO
+        logo: '/static/img/logos/giant-ivy.jpg'
     },
     hashrocket: {
         name: 'Hashrocket',
         href: 'http://hashrocket.com/',
-        logo: '/static/img/logos/hashrocket.png' // TODO
+        logo: '/static/img/logos/hashrocket.png'
     },
     ionicSecurity: {
         name: 'Ionic Security',
@@ -126,7 +126,8 @@ var sponsorData = {
     lob: {
         name: 'Lob',
         href: 'http://lob.com/',
-        logo: '/static/img/logos/lob.png' // TODO
+        logo: '/static/img/logos/lob.png',
+        logoStyle: 'padding: 0 25px;'
     },
     mailChimp: {
         name: 'MailChimp',
@@ -141,7 +142,7 @@ var sponsorData = {
     namecheap: {
         name: 'Namecheap',
         href: 'http://namecheap.com/',
-        logo: '/static/img/logos/namecheap.png' // TODO
+        logo: '/static/img/logos/namecheap.png'
     },
     oei: {
         name: 'Office of Entrepreneurship and Innovation (OEI)',
@@ -157,7 +158,7 @@ var sponsorData = {
     selenko: {
         name: 'Selenko',
         href: 'http://www.selenko.com/',
-        logo: '/static/img/logos/selenko.png' // TODO
+        logo: '/static/img/logos/selenko.png'
     },
     seminoleDining: {
         name: 'Seminole Dining',
@@ -192,7 +193,7 @@ var sponsorData = {
     theCrepeVine: {
         name: 'The Crepe Vine',
         href: 'http://www.thecrepevine.com/',
-        logo: '/static/img/logos/the-crep-vine.png' // TODO
+        logo: '/static/img/logos/the-crepe-vine.png'
     },
     uberOperations: {
         name: 'Uber Operations LLC',
@@ -207,14 +208,13 @@ var sponsorData = {
     wolfram: {
         name: 'Wolfram',
         href: 'http://www.wolfram.com/',
-        logo: '/static/img/logos/wolfram.png' // TODO
+        logo: '/static/img/logos/wolfram.png'
     }
 };
 
 // Locals for pug use
 locals.sponsors = {
-    // TODO TBD
-    '2017': {
+     '2017': {
         sponsors: {
             '3': [],
             '2': [],
@@ -278,21 +278,20 @@ locals.sponsors = {
         ]
     },
 
-    // TODO Still need some images
     '2014': {
         sponsors: {
             '2': [
                 sponsorData.domiStation
             ],
             '1': [
-                // sponsorData.selenko,
-                // sponsorData.theCrepeVine,
+                sponsorData.selenko,
+                sponsorData.theCrepeVine,
                 sponsorData.jmi,
-                // sponsorData.hashrocket,
-                // sponsorData.wolfram,
-                // sponsorData.namecheap,
-                // sponsorData.lob,
-                // sponsorData.giantIvy
+                sponsorData.hashrocket,
+                sponsorData.wolfram,
+                sponsorData.namecheap,
+                sponsorData.lob,
+                sponsorData.giantIvy
             ]
         },
         partners: [

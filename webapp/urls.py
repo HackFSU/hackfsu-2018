@@ -25,10 +25,6 @@ def static_redirect(path):
     return RedirectView.as_view(url=settings.STATIC_URL + path)
 
 urlpatterns = [
-    # Special root-only static files
-    url('^favicon.ico$', static_redirect('img/favicon/favicon.ico')),
-    url('^browserconfig.xml$', static_redirect('img/favicon/browserconfig.xml')),
-
     # Static Website Pages
     url(r'^$', views.IndexPage.as_view(), name='index'),
     # url(r'^help$', views.HelpPage.as_view(), name='help'),
@@ -46,6 +42,11 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns.extend([
+        # Special root-only static files handled by Apache
+        url('^favicon.ico$', static_redirect('img/favicon/favicon.ico')),
+        url('^browserconfig.xml$', static_redirect('img/favicon/browserconfig.xml')),
+
+        # Error Pages
         url(r'^error/404/$', views.handler404),
         url(r'^error/500/$', views.handler500),
     ])

@@ -1,13 +1,16 @@
 $navbar-height: 100px;
 $navbar-line-height: 50px;
-$navbar-margin: (($navbar-height - $navbar-line-height) / 2) 0;
+$navbar-margin-vertical: (($navbar-height - $navbar-line-height) / 2);
+$navbar-margin: $navbar-margin-vertical 0;
 
-nav.navbar-custom {
+nav.navbar.navbar-custom {
     background-color: $color-dark;
+    font-size: 30px;
+    border: 0;
+    margin-bottom: 0;
 
     .navbar-header {
         line-height: $navbar-line-height;
-        font-size: 30px;
         color: $color-light;
 
         button {
@@ -17,14 +20,21 @@ nav.navbar-custom {
     }
 
     .navbar-brand {
-        padding: $navbar-margin;
+        padding-top: $navbar-margin-vertical;
+        height: $navbar-line-height;
         line-height: $navbar-line-height;
-        font-size: 30px;
         font-family: $font-header;
         color: $color-light;
+        font-size: 1.0em;
 
         img {
-            height: 20px;
+            display: inline-block;
+            height: 0.75em;
+            margin-top: -0.25em;
+        }
+        .brand-title {
+            display: inline-block;
+            margin-left: 0.2em;
         }
     }
 
@@ -61,7 +71,7 @@ nav.navbar-custom {
                     height: 2px;
                     width: 80%;
                     margin-left: 10%;
-                    bottom: 10px;
+                    bottom: 7px;
                     left: 0;
                     right: 0;
                     content: '';
@@ -76,7 +86,7 @@ nav.navbar-custom {
                     height: 5px;
                     width: 80%;
                     margin-left: 10%;
-                    bottom: 7px;
+                    bottom: 4px;
                     left: 0;
                     right: 0;
                     content: '';

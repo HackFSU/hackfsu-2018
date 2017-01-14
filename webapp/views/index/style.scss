@@ -113,33 +113,34 @@
 }
 
 .section {
+    $section-margin: 200px;
+    $title-offset: 63px;
     width: 100%;
-    margin-top: 140px;
-    font-size: 24px;
+    margin-top: ($section-margin - $title-offset);
 
     .section-title-container {
         position: relative;
         display: block;
         width: 100%;
-        margin-bottom: -62px;
+        font-size: 70px;
+        margin-bottom: (-1)*$title-offset;
         z-index: 2;
     }
 
     .section-content-container {
+        padding-top: $title-offset*1.5;
+        padding-bottom: $title-offset*1.5;
         position: relative;
-        padding-top: 70px;
-        padding-bottom: 70px;
         display: flex;
         width: 100%;
         z-index: 1;
+        font-size: 24px;
     }
 
     .section-title {
         display: flex;
         align-items: stretch;
         font-family: $font-header;
-        font-size: 70px;
-        color: $color-light;
     }
     .section-title-spacer-empty {
         flex-grow: 2;
@@ -147,16 +148,26 @@
     }
     .section-title-spacer-filled {
         flex-grow: 1;
-        background-color: $color-teal;
+        background-color: transparent;
     }
     .section-title-text {
         padding: 0.5em 0.5em;
-        background-color: $color-teal;
+        background-color: transparent;
+    }
+
+    &.section-right {
+        .section-title-text,
+        .section-title-spacer-filled {
+            background-color: $color-teal;
+            color: $color-light;
+        }
     }
 
     &.section-left {
+        margin-top: ($section-margin + $title-offset);
+
         .section-title-container {
-            margin-bottom: -190px;
+            margin-bottom: (-1)*$title-offset*3;
 
             .section-title-text,
             .section-title-spacer-filled {
@@ -166,20 +177,26 @@
         }
 
         .section-content-container {
+            padding-top: $title-offset*4;
             background-color: $color-purple;
             color: $color-light;
-            padding-top: 230px;
         }
     }
 
     &.section-center {
+        margin-top: $section-margin;
+
         .section-title-container {
             margin-bottom: 0;
-        }
-        .section-title > *,
-        .section-content-container {
+            padding-top: $title-offset;
+            padding-bottom: $title-offset;
             background-color: $color-light;
         }
+        .section-content-container {
+            padding-top: 0px;
+            background-color: $color-light;
+        }
+
         .section-title-text {
             flex-grow: 1;
             text-align: center;
@@ -256,10 +273,9 @@
         background-repeat: no-repeat;
         background-position: center;
     }
-    .container {
-        padding-bottom: 400px;
+    .schedule-temp-filler {
+        padding-bottom: 600px;
     }
-
 }
 
 #faq-section {
@@ -303,18 +319,12 @@
 }
 
 #culture-section {
-    .section-content-container {
-        .image-spacer {
-            padding-top: 30px;
-        }
+    p {
+        margin-bottom: 0;
     }
 }
 
 #sponsors-section {
-    .section-title-text {
-        padding-top: 1.5em;
-    }
-
     .sponsor-tier {
         display: flex;
         width: 100%;
@@ -352,9 +362,121 @@
 }
 
 
+@media(max-width: $screen-md-min) {
+    $title-font-size: 30px;
+    $section-margin: 125px;
+    $title-offset: $title-font-size*0.9;
+
+    .section {
+        // Convert all sections to center section
+
+        .section-title-container {
+            font-size: $title-font-size;
+        }
+        .section-content-container {
+            font-size: 20px;
+            padding-bottom: $title-offset;
+        }
+        .section-title-spacer-filled,
+        .section-title-spacer-empty {
+            display: none;
+        }
+        .section-title-text {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        &.section-right,
+        &.section-left {
+            margin-top: ($section-margin + $title-offset);
+
+            .section-title-container {
+                margin-bottom: (-1)*$title-offset*3;
+            }
+            .section-content-container {
+                font-size: 20px;
+                padding-top: $title-offset*4;
+            }
+        }
+
+        &.section-center {
+            margin-top: $section-margin;
+            .section-title-container {
+                padding-top: $title-offset;
+                padding-bottom: $title-offset;
+            }
+        }
+
+
+    }
+
+    #title-section {
+        .title-images {
+            height: 400px;
+        }
+    }
+
+
+    #what-is-section {
+        .what-is-info {
+            padding: 0;
+        }
+        .icon-container {
+            display: none;
+        }
+        .what-is-info:first-child h3 {
+            margin-top: 0;
+        }
+        .what-is-info:last-child p {
+            margin-bottom: 0;
+        }
+        .description {
+            h3 {
+                font-size: $title-font-size*0.8;
+            }
+        }
+    }
+
+    #faq-section {
+        .faq-item-container {
+            flex-direction: column;
+        }
+        .faq-item-box {
+            margin: 5px 10px;
+            width: auto;
+
+            &.active {
+                .faq-item-text {
+                    max-height: 200px;
+                }
+            }
+        }
+        .faq-item-text {
+            font-size: 0.85;
+        }
+    }
+
+    #sponsors-section {
+        h1 {
+            font-size: $title-font-size*0.9;
+        }
+    }
+
+
+}
+
+
+@media(min-width: $screen-sm-min) {
+    // >= Tablet
+    #title-section {
+        .button {
+            margin: 0px;
+        }
+    }
+}
+
 @media(max-width: $screen-sm-min) {
     // Mobile
-
     #title-section {
         padding-top: 0;
 
@@ -385,74 +507,6 @@
 
     }
 
-    .section {
-        font-size: 20px;
-        .section-title {
-            font-size: 30px;
-        }
-    }
-
-    #what-is-section {
-        .what-is-info {
-            padding: 10px 0;
-        }
-        .icon-container {
-            display: none;
-        }
-        .description {
-            h3 {
-                font-size: 25px;
-            }
-        }
-    }
-
-    #schedule-section {
-        .section-content-container {
-            background-size: 100%;
-        }
-        .container {
-            padding-bottom: 0;
-        }
-    }
-
-    #faq-section {
-        .faq-item-container {
-            flex-direction: column;
-        }
-        .faq-item-box {
-            margin: 5px 10px;
-            width: auto;
-
-            &.active {
-                .faq-item-text {
-                    max-height: 200px;
-                }
-            }
-        }
-        .faq-item-text {
-            font-size: 0.85;
-        }
-    }
-
-
-}
-
-@media(min-width: $screen-sm-min) {
-    // >= Tablet
-    #title-section {
-        .button {
-            margin: 0px;
-        }
-    }
-}
-
-@media(max-width: $screen-md-min) {
-    // < Tablet
-    #title-section {
-        .title-images {
-            height: 400px;
-        }
-    }
 }
 
 
@@ -464,6 +518,12 @@
         }
         .title-image-three {
             display: none;
+        }
+    }
+
+    #culture-section {
+        .img-container {
+            margin-bottom: 1em;
         }
     }
 }

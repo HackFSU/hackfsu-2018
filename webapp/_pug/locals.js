@@ -57,9 +57,9 @@ locals.navLinks = {
         { name: 'Register', url: '/register' },
         { name: 'About', url: '/#about' },
         { name: 'Sponsors', url: '/#sponsors' },
-        { name: 'FAQs', url: '/#faq' },
-        { name: 'Help', url: '/help' },
-        { name: 'Login', url: '/user/login' }
+        { name: 'FAQs', url: '/#faq' }
+        // { name: 'Help', url: '/help' },
+        // { name: 'Login', url: '/user/login' }
     ]
 };
 

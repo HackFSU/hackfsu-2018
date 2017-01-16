@@ -2,7 +2,7 @@
     Logs user with the given credentials in for the stored session
 """
 from django import forms
-from ..generic import ApiView
+from hackfsu_com.views.generic import ApiView
 from django.db import models
 
 

@@ -2,7 +2,7 @@
     Website Home
 """
 
-from ..generic import PageView
+from hackfsu_com.views.generic import PageView
 
 
 class IndexPage(PageView):

@@ -4,3 +4,9 @@ block vars
     -
         var pageName = "User Profile"
         var viewDir = "/static/views/user/profile"
+
+block append scripts
+    script(src=`${viewDir}/script.js`)
+
+block content
+    h1 Profile

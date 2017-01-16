@@ -251,42 +251,49 @@ These pages are used to manage the website as a whole, so that the server does n
 # API Informal SRS
 A list of all requests handled by the api in the format `<REQUEST_TYPE> <REQUEST_PATH> <ACL> - <DESCRIPTION>`.
 
-## General
-* GET `/api/hackathon/schedule/get` [] - Returns current hackathon's schedule items in a list
-* GET `/api/hackathon/sponsors/get` [] - Returns current hackathon's public sponsor list with logo image links
-* GET `/api/hackathon/stats/get` [] - Returns current hackathon's public statistics
+## Hackathon
+## Actions
 * POST `/api/hackathon/subscribe` [] - Subscribes an email for updates about the current hackathon
+### Access
+* GET `/api/hackathon/get/schedule` [] - Returns current hackathon's schedule items in a list
+* GET `/api/hackathon/get/sponsors` [] - Returns current hackathon's public sponsor list with logo image links
+* GET `/api/hackathon/get/stats` [] - Returns current hackathon's public statistics
 
-## User management
+
+## User
+### Actions
 * POST `/api/user/login` [!user] - Logs in a user for the session
     * Must be a existing, enabled, email verified user.
 * POST `/api/user/initialize_password_reset` [!user] - Sends a password reset email with a link for reset page
 * POST `/api/user/finalize_password_reset` [!user] - Completes a password reset, setting a new password for the user
-* GET `/api/user/profile` [user] - Returns profile data of logged in user (can handle non-user info properties as well if applicable)
 * POST `/api/user/change_password` [user] - Changes user password and logs user out
-* POST `/api/user/edit` [user] - Changes user properties (can handle non-user info properties as well if applicable)
+
 * POST `/api/user/resend_email_confirmation` [!user] - Resends the email confirmation email for the account creation process
 * POST `/api/user/confirm_email` [!user] - Submits an email confirmation for a pending user
-* POST `/api/user/register/hacker` [!user] - Hacker new account registration
-    * Email confirmation required
-* POST `/api/user/register/judge` [!user] - Judge new account registration
-* POST `/api/user/register/mentor` [!user] - Mentor new account registration
-* POST `/api/user/register/organizer` [!user] - Organizer new account registration
-* POST `/api/user/join/hackers` [user,!hacker] - Register current account for hacker status
-* POST `/api/user/join/organizers` [user,!organizer] - Register current account for organizer status
-* POST `/api/user/join/judges` [user,!judge] - Register current account for judge status
-* POST `/api/user/join/mentors` [user,!mentor] - Register current account for mentor status
+### Access
+* GET `/api/user/get/profile` [user] - Returns profile data of logged in user (can handle non-user info properties as well if applicable)
+### Mutate
+* POST `/api/user/set/*` [user] - Changes user properties (can handle non-user info properties as well if applicable)
+
+
+## Hacker
+* POST `/api/hacker/register` [user,!hacker] - Register current account for hacker status
+
 
 ## Mentor
+* POST `/api/mentor/register` [user,!mentor] - Register current account for mentor status
 * GET `/api/mentor/get_requests` [mentor] - Returns all of the help requests for the current hackathon
 * POST `/api/mentor/claim_request` [mentor] - Claims a help request
 * POST `/api/mentor/release_request` [mentor] - Releases a claimed help request for other mentors
 
+
 ## Judge
-TODO
+* POST `/api/judge/register` [user,!judge,!hacker] - Register current account for judge status
+
 
 ## Organize
-TODO
+* POST `/api/organizer/register` [user,!organizer,!hacker] - Register current account for organizer status
+
 
 ## Administration
 TODO

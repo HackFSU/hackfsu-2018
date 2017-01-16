@@ -4,8 +4,9 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-from ..generic import ApiView
 from django.contrib.auth import authenticate, login
+from hackfsu_com.views.generic import ApiView
+from hackfsu_com.util import acl
 
 
 class RequestForm(forms.Form):
@@ -15,6 +16,7 @@ class RequestForm(forms.Form):
 
 class LogInView(ApiView):
     request_form_class = RequestForm
+    access_manager = acl.AccessManager(acl_deny=[acl.group_user])
 
     def work(self, request, req, res):
         # Authenticate user (username == email)

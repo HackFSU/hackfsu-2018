@@ -13,12 +13,14 @@ from django.views.generic import View
 from django.utils.translation import ugettext as _
 from django import forms
 from django.conf import settings
+from hackfsu_com.util import acl
 
 
 class ApiView(View):
     http_method_names = ['post']        # Override to allow GET
     request_form_class = forms.Form     # Override each time
     response_form_class = forms.Form    # Override each time
+    access_manager = acl.AccessManager()
 
     def get(self, request):
         return self.process(request, request.GET)
@@ -28,6 +30,14 @@ class ApiView(View):
 
     def process(self, request, input_data):
         """ Validates input and attempts to preform work() logic. Returns the correct JsonResponse """
+
+        # Authenticate Access
+        if not self.access_manager.check_user(request.user):
+            return JsonResponse({
+                'message': _('Unauthorized')
+            }, status=401)
+
+        # Preform request
         try:
             # Validate & clean request
             request_form = self.request_form_class(input_data, request.FILES)
@@ -58,7 +68,7 @@ class ApiView(View):
                 error_data['cause'] = str(e)
             return JsonResponse(error_data, status=500)
 
-    def work(self, request, req, res):
+    def work(self, request, req: dict, res: dict):
         """
             Preforms api request logic
             :param request Django request object (only use this if necessary)

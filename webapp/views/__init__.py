@@ -1,4 +1,5 @@
-from . import registration, user
+from . import registration
+from . import user
 from .index import IndexPage
 from .help import HelpPage
 from django.shortcuts import render

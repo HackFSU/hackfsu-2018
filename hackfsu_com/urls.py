@@ -22,14 +22,14 @@ from django.urls import reverse
 app_name = 'hackfsu'
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    # url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^api/', include('api.urls', namespace='api')),
     url('', include('webapp.urls', namespace='webapp'))
 ]
 
 # Shortcuts
 urlpatterns.extend([
     url(r'^register/$', RedirectView.as_view(url=reverse('webapp:registration-user'))),
-    # url(r'^login$/', RedirectView.as_view(url=reverse('webapp:user-login')))
+    url(r'^login/$', RedirectView.as_view(url=reverse('webapp:user-login')))
 ])
 
 handler404 = 'webapp.views.handler404'

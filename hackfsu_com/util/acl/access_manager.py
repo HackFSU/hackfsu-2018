@@ -86,7 +86,5 @@ class AccessManager(object):
             if group in user_groups:
                 return False
 
-        print('Passed!')
-
         # All checks passed
         return True

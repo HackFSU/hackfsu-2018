@@ -16,12 +16,15 @@ Including another URL conf
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf import settings
 from django.views.generic.base import RedirectView
 from django.urls import reverse
 
 app_name = 'hackfsu'
+handler404 = 'webapp.views.handler404'
+handler500 = 'webapp.views.handler500'
+
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
     url(r'^api/', include('api.urls', namespace='api')),
     url('', include('webapp.urls', namespace='webapp'))
 ]
@@ -32,5 +35,7 @@ urlpatterns.extend([
     url(r'^login/$', RedirectView.as_view(url=reverse('webapp:user-login')))
 ])
 
-handler404 = 'webapp.views.handler404'
-handler500 = 'webapp.views.handler500'
+if settings.DEBUG:
+    urlpatterns.extend([
+        url(r'^admin/', admin.site.urls)
+    ])

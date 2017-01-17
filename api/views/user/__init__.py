@@ -6,4 +6,4 @@
 
 from .login import LogInView
 from .profile import ProfileView
-
+from .register import RegisterView

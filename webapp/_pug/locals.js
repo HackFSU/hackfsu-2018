@@ -201,7 +201,7 @@ var sponsorData = {
     },
     uberOperations: {
         name: 'Uber Operations LLC',
-        href: 'https://www.uberops.com/',
+        href: 'http://uberops.com/',
         logo: '/static/img/logos/uber-operations-llc.png'
     },
     valeFoodCo: {

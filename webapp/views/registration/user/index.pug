@@ -2,8 +2,8 @@ extends ../../../_pug/standardLayout.pug
 
 block vars
     -
-        var pageName = "Organizer Registration"
-        var viewDir = "/static/views/registration/organizer"
+        var pageName = "Registration"
+        var viewDir = "/static/views/registration/user"
 
 block append styles
     link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
@@ -14,3 +14,97 @@ block append scripts
 block content
     h1 Registration
     p Registration is not ready yet unfortunately. We are coding in-between class, come back in a few days.
+    h1 Registration Form
+    form#register_user
+        // first_name = forms.CharField(required=True, max_length=100)
+        // last_name = forms.CharField(required=True, max_length=100)
+        // email = forms.EmailField(required=True, max_length=100)
+        // password = forms.CharField(required=True, max_length=1000)
+        // github = forms.CharField(max_length=100)
+        // diet = forms.CharField(max_length=500)
+        // shirt_size = forms.ChoiceField(choices=UserInfo.SHIRT_SIZE_CHOICES)
+        // phone_number = forms.CharField(max_length=20)
+
+        fieldset
+            label(for="first_name") First Name *
+            input(type="text" name="first_name" maxlength=100 placeholder="First name" required)
+        fieldset
+            label(for="last_name") Last Name *
+            input(type="text" name="last_name" maxlength=100 placeholder="Last name" required)
+        fieldset
+            label(for="email") Email *
+            input(type="email" name="email" maxlength=100 placeholder="Email" required)
+        fieldset
+            label(for="password") Password *
+            input(type="password" name="password" minlength=8 maxlength=100 placeholder="Password" required)
+        fieldset
+            label(for="password2") Confirm Password *
+            input(type="password" name="password2" minlength=8 maxlength=100 placeholder="Confirm Password" required)
+        fieldset
+            label(for="school") School *
+            input(type="text" name="school" maxlength=100 placeholder="Your School" required)
+        fieldset
+            label(for="year") Current Year *
+            select(name="year" required)
+                option(value="" disabled selected) Select school year
+                option(value="freshman") Freshman (1st year)
+                option(value="sophomore") Sophomore (2nd year)
+                option(value="junior") Junior (3rd year)
+                option(value="senior") Senior (4th+ year)
+                option(value="graduate") Graduate School
+                option(value="highschool") Highschool
+        fieldset
+            label(for="major") Major *
+            input(type="text" name="major" maxlength=100 placeholder="Your Major" required)
+        fieldset
+            label(for="first_hackathon") Will this be your first hackathon? *
+            input(type="radio" value="yes")
+            | Yes
+            input(type="radio" value="no")
+            | No
+        fieldset
+            label(for="job") Looking for a job? *
+            select(name="job" required)
+                option(value="" disabled selected) Select option
+                option(value="Full-time") Full-Time
+                option(value="Part-time") Part-Time
+                option(value="Internship") Internship
+                option(value="No") No
+        fieldset
+            label(for="resume") Your resume
+            input(type="file" name="resume" placeholder="upload file")
+        fieldset
+            label(for="github") Your Github
+            input(type="url" name="github" maxlength=100 placeholder="Your Github")
+        fieldset
+            label(for="diet") Dietary restrictions?
+            textarea(name="diet" placeholder="Vegetarian, vegan, etc.")
+        fieldset
+            label(for="shirt_size") Shirt Size
+            select(name="shirt_size" required)
+                option(value="" disabled selected) Select shirt size
+                option(value="S") Small
+                option(value="M") Medium
+                option(value="L") Large
+                option(value="XL") X-Large
+        fieldset
+            label(for="gender") Your Gender
+            select(name="gender")
+                option(value="" disabled selected) Select your gender
+                option(value="Male") Male
+                option(value="Female") Female
+                option(value="Other") Other
+                option(value="na") Prefer not to answer
+            span.note Answering this optional field is anonymous and will not be associated with your account.
+        fieldset
+            label(for="ethnicity") Your Ethnicity
+            select(name="ethnicity")
+                option(value="" disabled selected) Select ethnicity
+                option(value="na") Prefer not to answer
+            span.note Answering this optional field is anonymous and will not be associated with your account.
+        fieldset
+            label(for="mlhcoc") MLH Code of Conduct
+            input(type="checkbox" value="yes" required)
+            | I will abide by the #[a(href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf") MLH Code of Conduct] for the duration of this event.
+
+        button(type="submit") Submit

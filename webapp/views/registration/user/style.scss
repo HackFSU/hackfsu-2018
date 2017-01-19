@@ -1,1 +1,31 @@
-@import '../../../_sass/vars'
+@import '../../../_sass/vars';
+
+fieldset {
+    margin: 20px;
+    label {
+        color: #000;
+        font-weight: 400;
+        width: 200px;
+        vertical-align: top;
+    }
+    input[type='text'], input[type='email'], input[type='password'], input[type='url'] {
+        border: none;
+        border-bottom: 2px solid #000;
+        padding: 2px;
+        width: 70%;
+    }
+    input[type='radio'], input[type='checkbox'] {
+        margin-right: 0px 10px 0px 30px;
+    }
+    textarea {
+        border: 2px solid #000;
+        border-radius: 5px;
+        width: 70%;
+        height: 60px;
+    }
+    .note {
+        display: block;
+        margin: 0px 10px 30px;
+        font-size: 90%;
+    }
+}

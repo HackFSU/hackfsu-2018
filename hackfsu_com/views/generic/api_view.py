@@ -7,13 +7,13 @@
     TODO sensitive parameter support
 """
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest
 from django.core.exceptions import ValidationError
 from django.views.generic import View
 from django.utils.translation import ugettext as _
 from django import forms
-from django.conf import settings
 from hackfsu_com.util import acl
+import logging
 
 
 class ApiView(View):
@@ -22,13 +22,13 @@ class ApiView(View):
     response_form_class = forms.Form    # Override each time
     access_manager = acl.AccessManager()
 
-    def get(self, request):
+    def get(self, request: HttpRequest):
         return self.process(request, request.GET)
 
-    def post(self, request):
+    def post(self, request: HttpRequest):
         return self.process(request, request.POST)
 
-    def process(self, request, input_data):
+    def process(self, request: HttpRequest, input_data):
         """ Validates input and attempts to preform work() logic. Returns the correct JsonResponse """
 
         # Authenticate Access
@@ -59,16 +59,15 @@ class ApiView(View):
 
         except ValidationError as e:
             return JsonResponse({
-                'message': _('Validation Error: '),
+                'message': _('Validation Error'),
                 'cause': str(e)
             }, status=400)
         except Exception as e:
             error_data = {'message': _('Internal Server Error')}
-            if settings.DEBUG:
-                error_data['cause'] = str(e)
+            logging.exception('Internal Server Error ' + str(request))
             return JsonResponse(error_data, status=500)
 
-    def work(self, request, req: dict, res: dict):
+    def work(self, request: HttpRequest, req: dict, res: dict):
         """
             Preforms api request logic
             :param request Django request object (only use this if necessary)

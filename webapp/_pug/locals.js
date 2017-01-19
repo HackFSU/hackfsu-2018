@@ -16,6 +16,10 @@ locals.getTitle = function(subtitle) {
     return locals.baseTitle;
 };
 
+locals.keys = {
+    reCaptchaSiteKey: '6LffORIUAAAAAL0tK0lbV9sJ1AWO5Q_FMBNh51Dv'
+};
+
 locals.links = {
     twitter: 'http://www.twitter.com/HackFSU',
     facebook: 'https://www.facebook.com/hackfsu',

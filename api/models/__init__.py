@@ -14,6 +14,7 @@ User groups:
 """
 
 from .hackathon import Hackathon
+from .school import School
 from .anon_stat import AnonStat
 from .user_info import UserInfo
 from .hacker_info import HackerInfo
@@ -21,7 +22,6 @@ from .judge_info import JudgeInfo
 from .mentor_info import MentorInfo
 from .organizer_info import OrganizerInfo
 from .help_request import HelpRequest
-from .school import School
 from .subscriber import Subscriber
 from .wifi_cred import WifiCred
 # TODO Update

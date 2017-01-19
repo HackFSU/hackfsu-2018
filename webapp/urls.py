@@ -50,6 +50,9 @@ if settings.DEBUG:
         # Error Pages
         url(r'^error/404/$', views.handler404),
         url(r'^error/500/$', views.handler500),
+
+        # Test Pages
+        url(r'^test/captcha/$', views.test.CaptchaTestPage.as_view())
     ])
 
 

@@ -2,30 +2,72 @@
     User account registration. Creates basic user account
 """
 from django import forms
+from django.contrib.auth.models import User
+from django.http.request import HttpRequest
+from django.core.exceptions import ValidationError
 from hackfsu_com.views.generic import ApiView
-from hackfsu_com.util import acl
+from hackfsu_com.util import acl, captcha, email
 from api.models import UserInfo
 
 
 class RequestForm(forms.Form):
-    first_name = forms.CharField(required=True, max_length=100)
-    last_name = forms.CharField(required=True, max_length=100)
-    email = forms.EmailField(required=True, max_length=100)
-    password = forms.CharField(required=True, max_length=1000)
-    github = forms.CharField(max_length=100)
-    diet = forms.CharField(max_length=500)
+    agree_to_mlh_coc = forms.BooleanField()
+    agree_to_mlh_data_sharing = forms.BooleanField()
+    g_recaptcha_response = forms.CharField(max_length=10000)
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField( max_length=100)
+    email = forms.EmailField(max_length=100)
+    password = forms.CharField(max_length=1000)
     shirt_size = forms.ChoiceField(choices=UserInfo.SHIRT_SIZE_CHOICES)
     phone_number = forms.CharField(max_length=20)
-    # TODO agree to terms of service (bool)
-    # TODO agree to MLH code of conduct (bool)
+    github = forms.CharField(required=False, max_length=100)
+    diet = forms.CharField(required=False, max_length=500)
 
 
 class RegisterView(ApiView):
     request_form_class = RequestForm
     access_manager = acl.AccessManager(acl_deny=[acl.group_user])
 
-    def work(self, request, req, res):
-        # Attempt to create new user TODO
+    def work(self, request: HttpRequest, req: dict, res: dict):
+        # Make sure terms are agreed to
+        if not req['agree_to_mlh_coc']:
+            raise ValidationError('Must agree to MLH Code of Conduct', params=['agree_to_mlh_coc'])
+        if not req['agree_to_mlh_data_sharing']:
+            raise ValidationError('Must agree to MLH Data Sharing', params=['agree_to_mlh_data_sharing'])
+
+        # Check captcha
+        if not captcha.is_valid_response(req['g_recaptcha_response']):
+            raise ValidationError('Captcha check failed', params=['g_recaptcha_response'])
+
+        # Check if email (username) already in use
+        if User.objects.filter(username=req['email']).exists():
+            raise ValidationError('Email already in use', params=['email'])
+
+        # Attempt to create new user
+        user = User.objects.create_user(
+            username=req['email'],
+            email=req['email'],
+            password=req['password']
+        )
+        user.first_name = req['first_name']
+        user.last_name = req['last_name']
+        user.save()
+
+        # Create respective UserInfo
+        user_info = UserInfo(
+            user=user,
+            shirt_size=req['shirt_size'],
+            github=req['github'],
+            diet=req['diet'],
+            phone_number=req['phone_number']
+        )
+        user_info.save()
 
         # Send email for confirmation
-        pass
+        email.send_template(
+            to_email=user.email,
+            to_first_name=user.first_name,
+            to_last_name=user.last_name,
+            subject='HackFSU Account Created!',
+            template_name='user-registered'
+        )

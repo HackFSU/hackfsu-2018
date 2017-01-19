@@ -19,6 +19,7 @@ from .user_info import UserInfo
 from .hacker_info import HackerInfo
 from .judge_info import JudgeInfo
 from .mentor_info import MentorInfo
+from .organizer_info import OrganizerInfo
 from .help_request import HelpRequest
 from .school import School
 from .subscriber import Subscriber

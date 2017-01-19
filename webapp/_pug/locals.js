@@ -16,12 +16,21 @@ locals.getTitle = function(subtitle) {
     return locals.baseTitle;
 };
 
+locals.keys = {
+    reCaptchaSiteKey: '6LffORIUAAAAAL0tK0lbV9sJ1AWO5Q_FMBNh51Dv'
+};
+
 locals.links = {
     twitter: 'http://www.twitter.com/HackFSU',
     facebook: 'https://www.facebook.com/hackfsu',
     instagram: 'https://www.instagram.com/hackfsu',
     github: 'https://github.com/HackFSU',
-    sponsorshipPacket: '/static/res/HackFSU_sponsorship_options_spring_2017.pdf'
+    sponsorshipPacket: '/static/res/HackFSU_sponsorship_options_spring_2017.pdf',
+    mlh: {
+        codeOfConduct: '/static/res/mlh-code-of-conduct.pdf',
+        contestTerms: 'https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions',
+        privatePolicy: 'https://mlh.io/privacy'
+    }
 };
 
 locals.emails = {
@@ -140,8 +149,8 @@ var sponsorData = {
     },
     mlh: {
         name: 'Major League Hacking (MLH)',
-        href: 'http://mlh.io/',
-        logo: '/static/img/logos/mlh/mlh-block.png'
+        href: 'https://mlh.io/seasons/na-2017/events', /* current season */
+        logo: '/static/img/logos/mlh/mlh-logo-color.png'
     },
     namecheap: {
         name: 'Namecheap',

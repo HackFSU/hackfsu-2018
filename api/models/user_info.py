@@ -20,7 +20,7 @@ class UserInfo(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20)
     shirt_size = models.CharField(max_length=3, choices=SHIRT_SIZE_CHOICES)
-    waiver_signature = models.CharField(max_length=100)
     diet = models.CharField(max_length=500, default='', blank=True)
     github = models.CharField(max_length=100, default='', blank=True)
     last_hackathon = models.ForeignKey(to=Hackathon, on_delete=models.SET_NULL, default=None, null=True, blank=True)
+    comments = models.CharField(max_length=1000, default='', blank=True)

@@ -15,6 +15,7 @@ DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
 DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
+RECAPTCHA_SECRET = os.getenv('RECAPTCHA_SECRET')
 
 
 def load_secret_keys():
@@ -25,6 +26,7 @@ def load_secret_keys():
     global DB_PORT
     global DB_USER
     global DB_PASSWORD
+    global RECAPTCHA_SECRET
 
     with open(os.path.dirname(os.path.abspath(__file__)) + '/secret_keys.json') as file:
         secret_keys = json.load(file)
@@ -41,6 +43,7 @@ def load_secret_keys():
         DB_PORT = set_if_exists(DB_PORT, 'DB_PORT')
         DB_USER = set_if_exists(DB_USER, 'DB_USER')
         DB_PASSWORD = set_if_exists(DB_PASSWORD, 'DB_PASSWORD')
+        RECAPTCHA_SECRET = set_if_exists(RECAPTCHA_SECRET, 'RECAPTCHA_SECRET')
 
 
 load_secret_keys()

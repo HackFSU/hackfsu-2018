@@ -21,7 +21,12 @@ locals.links = {
     facebook: 'https://www.facebook.com/hackfsu',
     instagram: 'https://www.instagram.com/hackfsu',
     github: 'https://github.com/HackFSU',
-    sponsorshipPacket: '/static/res/HackFSU_sponsorship_options_spring_2017.pdf'
+    sponsorshipPacket: '/static/res/HackFSU_sponsorship_options_spring_2017.pdf',
+    mlh: {
+        codeOfConduct: '/static/res/mlh-code-of-conduct.pdf',
+        contestTerms: 'https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions',
+        privatePolicy: 'https://mlh.io/privacy'
+    }
 };
 
 locals.emails = {

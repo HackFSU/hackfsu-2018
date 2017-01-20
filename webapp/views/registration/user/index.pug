@@ -10,21 +10,13 @@ block append styles
 
 block append scripts
     script(src=`${viewDir}/script.js`)
+    script(src="https://www.google.com/recaptcha/api.js" async defer)
 
 block content
     h1 Registration
     p Registration is not ready yet unfortunately. We are coding in-between class, come back in a few days.
     h1 Registration Form
     form#register_user
-        // first_name = forms.CharField(required=True, max_length=100)
-        // last_name = forms.CharField(required=True, max_length=100)
-        // email = forms.EmailField(required=True, max_length=100)
-        // password = forms.CharField(required=True, max_length=1000)
-        // github = forms.CharField(max_length=100)
-        // diet = forms.CharField(max_length=500)
-        // shirt_size = forms.ChoiceField(choices=UserInfo.SHIRT_SIZE_CHOICES)
-        // phone_number = forms.CharField(max_length=20)
-
         fieldset
             label(for="first_name") First Name *
             input(type="text" name="first_name" maxlength=100 placeholder="First name" required)
@@ -39,48 +31,21 @@ block content
             input(type="password" name="password" minlength=8 maxlength=100 placeholder="Password" required)
         fieldset
             label(for="password2") Confirm Password *
-            input(type="password" name="password2" minlength=8 maxlength=100 placeholder="Confirm Password" required)
+            input(type="password" name="password2" minlength=8 maxlength=100 placeholder="Confirm Password" required data-parsley-equalto="#password")
         fieldset
-            label(for="school") School *
-            input(type="text" name="school" maxlength=100 placeholder="Your School" required)
+            label(for="phone") Phone Number *
+            input(type="tel" name="phone" maxlength=12 minlength=10 required)
         fieldset
-            label(for="year") Current Year *
-            select(name="year" required)
-                option(value="" disabled selected) Select school year
-                option(value="freshman") Freshman (1st year)
-                option(value="sophomore") Sophomore (2nd year)
-                option(value="junior") Junior (3rd year)
-                option(value="senior") Senior (4th+ year)
-                option(value="graduate") Graduate School
-                option(value="highschool") Highschool
-        fieldset
-            label(for="major") Major *
-            input(type="text" name="major" maxlength=100 placeholder="Your Major" required)
-        fieldset
-            label(for="first_hackathon") Will this be your first hackathon? *
-            input(type="radio" value="yes")
-            | Yes
-            input(type="radio" value="no")
-            | No
-        fieldset
-            label(for="job") Looking for a job? *
-            select(name="job" required)
-                option(value="" disabled selected) Select option
-                option(value="Full-time") Full-Time
-                option(value="Part-time") Part-Time
-                option(value="Internship") Internship
-                option(value="No") No
-        fieldset
-            label(for="resume") Your resume
-            input(type="file" name="resume" placeholder="upload file")
-        fieldset
-            label(for="github") Your Github
+            label(for="github") Github Link
             input(type="url" name="github" maxlength=100 placeholder="Your Github")
+        fieldset
+            label(for="linkedin") LinkedIn Profile Link
+            input(type="url" name="github" maxlength=100 placeholder="Your LinkedIn")
         fieldset
             label(for="diet") Dietary restrictions?
             textarea(name="diet" placeholder="Vegetarian, vegan, etc.")
         fieldset
-            label(for="shirt_size") Shirt Size
+            label(for="shirt_size") Shirt Size *
             select(name="shirt_size" required)
                 option(value="" disabled selected) Select shirt size
                 option(value="S") Small
@@ -104,7 +69,13 @@ block content
             span.note Answering this optional field is anonymous and will not be associated with your account.
         fieldset
             label(for="mlhcoc") MLH Code of Conduct
-            input(type="checkbox" value="yes" required)
+            input(type="checkbox" name="mlhcoc" value="true" required)
             | I will abide by the #[a(href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf") MLH Code of Conduct] for the duration of this event.
+        fieldset
+            label(for="mlhtac") MLH Terms and Conditions
+            input(type="checkbox" name="mlhtcpp" value="true" required)
+            | I agree to the terms of both the #[a(href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions") MLH Contest Terms and Conditions] and the #[a(href="https://mlh.io/privacy") MLH Privacy Policy]. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.
+        fieldset
+            .g-recaptcha(data-sitekey=keys.reCaptchaSiteKey)
 
         button(type="submit") Submit

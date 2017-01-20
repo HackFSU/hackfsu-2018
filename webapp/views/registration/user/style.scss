@@ -15,7 +15,7 @@ fieldset {
         width: 70%;
     }
     input[type='radio'], input[type='checkbox'] {
-        margin-right: 0px 10px 0px 30px;
+        margin: 0px 10px 0px 30px;
     }
     textarea {
         border: 2px solid #000;
@@ -28,4 +28,7 @@ fieldset {
         margin: 0px 10px 30px;
         font-size: 90%;
     }
+}
+.parsley-errors-list {
+    color: #f00;
 }

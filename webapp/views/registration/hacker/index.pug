@@ -13,3 +13,39 @@ block append scripts
 
 block content
     h1 Hacker Registration
+    form#register_hacker
+        fieldset
+            label(for="school") School *
+            input(type="text" name="school" maxlength=100 placeholder="Your School" required)
+        fieldset
+            label(for="year") Current Year *
+            select(name="year" required)
+                option(value="" disabled selected) Select school year
+                option(value="freshman") Freshman (1st year)
+                option(value="sophomore") Sophomore (2nd year)
+                option(value="junior") Junior (3rd year)
+                option(value="senior") Senior (4th+ year)
+                option(value="graduate") Graduate School
+                option(value="highschool") Highschool
+        fieldset
+            label(for="major") Major *
+            input(type="text" name="major" maxlength=100 placeholder="Your Major" required)
+        fieldset
+            label(for="first_hackathon") Will this be your first hackathon? *
+            input(type="radio" name="first_hackathon" value="yes" required)
+            | Yes
+            input(type="radio" name="first_hackathon" value="no" required)
+            | No
+        fieldset
+            label(for="job") Looking for a job? *
+            select(name="job" required)
+                option(value="" disabled selected) Select option
+                option(value="Full-time") Full-Time
+                option(value="Part-time") Part-Time
+                option(value="Internship") Internship
+                option(value="No") No
+        fieldset
+            label(for="resume") Your resume
+            input(type="file" name="resume" placeholder="upload file")
+
+        button(type="submit") Submit

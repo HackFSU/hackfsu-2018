@@ -3,3 +3,4 @@ django
 psycopg2
 pylint
 mandrill
+django-extensions

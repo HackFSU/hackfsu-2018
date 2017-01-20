@@ -13,7 +13,9 @@ urlpatterns = [
 
     url(r'mentor/register$', views.hacker.RegisterView.as_view(), name='mentor-register'),
 
-    url(r'organizer/register$', views.hacker.RegisterView.as_view(), name='organizer-register')
+    url(r'organizer/register$', views.hacker.RegisterView.as_view(), name='organizer-register'),
+
+    url(r'school/get', views.school.GetView.as_view(), name='organizer-register')
 ]
 
 if settings.DEBUG:

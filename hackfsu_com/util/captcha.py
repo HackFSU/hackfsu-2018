@@ -21,6 +21,10 @@ def is_valid_response(g_recaptcha_response: str) -> bool:
     except ValueError:
         logging.exception('Unable to parse reCaptcha verification response')
         return False
-    return json_response['success'] is True
+    if json_response['success']:
+        return True
+    else:
+        logging.warning('Captcha Failure: ' + str(json_response))
+        return False
 
 

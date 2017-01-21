@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User, Group
 from .access_manager import AccessManager
 
 group_user = 'user'     # Special case, just checks if logged in
@@ -29,3 +30,16 @@ groups = [
     group_pending_organizer
 ]
 
+
+def add_user_to_group(user: User, group_name: str):
+    group = Group.objects.get(name=group_name)
+    if user not in group.user_set:
+        group.user_set.add(user)
+    group.save()
+
+
+def remove_user_from_group(user: User, group_name: str):
+    group = Group.objects.get(name=group_name)
+    if user in group.user_set:
+        group.user_set.remove(user)
+    group.save()

@@ -13,18 +13,10 @@
     var phoneNumber = form.find('input[name="phone"]');
     var githubLink = form.find('input[name="github"]');
     var linkedInProfile = form.find('input[name="linkedin"]');
-    var dietInput = form.find('input[name="diet"]');
-    var shirtSize = form.find('input[name="shirt_size"]');
+    var dietInput = form.find('textarea[name="diet"]');
+    var shirtSize = form.find('select[name="shirt_size"]');
     var mlhCoc = form.find('input[name="mlhcoc"]');
     var mlhDataSharing = form.find('input[name="mlhcoc"]');
-    var recaptchaResponse = window.grecaptcha.getResponse();
-
-    /*$('#test button').click(function() {
-        console.log('Captcha response?');
-        var response = window.grecaptcha.getResponse();
-        console.log(response);
-        $('#recaptcha-validate').val(response);
-    });*/
 
     form.ajaxForm({
         url: '/api/user/register',
@@ -32,7 +24,7 @@
             return {
                 agree_to_mlh_coc: mlhCoc.val().trim(),
                 agree_to_mlh_data_sharing: mlhDataSharing.val().trim(),
-                g_recaptcha_response: recaptchaResponse.val().trim(),
+                g_recaptcha_response: window.grecaptcha.getResponse(),
                 first_name: firstName.val().trim(),
                 last_name: lastName.val().trim(),
                 email: emailInput.val().trim(),
@@ -56,7 +48,6 @@
             shirtSize.prop('disabled', value);
             mlhCoc.prop('disabled', value);
             mlhDataSharing.prop('disabled', value);
-            recaptchaResponse.prop('disabled', value);
             emailInput.prop('disabled', value);
             passwordInput.prop('disabled', value);
         },

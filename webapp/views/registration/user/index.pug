@@ -28,7 +28,7 @@ block content
             input(type="email" name="email" maxlength=100 placeholder="Email" required)
         fieldset
             label(for="password") Password *
-            input(type="password" name="password" minlength=8 maxlength=100 placeholder="Password" required)
+            input(type="password" id="password" name="password" minlength=8 maxlength=100 placeholder="Password" required)
         fieldset
             label(for="password2") Confirm Password *
             input(type="password" name="password2" minlength=8 maxlength=100 placeholder="Confirm Password" required data-parsley-equalto="#password")
@@ -37,10 +37,10 @@ block content
             input(type="tel" name="phone" maxlength=12 minlength=10 required)
         fieldset
             label(for="github") Github Link
-            input(type="url" name="github" maxlength=100 placeholder="Your Github")
+            input(type="text" name="github" maxlength=100 placeholder="Your github username")
         fieldset
             label(for="linkedin") LinkedIn Profile Link
-            input(type="url" name="github" maxlength=100 placeholder="Your LinkedIn")
+            input(type="url" name="linkedin" maxlength=100 placeholder="https://www.linkedin.com/in/your-username")
         fieldset
             label(for="diet") Dietary restrictions?
             textarea(name="diet" placeholder="Vegetarian, vegan, etc.")
@@ -48,10 +48,8 @@ block content
             label(for="shirt_size") Shirt Size *
             select(name="shirt_size" required)
                 option(value="" disabled selected) Select shirt size
-                option(value="S") Small
-                option(value="M") Medium
-                option(value="L") Large
-                option(value="XL") X-Large
+                each val, key in locals.shirt_size_choices
+                    option(value=`${key}`)=val
         fieldset
             label(for="gender") Your Gender
             select(name="gender")
@@ -59,7 +57,6 @@ block content
                 option(value="Male") Male
                 option(value="Female") Female
                 option(value="Other") Other
-                option(value="na") Prefer not to answer
             span.note Answering this optional field is anonymous and will not be associated with your account.
         fieldset
             label(for="ethnicity") Your Ethnicity

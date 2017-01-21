@@ -314,6 +314,21 @@ locals.sponsors = {
 };
 
 
+/**
+ * Registration Form options
+ */
+ locals.shirt_size_choices = {
+    'm-s':     'Men\'s Small',
+    'm-m':     'Men\'s Medium',
+    'm-l':     'Men\'s Large',
+    'm-xl':    'Men\'s XL',
+    'm-2xl':   'Men\'s XXL',
+    'm-3xl':   'Men\'s XXXL',
+    'w-s':     'Women\'s Small',
+    'w-m':     'Women\'s Medium',
+    'w-l':     'Women\'s Large',
+    'w-xl':    'Women\'s XL'
+};
 
 
 module.exports = locals;

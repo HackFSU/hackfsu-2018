@@ -4,6 +4,7 @@
 from django import forms
 from django.http.request import HttpRequest
 from hackfsu_com.views.generic import ApiView
+from hackfsu_com.util.forms import JsonField
 from hackfsu_com.util import acl
 from api.models import School
 
@@ -13,7 +14,7 @@ class RequestForm(forms.Form):
 
 
 class ResponseForm(forms.Form):
-    school_choices = forms.Field()      # [{id: "", name: ""}]
+    school_choices = JsonField()        # [{id: "", name: ""}]
 
 
 class GetView(ApiView):

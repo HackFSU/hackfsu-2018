@@ -4,11 +4,12 @@
 from django import forms
 from django.http.request import HttpRequest
 from hackfsu_com.views.generic import ApiView
+from hackfsu_com.util.forms import JsonField
 from api.models import Hackathon, HackathonSponsor
 
 
 class ResponseForm(forms.Form):
-    sponsors = forms.Field()
+    sponsors = JsonField()
 
 
 class SponsorsView(ApiView):

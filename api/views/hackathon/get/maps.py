@@ -4,11 +4,12 @@
 from django import forms
 from django.http.request import HttpRequest
 from hackfsu_com.views.generic import ApiView
+from hackfsu_com.util.forms import JsonField
 from api.models import Hackathon, HackathonMap
 
 
 class ResponseForm(forms.Form):
-    maps = forms.Field()
+    maps = JsonField()
 
 
 class MapsView(ApiView):

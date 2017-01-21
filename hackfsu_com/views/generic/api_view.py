@@ -60,7 +60,7 @@ class ApiView(View):
         except ValidationError as e:
             return JsonResponse({
                 'message': _('Validation Error'),
-                'cause': str(e)
+                'cause': e.message_dict
             }, status=400)
         except Exception as e:
             error_data = {'message': _('Internal Server Error')}

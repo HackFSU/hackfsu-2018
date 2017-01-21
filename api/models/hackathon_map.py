@@ -7,3 +7,11 @@ class HackathonMap(models.Model):
     title = models.CharField(max_length=100)
     link = models.CharField(max_length=50)
     order = models.SmallIntegerField()
+
+    def __str__(self):
+        return 'hackathon={} title="{}" order={} link="{}"' .format(
+            self.hackathon.id,
+            self.title,
+            self.order,
+            self.link
+        )

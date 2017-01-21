@@ -7,3 +7,12 @@ class HackathonCountdown(models.Model):
     title = models.CharField(max_length=50)
     start = models.DateTimeField()
     end = models.DateTimeField()
+
+    def __str__(self):
+        return 'hackathon={} title="{}" start={} end={}'.format(
+            self.hackathon.id,
+            self.title,
+            self.start,
+            self.end
+        )
+

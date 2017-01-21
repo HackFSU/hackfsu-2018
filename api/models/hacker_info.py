@@ -27,3 +27,20 @@ class HackerInfo(models.Model):
 
     rsvp = models.BooleanField(default=False, blank=True)
     checked_in = models.BooleanField(default=False, blank=True)
+
+    def __str__(self):
+        summary = 'hackathon.id={} email="{}" name="{} {}" approved={} rsvp={} checked_in={} school.name="{}"'.format(
+            self.hackathon.id,
+            self.user.email,
+            self.user.first_name, self.user.last_name,
+            self.approved,
+            self.rsvp,
+            self.checked_in,
+            self.school.name
+        )
+
+        if len(self.comments) > 0:
+            summary += ' comments="{}"'.format(self.comments)
+
+        return summary
+

@@ -9,3 +9,13 @@ class HackathonSponsor(models.Model):
     logo_link = models.CharField(max_length=500)
     tier = models.SmallIntegerField(default=0)
     order = models.SmallIntegerField(default=0)
+
+    def __str__(self):
+        return 'hackathon={} name="{}" tier={} order={} website_link="{}" logo_link="{}"'.format(
+            self.hackathon.id,
+            self.name,
+            self.tier,
+            self.order,
+            self.website_link,
+            self.logo_link
+        )

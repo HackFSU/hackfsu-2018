@@ -15,7 +15,13 @@ urlpatterns = [
 
     url(r'organizer/register$', views.hacker.RegisterView.as_view(), name='organizer-register'),
 
-    url(r'school/get', views.school.GetView.as_view(), name='organizer-register')
+    url(r'school/get$', views.school.GetView.as_view(), name='organizer-register'),
+
+    url(r'hackathon/get/countdowns$', views.hackathon.get.CountdownsView.as_view()),
+    url(r'hackathon/get/maps$', views.hackathon.get.MapsView.as_view()),
+    url(r'hackathon/get/schedule_items$', views.hackathon.get.ScheduleItemsView.as_view()),
+    url(r'hackathon/get/sponsors$', views.hackathon.get.SponsorsView.as_view()),
+    url(r'hackathon/get/updates$', views.hackathon.get.UpdatesView.as_view())
 ]
 
 if settings.DEBUG:

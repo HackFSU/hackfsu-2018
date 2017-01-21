@@ -21,6 +21,7 @@ class RequestForm(forms.Form):
     shirt_size = forms.ChoiceField(choices=UserInfo.SHIRT_SIZE_CHOICES)
     phone_number = forms.CharField(max_length=20)
     github = forms.CharField(required=False, max_length=100)
+    linkedin = forms.CharField(required=False, max_length=200)
     diet = forms.CharField(required=False, max_length=500)
 
 
@@ -58,6 +59,7 @@ class RegisterView(ApiView):
             user=user,
             shirt_size=req['shirt_size'],
             github=req['github'],
+            linkedin=req['linkedin'],
             diet=req['diet'],
             phone_number=req['phone_number']
         )

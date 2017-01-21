@@ -1,5 +1,21 @@
 @import '../../../_sass/vars';
 
+$form-border: 2px solid #000;
+
+.form-section {
+    display: block;
+    margin-bottom: 45px;
+}
+.form-section-title {
+
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.flex-checkbox {
+    width: 24%;
+}
 fieldset {
     margin: 20px;
     label {
@@ -8,23 +24,32 @@ fieldset {
         width: 200px;
         vertical-align: top;
     }
-    input[type='text'], input[type='email'], input[type='password'], input[type='url'] {
-        border: none;
-        border-bottom: 2px solid #000;
-        padding: 2px;
-        width: 70%;
+    input {
+        &[type='text'],
+        &[type='email'],
+        &[type='password'],
+        &[type='url'],
+        &[type="tel"] {
+            border: none;
+            border-bottom: $form-border;
+            padding: 2px;
+        }
+        &[type='radio'],
+        &[type='checkbox'] {
+            margin-right: 2px;
+        }
     }
-    input[type='radio'], input[type='checkbox'] {
-        margin: 0px 10px 0px 30px;
+    .responsive {
+        width: 100%;
     }
     textarea {
-        border: 2px solid #000;
+        border: $form-border;
         border-radius: 5px;
-        width: 70%;
         height: 60px;
+        resize: vertical;
     }
     .note {
-        display: block;
+        display: inline-block;
         margin: 0px 10px 30px;
         font-size: 90%;
     }

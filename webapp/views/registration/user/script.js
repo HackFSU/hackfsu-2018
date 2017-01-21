@@ -18,6 +18,32 @@
     var mlhCoc = form.find('input[name="mlhcoc"]');
     var mlhDataSharing = form.find('input[name="mlhcoc"]');
 
+    var dietString = "";
+    var dietText = false;
+
+    $('.diet-detail:checkbox').change(function() {
+        dietString = "";
+        dietText = false;
+        if ($('#vegetarian').prop('checked')) {
+            dietString += "Vegetarian, ";
+        }
+        if ($('#vegan').prop('checked')) {
+            dietString += "Vegan, ";
+        }
+        if ($('#allergy').prop('checked')) {
+            dietString += "Allergy, ";
+            dietText = true;
+        }
+        if ($('#diet-other').prop('checked')) {
+            dietString += "Other, ";
+            dietText = true;
+        }
+        if (dietText)
+            $('#dietbox').fadeIn();
+        else
+            $('#dietbox').fadeOut();
+    });
+
     form.ajaxForm({
         url: '/api/user/register',
         getData: function() {
@@ -30,13 +56,14 @@
                 email: emailInput.val().trim(),
                 password: passwordInput.val().trim(),
                 shirt_size: shirtSize.val().trim(),
-                phone_number: phoneNumber.val().trim(),
+                phone_number: phoneNumber.val().trim().replace(/\D/g,''),
                 github: githubLink.val().trim(),
                 linkedin: linkedInProfile.val().trim(),
-                diet: dietInput.val().trim()
+                diet: dietText ? dietString + dietInput.val().trim() : dietString
             };
         },
         setDisabled: function(value) {
+            console.log(dietString);
             firstName.prop('disabled', value);
             lastName.prop('disabled', value);
             emailInput.prop('disabled', value);

@@ -14,6 +14,11 @@ User groups:
 """
 
 from .hackathon import Hackathon
+from .hackathon_countdown import HackathonCountdown
+from .hackathon_map import HackathonMap
+from .hackathon_sponsor import HackathonSponsor
+from .hackathon_update import HackathonUpdate
+from .schedule_item import ScheduleItem
 from .school import School
 from .anon_stat import AnonStat
 from .user_info import UserInfo

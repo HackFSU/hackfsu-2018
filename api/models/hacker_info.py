@@ -23,5 +23,7 @@ class HackerInfo(models.Model):
     school = models.ForeignKey(to=School, on_delete=models.SET_NULL, null=True)
     school_year = models.CharField(max_length=2, choices=SCHOOL_YEAR_CHOICES)
     school_major = models.CharField(max_length=100)
+    resume_file_name = models.CharField(max_length=300, default='', blank=True)
+
     rsvp = models.BooleanField(default=False, blank=True)
     checked_in = models.BooleanField(default=False, blank=True)

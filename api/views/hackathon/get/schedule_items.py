@@ -3,7 +3,7 @@
 """
 from django import forms
 from django.http.request import HttpRequest
-from hackfsu_com.views.generic import ApiView
+from hackfsu_com.views.generic import PublicApiView
 from hackfsu_com.util.forms import JsonField
 from api.models import Hackathon, ScheduleItem
 
@@ -12,7 +12,7 @@ class ResponseForm(forms.Form):
     schedule_items = JsonField()
 
 
-class ScheduleItemsView(ApiView):
+class ScheduleItemsView(PublicApiView):
     response_form_class = ResponseForm
 
     def work(self, request: HttpRequest, req: dict, res: dict):

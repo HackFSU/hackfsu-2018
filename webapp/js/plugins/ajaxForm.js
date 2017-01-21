@@ -25,6 +25,9 @@
             url: url,
             type: 'POST',
             contentType: 'application/json; charset=UTF-8',
+            headers: {
+                'HTTP_X_CSRFTOKEN': Cookies.get('csrftoken')
+            },
             data: JSON.stringify(data),
             success: function(response) {
                 if (response.error) {

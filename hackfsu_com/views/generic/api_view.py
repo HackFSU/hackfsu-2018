@@ -11,6 +11,7 @@ from django.http import JsonResponse, HttpRequest
 from django.core.exceptions import ValidationError
 from django.views.generic import View
 from django.utils.translation import ugettext as _
+from django.conf import settings
 from django import forms
 from hackfsu_com.util import acl
 import logging
@@ -34,8 +35,11 @@ class ApiView(View):
         # Authenticate Access
         if not self.access_manager.check_user(request.user):
             return JsonResponse({
-                'message': _('Unauthorized')
+                'cause': _('Unauthorized')
             }, status=401)
+
+        req = None
+        res = None
 
         # Preform request
         try:
@@ -53,17 +57,25 @@ class ApiView(View):
             response_form = self.response_form_class(res)
             if not response_form.is_valid():
                 raise ValidationError(response_form.errors.as_data())
+            res = response_form.cleaned_data
 
             # Successful api call!
             return JsonResponse(response_form.cleaned_data)
 
         except ValidationError as e:
+            if settings.DEBUG:
+                logging.error(
+                    'Validation Error\n\tRequest: {}\n\tRaw Input: {}\n\tReq: {}\n\tRes: {}\n\tError: {}'.format(
+                        str(request), str(input_data.dict()), str(req), str(res), str(e.message_dict)
+                    )
+                )
+
             return JsonResponse({
-                'message': _('Validation Error'),
-                'cause': e.message_dict
+                'cause': _('Validation Error'),
+                'message': e.message_dict
             }, status=400)
         except Exception as e:
-            error_data = {'message': _('Internal Server Error')}
+            error_data = {'cause': _('Internal Server Error')}
             logging.exception('Internal Server Error ' + str(request))
             return JsonResponse(error_data, status=500)
 

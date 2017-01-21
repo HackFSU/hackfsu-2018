@@ -47,19 +47,22 @@ block content
             fieldset.row
                 label.col-md-2(for="diet") Dietary restrictions?
                 .col-md-10
-                    .flex-row
-                        .flex-checkbox
-                            input.diet-detail(type="checkbox" id="vegetarian" value="vegetarian")
-                            | Vegetarian
-                        .flex-checkbox
-                            input.diet-detail(type="checkbox" id="vegan" value="vegan")
-                            | Vegan
-                        .flex-checkbox
-                            input.diet-detail(type="checkbox" id="allergy" value="allergy")
-                            | Allergies
-                        .flex-checkbox
-                            input.diet-detail(type="checkbox" id="diet-other" value="other")
-                            | Other
+                    .group
+                        .flex-row
+                            .flex-checkbox
+                                input.diet-detail(type="checkbox" id="vegetarian" value="vegetarian")
+                                | Vegetarian
+                            .flex-checkbox
+                                input.diet-detail(type="checkbox" id="vegan" value="vegan")
+                                | Vegan
+                    .group
+                        .flex-row
+                            .flex-checkbox
+                                input.diet-detail(type="checkbox" id="allergy" value="allergy")
+                                | Allergies
+                            .flex-checkbox
+                                input.diet-detail(type="checkbox" id="diet-other" value="other")
+                                | Other
                     textarea.responsive(name="diet" id="dietbox" placeholder="Please explain food allergies or unique dietary needs" style="display: none")
             fieldset.row
                 label.col-md-2(for="shirt_size") Shirt Size&nbsp;*

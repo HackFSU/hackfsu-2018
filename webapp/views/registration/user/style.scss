@@ -9,12 +9,17 @@ $form-border: 2px solid #000;
 .form-section-title {
 
 }
-.flex-row {
-    display: flex;
-    flex-direction: row;
-}
-.flex-checkbox {
-    width: 24%;
+.group {
+    min-width: 49%;
+
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .flex-checkbox {
+        min-width: 49%;
+    }
 }
 fieldset {
     margin: 20px;

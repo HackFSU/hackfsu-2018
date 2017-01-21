@@ -3,6 +3,9 @@
 /**
  * Overwrite regular layout
  */
+ body {
+     background-color: #F2F6FB;
+ }
 #page-container #content-container {
     background: url('/static/img/patterns/tech-pattern-white.png');
     background-size: 800px 800px;

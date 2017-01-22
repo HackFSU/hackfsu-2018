@@ -27,7 +27,7 @@ class RequestForm(forms.Form):
 
 
 class ResponseForm(forms.Form):
-    logged_in = forms.BooleanField()
+    logged_in = forms.BooleanField(required=False)
 
 
 class RegisterView(ApiView):
@@ -83,3 +83,4 @@ class RegisterView(ApiView):
 
         # Log user in
         log_user_in(request=request, email=req['email'], password=req['password'])
+        res['logged_in'] = True

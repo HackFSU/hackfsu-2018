@@ -66,13 +66,13 @@ class ApiView(View):
             if settings.DEBUG:
                 logging.error(
                     'Validation Error\n\tRequest: {}\n\tRaw Input: {}\n\tReq: {}\n\tRes: {}\n\tError: {}'.format(
-                        str(request), str(input_data.dict()), str(req), str(res), str(e.message_dict)
+                        str(request), str(dict(input_data)), str(req), str(res), str(e)
                     )
                 )
 
             return JsonResponse({
                 'cause': _('Validation Error'),
-                'message': e.message_dict
+                'message': str(e)
             }, status=400)
         except Exception as e:
             error_data = {'cause': _('Internal Server Error')}

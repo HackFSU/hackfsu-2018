@@ -50,7 +50,7 @@
             return {
                 agree_to_mlh_coc: mlhCoc.val().trim(),
                 agree_to_mlh_data_sharing: mlhDataSharing.val().trim(),
-                g_recaptcha_response: '',//window.grecaptcha.getResponse(),
+                g_recaptcha_response: 'TODO',//window.grecaptcha.getResponse(),
                 first_name: firstName.val().trim(),
                 last_name: lastName.val().trim(),
                 email: emailInput.val().trim(),
@@ -80,7 +80,7 @@
         },
         onAjaxComplete: function(response) {
             console.log('TODO complete', response);
-            // window.location.href = '/user/profile';
+            window.location.href = '/registration/hacker';
         }
     });
 

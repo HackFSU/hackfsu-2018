@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^registration/organizer/$', views.registration.OrganizerRegistrationPage.as_view(),
         name='registration-organizer'),
 
-    # url(r'^user/login/$', views.user.LoginPage.as_view(), name='user-login'),
+    url(r'^user/login/$', views.user.LoginPage.as_view(), name='user-login'),
     url(r'^user/logout/$', views.user.logout_view, name='user-logout'),
     url(r'^user/profile/$', views.user.ProfilePage.as_view(), name='user-profile'),
 

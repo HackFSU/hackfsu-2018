@@ -9,8 +9,8 @@ urlpatterns = [
     url(r'hackathon/get/sponsors$', views.hackathon.get.SponsorsView.as_view()),
     url(r'hackathon/get/updates$', views.hackathon.get.UpdatesView.as_view()),
 
-    # url(r'user/login$', views.user.LogInView.as_view(), name='user-login'),
-    # url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),
+    url(r'user/login$', views.user.LogInView.as_view(), name='user-login'),
+    url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),
     url(r'user/get/profile$', views.user.get.ProfileView.as_view(), name='user-get-profile'),
 
     url(r'hacker/register$', views.hacker.RegisterView.as_view(), name='hacker-register'),

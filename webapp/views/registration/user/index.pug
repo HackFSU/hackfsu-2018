@@ -45,6 +45,12 @@ block content
                 label.col-md-2(for="linkedin") LinkedIn Profile Link
                 .col-md-10: input.responsive(type="url" name="linkedin" maxlength=100 data-parsley-type="url" placeholder="https://www.linkedin.com/in/your-username")
             fieldset.row
+                label.col-md-2(for="shirt_size") Shirt Size&nbsp;*
+                select(name="shirt_size" required)
+                    option(value="" disabled selected) Select shirt size
+                    each val, key in locals.shirt_size_choices
+                        option(value=`${key}`)=val
+            fieldset.row
                 label.col-md-2(for="diet") Dietary restrictions?
                 .col-md-10
                     .group
@@ -64,12 +70,6 @@ block content
                                 input.diet-detail(type="checkbox" id="diet-other" value="other")
                                 | Other
                     textarea.responsive(name="diet" id="dietbox" placeholder="Please explain food allergies or unique dietary needs" style="display: none")
-            fieldset.row
-                label.col-md-2(for="shirt_size") Shirt Size&nbsp;*
-                select(name="shirt_size" required)
-                    option(value="" disabled selected) Select shirt size
-                    each val, key in locals.shirt_size_choices
-                        option(value=`${key}`)=val
         //- .form-section
             h2.form-section-title Anonymous Statistics
             span.note Answering these optional fields is anonymous and will not be associated with your account.

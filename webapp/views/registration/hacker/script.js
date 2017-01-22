@@ -21,19 +21,19 @@
         console.log(studentType.val());
         if (studentType.val() === 'highschool') {
             studentYear.prop('required', false);
-            $('#year').fadeOut();
+            $('#year').toggle(false);
             studentMajor.prop('required', false);
-            $('#major').fadeOut();
+            $('#major').toggle(false);
         }
         else if (studentType.val() === 'graduated')  {
             studentYear.prop('required', false);
-            $('#year').fadeOut();
+            $('#year').toggle(false);
         }
         else {
             studentYear.prop('required', true);
             studentMajor.prop('required', true);
-            $('#year').fadeIn();
-            $('#major').fadeIn();
+            $('#year').toggle(true);
+            $('#major').toggle(true);
         }
     });
 

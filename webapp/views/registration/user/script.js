@@ -39,9 +39,9 @@
             dietText = true;
         }
         if (dietText)
-            $('#dietbox').fadeIn();
+            $('#dietbox').toggle(true);
         else
-            $('#dietbox').fadeOut();
+            $('#dietbox').toggle(false);
     });
 
     form.ajaxForm({

@@ -98,7 +98,7 @@
         },
         onAjaxComplete: function(response) {
             console.log('TODO complete', response);
-            window.location.href = '/register';
+            window.location.href = '/user/profile';
         }
     });
 

@@ -42,9 +42,9 @@ class RegisterView(ApiView):
         if not req['agree_to_mlh_data_sharing']:
             raise ValidationError('Must agree to MLH Data Sharing', params=['agree_to_mlh_data_sharing'])
 
-        # Check captcha TODO re-enable
-        # if not captcha.is_valid_response(req['g_recaptcha_response']):
-        #     raise ValidationError('Captcha check failed', params=['g_recaptcha_response'])
+        # Check captcha
+        if not captcha.is_valid_response(req['g_recaptcha_response']):
+            raise ValidationError('Captcha check failed', params=['g_recaptcha_response'])
 
         # Check if email (username) already in use
         if User.objects.filter(username=req['email']).exists():
@@ -67,8 +67,7 @@ class RegisterView(ApiView):
             github=req['github'],
             linkedin=req['linkedin'],
             diet=req['diet'],
-            phone_number=req['phone_number'],
-            comments='swamphacks'
+            phone_number=req['phone_number']
         )
         user_info.save()
 

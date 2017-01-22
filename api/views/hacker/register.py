@@ -50,8 +50,7 @@ class RegisterView(ApiView):
             is_adult=req['is_adult'],
             school_major=['school_major'],
             resume_file_name=resume_file_name,
-            interests=req['interests'],
-            comments='swamphacks',  # TODO remove
+            interests=req['interests']
         )
 
         # Add to pending group
@@ -65,9 +64,6 @@ class RegisterView(ApiView):
             subject='Hacker Registration Submitted!',
             template_name='hacker_registered'
         )
-
-        # TODO remove, only for temp
-        logout(request)
 
     @staticmethod
     def get_school(school_id, new_school_name, hs):

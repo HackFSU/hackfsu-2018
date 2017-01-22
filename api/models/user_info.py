@@ -19,7 +19,7 @@ class UserInfo(models.Model):
 
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20)
-    shirt_size = models.CharField(max_length=3, choices=SHIRT_SIZE_CHOICES)
+    shirt_size = models.CharField(max_length=10, choices=SHIRT_SIZE_CHOICES)
     diet = models.CharField(max_length=500, default='', blank=True)
     github = models.CharField(max_length=100, default='', blank=True)
     linkedin = models.CharField(max_length=100, default='', blank=True)

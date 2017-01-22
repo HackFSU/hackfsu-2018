@@ -3,7 +3,6 @@
 """
 
 from hackfsu_com import keys
-from api.models import Hackathon
 import mandrill
 import logging
 
@@ -13,16 +12,17 @@ mandrill_client = mandrill.Mandrill(
 
 # List of templates known to exist in MailChimp
 templates = [
-    'user-registered',
-    'hacker-register-waiting',
-    'hacker-register-accepted',
-    'judge-register-waiting',
-    'judge-register-accepted',
-    'mentor-register-waiting',
-    'mentor-register-accepted',
-    'organizer-register-waiting',
-    'organizer-register-accepted',
-    'mandrill_test'
+    'user_registered',
+    'hacker_register_waiting',
+    'hacker_register_accepted',
+    'judge_register_waiting',
+    'judge_register_accepted',
+    'mentor_register_waiting',
+    'mentor_register_accepted',
+    'organizer_register_waiting',
+    'organizer_register_accepted',
+    'mandrill_test',
+    'standard_html'
 ]
 
 default_from_email = 'noreply@hackfsu.com'

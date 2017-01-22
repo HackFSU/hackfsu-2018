@@ -23,19 +23,20 @@ html
         include ./includes/googleAnalytics.html
         include ./includes/mlh-season-badge.pug
 
-        #page-container
-            #header-container
-                #header.container
-                    block navbar
-                        +navbar(navLinks.standard)
-            #content-container
-                block page
-                    #content.container
-                        block content
-                            h1 TODO
-            #footer-container
-                #footer.container
-                    include ./includes/footer.pug
+        block body-container
+            #page-container
+                #header-container
+                    #header.container
+                        block navbar
+                            +navbar(navLinks.standard)
+                #content-container
+                    block page
+                        #content.container
+                            block content
+                                h1 TODO
+                #footer-container
+                    #footer.container
+                        include ./includes/footer.pug
 
         //- JavaScript
         block scripts

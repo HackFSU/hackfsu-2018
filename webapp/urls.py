@@ -38,7 +38,10 @@ urlpatterns = [
 
     url(r'^user/login/$', views.user.LoginPage.as_view(), name='user-login'),
     url(r'^user/logout/$', views.user.logout_view, name='user-logout'),
-    url(r'^user/profile/$', views.user.ProfilePage.as_view(), name='user-profile')
+    url(r'^user/profile/$', views.user.ProfilePage.as_view(), name='user-profile'),
+
+    url(r'^hype/$', views.hype.HypeIndex.as_view()),
+    url(r'^hype/registration$', views.hype.HypeRegistration.as_view())
 ]
 
 if settings.DEBUG:

@@ -1,6 +1,7 @@
 from . import registration
 from . import user
 from . import test
+from . import hype
 from .index import IndexPage
 from .help import HelpPage
 from django.shortcuts import render

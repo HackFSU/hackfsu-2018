@@ -4,8 +4,11 @@
 
 from hackfsu_com import keys
 import mandrill
+import logging
 
-mandrill_client = mandrill.Mandrill(keys.MANDRILL_API_KEY)
+mandrill_client = mandrill.Mandrill(
+    apikey=keys.MANDRILL_API_KEY
+)
 
 # List of templates known to exist in MailChimp
 templates = [
@@ -17,7 +20,8 @@ templates = [
     'mentor-register-waiting',
     'mentor-register-accepted',
     'organizer-register-waiting',
-    'organizer-register-accepted'
+    'organizer-register-accepted',
+    'mandrill_test'
 ]
 
 default_from_email = 'noreply@hackfsu.com'
@@ -41,23 +45,40 @@ def send_template(to_email, to_first_name, to_last_name, template_name, subject,
 
     # Automatically add first and last name to context
     if template_content is None:
-        template_content = []
+        template_content = {}
+    elif template_content is not dict:
+        ValueError('template_content must be dict')
+    if 'first_name' not in template_content:
+        template_content['first_name'] = to_first_name
+    if 'last_name' not in template_content:
+        template_content['last_name'] = to_last_name
 
-    t_content = TemplateContentList(template_content)
-    t_content.add_default('first_name', to_first_name)
-    t_content.add_default('last_name', to_last_name)
+    # Convert template dict to array for mandrill
+    template_content_list = []
+    for key in template_content.keys():
+        template_content_list.append({
+            'name': key,
+            'content': template_content[key]
+        })
 
     message = {
+        'subject': subject,
+        'from_email': default_from_email,
+        'from_name': default_from_name,
         'to': [{
             'email': to_email,
             'name': to_first_name + ' ' + to_last_name
-        }],
-        'message': {
-            'subject': subject,
-            'from_email': default_from_email,
-            'from_name': default_from_name
-        }
+        }]
     }
 
-    return mandrill_client.messages.send_template(template_name=template_name, template_content=list(t_content),
-                                                  message=message)
+    send_results = mandrill_client.messages.send_template(
+        template_name=template_name, template_content=template_content_list, message=message
+    )
+
+    for result in send_results:
+        if result['status'] != 'sent':
+            logging.log('Unable to send email. Mandrill result: ' + str(result))
+
+    return send_results
+
+

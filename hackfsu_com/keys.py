@@ -8,15 +8,20 @@ import json
 
 APP_DEBUG = str(os.getenv('APP_DEBUG')).lower() == 'true'
 
-APP_SECRET = os.getenv('APP_SECRET')
-DB_NAME = os.getenv('DB_NAME')
-DB_SCHEMA = os.getenv('DB_SCHEMA')
-DB_HOST = os.getenv('DB_HOST')
-DB_PORT = os.getenv('DB_PORT')
-DB_USER = os.getenv('DB_USER')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
-RECAPTCHA_SECRET = os.getenv('RECAPTCHA_SECRET')
-MANDRILL_API_KEY = os.getenv('MANDRILL_API_KEY')
+# Required secret keys
+APP_SECRET = str()
+DB_NAME = str()
+DB_SCHEMA = str()
+DB_HOST = str()
+DB_PORT = str()
+DB_USER = str()
+DB_PASSWORD = str()
+RECAPTCHA_SECRET = str()
+MANDRILL_API_KEY = str()
+MANDRILL_HOST = str()
+MANDRILL_PORT = str()
+MANDRILL_SMTP_USERNAME = str()
+MANDRILL_SMTP_PASSWORD = str()
 
 
 def load_secret_keys():
@@ -29,26 +34,32 @@ def load_secret_keys():
     global DB_PASSWORD
     global RECAPTCHA_SECRET
     global MANDRILL_API_KEY
+    global MANDRILL_HOST
+    global MANDRILL_PORT
+    global MANDRILL_SMTP_USERNAME
+    global MANDRILL_SMTP_PASSWORD
 
     with open(os.path.dirname(os.path.abspath(__file__)) + '/secret_keys.json') as file:
         secret_keys = json.load(file)
 
-        def set_if_exists(current, key):
+        def load_key(key):
             if key in secret_keys:
-                return secret_keys[key]
-            return current
+                return str(secret_keys[key])
+            else:
+                raise ValueError('Missing secret_key "{}". Ask someone for it.'.format(key))
 
-        APP_SECRET = set_if_exists(APP_SECRET, 'APP_SECRET')
-        DB_NAME = set_if_exists(DB_NAME, 'DB_NAME')
-        DB_SCHEMA = set_if_exists(DB_SCHEMA, 'DB_SCHEMA')
-        DB_HOST = set_if_exists(DB_HOST, 'DB_HOST')
-        DB_PORT = set_if_exists(DB_PORT, 'DB_PORT')
-        DB_USER = set_if_exists(DB_USER, 'DB_USER')
-        DB_PASSWORD = set_if_exists(DB_PASSWORD, 'DB_PASSWORD')
-        RECAPTCHA_SECRET = set_if_exists(RECAPTCHA_SECRET, 'RECAPTCHA_SECRET')
-        MANDRILL_API_KEY = set_if_exists(MANDRILL_API_KEY, 'MANDRILL_API_KEY')
-
+        APP_SECRET = load_key('APP_SECRET')
+        DB_NAME = load_key('DB_NAME')
+        DB_SCHEMA = load_key('DB_SCHEMA')
+        DB_HOST = load_key('DB_HOST')
+        DB_PORT = load_key('DB_PORT')
+        DB_USER = load_key('DB_USER')
+        DB_PASSWORD = load_key('DB_PASSWORD')
+        RECAPTCHA_SECRET = load_key('RECAPTCHA_SECRET')
+        MANDRILL_API_KEY = load_key('MANDRILL_API_KEY')
+        MANDRILL_HOST = load_key('MANDRILL_HOST')
+        MANDRILL_PORT = load_key('MANDRILL_PORT')
+        MANDRILL_SMTP_USERNAME = load_key('MANDRILL_SMTP_USERNAME')
+        MANDRILL_SMTP_PASSWORD = load_key('MANDRILL_SMTP_PASSWORD')
 
 load_secret_keys()
-
-

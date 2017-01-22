@@ -1,6 +1,10 @@
 {
   "extends": "../.jshintrc",
 
+  "globals": {
+      "Cookies": true
+  },
+
   "node": false,
   "browser": true,
   "jquery": true,

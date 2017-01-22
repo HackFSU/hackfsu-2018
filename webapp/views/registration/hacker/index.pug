@@ -9,11 +9,12 @@ block append styles
     link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
 
 block append scripts
+    script(src="/static/bower_components/devbridge-autocomplete/dist/jquery.autocomplete.min.js")
+    script(src="/static/js/plugins/schoolInput.js")
     script(src=`${viewDir}/script.js`)
 
 block content
     h1 Hacker Registration
-    p Registration is not ready yet unfortunately. We are coding in-between class, come back in a few days.
     form#register_hacker
         .form-section
             h2.form-section-title School Info
@@ -26,7 +27,6 @@ block content
                 label.col-md-2(for="school") From... *
                 .col-md-10
                     input.responsive(type="text" name="school" maxlength=100 placeholder="Your School" required)
-                    input(type="hidden" name="school_code" value="")
             fieldset#year.row
                 label.col-md-2(for="year") Current Year *
                 .col-md-4: select.responsive(name="year" required)
@@ -50,7 +50,7 @@ block content
                                 input(type="radio" name="first_hackathon" value="false" required)
                                 | No
             fieldset.row
-                label.col-md-2(for="project-types") What are you interested in hacking? *
+                label.col-md-2(for="project-types") What are you interested in hacking?
                 .col-md-10
                     .group
                         .flex-row
@@ -96,7 +96,7 @@ block content
                             .flex-checkbox
                                 input(type="radio" name="over_18" value="false" required)
                                 | No
-            fieldset.row
+            //- fieldset.row
                 label.col-md-2(for="job") Looking for a job? *
                 .col-md-4: select.responsive(name="job" required)
                     option(value="" disabled selected) Select option

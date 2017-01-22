@@ -77,7 +77,7 @@ def send_template(to_email, to_first_name, to_last_name, template_name, subject,
 
     for result in send_results:
         if result['status'] != 'sent':
-            logging.log('Unable to send email. Mandrill result: ' + str(result))
+            logging.info('Unable to send email. Mandrill result: ' + str(result))
 
     return send_results
 

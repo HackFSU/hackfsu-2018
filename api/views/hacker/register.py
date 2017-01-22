@@ -3,6 +3,7 @@
 """
 from django import forms
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.contrib.auth import logout
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl, files, email
 from api.models import HackerInfo, School, Hackathon
@@ -14,6 +15,7 @@ class RequestForm(forms.Form):
     is_high_school = forms.BooleanField()   # make this a select box for College/HS Student
     school_year = forms.ChoiceField(choices=HackerInfo.SCHOOL_YEAR_CHOICES)
     school_major = forms.CharField(max_length=100)
+    interests = forms.CharField(required=False, max_length=500)
     new_school_name = forms.CharField(required=False, max_length=100)
     school_id = forms.IntegerField(required=False)
     resume = forms.FileField(required=False)
@@ -47,7 +49,9 @@ class RegisterView(ApiView):
             is_first_hackathon=req['is_first_hackathon'],
             is_adult=req['is_adult'],
             school_major=['school_major'],
-            resume_file_name=resume_file_name
+            resume_file_name=resume_file_name,
+            interests=req['interests'],
+            comments='swamphacks',  # TODO remove
         )
 
         # Add to pending group
@@ -61,6 +65,9 @@ class RegisterView(ApiView):
             subject='Hacker Registration Submitted!',
             template_name='hacker_registered'
         )
+
+        # TODO remove, only for temp
+        logout(request)
 
     @staticmethod
     def get_school(school_id, new_school_name, hs):

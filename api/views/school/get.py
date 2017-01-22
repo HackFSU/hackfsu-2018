@@ -21,7 +21,7 @@ class GetView(ApiView):
     http_method_names = ['get']
     request_form_class = RequestForm
     response_form_class = ResponseForm
-    # access_manager = acl.AccessManager(acl_deny=[acl.group_user])
+    access_manager = acl.AccessManager(acl_accept=[acl.group_user])
 
     def work(self, request: HttpRequest, req: dict, res: dict):
         schools = []

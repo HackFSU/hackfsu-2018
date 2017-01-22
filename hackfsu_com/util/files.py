@@ -10,8 +10,8 @@ import os
 
 __all__ = []
 
-
-UPLOAD_DIR = os.path.join(settings.BASE_DIR, './uploads')
+RELATIVE_UPLOAD_DIR = '/uploads'
+UPLOAD_DIR = os.path.join(settings.BASE_DIR, '.' + RELATIVE_UPLOAD_DIR)
 MAX_FILE_NAME_SIZE = 60
 MAX_NAME_SIZE = 30
 
@@ -47,3 +47,8 @@ def handle_file_upload(file, src_file_name: str, file_extension: str) -> str:
             destination.write(chunk)
 
     return relative_path
+
+
+def get_url(file_name):
+    """ Gets the url path to given file_name, which has already been made """
+    return os.path.join(RELATIVE_UPLOAD_DIR, './' + file_name)

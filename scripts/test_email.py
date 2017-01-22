@@ -12,7 +12,7 @@ def run():
         template_name='mandrill_test',
         to_first_name='Jared',
         to_last_name='Bennett',
-        template_content={
+        merge_vars={
             'test_data': 'Hello World!'
         }
     )

@@ -10,6 +10,7 @@ from hackfsu_com.util import acl, captcha, email
 from api.models import UserInfo
 from api.views.user.login import log_user_in
 
+
 class RequestForm(forms.Form):
     agree_to_mlh_coc = forms.BooleanField()
     agree_to_mlh_data_sharing = forms.BooleanField()

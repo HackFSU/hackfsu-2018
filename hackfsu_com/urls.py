@@ -32,7 +32,7 @@ urlpatterns = [
 # Shortcuts
 urlpatterns.extend([
     url(r'^register/$', RedirectView.as_view(url=reverse('webapp:registration-user'))),
-    url(r'^login/$', RedirectView.as_view(url=reverse('webapp:user-login'))),
+    # url(r'^login/$', RedirectView.as_view(url=reverse('webapp:user-login'))),
     url(r'^logout/$', RedirectView.as_view(url=reverse('webapp:user-logout')))
 ])
 

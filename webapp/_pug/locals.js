@@ -315,7 +315,7 @@ locals.sponsors = {
 
 
 /**
- * Registration Form options
+ * User Registration Form options
  */
  locals.shirt_size_choices = {
     'm-s':     'Men\'s Small',
@@ -329,6 +329,48 @@ locals.sponsors = {
     'w-l':     'Women\'s Large',
     'w-xl':    'Women\'s XL'
 };
+
+locals.anon_stats = {
+	"ethnicity": {
+		"white": "White",
+		"asian": "Asian",
+		"hispanic": "Hispanic",
+		"black": "Black",
+		"multicultural": "Multicultural",
+		"other": "Other"
+	},
+	"gender": {
+		"male": "Male",
+		"female": "Female",
+		"other": "Other"
+	}
+};
+
+/**
+ * Hacker Registration Form options
+ */
+
+locals.student_types = {
+    'college': 'College Student',
+    'highschool': 'High School Student',
+    'graduated': 'Recent College Graduate'
+}
+
+ locals.school_year_choices = {
+     'FR': 'Freshman',
+     'SO': 'Sophomore',
+     'JR': 'Junior',
+     'SR': 'Senior',
+     'SS': '\"Super Senior\"',
+     'GS': 'Graduate Student'
+};
+
+locals.job_seeker_options = {
+    'full-time' : 'Full-time',
+    'part-time' : 'Part-time',
+    'internship' : 'Internship',
+    'none' : 'No'
+}
 
 
 module.exports = locals;

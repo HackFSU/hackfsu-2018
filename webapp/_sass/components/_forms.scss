@@ -1,1 +1,65 @@
-// TODO
+
+
+$form-border: 2px solid #000;
+
+.form-section-title {
+
+}
+.form-section {
+    display: block;
+    margin-bottom: 45px;
+
+    fieldset {
+        margin: 20px;
+
+        label {
+            color: #000;
+            font-weight: 400;
+            vertical-align: top;
+        }
+        input {
+            &[type='text'],
+            &[type='email'],
+            &[type='password'],
+            &[type='url'],
+            &[type="tel"] {
+                border: none;
+                border-bottom: $form-border;
+                padding: 2px;
+            }
+            &[type='radio'],
+            &[type='checkbox'] {
+                margin-right: 10px;
+            }
+        }
+        .responsive {
+            width: 100%;
+        }
+        textarea {
+            border: $form-border;
+            border-radius: 5px;
+            height: 60px;
+            resize: vertical;
+        }
+        .note {
+            display: inline-block;
+            margin: 0px 10px 30px;
+            font-size: 90%;
+        }
+    }
+}
+.group {
+    min-width: 49%;
+
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .flex-checkbox {
+        min-width: 49%;
+    }
+}
+.parsley-errors-list {
+    color: #f00;
+}

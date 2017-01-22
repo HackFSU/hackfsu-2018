@@ -69,12 +69,12 @@
     });
 
     form.ajaxForm({
-        url: '/api/user/register',
+        url: '/api/hacker/register',
         getData: function() {
             return {
-                is_first_hackathon: first_hackathon.val().trim(),
-                is_adult: isAdult.val().trim(),
-                is_high_school: studentType === 'highschool' ? true : false,
+                is_first_hackathon: first_hackathon.val() === 'true',
+                is_adult: isAdult.val() === 'true',
+                is_high_school: studentType === 'highschool',
                 school_year: studentType === 'highschool' ? '' : studentYear.val().trim(),
                 school_major: studentType === 'highschool' ? '' : studentMajor.val().trim(),
                 school_id: schoolCode.val().trim(),

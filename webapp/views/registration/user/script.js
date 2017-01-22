@@ -63,7 +63,6 @@
             };
         },
         setDisabled: function(value) {
-            console.log(dietString);
             firstName.prop('disabled', value);
             lastName.prop('disabled', value);
             emailInput.prop('disabled', value);

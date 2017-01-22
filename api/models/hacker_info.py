@@ -9,7 +9,10 @@ class HackerInfo(models.Model):
         ('FR', 'Freshman'),
         ('SO', 'Sophomore'),
         ('JR', 'Junior'),
-        ('SR', 'Senior')
+        ('SR', 'Senior'),
+        ('SS', 'Super Senior'),
+        ('GS', 'Graduate Student'),
+        ('HS', 'High School Student')
     )
 
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)

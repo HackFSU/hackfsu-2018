@@ -19,7 +19,7 @@ block content
             h2.form-section-title School Info
             fieldset.row
                 label.col-md-2(for="student_type") I am a... *
-                .col-md-10: select.responsive(name="student_type" required)
+                .col-md-4: select.responsive(name="student_type" required)
                     each val, key in locals.student_types
                         option(value=`${key}`)=val
             fieldset.row
@@ -27,7 +27,7 @@ block content
                 .col-md-10: input.responsive(type="text" name="school" maxlength=100 placeholder="Your School" required)
             fieldset#year.row
                 label.col-md-2(for="year") Current Year *
-                .col-md-10: select.responsive(name="year" required)
+                .col-md-4: select.responsive(name="year" required)
                     option(value="" disabled selected) Select your school year
                     each val, key in locals.school_year_choices
                         option(value=`${key}`)=val
@@ -80,12 +80,12 @@ block content
                     | No
             fieldset.row
                 label.col-md-2(for="job") Looking for a job? *
-                .col-md-10: select.responsive(name="job" required)
+                .col-md-4: select.responsive(name="job" required)
                     option(value="" disabled selected) Select option
                     each val, key in locals.job_seeker_options
                         option(value=`${key}`)=val
             fieldset.row
-                label.col-md-2(for="resume") Your Résumé
+                label.col-md-2(for="resume") Your Resume
                 .col-md-10: input.responsive(type="file" name="resume" placeholder="upload file")
 
             button(type="submit") Submit

@@ -8,6 +8,7 @@
     var form = $('form#register_hacker');
     var studentType = form.find('select[name="student_type"]');
     var schoolInput = form.find('input[name="school"]');
+    var schoolCode = form.find('input[name="school_code"]');
     var studentYear = form.find('select[name="year"]');
     var studentMajor = form.find('input[name="major"]');
     var first_hackathon = form.find('input[name="first_hackathon"]');
@@ -64,17 +65,13 @@
         url: '/api/user/register',
         getData: function() {
             return {
-                /*var school_year = forms.ChoiceField(choices=HackerInfo.SCHOOL_YEAR_CHOICES)
-                var school_major = forms.CharField(max_length=100)
-                var new_school_name = forms.CharField(required=False, max_length=100)
-                var school_id = forms.IntegerField(required=False)
-                var resume = forms.FileField(required=False)*/
-
-                is_first_hackathon: first_hackathon.val(),
-                is_adult: isAdult.val(),
+                is_first_hackathon: first_hackathon.val().trim(),
+                is_adult: isAdult.val().trim(),
                 is_high_school: studentType === 'highschool' ? true : false,
-                school_year: studentType === 'highschool' ? '' : studentYear.val(),
-                school_major: studentType === 'highschool' ? '' : studentMajor.val(),
+                school_year: studentType === 'highschool' ? '' : studentYear.val().trim(),
+                school_major: studentType === 'highschool' ? '' : studentMajor.val().trim(),
+                school_id: schoolCode.val().trim(),
+                new_school_name: school_code >= 0 ? '' : schoolInput.val().trim()
 
             };
         },

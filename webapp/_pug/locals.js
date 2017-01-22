@@ -354,7 +354,7 @@ locals.student_types = {
     'college': 'College Student',
     'highschool': 'High School Student',
     'graduated': 'Recent College Graduate'
-}
+};
 
  locals.school_year_choices = {
      'FR': 'Freshman',
@@ -370,7 +370,7 @@ locals.job_seeker_options = {
     'part-time' : 'Part-time',
     'internship' : 'Internship',
     'none' : 'No'
-}
+};
 
 
 module.exports = locals;

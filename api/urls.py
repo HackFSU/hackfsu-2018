@@ -3,25 +3,29 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
-    # url(r'user/login$', views.user.LogInView.as_view(), name='user-login'),
-    url(r'user/get/profile$', views.user.ProfileView.as_view(), name='user-get-profile'),
-    # url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),
-
-    url(r'hacker/register$', views.hacker.RegisterView.as_view(), name='hacker-register'),
-
-    url(r'judge/register$', views.judge.RegisterView.as_view(), name='judge-register'),
-
-    url(r'mentor/register$', views.hacker.RegisterView.as_view(), name='mentor-register'),
-
-    url(r'organizer/register$', views.hacker.RegisterView.as_view(), name='organizer-register'),
-
-    url(r'school/get$', views.school.GetView.as_view(), name='organizer-register'),
-
     url(r'hackathon/get/countdowns$', views.hackathon.get.CountdownsView.as_view()),
     url(r'hackathon/get/maps$', views.hackathon.get.MapsView.as_view()),
     url(r'hackathon/get/schedule_items$', views.hackathon.get.ScheduleItemsView.as_view()),
     url(r'hackathon/get/sponsors$', views.hackathon.get.SponsorsView.as_view()),
-    url(r'hackathon/get/updates$', views.hackathon.get.UpdatesView.as_view())
+    url(r'hackathon/get/updates$', views.hackathon.get.UpdatesView.as_view()),
+
+    url(r'user/login$', views.user.LogInView.as_view(), name='user-login'),
+    url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),
+    url(r'user/get/profile$', views.user.get.ProfileView.as_view(), name='user-get-profile'),
+
+    url(r'hacker/register$', views.hacker.RegisterView.as_view(), name='hacker-register'),
+    url(r'hacker/get/profile$', views.hacker.get.ProfileView.as_view(), name='hacker-get-profile'),
+
+    url(r'judge/register$', views.judge.RegisterView.as_view(), name='judge-register'),
+    url(r'judge/get/profile$', views.judge.get.ProfileView.as_view(), name='judge-get-profile'),
+
+    url(r'mentor/register$', views.hacker.RegisterView.as_view(), name='mentor-register'),
+    url(r'mentor/get/profile$', views.mentor.get.ProfileView.as_view(), name='mentor-get-profile'),
+
+    url(r'organizer/register$', views.hacker.RegisterView.as_view(), name='organizer-register'),
+    url(r'organizer/get/profile$', views.organizer.get.ProfileView.as_view(), name='organizer-get-profile'),
+
+    url(r'school/get$', views.school.GetView.as_view(), name='organizer-register'),
 ]
 
 if settings.DEBUG:

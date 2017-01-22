@@ -58,8 +58,8 @@ class RegisterView(ApiView):
             to_email=request.user.email,
             to_first_name=request.user.first_name,
             to_last_name=request.user.last_name,
-            subject='Hacker registration submitted!',
-            template_name='hacker-registered'
+            subject='Hacker Registration Submitted!',
+            template_name='hacker_registered'
         )
 
     @staticmethod

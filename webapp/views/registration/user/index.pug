@@ -8,14 +8,14 @@ block vars
 block append styles
     link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
 
-//- block append scripts
+block append scripts
     script(src=`${viewDir}/script.js`)
     script(src="https://www.google.com/recaptcha/api.js" async defer)
 
 block content
     h1 Registration
     p Registration is not ready yet unfortunately. We are coding in-between class, come back in a few days.
-    //- form#register_user.container-fluid
+    form#register_user.container-fluid
         .form-section
             h2.form-section-title Account
             fieldset.row
@@ -77,14 +77,14 @@ block content
                 label.col-md-2(for="gender") Your Gender
                 select(name="gender")
                     option(value="" disabled selected) Select your gender
-                    option(value="Male") Male
-                    option(value="Female") Female
-                    option(value="Other") Other
+                    each val, key in locals.anon_stats.gender
+                        option(value=`${key}`)=val
             fieldset.row
                 label.col-md-2(for="ethnicity") Your Ethnicity
                 select(name="ethnicity")
                     option(value="" disabled selected) Select ethnicity
-                    option(value="na") Prefer not to answer
+                    each val, key in locals.anon_stats.ethnicity
+                        option(value=`${key}`)=val
         .form-section
             h2.form-section-title Legal Stuff
             fieldset.row

@@ -5,7 +5,7 @@
 (function($) {
     'use strict';
 
-    var form = $('form#register_user');
+    var form = $('form#register_userz');
     var firstName = form.find('input[name="first_name"]');
     var lastName = form.find('input[name="last_name"]');
     var emailInput = form.find('input[name="email"]');

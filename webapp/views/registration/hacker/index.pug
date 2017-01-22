@@ -14,39 +14,78 @@ block append scripts
 block content
     h1 Hacker Registration
     p Registration is not ready yet unfortunately. We are coding in-between class, come back in a few days.
-    //- form#register_hacker
-        fieldset
-            label(for="school") School *
-            input(type="text" name="school" maxlength=100 placeholder="Your School" required)
-        fieldset
-            label(for="year") Current Year *
-            select(name="year" required)
-                option(value="" disabled selected) Select school year
-                option(value="freshman") Freshman (1st year)
-                option(value="sophomore") Sophomore (2nd year)
-                option(value="junior") Junior (3rd year)
-                option(value="senior") Senior (4th+ year)
-                option(value="graduate") Graduate School
-                option(value="highschool") Highschool
-        fieldset
-            label(for="major") Major *
-            input(type="text" name="major" maxlength=100 placeholder="Your Major" required)
-        fieldset
-            label(for="first_hackathon") Will this be your first hackathon? *
-            input(type="radio" name="first_hackathon" value="yes" required)
-            | Yes
-            input(type="radio" name="first_hackathon" value="no" required)
-            | No
-        fieldset
-            label(for="job") Looking for a job? *
-            select(name="job" required)
-                option(value="" disabled selected) Select option
-                option(value="Full-time") Full-Time
-                option(value="Part-time") Part-Time
-                option(value="Internship") Internship
-                option(value="No") No
-        fieldset
-            label(for="resume") Your resume
-            input(type="file" name="resume" placeholder="upload file")
+    form#register_hacker
+        .form-section
+            h2.form-section-title School Info
+            fieldset.row
+                label.col-md-2(for="student_type") I am a... *
+                .col-md-10: select.responsive(name="student_type" required)
+                    each val, key in locals.student_types
+                        option(value=`${key}`)=val
+            fieldset.row
+                label.col-md-2(for="school") From... *
+                .col-md-10: input.responsive(type="text" name="school" maxlength=100 placeholder="Your School" required)
+            fieldset#year.row
+                label.col-md-2(for="year") Current Year *
+                .col-md-10: select.responsive(name="year" required)
+                    option(value="" disabled selected) Select your school year
+                    each val, key in locals.school_year_choices
+                        option(value=`${key}`)=val
+            fieldset#major.row
+                label.col-md-2(for="major") Major *
+                .col-md-10: input.responsive(type="text" name="major" maxlength=100 placeholder="Your Major" required)
+        .form-section
+            h2.form-section-title About You
+            fieldset.row
+                label.col-md-2(for="first_hackathon") Will this be your first hackathon? *
+                .col-md-10
+                    input(type="radio" name="first_hackathon" value="true" required)
+                    | Yes
+                    input(type="radio" name="first_hackathon" value="false" required)
+                    | No
+            fieldset.row
+                label.col-md-2(for="project-types") What are you interested in hacking? *
+                .col-md-10
+                    .group
+                        .flex-row
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="frontend")
+                                | Front-End
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="backend")
+                                | Back-End
+                    .group
+                        .flex-row
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="web")
+                                | Web
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="hardware")
+                                | Hardware
+                    .group
+                        .flex-row
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="ios")
+                                | iOS
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="android")
+                                | Android
+                    input.responsive(type="text" max="100" name="project-types" placeholder="Other...")
+            fieldset.row
+                label.col-md-2(for="over_18") Are you 18 years or older? *
+                .col-md-10
+                    input(type="radio" name="over_18" value="true" required)
+                    | Yes
+                    input(type="radio" name="over_18" value="false" required)
+                    | No
+            fieldset.row
+                label.col-md-2(for="job") Looking for a job? *
+                .col-md-10: select.responsive(name="job" required)
+                    option(value="" disabled selected) Select option
+                    each val, key in locals.job_seeker_options
+                        option(value=`${key}`)=val
+            fieldset.row
+                label.col-md-2(for="resume") Your Résumé
+                .col-md-10: input.responsive(type="file" name="resume" placeholder="upload file")
 
-        button(type="submit") Submit
+            button(type="submit") Submit

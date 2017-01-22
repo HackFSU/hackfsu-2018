@@ -70,6 +70,6 @@ class RegisterView(ApiView):
             to_email=user.email,
             to_first_name=user.first_name,
             to_last_name=user.last_name,
-            subject='HackFSU Account Created!',
-            template_name='user-registered'
+            subject='HackFSU Account Created',
+            template_name='user_registered'
         )

@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl, captcha, email
 from api.models import UserInfo
-
+from api.views.user.login import log_user_in
 
 class RequestForm(forms.Form):
     agree_to_mlh_coc = forms.BooleanField()
@@ -25,8 +25,13 @@ class RequestForm(forms.Form):
     diet = forms.CharField(required=False, max_length=500)
 
 
+class ResponseForm(forms.Form):
+    logged_in = forms.BooleanField()
+
+
 class RegisterView(ApiView):
     request_form_class = RequestForm
+    response_form_class = ResponseForm
     access_manager = acl.AccessManager(acl_deny=[acl.group_user])
 
     def work(self, request: HttpRequest, req: dict, res: dict):
@@ -73,3 +78,6 @@ class RegisterView(ApiView):
             subject='HackFSU Account Created',
             template_name='user_registered'
         )
+
+        # Log user in
+        log_user_in(request=request, email=req['email'], password=req['password'])

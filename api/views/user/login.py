@@ -9,6 +9,18 @@ from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl
 
 
+def log_user_in(request, email, password):
+    """ Authenticate user (username == email) """
+
+    user = authenticate(
+        username=email,
+        password=password
+    )
+    if user is None:
+        raise ValidationError(_('Invalid email or password'))
+    login(request, user)
+
+
 class RequestForm(forms.Form):
     email = forms.EmailField(required=True, max_length=100)
     password = forms.CharField(required=True, max_length=1000)
@@ -19,11 +31,5 @@ class LogInView(ApiView):
     access_manager = acl.AccessManager(acl_deny=[acl.group_user])
 
     def work(self, request, req, res):
-        # Authenticate user (username == email)
-        user = authenticate(
-            username=req['email'],
-            password=req['password']
-        )
-        if user is None:
-            raise ValidationError(_('Invalid email or password'))
-        login(request, user)
+        log_user_in(request=request, email=req['email'], password=req['password'])
+

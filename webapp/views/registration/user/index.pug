@@ -14,8 +14,8 @@ block append scripts
 
 block content
     h1 Registration
-    p Registration is not ready yet unfortunately. We are coding in-between class, come back in a few days.
-    //- form#register_user.container-fluid
+    //p Registration is not ready yet unfortunately. We are coding in-between class, come back in a few days.
+    form#register_user.container-fluid
         .form-section
             h2.form-section-title Account
             fieldset.row
@@ -70,7 +70,7 @@ block content
                     option(value="" disabled selected) Select shirt size
                     each val, key in locals.shirt_size_choices
                         option(value=`${key}`)=val
-        .form-section
+        //- .form-section
             h2.form-section-title Anonymous Statistics
             span.note Answering these optional fields is anonymous and will not be associated with your account.
             fieldset.row
@@ -99,6 +99,6 @@ block content
                     | I agree to the terms of both the #[a(href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions") MLH Contest Terms and Conditions] and the #[a(href="https://mlh.io/privacy") MLH Privacy Policy]. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.
         .form-section
             h2.form-section-title Submit
-            fieldset.row
+            //- fieldset.row
                 .g-recaptcha(data-sitekey=keys.reCaptchaSiteKey)
             button(type="submit") Submit

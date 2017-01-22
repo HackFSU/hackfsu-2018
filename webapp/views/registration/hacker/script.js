@@ -12,7 +12,7 @@
     var studentYear = form.find('select[name="year"]');
     var studentMajor = form.find('input[name="major"]');
     var first_hackathon = form.find('input[name="first_hackathon"]');
-    var projectTypes = form.find('input[name="project-types"]');
+    var projectTypes = form.find('textarea[name="project-types"]');
     var isAdult = form.find('input[name="over_18"]');
     var jobPref = form.find('input[name="job"]');
     var resumeField = form.find('input[name="resume"]');
@@ -42,10 +42,10 @@
     $('.project-type:checkbox').change(function() {
         projectTypesString = "";
         if ($('#frontend').prop('checked')) {
-            projectTypesString += "Frontend, ";
+            projectTypesString += "Front-end, ";
         }
         if ($('#backend').prop('checked')) {
-            projectTypesString += "Backend, ";
+            projectTypesString += "Back-end, ";
         }
         if ($('#web').prop('checked')) {
             projectTypesString += "Web, ";
@@ -59,6 +59,13 @@
         if ($('#android').prop('checked')) {
             projectTypesString += "Android, ";
         }
+        if ($('#vr').prop('checked')) {
+            projectTypesString += "Virtual Reality, ";
+        }
+        if ($('#design-hack').prop('checked')) {
+            projectTypesString += "Design, ";
+        }
+        console.log(projectTypesString);
     });
 
     form.ajaxForm({
@@ -71,8 +78,8 @@
                 school_year: studentType === 'highschool' ? '' : studentYear.val().trim(),
                 school_major: studentType === 'highschool' ? '' : studentMajor.val().trim(),
                 school_id: schoolCode.val().trim(),
-                new_school_name: school_code >= 0 ? '' : schoolInput.val().trim()
-
+                new_school_name: schoolCode === '' ? schoolInput.val().trim() : '',
+                interests: projectTypesString + projectTypes.val().trim()
             };
         },
         setDisabled: function(value) {
@@ -88,7 +95,7 @@
         },
         onAjaxComplete: function(response) {
             console.log('TODO complete', response);
-            // window.location.href = '/user/profile';
+            window.location.href = '/register';
         }
     });
 

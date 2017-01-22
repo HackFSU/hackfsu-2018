@@ -24,7 +24,9 @@ block content
                         option(value=`${key}`)=val
             fieldset.row
                 label.col-md-2(for="school") From... *
-                .col-md-10: input.responsive(type="text" name="school" maxlength=100 placeholder="Your School" required)
+                .col-md-10
+                    input.responsive(type="text" name="school" maxlength=100 placeholder="Your School" required)
+                    input(type="hidden" name="school_code" value="")
             fieldset#year.row
                 label.col-md-2(for="year") Current Year *
                 .col-md-4: select.responsive(name="year" required)
@@ -39,10 +41,14 @@ block content
             fieldset.row
                 label.col-md-2(for="first_hackathon") Will this be your first hackathon? *
                 .col-md-10
-                    input(type="radio" name="first_hackathon" value="true" required)
-                    | Yes
-                    input(type="radio" name="first_hackathon" value="false" required)
-                    | No
+                    .group
+                        .flex-row
+                            .flex-checkbox
+                                input(type="radio" name="first_hackathon" value="true" required)
+                                | Yes
+                            .flex-checkbox
+                                input(type="radio" name="first_hackathon" value="false" required)
+                                | No
             fieldset.row
                 label.col-md-2(for="project-types") What are you interested in hacking? *
                 .col-md-10
@@ -70,14 +76,26 @@ block content
                             .flex-checkbox
                                 input.project-type(type="checkbox" id="android")
                                 | Android
-                    input.responsive(type="text" max="100" name="project-types" placeholder="Other...")
+                    .group
+                        .flex-row
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="vr")
+                                | Virtual Reality
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="design-hack")
+                                | Design
+                    textarea.responsive(type="text" maxlength=200 name="project-types" placeholder="Other...")
             fieldset.row
                 label.col-md-2(for="over_18") Are you 18 years or older? *
                 .col-md-10
-                    input(type="radio" name="over_18" value="true" required)
-                    | Yes
-                    input(type="radio" name="over_18" value="false" required)
-                    | No
+                    .group
+                        .flex-row
+                            .flex-checkbox
+                                input(type="radio" name="over_18" value="true" required)
+                                | Yes
+                            .flex-checkbox
+                                input(type="radio" name="over_18" value="false" required)
+                                | No
             fieldset.row
                 label.col-md-2(for="job") Looking for a job? *
                 .col-md-4: select.responsive(name="job" required)
@@ -86,6 +104,6 @@ block content
                         option(value=`${key}`)=val
             fieldset.row
                 label.col-md-2(for="resume") Your Resume
-                .col-md-10: input.responsive(type="file" name="resume" placeholder="upload file")
+                .col-md-10: input.responsive(type="file" name="resume" placeholder="upload file" disabled)
 
             button(type="submit") Submit

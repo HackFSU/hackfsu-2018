@@ -5,7 +5,7 @@
 (function($) {
     'use strict';
 
-    var form = $('form#register_userz');
+    var form = $('form#register_user');
     var firstName = form.find('input[name="first_name"]');
     var lastName = form.find('input[name="last_name"]');
     var emailInput = form.find('input[name="email"]');
@@ -50,7 +50,7 @@
             return {
                 agree_to_mlh_coc: mlhCoc.val().trim(),
                 agree_to_mlh_data_sharing: mlhDataSharing.val().trim(),
-                g_recaptcha_response: window.grecaptcha.getResponse(),
+                g_recaptcha_response: '',//window.grecaptcha.getResponse(),
                 first_name: firstName.val().trim(),
                 last_name: lastName.val().trim(),
                 email: emailInput.val().trim(),

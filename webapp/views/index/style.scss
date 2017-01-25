@@ -73,7 +73,7 @@
 
         > * {
             display: inline-block;
-            height: 150px;
+            height: 200px;
         }
     }
 
@@ -81,7 +81,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
         height: 100%;
         margin-right: 25px;
 
@@ -102,8 +102,8 @@
         .title-text-date-location {
             font-family: $font-header;
             font-style: italic;
-            font-size: 1em;
-            margin: 0px;
+            font-size: 0.82em;
+            margin: 0;
         }
 
         img {
@@ -113,12 +113,11 @@
             padding-right: 0.25em;
         }
         #date {
-            display: inline-block;;
+            display: block;
             margin-right: 0.4em;
         }
         #fsu {
             display: inline-block;
-            font-size: 0.8em;
         }
     }
 }
@@ -481,7 +480,7 @@
     // >= Tablet
     #title-section {
         .button {
-            margin: 0px;
+            margin: 0;
         }
     }
 }
@@ -504,15 +503,16 @@
             }
         }
         .title-buttons-container {
-            padding: 15px 0px;
+            padding: 15px 0;
         }
         .title-text {
-            font-size: 30px;
+            font-size: 25px;
         }
         .title-buttons {
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: space-around;
+            margin-right: 0;
         }
 
 

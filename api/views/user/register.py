@@ -12,8 +12,8 @@ from api.views.user.login import log_user_in
 
 
 class RequestForm(forms.Form):
-    agree_to_mlh_coc = forms.BooleanField()
-    agree_to_mlh_data_sharing = forms.BooleanField()
+    agree_to_mlh_coc = forms.BooleanField()                         # Must be true
+    agree_to_mlh_data_sharing = forms.BooleanField()                # Must be true
     g_recaptcha_response = forms.CharField(max_length=10000)
     first_name = forms.CharField(max_length=100)
     last_name = forms.CharField(max_length=100)
@@ -36,12 +36,6 @@ class RegisterView(ApiView):
     access_manager = acl.AccessManager(acl_deny=[acl.group_user])
 
     def work(self, request: HttpRequest, req: dict, res: dict):
-        # Make sure terms are agreed to
-        if not req['agree_to_mlh_coc']:
-            raise ValidationError('Must agree to MLH Code of Conduct', params=['agree_to_mlh_coc'])
-        if not req['agree_to_mlh_data_sharing']:
-            raise ValidationError('Must agree to MLH Data Sharing', params=['agree_to_mlh_data_sharing'])
-
         # Check captcha
         if not captcha.is_valid_response(req['g_recaptcha_response']):
             raise ValidationError('Captcha check failed', params=['g_recaptcha_response'])

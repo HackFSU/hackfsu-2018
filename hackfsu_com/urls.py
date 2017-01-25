@@ -27,6 +27,7 @@ handler500 = 'webapp.views.handler500'
 
 urlpatterns = [
     url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^admin/django/', admin.site.urls),
     url('', include('webapp.urls', namespace='webapp'))
 ]
 
@@ -38,7 +39,4 @@ urlpatterns.extend([
 ])
 
 if settings.DEBUG:
-    urlpatterns.extend([
-        url(r'^admin/', admin.site.urls)
-    ])
     urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

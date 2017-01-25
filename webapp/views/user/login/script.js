@@ -14,16 +14,11 @@
         getData: function() {
             return {
                 email: emailInput.val().trim(),
-                password: passwordInput.val().trim()
+                password: passwordInput.val()
             };
         },
-        setDisabled: function(value) {
-            emailInput.prop('disabled', value);
-            passwordInput.prop('disabled', value);
-        },
         onAjaxComplete: function(response) {
-            console.log('TODO complete', response);
-            // window.location.href = '/user/profile';
+            window.location.href = '/user/profile';
         }
     });
 

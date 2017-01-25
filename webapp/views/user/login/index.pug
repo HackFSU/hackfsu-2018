@@ -11,6 +11,13 @@ block append scripts
 block content
     h1 Login
     form#login
-        input(type="email" name="email" maxlength=100 placeholder="Email" required)
-        input(type="password" name="password" minlength=8 maxlength=100 placeholder="Password" required)
-        button(type="submit") Log in
+        .form-section
+            fieldset.row
+                label.col-md-2(for="email") Email *
+                .col-md-10: input.responsive(type="email" name="email" maxlength=100 placeholder="your@school.edu" required)
+            fieldset.row
+                label.col-md-2(for="password") Password *
+                .col-md-10: input.responsive(type="password" id="password" name="password" minlength=8 maxlength=100 placeholder="********************" required)
+        .form-section
+            .text-right
+                button.btn.btn-form(type="submit") Log in

@@ -16,7 +16,6 @@
     var dietInput = form.find('textarea[name="diet"]');
     var shirtSize = form.find('select[name="shirt_size"]');
     var mlhCoc = form.find('input[name="mlhcoc"]');
-    var mlhDataSharing = form.find('input[name="mlhcoc"]');
 
     var dietString = "";
     var dietText = false;
@@ -45,38 +44,34 @@
         }
     });
 
+    function getDiet() {
+        var diets = [];
+        $('input.diet-detail:checked').each(function () {
+            diets.push(value);
+        });
+        if ($('#diet-other').is(':checked')) {
+            diets.push(dietInput.val().trim());
+        }
+        return '' + diets.join('; ');
+    }
+
     form.ajaxForm({
         url: '/api/user/register',
         getData: function() {
             return {
-                agree_to_mlh_coc: mlhCoc.val().trim(),
-                agree_to_mlh_data_sharing: mlhDataSharing.val().trim(),
+                agree_to_mlh_coc: mlhCoc.is(':checked'),
+                agree_to_mlh_data_sharing: mlhtcpp.is(':checked'),
                 g_recaptcha_response: window.grecaptcha.getResponse(),
                 first_name: firstName.val().trim(),
                 last_name: lastName.val().trim(),
                 email: emailInput.val().trim(),
-                password: passwordInput.val().trim(),
+                password: passwordInput.val(),
                 shirt_size: shirtSize.val().trim(),
                 phone_number: phoneNumber.val().trim().replace(/\D/g,''),
                 github: githubLink.val().trim(),
                 linkedin: linkedInProfile.val().trim(),
-                diet: dietText ? dietString + dietInput.val().trim() : dietString
+                diet: getDiet()
             };
-        },
-        setDisabled: function(value) {
-            firstName.prop('disabled', value);
-            lastName.prop('disabled', value);
-            emailInput.prop('disabled', value);
-            passwordInput.prop('disabled', value);
-            phoneNumber.prop('disabled', value);
-            githubLink.prop('disabled', value);
-            linkedInProfile.prop('disabled', value);
-            dietInput.prop('disabled', value);
-            shirtSize.prop('disabled', value);
-            mlhCoc.prop('disabled', value);
-            mlhDataSharing.prop('disabled', value);
-            emailInput.prop('disabled', value);
-            passwordInput.prop('disabled', value);
         },
         onAjaxComplete: function(response) {
             console.log('TODO complete', response);

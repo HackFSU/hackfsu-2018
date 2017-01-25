@@ -19,28 +19,28 @@ block content
         .form-section
             h2.form-section-title Education
             fieldset.row
-                label.col-md-2(for="student_type") Student Type *
-                .col-md-4: select.responsive(name="student_type" required)
+                label.col-md-3(for="student_type") Student Type *
+                .col-md-9: select.responsive(name="student_type" required)
                     each val, key in locals.student_types
                         option(value=`${key}`)=val
             fieldset.row
-                label.col-md-2(for="school") School *
-                .col-md-10
+                label.col-md-3(for="school") School *
+                .col-md-9
                     input.responsive(type="text" name="school" minlength="5" maxlength="100" placeholder="Florida State University" required)
             fieldset#year.row
-                label.col-md-2(for="year") Status *
-                .col-md-4: select.responsive(name="year" required)
-                    option(value="" disabled selected) Select your school year
+                label.col-md-3(for="year") Status *
+                .col-md-9: select.responsive(name="year" required)
+                    option(value="" disabled selected)
                     each val, key in locals.school_year_choices
                         option(value=`${key}`)=val
             fieldset#major.row
-                label.col-md-2(for="major") Major *
-                .col-md-10: input.responsive(type="text" name="major" maxlength=100 placeholder="Computer Science" required)
+                label.col-md-3(for="major") Major *
+                .col-md-9: input.responsive(type="text" name="major" maxlength=100 placeholder="Computer Science" required)
         .form-section
             h2.form-section-title About You
             fieldset.row
-                label.col-md-2(for="first_hackathon") Will this be your first hackathon? *
-                .col-md-10
+                label.col-md-3(for="first_hackathon") Will this be your first hackathon? *
+                .col-md-9
                     .col-md-2: label
                         input(type="radio" name="first_hackathon" value="true" required)
                         | Yes
@@ -49,8 +49,8 @@ block content
                         | No
 
             fieldset.row
-                label.col-md-2(for="over_18") Are you 18 years or older? *
-                .col-md-10
+                label.col-md-3(for="over_18") Are you 18 years or older? *
+                .col-md-9
                     .col-md-2: label
                         input(type="radio" name="over_18" value="true" required)
                         | Yes
@@ -58,18 +58,18 @@ block content
                         input(type="radio" name="over_18" value="false" required)
                         | No
             //- fieldset.row
-                label.col-md-2(for="job") Looking for a job? *
-                .col-md-4: select.responsive(name="job" required)
+                label.col-md-3(for="job") Looking for a job? *
+                .col-md-9: select.responsive(name="job" required)
                     option(value="" disabled selected) Select option
                     each val, key in locals.job_seeker_options
                         option(value=`${key}`)=val
             fieldset.row
-                label.col-md-2(for="resume") Resume (PDF)
-                .col-md-10: input.responsive(type="file" name="resume" placeholder="upload file" )
+                label.col-md-3(for="resume") Resume (PDF)
+                .col-md-9: input.responsive(type="file" name="resume" placeholder="upload file" )
 
             fieldset.row
-                label.col-md-2(for="project-types") What are you interested in hacking?
-                .col-md-10
+                label.col-md-3(for="project-types") What are you interested in hacking?
+                .col-md-9
                     .group
                         .flex-row
                             .flex-checkbox: label
@@ -103,4 +103,6 @@ block content
                                 input.project-type(type="checkbox" name="project-type-8" data-value="Design")
                                 | Design
                     textarea.responsive(type="text" maxlength="200" name="project-types" placeholder="Other...")
-            button.btn.btn-form(type="submit") Submit
+        .form-section
+            .text-right
+                button.btn.btn-form(type="submit") Submit

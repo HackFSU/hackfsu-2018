@@ -14,62 +14,61 @@ block append scripts
 
 block content
     h1 Registration
-    // p Registration is not ready yet unfortunately. We are coding in-between class, come back in a few days.
     form#register_user.container-fluid
         .form-section
             h2.form-section-title Account
             fieldset.row
-                label.col-md-2(for="email") Email&nbsp;*
-                .col-md-10: input.responsive(type="email" name="email" maxlength=100 placeholder="your@school.edu" required)
+                label.col-md-3(for="email") Email *
+                .col-md-9: input.responsive(type="email" name="email" maxlength=100 placeholder="your@school.edu" required)
             fieldset.row
-                label.col-md-2(for="password") Password&nbsp;*
-                .col-md-10: input.responsive(type="password" id="password" name="password" minlength=8 maxlength=100 placeholder="********" required)
+                label.col-md-3(for="password") Password *
+                .col-md-9: input.responsive(type="password" id="password" name="password" minlength=8 maxlength=100 placeholder="********************" required)
             fieldset.row
-                label.col-md-2(for="password2") Confirm Password&nbsp;*
-                .col-md-10: input.responsive(type="password" name="password2" minlength=8 maxlength=100 placeholder="********" required data-parsley-equalto="#password")
+                label.col-md-3(for="password2") Confirm Password *
+                .col-md-9: input.responsive(type="password" name="password2" minlength=8 maxlength=100 placeholder="********************" required data-parsley-equalto="#password")
         .form-section
             h2.form-section-title Who are you?
             fieldset.row
-                label.col-md-2(for="first_name") First Name&nbsp;*
-                .col-md-10: input.responsive(type="text" name="first_name" maxlength=100 placeholder="John" required)
+                label.col-md-3(for="first_name") First Name *
+                .col-md-9: input.responsive(type="text" name="first_name" maxlength=100 placeholder="John" required)
             fieldset.row
-                label.col-md-2(for="last_name") Last Name&nbsp;*
-                .col-md-10: input.responsive(type="text" name="last_name" maxlength=100 placeholder="Doe" required)
+                label.col-md-3(for="last_name") Last Name *
+                .col-md-9: input.responsive(type="text" name="last_name" maxlength=100 placeholder="Doe" required)
             fieldset.row
-                label.col-md-2(for="phone") Phone Number&nbsp;*
-                .col-md-10: input.responsive(type="tel" name="phone" maxlength=20 minlength=10 data-parsley-type="digits" placeholder="850-867-5309" required)
+                label.col-md-3(for="phone") Phone Number *
+                .col-md-9: input.responsive(type="tel" name="phone" maxlength=20 minlength=10 data-parsley-type="digits" placeholder="850-867-5309" required)
             fieldset.row
-                label.col-md-2(for="github") Github Link
-                .col-md-10: input.responsive(type="text" name="github" maxlength=100 placeholder="Your github username")
-            fieldset.row
-                label.col-md-2(for="linkedin") LinkedIn Profile Link
-                .col-md-10: input.responsive(type="url" name="linkedin" maxlength=100 data-parsley-type="url" placeholder="https://www.linkedin.com/in/your-username")
-            fieldset.row
-                label.col-md-2(for="shirt_size") Shirt Size&nbsp;*
-                select(name="shirt_size" required)
-                    option(value="" disabled selected) Select shirt size
+                label.col-md-3(for="shirt_size") Shirt Size *
+                .col-md-9: select.responsive(name="shirt_size" required)
+                    option(value="" disabled selected)
                     each val, key in locals.shirt_size_choices
                         option(value=`${key}`)=val
             fieldset.row
-                label.col-md-2(for="diet") Dietary restrictions?
-                .col-md-10
+                label.col-md-3(for="github") Github
+                .col-md-9: input.responsive(type="text" name="github" maxlength=100 placeholder="Your github username")
+            fieldset.row
+                label.col-md-3(for="linkedin") LinkedIn
+                .col-md-9: input.responsive(type="url" name="linkedin" maxlength=100 data-parsley-type="url" placeholder="https://www.linkedin.com/in/your-username")
+            fieldset.row
+                label.col-md-3(for="diet") Dietary restrictions?
+                .col-md-9
                     .group
                         .flex-row
-                            .flex-checkbox
-                                input.diet-detail(type="checkbox" id="vegetarian" value="vegetarian")
+                            .flex-checkbox: label
+                                input.diet-detail(type="checkbox" id="vegetarian" data-value="vegetarian")
                                 | Vegetarian
-                            .flex-checkbox
-                                input.diet-detail(type="checkbox" id="vegan" value="vegan")
+                            .flex-checkbox: label
+                                input.diet-detail(type="checkbox" id="vegan" data-value="vegan")
                                 | Vegan
                     .group
                         .flex-row
-                            .flex-checkbox
-                                input.diet-detail(type="checkbox" id="allergy" value="allergy")
+                            .flex-checkbox: label
+                                input.diet-detail(type="checkbox" id="allergy" data-value="allergy")
                                 | Allergies
-                            .flex-checkbox
-                                input.diet-detail(type="checkbox" id="diet-other" value="other")
+                            .flex-checkbox: label
+                                input.diet-detail(type="checkbox" id="diet-other" data-value="other")
                                 | Other
-                    textarea.responsive(name="diet" id="dietbox" placeholder="Please explain food allergies or unique dietary needs" style="display: none")
+                    textarea.responsive(name="diet" id="dietbox" placeholder="Please explain your food allergies or unique dietary needs here and we will make sure you are covered." style="display: none")
         //- .form-section
             h2.form-section-title Anonymous Statistics
             span.note Answering these optional fields is anonymous and will not be associated with your account.
@@ -88,17 +87,18 @@ block content
         .form-section
             h2.form-section-title Legal Stuff
             fieldset.row
-                label.col-md-12(for="mlhcoc") MLH Code of Conduct
-                .col-md-12
-                    input(type="checkbox" name="mlhcoc" value="true" required)
+                label.col-md-3(for="mlhcoc") MLH Code of Conduct *
+                .col-md-9: label
+                    input(type="checkbox" name="mlhcoc" required)
                     | I will abide by the #[a(href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf") MLH Code of Conduct] for the duration of this event.
             fieldset.row
-                label.col-md-12(for="mlhtac") MLH Terms and Conditions
-                .col-md-12
-                    input(type="checkbox" name="mlhtcpp" value="true" required)
+                label.col-md-3(for="mlhtac") MLH Terms and Conditions *
+                .col-md-9: label
+                    input(type="checkbox" name="mlhtcpp" required)
                     | I agree to the terms of both the #[a(href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions") MLH Contest Terms and Conditions] and the #[a(href="https://mlh.io/privacy") MLH Privacy Policy]. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.
         .form-section
-            h2.form-section-title Submit
-            //- fieldset.row
+            .flex-center
                 .g-recaptcha(data-sitekey=keys.reCaptchaSiteKey)
-            button.btn.btn-form(type="submit") Submit
+        .form-section
+            .text-center
+                button.btn.btn-form(type="submit") Submit

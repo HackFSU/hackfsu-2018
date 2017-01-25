@@ -64,11 +64,14 @@ locals.navLinks = {
     // For regular non-index pages
     standard: [
         { name: 'Register', url: '/register' },
-        { name: 'About', url: '/#about' },
-        { name: 'Sponsors', url: '/#sponsors' },
-        { name: 'FAQs', url: '/#faq' }
         // { name: 'Help', url: '/help' },
-        // { name: 'Login', url: '/user/login' }
+        { name: 'Login', url: '/user/login' }
+    ],
+
+    // For regular user pages
+    user: [
+        { name: 'Profile', url: '/user/profile' },
+        { name: 'Logout', url: '/user/logout' }
     ]
 };
 

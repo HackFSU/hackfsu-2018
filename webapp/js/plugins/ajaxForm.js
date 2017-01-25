@@ -17,8 +17,8 @@
         useFormData: false,
         getData: function() { return {}; },
         setDisabled: function(value) { return value; },
-        onAjaxComplete: function(data, response) { console.log(response); },
-        onAjaxError: function(data, error) { console.error(error); },
+        onAjaxComplete: function(response, data) { console.log(response, data); },
+        onAjaxError: function(error, data) { console.error(error); },
         parsleyOptions: {}
     };
 
@@ -40,6 +40,8 @@
             },
             error: function(response) {
                 console.error('Server Error:', response);
+                var err = JSON.parse(response.responseText);
+                alert(err.cause + ': ' + err.message);
                 dfd.reject(response);
             }
         };

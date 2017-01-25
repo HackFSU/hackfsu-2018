@@ -66,6 +66,13 @@
         }
 
         var o = $.extend({}, defaultOptions, options);
+
+        if (!o.setDisabled) {
+            o.setDisabled = function() {
+                self.find('input, textarea, select, button').prop('disabled', value);
+            }
+        }
+
         var parsleyFormInstance = this.parsley(o.parsleyOptions);
         var canSubmit = true;
 

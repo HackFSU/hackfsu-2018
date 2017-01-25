@@ -73,11 +73,12 @@
             var data =  {
                 is_first_hackathon: first_hackathon.val() === 'true',
                 is_adult: isAdult.val() === 'true',
-                is_high_school: studentType === 'highschool',
-                school_year: studentType === 'highschool' ? '' : studentYear.val().trim(),
-                school_major: studentType === 'highschool' ? '' : studentMajor.val().trim(),
+                is_high_school: studentType.val() === 'highschool',
+                school_year: studentType.val() === 'highschool' ? 'HS' : studentYear.val(),
+                school_major: studentType.val() === 'highschool' ? 'High School' : studentMajor.val(),
                 interests: projectTypesString + projectTypes.val().trim()
             };
+            console.log(studentType.val());
 
             var school_name = schoolInput.val().trim();
             data.school_id = schoolInput.schoolInput('getId', school_name);

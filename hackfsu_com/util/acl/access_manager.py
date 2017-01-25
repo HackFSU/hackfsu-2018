@@ -71,20 +71,13 @@ class AccessManager(object):
             # Anonymous user, not logged in
             return self.allow_anon_users
 
-        if (len(self.acl_accept) + len(self.acl_deny)) == 0:
-            # No additional ACL to enforce
-            return True
-
-        # Load groups user is a part of from db
-        user_groups = user.groups.all()
-
         # Preform accept/deny checks
-        for group in self.acl_accept:
-            if group not in user_groups:
-                return False
-        for group in self.acl_deny:
-            if group in user_groups:
-                return False
+        if len(self.acl_accept) > 0 and not user.groups.filter(name__in=self.acl_accept).exists():
+            # Not in accept list
+            return False
+        if len(self.acl_deny) > 0 and user.groups.filter(name__in=self.acl_deny).exists():
+            # Is in deny list
+            return False
 
         # All checks passed
         return True

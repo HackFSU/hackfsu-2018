@@ -5,6 +5,8 @@
  * parsley form validation framework.
  *
  * Data is sent as JSON to the server.
+ *
+ * Need to send files? Set useFormData to true to convert the data to a formData object and send multipart/formdata
  */
 
 (function($) {
@@ -12,6 +14,7 @@
 
     var defaultOptions = {
         url: '',
+        useFormData: false,
         getData: function() { return {}; },
         setDisabled: function(value) { return value; },
         onAjaxComplete: function(data, response) { console.log(response); },
@@ -19,16 +22,14 @@
         parsleyOptions: {}
     };
 
-    function ajaxJsonSubmit(url, data) {
+    function ajaxJsonSubmit(options) {
         var dfd = $.Deferred();
-        $.ajax({
-            url: url,
+        var defaultAjaxOptions = {
             type: 'POST',
             contentType: 'application/json; charset=UTF-8',
             headers: {
                 'HTTP_X_CSRFTOKEN': Cookies.get('csrftoken')
             },
-            data: JSON.stringify(data),
             success: function(response) {
                 if (response.error) {
                     console.error('Server Error:', response.error);
@@ -41,9 +42,23 @@
                 console.error('Server Error:', response);
                 dfd.reject(response);
             }
-        });
+        };
+
+        $.ajax($.extend({}, defaultAjaxOptions, options));
+
         return dfd.promise();
     }
+
+    function jsonToFormData(jsonData) {
+        var fd = new FormData();
+        for (var key in jsonData) {
+            if (jsonData.hasOwnProperty(key) && jsonData[key] !== null && jsonData[key] !== undefined) {
+                fd.append(key, jsonData[key]);
+            }
+        }
+        return fd;
+    }
+
 
     $.fn.ajaxForm = function(options) {
         if (!this.is('form')) {
@@ -64,15 +79,29 @@
 
             parsleyFormInstance.whenValidate()
             .done(function() {
-                var data = o.getData();
-                ajaxJsonSubmit(o.url, data)
+                var jsonData = o.getData();
+                var ajaxOptions = {
+                    url: o.url
+                };
+
+                if (o.useFormData) {
+                    // Send formData
+                    ajaxOptions.data = jsonToFormData(jsonData);
+                    ajaxOptions.processData = false;
+                    ajaxOptions.contentType = false;
+                } else {
+                    // Send JSON
+                    ajaxOptions.data = JSON.stringify(jsonData);
+                }
+
+                ajaxJsonSubmit(ajaxOptions)
                 .done(function(response) {
-                    o.onAjaxComplete(response, data);
+                    o.onAjaxComplete(response, jsonData);
                 })
                 .fail(function(error) {
                     canSubmit = true;
                     o.setDisabled(false);
-                    o.onAjaxError(error, data);
+                    o.onAjaxError(error, jsonData);
                 });
             });
 

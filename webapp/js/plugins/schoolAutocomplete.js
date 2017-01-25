@@ -46,8 +46,9 @@
 
     function getIdFromName(data, name) {
         var id = '';
-        data.forEach(function(school) {
-            if (school.name === name) {
+        name = name.toLowerCase().trim();
+        $.each(data, function(i, school) {
+            if (school.name.toLowerCase().trim() === name) {
                 id = school.id;
                 return false;
             }
@@ -55,20 +56,22 @@
         return id;
     }
 
-    $.fn.schoolInput = function(task, arg) {
+    $.fn.schoolAutocomplete = function(task, arg) {
         var self = $(this);
+
+        if (task === 'getId') {
+            return getIdFromName(self.data('options'), arg);
+        }
+
         getSchoolData().then(function(data) {
-            if (task === 'getData') {
-                return data;
-            } else if (task === 'getId') {
-                return getIdFromName(data, arg);
-            }
+            self.data('options', data);
 
             // Setup autocomplete
             self.autocomplete({
                 lookup: getOptionsFromData(data),
                 onSelect: function(option) {
                     self.val(option.value);
+                    self.data('option-value', option.data);
                 }
             });
         });

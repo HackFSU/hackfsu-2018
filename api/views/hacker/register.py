@@ -3,16 +3,19 @@
 """
 from django import forms
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.contrib.auth import logout
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl, files, email
 from api.models import HackerInfo, School, Hackathon
+import os
+
+
+ACCEPTED_RESUME_CONTENT_TYPES = ['application/pdf']
 
 
 class RequestForm(forms.Form):
-    is_first_hackathon = forms.BooleanField()
-    is_adult = forms.BooleanField()
-    is_high_school = forms.BooleanField()   # make this a select box for College/HS Student
+    is_first_hackathon = forms.BooleanField(required=False)
+    is_adult = forms.BooleanField(required=False)
+    is_high_school = forms.BooleanField(required=False)   # make this a select box for College/HS Student
     school_year = forms.ChoiceField(choices=HackerInfo.SCHOOL_YEAR_CHOICES)
     school_major = forms.CharField(max_length=100)
     interests = forms.CharField(required=False, max_length=500)
@@ -32,15 +35,31 @@ class RegisterView(ApiView):
 
     def work(self, request, req, res):
         # Load resume
-        resume_file_name = None
+        resume_file_name = ''
         if request.FILES and request.FILES['resume']:
+            resume_file = request.FILES['resume']
+            file_name, file_extension = os.path.splitext(resume_file.name.lower())
+
+            if resume_file.content_type not in ACCEPTED_RESUME_CONTENT_TYPES:
+                raise ValidationError('Invalid resume file type "{}". Valid options include {}'.format(
+                    resume_file.content_type,
+                    ', '.join(ACCEPTED_RESUME_CONTENT_TYPES)
+                ), params=['resume'])
+
             resume_file_name = files.handle_file_upload(
-                file=request.FILES['resume']
+                src_file_name="resume_{}_{}_{}".format(
+                    request.user.id,
+                    request.user.first_name.lower(),
+                    request.user.last_name.lower()
+                ),
+                file=request.FILES['resume'],
+                file_extension=file_extension,
+                media_directory_path=('resumes/' + str(Hackathon.objects.current().id) + '/')
             )
 
         # Get school object (creating one if needed)
         school = self.get_school(school_id=req['school_id'], new_school_name=req['new_school_name'],
-                                 hs=res['is_high_school'])
+                                 hs=req['is_high_school'])
         # Create Info object
         HackerInfo.objects.create(
             user=request.user,
@@ -48,7 +67,7 @@ class RegisterView(ApiView):
             school=school,
             is_first_hackathon=req['is_first_hackathon'],
             is_adult=req['is_adult'],
-            school_major=['school_major'],
+            school_major=req['school_major'],
             resume_file_name=resume_file_name,
             interests=req['interests']
         )
@@ -62,7 +81,7 @@ class RegisterView(ApiView):
             to_first_name=request.user.first_name,
             to_last_name=request.user.last_name,
             subject='Hacker Registration Submitted!',
-            template_name='hacker_registered'
+            template_name='hacker_register_waiting'
         )
 
     @staticmethod
@@ -75,16 +94,16 @@ class RegisterView(ApiView):
             except ObjectDoesNotExist:
                 raise ValidationError('Invalid school', params=['school_id'])
 
-        if new_school_name is None or len(new_school_name.trim()) == 0:
+        if new_school_name is None or len(new_school_name.strip()) == 0:
             raise ValidationError('Invalid school', params=['new_school_name'])
 
-        school = School.objects.filter(name=new_school_name.trim())
+        school = School.objects.filter(name=new_school_name.strip())
         if school.exists():
-            return school
+            return school[0]
         else:
             # Valid new school, add it to database
             return School.objects.create(
-                name=new_school_name.trim(),
+                name=new_school_name.strip(),
                 user_submitted=True,
                 type=('H' if hs is True else 'C')
             )

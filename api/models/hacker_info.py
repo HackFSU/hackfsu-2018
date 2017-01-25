@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from django.dispatch import receiver
+from django.db.models.signals import pre_delete
 from api.models import Hackathon, School
+from hackfsu_com.util import acl
 
 
 class HackerInfo(models.Model):
@@ -48,3 +51,10 @@ class HackerInfo(models.Model):
 
         return summary
 
+
+@receiver(pre_delete, sender=HackerInfo)
+def on_pre_delete(**kwargs):
+    """ Update base user class's groups """
+    instance = kwargs['instance']
+    if instance.hackathon == Hackathon.objects.current():
+        acl.remove_user_from_groups(instance.user, [acl.group_hacker, acl.group_pending_hacker])

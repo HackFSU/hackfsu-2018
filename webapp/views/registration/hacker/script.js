@@ -10,9 +10,7 @@
     var schoolInput = form.find('input[name="school"]');
     var studentYear = form.find('select[name="year"]');
     var studentMajor = form.find('input[name="major"]');
-    var first_hackathon = form.find('input[name="first_hackathon"]');
     var projectTypes = form.find('textarea[name="project-types"]');
-    var isAdult = form.find('input[name="over_18"]');
     // var jobPref = form.find('input[name="job"]');
     var resumeField = form.find('input[name="resume"]');
 
@@ -55,8 +53,8 @@
             var hsStudent = studentType.val() === 'highschool';
 
             var data =  {
-                is_first_hackathon: first_hackathon.val() === 'true',
-                is_adult: isAdult.val() === 'true',
+                is_first_hackathon: form.find('input[name="first_hackathon"]:checked').val() === 'true',
+                is_adult: form.find('input[name="over_18"]:checked').val() === 'true',
                 is_high_school: hsStudent,
                 school_year: hsStudent ? 'HS' : studentYear.val(),
                 school_major: hsStudent ? 'N/A' : studentMajor.val().trim(),
@@ -73,14 +71,7 @@
             return data;
         },
         setDisabled: function(value) {
-            studentType.prop('disabled', value);
-            schoolInput.prop('disabled', value);
-            studentYear.prop('disabled', value);
-            studentMajor.prop('disabled', value);
-            first_hackathon.prop('disabled', value);
-            projectTypes.prop('disabled', value);
-            // jobPref.prop('disabled', value);
-            resumeField.prop('disabled', value);
+            form.find('input, textarea, select, button').prop('disabled', value);
         },
         onAjaxComplete: function(response) {
             console.log('TODO complete', response);

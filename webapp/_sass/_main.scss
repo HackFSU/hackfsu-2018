@@ -7,7 +7,10 @@
     top: 0;
     width: 10%;
     z-index: 10000;
-    filter: drop-shadow(0 0 2px rgba(0,0,0,0.25)); /* subtle svg border */
+
+    img {
+        width: 100%;
+    }
 }
 
 @media(max-width: 1500px) {

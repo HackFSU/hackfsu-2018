@@ -7,7 +7,7 @@
     var defaultAjaxSettings = {
         type: 'GET',
         headers: {
-            'HTTP_X_CSRFTOKEN': Cookies.get('csrftoken')
+            'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
 

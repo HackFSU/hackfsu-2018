@@ -18,7 +18,7 @@
         $.get({
             url: '/api/school/get',
             headers: {
-                'HTTP_X_CSRFTOKEN': Cookies.get('csrftoken')
+                'X-CSRFToken': Cookies.get('csrftoken')
             },
             success: function(res) {
                 schoolData = res.school_choices;

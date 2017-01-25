@@ -28,15 +28,15 @@
         initActionButtons(pData.groups);
         initAccountSection(pData);
 
-        if (pData.groups.includes(GROUP.hacker)
-        || pData.groups.includes(GROUP.pending_hacker)) {
-            $.ajaxGet({
-                url: '/api/hacker/get/profile',
-                success: function(data) {
-                    initHackerSection(data);
-                }
-            });
-        }
+        // if (pData.groups.includes(GROUP.hacker)
+        // || pData.groups.includes(GROUP.pending_hacker)) {
+        //     $.ajaxGet({
+        //         url: '/api/hacker/get/profile',
+        //         success: function(data) {
+        //             initHackerSection(data);
+        //         }
+        //     });
+        // }
     }
 
     function initActionButtons(groups) {

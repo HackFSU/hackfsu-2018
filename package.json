@@ -14,6 +14,9 @@
   "scripts": {
     "gulp-bower": "gulp bower",
     "gulp-build": "gulp build",
+    "gulp-html-watch": "gulp html:watch",
+    "gulp-css-watch": "gulp css:watch",
+    "gulp-js-watch": "gulp js:watch",
     "gulp-watch": "gulp watch",
     "gulp-demo": "gulp demo",
     "gulp-clean": "gulp clean",
@@ -22,7 +25,8 @@
     "pip-install": "./venv/bin/pip3.5 install -r ./requirements.txt",
     "django-collectstatic": "rm -rf static_collected; ./venv/bin/python3.5 manage.py collectstatic --noinput",
     "update": "npm run npm-install; npm run pip-install; npm run build; npm run django-collectstatic",
-    "demo": "npm run gulp-bower; concurrently --kill-others \"npm run gulp-watch\" \"npm run gulp-demo\""
+    "watch": "npm run gulp-bower; concurrently --prefix \"[{name}]\" --names \"HTML,JS,CSS\" --kill-others \"npm run gulp-html-watch\" \"npm run gulp-js-watch\" \"npm run gulp-css-watch\"",
+    "demo": "npm run gulp-bower; concurrently --prefix \"[{name}]\" --names \"BUILD,SERVER\" --kill-others \"npm run watch\" \"npm run gulp-demo\""
   },
   "author": "HackFSU",
   "license": "Apache-2.0",

@@ -61,7 +61,14 @@ gulp.task('css', function() {
         }))
         .pipe(gulp.dest(dirs.build));
 });
-
+gulp.task('css:watch', ['css'], function() {
+    return gulp.watch([
+        dirs.src + '/_sass/**/*',
+        dirs.src + '/css/**/*.scss',
+        dirs.src + '/views/**/*.scss',
+        '!' + dirs.build + '/**/*'
+    ], ['css']);
+});
 
 /**
  * HTML
@@ -79,7 +86,15 @@ gulp.task('html', function() {
         }))
         .pipe(gulp.dest(dirs.viewDst));
 });
-
+gulp.task('html:watch', ['html'], function() {
+    return gulp.watch([
+        dirs.src + '/_pug/**/*',
+        dirs.src + '/views/**/*.pug',
+        dirs.src + '/views/**/*.html',
+        dirs.src + '/views/**/*.md',
+        '!' + dirs.build + '/**/*'
+    ], ['html']);
+});
 
 /**
  * JS
@@ -103,7 +118,13 @@ gulp.task('js', function() {
         }))
         .pipe(gulp.dest(dirs.build));
 });
-
+gulp.task('js:watch', ['js'], function() {
+    return gulp.watch([
+        dirs.src + '/js/**/*.js',
+        dirs.src + '/views/**/*.js',
+        '!' + dirs.build + '/**/*'
+    ], ['js']);
+});
 
 gulp.task('bower', function() {
     var bower = require('gulp-bower');

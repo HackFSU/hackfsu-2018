@@ -68,6 +68,7 @@ class RegisterView(ApiView):
             is_first_hackathon=req['is_first_hackathon'],
             is_adult=req['is_adult'],
             school_major=req['school_major'],
+            school_year=req['school_year'],
             resume_file_name=resume_file_name,
             interests=req['interests']
         )

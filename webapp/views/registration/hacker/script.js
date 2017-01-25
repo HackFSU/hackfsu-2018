@@ -16,18 +16,21 @@
     // var jobPref = form.find('input[name="job"]');
     var resumeField = form.find('input[name="resume"]');
 
-    schoolInput.schoolInput();
+    schoolInput.schoolAutocomplete();
 
     studentType.change(function() {
-        if (studentType.val() === 'highschool') {
+        var type = studentType.val();
+        if (type === 'highschool') {
             studentYear.prop('required', false);
-            $('#year').toggle(false);
             studentMajor.prop('required', false);
+            $('#year').toggle(false);
             $('#major').toggle(false);
         }
-        else if (studentType.val() === 'graduated')  {
+        else if (type === 'graduated')  {
             studentYear.prop('required', false);
+            studentMajor.prop('required', true);
             $('#year').toggle(false);
+            $('#major').toggle(true);
         }
         else {
             studentYear.prop('required', true);
@@ -37,54 +40,36 @@
         }
     });
 
-    var projectTypesString = "";
-
-    $('.project-type:checkbox').change(function() {
-        projectTypesString = "";
-        if ($('#frontend').prop('checked')) {
-            projectTypesString += "Front-end, ";
-        }
-        if ($('#backend').prop('checked')) {
-            projectTypesString += "Back-end, ";
-        }
-        if ($('#web').prop('checked')) {
-            projectTypesString += "Web, ";
-        }
-        if ($('#hardware').prop('checked')) {
-            projectTypesString += "Hardware, ";
-        }
-        if ($('#ios').prop('checked')) {
-            projectTypesString += "iOS, ";
-        }
-        if ($('#android').prop('checked')) {
-            projectTypesString += "Android, ";
-        }
-        if ($('#vr').prop('checked')) {
-            projectTypesString += "Virtual Reality, ";
-        }
-        if ($('#design-hack').prop('checked')) {
-            projectTypesString += "Design, ";
-        }
-    });
+    function getInterests() {
+        var projectTypesList = [];
+        $('input.project-type').each(function () {
+            projectTypes.push($(this).data('data-value'));
+        });
+        return projectTypesList.join('; ') + projectTypes.val().trim();
+    }
 
     form.ajaxForm({
         url: '/api/hacker/register',
+        useFormData: true,
         getData: function() {
+            var hsStudent = studentType.val() === 'highschool';
+
             var data =  {
                 is_first_hackathon: first_hackathon.val() === 'true',
                 is_adult: isAdult.val() === 'true',
-                is_high_school: studentType.val() === 'highschool',
-                school_year: studentType.val() === 'highschool' ? 'HS' : studentYear.val(),
-                school_major: studentType.val() === 'highschool' ? 'High School' : studentMajor.val(),
-                interests: projectTypesString + projectTypes.val().trim()
+                is_high_school: hsStudent,
+                school_year: hsStudent ? 'HS' : studentYear.val(),
+                school_major: hsStudent ? 'N/A' : studentMajor.val().trim(),
+                interests: getInterests(),
+                resume: resumeField[0].files[0]
             };
-            console.log(studentType.val());
 
             var school_name = schoolInput.val().trim();
-            data.school_id = schoolInput.schoolInput('getId', school_name);
+            data.school_id = schoolInput.schoolAutocomplete('getId', school_name);
             if (!data.school_id) {
                 data.new_school_name = school_name;
             }
+
             return data;
         },
         setDisabled: function(value) {

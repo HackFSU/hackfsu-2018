@@ -10,51 +10,51 @@ block append styles
 
 block append scripts
     script(src="/static/bower_components/devbridge-autocomplete/dist/jquery.autocomplete.min.js")
-    script(src="/static/js/plugins/schoolInput.js")
+    script(src="/static/js/plugins/schoolAutocomplete.js")
     script(src=`${viewDir}/script.js`)
 
 block content
     h1 Hacker Registration
     form#register_hacker
         .form-section
-            h2.form-section-title School Info
+            h2.form-section-title Education
             fieldset.row
-                label.col-md-2(for="student_type") I am a... *
+                label.col-md-2(for="student_type") Student Type *
                 .col-md-4: select.responsive(name="student_type" required)
                     each val, key in locals.student_types
                         option(value=`${key}`)=val
             fieldset.row
-                label.col-md-2(for="school") From... *
+                label.col-md-2(for="school") School *
                 .col-md-10
-                    input.responsive(type="text" name="school" maxlength=100 placeholder="Your School" required)
+                    input.responsive(type="text" name="school" minlength="5" maxlength="100" placeholder="Florida State University" required)
             fieldset#year.row
-                label.col-md-2(for="year") Current Year *
+                label.col-md-2(for="year") Status *
                 .col-md-4: select.responsive(name="year" required)
                     option(value="" disabled selected) Select your school year
                     each val, key in locals.school_year_choices
                         option(value=`${key}`)=val
             fieldset#major.row
                 label.col-md-2(for="major") Major *
-                .col-md-10: input.responsive(type="text" name="major" maxlength=100 placeholder="Your Major" required)
+                .col-md-10: input.responsive(type="text" name="major" maxlength=100 placeholder="Computer Science" required)
         .form-section
             h2.form-section-title About You
             fieldset.row
                 label.col-md-2(for="first_hackathon") Will this be your first hackathon? *
                 .col-md-10
-                    .col-md-2
+                    .col-md-2: label
                         input(type="radio" name="first_hackathon" value="true" required)
                         | Yes
-                    .col-md-2
+                    .col-md-2: label
                         input(type="radio" name="first_hackathon" value="false" required)
                         | No
 
             fieldset.row
                 label.col-md-2(for="over_18") Are you 18 years or older? *
                 .col-md-10
-                    .col-md-2
+                    .col-md-2: label
                         input(type="radio" name="over_18" value="true" required)
                         | Yes
-                    .col-md-2
+                    .col-md-2: label
                         input(type="radio" name="over_18" value="false" required)
                         | No
             //- fieldset.row
@@ -64,43 +64,43 @@ block content
                     each val, key in locals.job_seeker_options
                         option(value=`${key}`)=val
             fieldset.row
-                label.col-md-2(for="resume") Your Resume
-                .col-md-10: input.responsive(type="file" name="resume" placeholder="upload file" disabled)
+                label.col-md-2(for="resume") Resume (PDF)
+                .col-md-10: input.responsive(type="file" name="resume" placeholder="upload file" )
 
             fieldset.row
                 label.col-md-2(for="project-types") What are you interested in hacking?
                 .col-md-10
                     .group
                         .flex-row
-                            .flex-checkbox
-                                input.project-type(type="checkbox" id="frontend")
+                            .flex-checkbox: label
+                                input.project-type(type="checkbox" name="project-type-1" data-value="Front-End")
                                 | Front-End
-                            .flex-checkbox
-                                input.project-type(type="checkbox" id="backend")
+                            .flex-checkbox: label
+                                input.project-type(type="checkbox" name="project-type-2" data-value="Back-End")
                                 | Back-End
                     .group
                         .flex-row
-                            .flex-checkbox
-                                input.project-type(type="checkbox" id="web")
+                            .flex-checkbox: label
+                                input.project-type(type="checkbox" name="project-type-3" data-value="Web")
                                 | Web
-                            .flex-checkbox
-                                input.project-type(type="checkbox" id="hardware")
+                            .flex-checkbox: label
+                                input.project-type(type="checkbox" name="project-type-4" data-value="Hardware")
                                 | Hardware
                     .group
                         .flex-row
-                            .flex-checkbox
-                                input.project-type(type="checkbox" id="ios")
+                            .flex-checkbox: label
+                                input.project-type(type="checkbox" name="project-type-5" data-value="iOS")
                                 | iOS
-                            .flex-checkbox
-                                input.project-type(type="checkbox" id="android")
+                            .flex-checkbox: label
+                                input.project-type(type="checkbox" name="project-type-6" data-value="Android")
                                 | Android
                     .group
                         .flex-row
-                            .flex-checkbox
-                                input.project-type(type="checkbox" id="vr")
+                            .flex-checkbox: label
+                                input.project-type(type="checkbox" name="project-type-7" data-value="Virtual Reality")
                                 | Virtual Reality
-                            .flex-checkbox
-                                input.project-type(type="checkbox" id="design-hack")
+                            .flex-checkbox: label
+                                input.project-type(type="checkbox" name="project-type-8" data-value="Design")
                                 | Design
-                    textarea.responsive(type="text" maxlength=200 name="project-types" placeholder="Other...")
+                    textarea.responsive(type="text" maxlength="200" name="project-types" placeholder="Other...")
             button.btn.btn-form(type="submit") Submit

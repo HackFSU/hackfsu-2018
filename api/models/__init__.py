@@ -29,8 +29,6 @@ from .organizer_info import OrganizerInfo
 from .help_request import HelpRequest
 from .subscriber import Subscriber
 from .wifi_cred import WifiCred
-# TODO Update
-# TODO Sponsor
 # TODO OldParseUser
 # TODO OldParseHacker
 # TODO OldParseMentor

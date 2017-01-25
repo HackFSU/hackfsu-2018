@@ -4,7 +4,7 @@ from django.contrib.postgres.fields import JSONField
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
 from api.models import Hackathon, School
-from hackfsu_com.util import acl
+from hackfsu_com.util import acl, files
 
 
 class HackerInfo(models.Model):
@@ -54,7 +54,14 @@ class HackerInfo(models.Model):
 
 @receiver(pre_delete, sender=HackerInfo)
 def on_pre_delete(**kwargs):
-    """ Update base user class's groups """
+    """ Delete cleanup """
     instance = kwargs['instance']
+
+    # Update base user class's groups
     if instance.hackathon == Hackathon.objects.current():
         acl.remove_user_from_groups(instance.user, [acl.group_hacker, acl.group_pending_hacker])
+
+    # Delete stored resume file
+    if len(instance.resume_file_name) > 0:
+        files.delete_if_exists(instance.resume_file_name)
+

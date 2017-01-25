@@ -143,15 +143,21 @@ STATICFILES_DIRS = [
 ]
 
 
-# Add more strict rules in production
-if not DEBUG:
-    MIDDLEWARE.extend([
-        'django.middleware.csrf.CsrfViewMiddleware',
-    ])
-
 
 IGNORABLE_404_URLS = [
     re.compile(r'\.(php|cgi|pug|scss)$'),
     re.compile(r'^/node_modules/'),
     re.compile(r'/\.git.*')
 ]
+
+# Add more strict rules in production TODO
+# if not DEBUG:
+#     MIDDLEWARE.extend([
+#         'django.middleware.csrf.CsrfViewMiddleware'
+#     ])
+#
+#     CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
+#     CSRF_COOKIE_NAME = 'csrftoken'
+#     CSRF_COOKIE_SECURE = 'TRUE'
+#     CSRF_TRUSTED_ORIGINS = []
+

@@ -39,11 +39,12 @@
     });
 
     function getInterests() {
-        var typeList = [];
+        var interests = [];
         $('input.project-type:checked').each(function () {
-            typeList.push($(this).data('value'));
+            interests.push($(this).data('value'));
         });
-        return typeList.join('; ') + projectTypes.val().trim();
+        interests.push(projectTypes.val().trim());
+        return '' + interests.join('; ');
     }
 
     form.ajaxForm({

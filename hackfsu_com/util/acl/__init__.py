@@ -49,7 +49,7 @@ def add_user_to_group(user: User, group_name: str):
     validate_db_group(group_name)
     group_to_add = Group.objects.get(name=group_name)
     if not user.groups.filter(name=group_to_add).exists():
-        user.groups.add(group)
+        user.groups.add(group_to_add)
     user.save()
 
 

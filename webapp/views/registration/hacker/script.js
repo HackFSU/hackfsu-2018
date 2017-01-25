@@ -41,11 +41,11 @@
     });
 
     function getInterests() {
-        var projectTypesList = [];
-        $('input.project-type').each(function () {
-            projectTypes.push($(this).data('data-value'));
+        var typeList = [];
+        $('input.project-type:checked').each(function () {
+            typeList.push($(this).data('value'));
         });
-        return projectTypesList.join('; ') + projectTypes.val().trim();
+        return typeList.join('; ') + projectTypes.val().trim();
     }
 
     form.ajaxForm({

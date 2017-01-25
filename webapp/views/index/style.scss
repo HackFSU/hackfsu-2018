@@ -99,7 +99,7 @@
             font-size: 2.5em;
         }
 
-        .title-text-date {
+        .title-text-date-location {
             font-family: $font-header;
             font-style: italic;
             font-size: 1em;
@@ -111,6 +111,14 @@
             margin-top: -0.25em;
             width: auto;
             padding-right: 0.25em;
+        }
+        #date {
+            display: inline-block;;
+            margin-right: 0.4em;
+        }
+        #fsu {
+            display: inline-block;
+            font-size: 0.8em;
         }
     }
 }

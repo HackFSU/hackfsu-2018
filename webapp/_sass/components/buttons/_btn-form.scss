@@ -1,0 +1,22 @@
+.btn-form {
+    font-family: $font-header;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 0.2em solid $form-border-color;
+    outline: 0;
+    font-weight: 600;
+    transition: 200ms all;
+    color: $form-border-color;
+    margin: 5px 0;
+    font-size: 1.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.3em;
+}
+
+.btn-form:hover:not(:disabled) {
+    background-color: $form-border-color;
+    color: #fff;
+    box-shadow: none;
+}

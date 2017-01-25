@@ -5,9 +5,6 @@ block vars
         var pageName = "Registration"
         var viewDir = "/static/views/registration/user"
 
-block append styles
-    link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
-
 block append scripts
     script(src=`${viewDir}/script.js`)
     script(src="https://www.google.com/recaptcha/api.js" async defer)

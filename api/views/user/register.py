@@ -46,12 +46,12 @@ class RegisterView(ApiView):
 
         # Attempt to create new user
         user = User.objects.create_user(
-            username=req['email'],
-            email=req['email'],
+            username=req['email'].lower(),
+            email=req['email'].lower(),
             password=req['password']
         )
-        user.first_name = req['first_name']
-        user.last_name = req['last_name']
+        user.first_name = req['first_name'].lower().capitalize()
+        user.last_name = req['last_name'].lower().capitalize()
         user.save()
 
         # Create respective UserInfo

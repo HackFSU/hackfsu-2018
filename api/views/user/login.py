@@ -22,8 +22,8 @@ def log_user_in(request, email, password):
 
 
 class RequestForm(forms.Form):
-    email = forms.EmailField(required=True, max_length=100)
-    password = forms.CharField(required=True, max_length=1000)
+    email = forms.EmailField(max_length=100)
+    password = forms.CharField(max_length=1000)
 
 
 class LogInView(ApiView):
@@ -31,5 +31,5 @@ class LogInView(ApiView):
     access_manager = acl.AccessManager(acl_deny=[acl.group_user])
 
     def work(self, request, req, res):
-        log_user_in(request=request, email=req['email'], password=req['password'])
+        log_user_in(request=request, email=req['email'].lower(), password=req['password'])
 

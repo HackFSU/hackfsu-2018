@@ -120,7 +120,7 @@
          */
 
         parsleyFormInstance.on('form:error', function(parsleyForm) {
-            console.error('parsley:form:error', parsleyForm);
+            // console.error('parsley:form:error', parsleyForm);
         });
 
         parsleyFormInstance.on('form:success', function(parsleyForm) {
@@ -128,7 +128,7 @@
         });
 
         parsleyFormInstance.on('field:error', function(parsleyField) {
-            console.error('parsley:field:error', parsleyField);
+            // console.error('parsley:field:error', parsleyField);
         });
 
         parsleyFormInstance.on('field:success', function(parsleyField) {

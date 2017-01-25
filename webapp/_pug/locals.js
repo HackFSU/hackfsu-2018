@@ -27,7 +27,7 @@ locals.links = {
     github: 'https://github.com/HackFSU',
     sponsorshipPacket: '/static/res/HackFSU_sponsorship_options_spring_2017.pdf',
     mlh: {
-        codeOfConduct: '/static/res/mlh-code-of-conduct.pdf',
+        codeOfConduct: 'https://static.mlh.io/docs/mlh-code-of-conduct.pdf',
         contestTerms: 'https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions',
         privatePolicy: 'https://mlh.io/privacy'
     }

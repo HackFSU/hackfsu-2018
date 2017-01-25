@@ -16,40 +16,18 @@
     var dietInput = form.find('textarea[name="diet"]');
     var shirtSize = form.find('select[name="shirt_size"]');
     var mlhCoc = form.find('input[name="mlhcoc"]');
+    var mlhTac = form.find('input[name="mlhtac"]');
 
-    var dietString = "";
-    var dietText = false;
-
-    $('.diet-detail:checkbox').change(function() {
-        dietString = "";
-        dietText = false;
-        if ($('#vegetarian').prop('checked')) {
-            dietString += "Vegetarian, ";
-        }
-        if ($('#vegan').prop('checked')) {
-            dietString += "Vegan, ";
-        }
-        if ($('#allergy').prop('checked')) {
-            dietString += "Allergy, ";
-            dietText = true;
-        }
-        if ($('#diet-other').prop('checked')) {
-            dietString += "Other, ";
-            dietText = true;
-        }
-        if (dietText) {
-            $('#dietbox').toggle(true);
-        } else {
-            $('#dietbox').toggle(false);
-        }
+    $('#diet-detail, #allergy').change(function () {
+        dietInput.toggle($('#diet-other').is(':checked') || $('#allergy').is(':checked'));
     });
 
     function getDiet() {
         var diets = [];
         $('input.diet-detail:checked').each(function () {
-            diets.push(value);
+            diets.push($(this).data('value'));
         });
-        if ($('#diet-other').is(':checked')) {
+        if ($('#diet-other').is(':checked') || $('#allergy').is(':checked')) {
             diets.push(dietInput.val().trim());
         }
         return '' + diets.join('; ');
@@ -60,7 +38,7 @@
         getData: function() {
             return {
                 agree_to_mlh_coc: mlhCoc.is(':checked'),
-                agree_to_mlh_data_sharing: mlhtcpp.is(':checked'),
+                agree_to_mlh_data_sharing: mlhTac.is(':checked'),
                 g_recaptcha_response: window.grecaptcha.getResponse(),
                 first_name: firstName.val().trim(),
                 last_name: lastName.val().trim(),
@@ -74,8 +52,12 @@
             };
         },
         onAjaxComplete: function(response) {
-            console.log('TODO complete', response);
-            window.location.href = '/user/profile';
+            console.log('complete', response);
+            if (response.logged_in) {
+                window.location.href = '/user/profile';
+            } else {
+                // window.location.href = '/user/login';
+            }
         }
     });
 

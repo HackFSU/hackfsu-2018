@@ -14,9 +14,8 @@ block append scripts
 
 block content
     h1 Registration
-    form#register_user.container-fluid
+    form#register_user
         .form-section
-            h2.form-section-title Account
             fieldset.row
                 label.col-md-3(for="email") Email *
                 .col-md-9: input.responsive(type="email" name="email" maxlength=100 placeholder="your@school.edu" required)
@@ -90,12 +89,12 @@ block content
                 label.col-md-3(for="mlhcoc") MLH Code of Conduct *
                 .col-md-9: label
                     input(type="checkbox" name="mlhcoc" required)
-                    | I will abide by the #[a(href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf") MLH Code of Conduct] for the duration of this event.
+                    | I will abide by the #[a(href=links.mlh.codeOfConduct target="_blank") MLH Code of Conduct] for the duration of this event.
             fieldset.row
                 label.col-md-3(for="mlhtac") MLH Terms and Conditions *
                 .col-md-9: label
-                    input(type="checkbox" name="mlhtcpp" required)
-                    | I agree to the terms of both the #[a(href="https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions") MLH Contest Terms and Conditions] and the #[a(href="https://mlh.io/privacy") MLH Privacy Policy]. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.
+                    input(type="checkbox" name="mlhtac" required)
+                    | I agree to the terms of both the #[a(href=links.mlh.contestTerms target="_blank") MLH Contest Terms and Conditions] and the #[a(href=links.mlh.privatePolicy target="_blank") MLH Privacy Policy]. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.
         .form-section
             .flex-center
                 .g-recaptcha(data-sitekey=keys.reCaptchaSiteKey)

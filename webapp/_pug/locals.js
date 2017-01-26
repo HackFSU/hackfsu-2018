@@ -82,7 +82,7 @@ locals.navLinks = {
  *
  * Logo should be the company's most current, if we have it.
  */
-var sponsorData = {
+var sponsorData = locals.sponsorData = {
     accenture: {
         name: 'Accenture',
         href: 'http://www.accenture.com',
@@ -153,7 +153,11 @@ var sponsorData = {
     mlh: {
         name: 'Major League Hacking (MLH)',
         href: 'https://mlh.io/seasons/na-2017/events', /* current season */
-        logo: 'https://s3.amazonaws.com/logged-assets/trust-badge/2017/white.svg' /* 2017 badge logo*/
+        logo: '/static/img/logos/mlh/mlh-logo-color.png',
+        badge: '/static/img/logos/mlh/mlh-badge-white.png',
+        external: {
+            badge: 'https://s3.amazonaws.com/logged-assets/trust-badge/2017/white.svg'
+        }
     },
     namecheap: {
         name: 'Namecheap',
@@ -238,7 +242,7 @@ locals.sponsors = {
         },
         partners: [
             sponsorData.techNole,
-            sponsorData.mlh,
+            sponsorData.mlh
         ]
     },
 
@@ -258,7 +262,7 @@ locals.sponsors = {
                 sponsorData.codeSchool,
                 sponsorData.domiStation,
                 sponsorData.soylent,
-                sponsorData.seminoleDining,
+                sponsorData.seminoleDining
             ]
         },
         partners: [

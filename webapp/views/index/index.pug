@@ -100,15 +100,18 @@ block page
         .section-title-container: .section-title
             .section-title-text: .uni-fix SPONSORS
         .section-content-container: .container
+            .flex-center
+                p We will announce our sponsor list for this year soon! Check back later.
+                br
             //- +sponsorLogoTier(sponsors["2017"].sponsors["3"], 3)
             //- +sponsorLogoTier(sponsors["2017"].sponsors["2"], 2)
             //- +sponsorLogoTier(sponsors["2017"].sponsors["1"], 1)
             h1.sponsor-tier-title  Partners
             +sponsorLogoTier(sponsors["2017"].partners, 1)
-            .flex-center
-                p
-                    | Interested in sponsoring HackFSU '17? Check out our sponsorship #[a(href=links.sponsorshipPacket target="_blank" download) packet] and then shoot us an email at #[a(href=`mailto:${emails.sponsors}`) #{emails.sponsors}]!
 
+            .flex-center.text-center
+                br
+                p Interested in sponsoring HackFSU '17? Check out our sponsorship #[a(href=links.sponsorshipPacket target="_blank" download) packet] and then shoot us an email at #[a(href=`mailto:${emails.sponsors}`) #{emails.sponsors}]!
             //-.sponsors-past-container
                 .sponsors-past
                     h1 HackFSU '16

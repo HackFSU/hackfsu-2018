@@ -56,7 +56,7 @@
             if (response.logged_in) {
                 window.location.href = '/user/profile';
             } else {
-                // window.location.href = '/user/login';
+                window.location.href = '/user/login';
             }
         }
     });

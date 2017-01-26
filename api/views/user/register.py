@@ -36,6 +36,11 @@ class RegisterView(ApiView):
     access_manager = acl.AccessManager(acl_deny=[acl.group_user])
 
     def work(self, request: HttpRequest, req: dict, res: dict):
+        # Clean fields
+        req['email'] = req['email'].lower()
+        req['first_name'] = req['first_name'].lower().capitalize()
+
+
         # Check captcha
         if not captcha.is_valid_response(req['g_recaptcha_response']):
             raise ValidationError('Captcha check failed', params=['g_recaptcha_response'])
@@ -46,12 +51,12 @@ class RegisterView(ApiView):
 
         # Attempt to create new user
         user = User.objects.create_user(
-            username=req['email'].lower(),
-            email=req['email'].lower(),
+            username=req['email'],
+            email=req['email'],
             password=req['password']
         )
-        user.first_name = req['first_name'].lower().capitalize()
-        user.last_name = req['last_name'].lower().capitalize()
+        user.first_name = req['first_name']
+        user.last_name = req['last_name']
         user.save()
 
         # Create respective UserInfo
@@ -67,13 +72,16 @@ class RegisterView(ApiView):
 
         # Send email for confirmation
         email.send_template(
-            to_email=user.email,
-            to_first_name=user.first_name,
-            to_last_name=user.last_name,
+            to_email=req['email'],
+            to_first_name=req['first_name'],
+            to_last_name=req['last_name'],
             subject='HackFSU Account Created',
             template_name='user_registered'
         )
 
         # Log user in
-        log_user_in(request=request, email=req['email'], password=req['password'])
-        res['logged_in'] = True
+        try:
+            log_user_in(request=request, email=req['email'], password=req['password'])
+            res['logged_in'] = True
+        except ValidationError:
+            res['logged_in'] = False

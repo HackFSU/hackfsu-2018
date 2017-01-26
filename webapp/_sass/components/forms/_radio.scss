@@ -28,8 +28,10 @@
 [type="radio"]:checked + label:before {
     content: '';
     position: absolute;
-    left:0; top: 5px;
+    top: 4px;
+    left: 1px;
     width: 12px; height: 12px;
+    border-radius: 50%;
     border: 2px solid $form-border-color;
     background: rgba(30, 177, 173, 0);
 }
@@ -38,9 +40,10 @@
 [type="radio"]:checked + label:after {
     content: '';
     position: absolute;
-    top: 5px; left: 0px;
+    top: 3px;
+    left: 0;
     width: 14px; height: 14px;
-    font-size: 14px;
+    border-radius: 50%;
     color: $form-border-color;
     background-color: $form-border-color;
     transition: all .2s;

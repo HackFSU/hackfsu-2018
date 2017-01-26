@@ -45,20 +45,17 @@ function getViewFiles(directory, extension) {
 gulp.task('css', function() {
     var sass = require('gulp-sass');
     var autoPrefixer = require('gulp-autoprefixer');
-    var sourceMaps = require('gulp-sourcemaps');
+    var cleanCss = require('gulp-clean-css');
 
     return gulp.src(getViewFiles(dirs.src, 'scss'))
-        .pipe(sourceMaps.init())
         .pipe(sass.sync({
             outputStyle: 'compact',
         }).on('error', sass.logError))
+
         .pipe(autoPrefixer({
             cascade: false
         }))
-        .pipe(sourceMaps.write('./',{
-            addComment: true,
-            includeContent: true
-        }))
+        .pipe(cleanCss())
         .pipe(gulp.dest(dirs.build));
 });
 gulp.task('css:watch', ['css'], function() {
@@ -81,7 +78,7 @@ gulp.task('html', function() {
 
     return gulp.src(getViewFiles(dirs.viewSrc, 'pug'))
         .pipe(pug({
-            pretty: true,
+            pretty: false,
             locals: locals
         }))
         .pipe(gulp.dest(dirs.viewDst));

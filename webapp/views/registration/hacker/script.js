@@ -38,6 +38,11 @@
         }
     });
 
+    // for testing only
+    $('.project-type').click( function() {
+        console.log(getInterests());
+    });
+
     function getInterests() {
         var interests = [];
         $('input.project-type:checked').each(function () {

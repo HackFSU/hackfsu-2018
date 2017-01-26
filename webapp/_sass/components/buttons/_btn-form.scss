@@ -20,3 +20,8 @@
     color: #fff;
     box-shadow: none;
 }
+
+.btn-form-file {
+    @extend .btn-form;
+    font-size: 1em;
+}

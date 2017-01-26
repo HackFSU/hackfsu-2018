@@ -11,6 +11,7 @@ block append styles
 block append scripts
     script(src="/static/bower_components/devbridge-autocomplete/dist/jquery.autocomplete.min.js")
     script(src="/static/js/plugins/schoolAutocomplete.js")
+    script(src="/static/js/plugins/fileUpload.js")
     script(src=`${viewDir}/script.js`)
 
 block content
@@ -19,44 +20,44 @@ block content
         .form-section
             h2.form-section-title Education
             fieldset.row
-                label.col-md-3(for="student_type") Student Type *
+                .field-label.col-md-3 Student Type *
                 .col-md-9: select.responsive(name="student_type" required)
                     each val, key in locals.student_types
                         option(value=`${key}`)=val
             fieldset.row
-                label.col-md-3(for="school") School *
+                .field-label.col-md-3 School *
                 .col-md-9
                     input.responsive(type="text" name="school" minlength="5" maxlength="100" placeholder="Florida State University" required)
             fieldset#year.row
-                label.col-md-3(for="year") Status *
+                .field-label.col-md-3 Status *
                 .col-md-9: select.responsive(name="year" required)
                     option(value="" disabled selected)
                     each val, key in locals.school_year_choices
                         option(value=`${key}`)=val
             fieldset#major.row
-                label.col-md-3(for="major") Major *
+                .field-label.col-md-3 Major *
                 .col-md-9: input.responsive(type="text" name="major" maxlength=100 placeholder="Computer Science" required)
         .form-section
             h2.form-section-title About You
             fieldset.row
-                label.col-md-3(for="first_hackathon") Will this be your first hackathon? *
+                .field-label.col-md-3 Will this be your first hackathon? *
                 .col-md-9
-                    .col-md-2: label
-                        input(type="radio" name="first_hackathon" value="true" required)
-                        | Yes
-                    .col-md-2: label
-                        input(type="radio" name="first_hackathon" value="false" required)
-                        | No
+                    .col-md-2
+                        input(type="radio" name="first_hackathon" id="first-hack-true" value="true" required)
+                        label(for="first-hack-true") Yes
+                    .col-md-2
+                        input(type="radio" name="first_hackathon" id="first-hack-false" value="false" required)
+                        label(for="first-hack-false") No
 
             fieldset.row
-                label.col-md-3(for="over_18") Are you 18 years or older? *
+                .field-label.col-md-3 Are you 18 years or older? *
                 .col-md-9
+                    .col-md-2
+                        input(type="radio" name="over_18" id="yes_adult" value="true" required)
+                        label(for="yes_adult") Yes
                     .col-md-2: label
-                        input(type="radio" name="over_18" value="true" required)
-                        | Yes
-                    .col-md-2: label
-                        input(type="radio" name="over_18" value="false" required)
-                        | No
+                        input(type="radio" name="over_18" id="no_adult" value="false" required)
+                        label(for="no_adult") No
             //- fieldset.row
                 label.col-md-3(for="job") Looking for a job? *
                 .col-md-9: select.responsive(name="job" required)
@@ -64,44 +65,47 @@ block content
                     each val, key in locals.job_seeker_options
                         option(value=`${key}`)=val
             fieldset.row
-                label.col-md-3(for="resume") Resume (PDF)
-                .col-md-9: input.responsive(type="file" name="resume" placeholder="upload file" )
+                .field-label.col-md-3 Resume (PDF)
+                .col-md-9
+                    input.file-upload.responsive(type="file" id="resume" name="resume" placeholder="upload file" )
+                    label.btn.btn-form-file(for="resume")
+                        span Choose a file&hellip;
 
             fieldset.row
-                label.col-md-3(for="project-types") What are you interested in hacking?
+                .field-label.col-md-3 What are you interested in hacking?
                 .col-md-9
                     .group
                         .flex-row
-                            .flex-checkbox: label
-                                input.project-type(type="checkbox" name="project-type-1" data-value="Front-End")
-                                | Front-End
-                            .flex-checkbox: label
-                                input.project-type(type="checkbox" name="project-type-2" data-value="Back-End")
-                                | Back-End
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="project-type-1" name="project-type-1" data-value="Front-End")
+                                label(for="project-type-1") Front-End
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="project-type-2" name="project-type-2" data-value="Back-End")
+                                label(for="project-type-2") Back-End
                     .group
                         .flex-row
-                            .flex-checkbox: label
-                                input.project-type(type="checkbox" name="project-type-3" data-value="Web")
-                                | Web
-                            .flex-checkbox: label
-                                input.project-type(type="checkbox" name="project-type-4" data-value="Hardware")
-                                | Hardware
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="project-type-3" name="project-type-3" data-value="Web")
+                                label(for="project-type-3") Web
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="project-type-4" name="project-type-4" data-value="Hardware")
+                                label(for="project-type-4") Hardware
                     .group
                         .flex-row
-                            .flex-checkbox: label
-                                input.project-type(type="checkbox" name="project-type-5" data-value="iOS")
-                                | iOS
-                            .flex-checkbox: label
-                                input.project-type(type="checkbox" name="project-type-6" data-value="Android")
-                                | Android
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="project-type-5" name="project-type-5" data-value="iOS")
+                                label(for="project-type-5") iOS
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="project-type-6" name="project-type-6" data-value="Android")
+                                label(for="project-type-6") Android
                     .group
                         .flex-row
-                            .flex-checkbox: label
-                                input.project-type(type="checkbox" name="project-type-7" data-value="Virtual Reality")
-                                | Virtual Reality
-                            .flex-checkbox: label
-                                input.project-type(type="checkbox" name="project-type-8" data-value="Design")
-                                | Design
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="project-type-7" name="project-type-7" data-value="Virtual Reality")
+                                label(for="project-type-7") Virtual Reality
+                            .flex-checkbox
+                                input.project-type(type="checkbox" id="project-type-8" name="project-type-8" data-value="Design")
+                                label(for="project-type-8") Design
                     textarea.responsive(type="text" maxlength="200" name="project-types" placeholder="Other...")
         .form-section
             .text-right

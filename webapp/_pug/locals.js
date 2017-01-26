@@ -153,7 +153,7 @@ var sponsorData = {
     mlh: {
         name: 'Major League Hacking (MLH)',
         href: 'https://mlh.io/seasons/na-2017/events', /* current season */
-        logo: '/static/img/logos/mlh/mlh-logo-color.png'
+        logo: 'https://s3.amazonaws.com/logged-assets/trust-badge/2017/white.svg' /* 2017 badge logo*/
     },
     namecheap: {
         name: 'Namecheap',
@@ -237,7 +237,8 @@ locals.sponsors = {
             '1': []
         },
         partners: [
-
+            sponsorData.techNole,
+            sponsorData.mlh,
         ]
     },
 

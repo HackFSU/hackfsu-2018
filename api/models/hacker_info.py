@@ -18,7 +18,7 @@ class HackerInfo(models.Model):
         ('HS', 'High School Student'),
         ('RG', 'Recent College Graduate')
     )
-
+    created = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
     attendee_status = models.OneToOneField(to=AttendeeStatus, on_delete=models.CASCADE, null=True)  # TODO null=False
@@ -59,4 +59,4 @@ def on_pre_delete(**kwargs):
 
 @admin.register(HackerInfo)
 class HackerAdmin(admin.ModelAdmin):
-    list_filter = ('approved', 'is_first_hackathon', 'is_adult', 'school_year')
+    list_filter = ('hackathon', 'approved', 'is_first_hackathon', 'is_adult', 'school_year')

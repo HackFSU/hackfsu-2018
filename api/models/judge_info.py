@@ -7,6 +7,7 @@ from hackfsu_com.util import acl
 
 
 class JudgeInfo(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
     attendee_status = models.OneToOneField(to=AttendeeStatus, on_delete=models.CASCADE)

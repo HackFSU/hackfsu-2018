@@ -67,7 +67,7 @@
             if (hsStudent) {
                 data.school_year = 'HS';
             } else if (recentGraduate) {
-                data.school_major = 'RG';
+                data.school_year = 'RG';
             }
 
 

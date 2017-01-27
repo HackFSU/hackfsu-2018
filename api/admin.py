@@ -3,7 +3,6 @@ from . import models
 
 admin.site.register(models.AnonStat)
 admin.site.register(models.Hackathon)
-admin.site.register(models.HackerInfo)
 admin.site.register(models.HelpRequest)
 admin.site.register(models.JudgeInfo)
 admin.site.register(models.MentorInfo)

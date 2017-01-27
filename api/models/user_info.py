@@ -16,7 +16,7 @@ class UserInfo(models.Model):
         ('w-l',     'Women\'s Large'),
         ('w-xl',    'Women\'s XL')
     )
-
+    created = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20)
     shirt_size = models.CharField(max_length=10, choices=SHIRT_SIZE_CHOICES)

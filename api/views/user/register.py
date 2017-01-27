@@ -40,7 +40,6 @@ class RegisterView(ApiView):
         req['email'] = req['email'].lower()
         req['first_name'] = req['first_name'].lower().capitalize()
 
-
         # Check captcha
         if not captcha.is_valid_response(req['g_recaptcha_response']):
             raise ValidationError('Captcha check failed', params=['g_recaptcha_response'])

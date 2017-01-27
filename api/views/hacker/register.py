@@ -5,7 +5,7 @@ from django import forms
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl, files, email
-from api.models import HackerInfo, School, Hackathon
+from api.models import HackerInfo, School, Hackathon, AttendeeStatus
 import os
 
 
@@ -22,8 +22,6 @@ class RequestForm(forms.Form):
     new_school_name = forms.CharField(required=False, max_length=100)
     school_id = forms.IntegerField(required=False)
     resume = forms.FileField(required=False)
-
-    # TODO more fields
 
 
 class RegisterView(ApiView):
@@ -60,10 +58,16 @@ class RegisterView(ApiView):
         # Get school object (creating one if needed)
         school = self.get_school(school_id=req['school_id'], new_school_name=req['new_school_name'],
                                  hs=req['is_high_school'])
+
+        # Ensure is attendee
+        current_hackathon = Hackathon.objects.current()
+        attendee_status = AttendeeStatus.objects.get_or_create(user=request.user, hackathon=current_hackathon)
+
         # Create Info object
         HackerInfo.objects.create(
             user=request.user,
-            hackathon=Hackathon.objects.current(),
+            hackathon=current_hackathon,
+            attendee_status=attendee_status,
             school=school,
             is_first_hackathon=req['is_first_hackathon'],
             is_adult=req['is_adult'],

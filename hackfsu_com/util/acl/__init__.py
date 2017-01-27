@@ -5,10 +5,11 @@ group_user = 'user'     # Special case, just checks if logged in
 group_admin = 'admin'   # Special case, just checks for admin flag
 
 # Main user groups in db (just the ones we care about for the acl)
-group_hacker = 'hacker'
-group_mentor = 'mentor'
-group_judge = 'judge'
-group_organizer = 'organizer'
+group_hacker = 'hacker'         # Approved hacker for current hackathon
+group_mentor = 'mentor'         # Approved mentor for current hackathon
+group_judge = 'judge'           # Approved judge for current hackathon
+group_organizer = 'organizer'   # Approved organizer for current hackathon
+group_attendee = 'attendee'     # Checked-in attendee for current hackathon
 
 # Pending groups relevant for registration pages
 group_pending_hacker = 'pending-hacker'
@@ -24,7 +25,8 @@ db_groups = [
     group_pending_hacker,
     group_pending_mentor,
     group_pending_judge,
-    group_pending_organizer
+    group_pending_organizer,
+    group_attendee
 ]
 
 groups = [

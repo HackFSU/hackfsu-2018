@@ -9,11 +9,12 @@ class ResponseForm(forms.Form):
     approved = forms.BooleanField(required=False)
     is_first_hackathon = forms.BooleanField(required=False)
     is_adult = forms.BooleanField(required=False)
-    school = forms.CharField()
-    school_year = forms.CharField()
-    school_major = forms.CharField()
+    school = forms.CharField(required=False)
+    school_year = forms.CharField(required=False)
+    school_major = forms.CharField(required=False)
     resume_url = forms.CharField(required=False)
-    interests = forms.CharField()
+    interests = forms.CharField(required=False)
+
 
 class ProfileView(ApiView):
     http_method_names = ['get']

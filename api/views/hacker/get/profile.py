@@ -6,16 +6,14 @@ from api.models import Hackathon, HackerInfo
 
 
 class ResponseForm(forms.Form):
-    approved = forms.BooleanField()
-    is_first_hackathon = forms.BooleanField()
-    is_adult = forms.BooleanField()
-    school_id = forms.IntegerField()
+    approved = forms.BooleanField(required=False)
+    is_first_hackathon = forms.BooleanField(required=False)
+    is_adult = forms.BooleanField(required=False)
+    school = forms.CharField()
     school_year = forms.CharField()
     school_major = forms.CharField()
-    resume_url = forms.CharField()
-    checked_in = forms.BooleanField()
-    rsvp = forms.BooleanField()
-
+    resume_url = forms.CharField(required=False)
+    interests = forms.CharField()
 
 class ProfileView(ApiView):
     http_method_names = ['get']
@@ -27,16 +25,15 @@ class ProfileView(ApiView):
         hacker_info = HackerInfo.objects.get(hackathon=current_hackathon, user=request.user)
 
         # Status flags
-        req['approved'] = hacker_info.approved
-        req['checked_in'] = hacker_info.checked_in
-        req['rsvp'] = hacker_info.rsvp
+        res['approved'] = hacker_info.approved
 
         # Entered data
-        req['is_first_hackathon'] = hacker_info.is_first_hackathon
-        req['is_adult'] = hacker_info.is_adult
-        req['school_id'] = hacker_info.school_id
-        req['school_year'] = hacker_info.school_year
-        req['school_major'] = hacker_info.school_major
+        res['is_first_hackathon'] = hacker_info.is_first_hackathon
+        res['is_adult'] = hacker_info.is_adult
+        res['school'] = hacker_info.school.name
+        res['school_year'] = hacker_info.school_year
+        res['school_major'] = hacker_info.school_major
+        res['interests'] = hacker_info.interests
 
         if len(hacker_info.resume_file_name) > 0:
-            req['resume_url'] = files.get_url(hacker_info.resume_file_name)
+            res['resume_url'] = files.get_url(hacker_info.resume_file_name)

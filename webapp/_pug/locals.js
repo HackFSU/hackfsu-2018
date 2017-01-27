@@ -364,13 +364,23 @@ locals.student_types = {
     'graduated': 'Recent College Graduate'
 };
 
- locals.school_year_choices = {
-     'FR': 'Freshman',
-     'SO': 'Sophomore',
-     'JR': 'Junior',
-     'SR': 'Senior',
-     'SS': '\"Super Senior\"',
-     'GS': 'Graduate Student'
+locals.school_year_choices = {
+    'FR': 'Freshman',
+    'SO': 'Sophomore',
+    'JR': 'Junior',
+    'SR': 'Senior',
+    'SS': '\"Super Senior\"',
+    'GS': 'Graduate Student'
+};
+locals.school_year_choices_all = {
+    'FR': 'Freshman',
+    'SO': 'Sophomore',
+    'JR': 'Junior',
+    'SR': 'Senior',
+    'SS': '\"Super Senior\"',
+    'GS': 'Graduate Student',
+    'RG': 'Recent College Graduate',
+    'HS': 'High School Student'
 };
 
 locals.job_seeker_options = {

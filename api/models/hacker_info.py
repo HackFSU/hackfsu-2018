@@ -32,12 +32,10 @@ class HackerInfo(models.Model):
     interests = models.CharField(max_length=500, default='', blank=True)
 
     def __str__(self):
-        summary = 'hackathon.id={} email="{}" name="{} {}" approved={} school.name="{}"'.format(
-            self.hackathon.id,
+        summary = 'email="{}" name="{} {}" approved={}'.format(
             self.user.email,
             self.user.first_name, self.user.last_name,
-            self.approved,
-            self.school.name
+            self.approved
         )
 
         return summary

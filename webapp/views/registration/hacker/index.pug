@@ -55,7 +55,7 @@ block content
                     .col-md-2
                         input(type="radio" name="over_18" id="yes_adult" value="true" required)
                         label(for="yes_adult") Yes
-                    .col-md-2: label
+                    .col-md-2
                         input(type="radio" name="over_18" id="no_adult" value="false" required)
                         label(for="no_adult") No
             //- fieldset.row
@@ -106,7 +106,7 @@ block content
                             .flex-checkbox
                                 input.project-type(type="checkbox" id="project-type-8" name="project-type-8" data-value="Design")
                                 label(for="project-type-8") Design
-                    textarea.responsive(type="text" maxlength="200" name="project-types" placeholder="Other...")
+                    textarea.responsive(maxlength="200" name="project-types" placeholder="Other...")
         .form-section
             .text-right
                 button.btn.btn-form(type="submit") Submit

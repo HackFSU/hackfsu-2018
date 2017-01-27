@@ -3,7 +3,7 @@ $navbar-line-height: 50px;
 $navbar-margin-vertical: (($navbar-height - $navbar-line-height) / 2);
 $navbar-margin: $navbar-margin-vertical 0;
 
-nav.navbar.navbar-custom {
+nav.navbar-custom {
     background-color: $color-dark;
     font-size: 30px;
     border: 0;
@@ -16,6 +16,7 @@ nav.navbar.navbar-custom {
         button {
             padding: (($navbar-height - $navbar-line-height) / 4);
             margin: (($navbar-height - $navbar-line-height) / 4) 0;
+            margin-right: 70px;
         }
     }
 
@@ -97,10 +98,15 @@ nav.navbar.navbar-custom {
     }
 }
 
+
 @media(max-width: $screen-sm-min) {
     nav.navbar-custom {
         .navbar-brand {
             padding-left: (($navbar-height - $navbar-line-height) / 4);
+
+            .brand-title {
+                display: none;
+            }
         }
     }
 }

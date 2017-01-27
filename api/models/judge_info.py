@@ -1,20 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import JSONField
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
-from api.models import Hackathon
+from api.models import Hackathon, AttendeeStatus
 from hackfsu_com.util import acl
 
 
 class JudgeInfo(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
+    attendee_status = models.OneToOneField(to=AttendeeStatus, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
-    comments = models.CharField(max_length=1000, default='', blank=True)
-    misc_info = JSONField(default=None, null=True, blank=True)
-
     affiliation = models.CharField(max_length=100)
+    organizer_contact = models.CharField(max_length=100)
 
 
 @receiver(pre_delete, sender=JudgeInfo)

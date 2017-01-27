@@ -18,6 +18,7 @@ from .hackathon_countdown import HackathonCountdown
 from .hackathon_map import HackathonMap
 from .hackathon_sponsor import HackathonSponsor
 from .hackathon_update import HackathonUpdate
+from .attendee_status import AttendeeStatus
 from .schedule_item import ScheduleItem
 from .school import School
 from .anon_stat import AnonStat

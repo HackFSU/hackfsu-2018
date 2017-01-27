@@ -1,9 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import JSONField
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
-from api.models import Hackathon, School
+from api.models import Hackathon, School, AttendeeStatus
 from hackfsu_com.util import acl, files
 
 
@@ -20,10 +19,8 @@ class HackerInfo(models.Model):
 
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
+    attendee_status = models.OneToOneField(to=AttendeeStatus, on_delete=models.CASCADE, null=True)  # TODO null=False
     approved = models.BooleanField(default=False, blank=True)
-    comments = models.CharField(max_length=1000, default='', blank=True)
-    misc_info = JSONField(default=None, null=True, blank=True)
-
     is_first_hackathon = models.BooleanField()
     is_adult = models.BooleanField()
     school = models.ForeignKey(to=School, on_delete=models.SET_NULL, null=True)
@@ -32,17 +29,12 @@ class HackerInfo(models.Model):
     resume_file_name = models.CharField(max_length=300, default='', blank=True)
     interests = models.CharField(max_length=500, default='', blank=True)
 
-    rsvp = models.BooleanField(default=False, blank=True)
-    checked_in = models.BooleanField(default=False, blank=True)
-
     def __str__(self):
-        summary = 'hackathon.id={} email="{}" name="{} {}" approved={} rsvp={} checked_in={} school.name="{}"'.format(
+        summary = 'hackathon.id={} email="{}" name="{} {}" approved={} school.name="{}"'.format(
             self.hackathon.id,
             self.user.email,
             self.user.first_name, self.user.last_name,
             self.approved,
-            self.rsvp,
-            self.checked_in,
             self.school.name
         )
 

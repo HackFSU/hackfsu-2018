@@ -22,6 +22,7 @@ MANDRILL_HOST = str()
 MANDRILL_PORT = str()
 MANDRILL_SMTP_USERNAME = str()
 MANDRILL_SMTP_PASSWORD = str()
+ADMIN_EMAIL = str()
 
 
 def load_secret_keys():
@@ -38,6 +39,7 @@ def load_secret_keys():
     global MANDRILL_PORT
     global MANDRILL_SMTP_USERNAME
     global MANDRILL_SMTP_PASSWORD
+    global ADMIN_EMAIL
 
     with open(os.path.dirname(os.path.abspath(__file__)) + '/secret_keys.json') as file:
         secret_keys = json.load(file)
@@ -61,5 +63,6 @@ def load_secret_keys():
         MANDRILL_PORT = load_key('MANDRILL_PORT')
         MANDRILL_SMTP_USERNAME = load_key('MANDRILL_SMTP_USERNAME')
         MANDRILL_SMTP_PASSWORD = load_key('MANDRILL_SMTP_PASSWORD')
+        ADMIN_EMAIL = load_key('ADMIN_EMAIL')
 
 load_secret_keys()

@@ -14,7 +14,14 @@ from django.utils.translation import ugettext as _
 from django.conf import settings
 from django import forms
 from hackfsu_com.util import acl
+from hackfsu_com.util.exceptions import InternalServerError, ExternalUserError
 import logging
+
+
+def format_request_info(request: HttpRequest, input_data: dict, req, res):
+    return '\tRequest: {}\n\tRaw Input: {}\n\tReq: {}\n\tRes: {}'.format(
+        str(request), str(input_data), str(req), str(res)
+    )
 
 
 class ApiView(View):
@@ -29,7 +36,7 @@ class ApiView(View):
     def post(self, request: HttpRequest):
         return self.process(request, request.POST)
 
-    def process(self, request: HttpRequest, input_data):
+    def process(self, request: HttpRequest, input_data: dict):
         """ Validates input and attempts to preform work() logic. Returns the correct JsonResponse """
 
         # Authenticate Access
@@ -46,38 +53,49 @@ class ApiView(View):
             # Validate & clean request
             request_form = self.request_form_class(input_data, request.FILES)
             if not request_form.is_valid():
-                raise ValidationError(request_form.errors.as_data())
+                raise ExternalUserError(ValidationError(request_form.errors.as_data()))
             req = request_form.cleaned_data
             res = {}
 
             # Preform desired api task and populate response (res) object
-            self.work(request, req, res)
+            try:
+                self.work(request, req, res)
+            except ValidationError as e:
+                raise ExternalUserError(e)
 
             # Validate response
             response_form = self.response_form_class(res)
             if not response_form.is_valid():
-                raise ValidationError(response_form.errors.as_data())
+                raise InternalServerError(ValidationError(response_form.errors.as_data()))
             res = response_form.cleaned_data
 
             # Successful api call!
-            return JsonResponse(response_form.cleaned_data)
+            return JsonResponse(res)
 
-        except ValidationError as e:
+        except ExternalUserError as error:
             if settings.DEBUG:
-                logging.error(
-                    'Validation Error\n\tRequest: {}\n\tRaw Input: {}\n\tReq: {}\n\tRes: {}\n\tError: {}'.format(
-                        str(request), str(dict(input_data)), str(req), str(res), str(e)
-                    )
-                )
+                logging.error(format_request_info(request, input_data, res, req))
+                error.log()
+            return error.json_response()
+        except InternalServerError as error:
+            request_info = format_request_info(request, input_data, res, req)
+            logging.error(request_info)
+            error.log()
 
-            return JsonResponse({
-                'cause': _('Validation Error'),
-                'message': str(e)
-            }, status=400)
+            if not settings.DEBUG:
+                error.email_log_to_dev(request_info)
+
+            return error.json_response(include_message=False)
         except Exception as e:
-            error_data = {'cause': _('Internal Server Error')}
-            logging.exception('Internal Server Error ' + str(request))
-            return JsonResponse(error_data, status=500)
+            error = InternalServerError(e)
+            request_info = format_request_info(request, input_data, res, req)
+            logging.error(request_info)
+            error.log()
+
+            if not settings.DEBUG:
+                error.email_log_to_dev(request_info)
+
+            return error.json_response(include_message=False)
 
     def work(self, request: HttpRequest, req: dict, res: dict):
         """

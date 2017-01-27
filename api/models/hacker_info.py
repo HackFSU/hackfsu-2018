@@ -21,7 +21,7 @@ class HackerInfo(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
-    attendee_status = models.OneToOneField(to=AttendeeStatus, on_delete=models.CASCADE, null=True)  # TODO null=False
+    attendee_status = models.OneToOneField(to=AttendeeStatus, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False, blank=True)
     is_first_hackathon = models.BooleanField()
     is_adult = models.BooleanField()

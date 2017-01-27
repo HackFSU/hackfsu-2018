@@ -52,16 +52,24 @@
         useFormData: true,
         getData: function() {
             var hsStudent = studentType.val() === 'highschool';
+            var recentGraduate = studentType.val() == 'graduated';
 
             var data =  {
                 is_first_hackathon: form.find('input[name="first_hackathon"]:checked').val() === 'true',
                 is_adult: form.find('input[name="over_18"]:checked').val() === 'true',
                 is_high_school: hsStudent,
-                school_year: hsStudent ? 'HS' : studentYear.val(),
+                school_year: studentYear.val(),
                 school_major: hsStudent ? 'N/A' : studentMajor.val().trim(),
                 interests: getInterests(),
                 resume: resumeField[0].files[0]
             };
+
+            if (hsStudent) {
+                data.school_year = 'HS';
+            } else if (recentGraduate) {
+                data.school_major = 'RG';
+            }
+
 
             var school_name = schoolInput.val().trim();
             data.school_id = schoolInput.schoolAutocomplete('getId', school_name);

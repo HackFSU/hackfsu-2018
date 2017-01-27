@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
+from django.contrib import admin
 from api.models import Hackathon, School, AttendeeStatus
 from hackfsu_com.util import acl, files
 
@@ -14,7 +15,8 @@ class HackerInfo(models.Model):
         ('SR', 'Senior'),
         ('SS', 'Super Senior'),
         ('GS', 'Graduate Student'),
-        ('HS', 'High School Student')
+        ('HS', 'High School Student'),
+        ('RG', 'Recent College Graduate')
     )
 
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
@@ -38,9 +40,6 @@ class HackerInfo(models.Model):
             self.school.name
         )
 
-        if len(self.comments) > 0:
-            summary += ' comments="{}"'.format(self.comments)
-
         return summary
 
 
@@ -57,3 +56,7 @@ def on_pre_delete(**kwargs):
     if len(instance.resume_file_name) > 0:
         files.delete_if_exists(instance.resume_file_name)
 
+
+@admin.register(HackerInfo)
+class HackerAdmin(admin.ModelAdmin):
+    list_filter = ('approved', 'is_first_hackathon', 'is_adult', 'school_year')

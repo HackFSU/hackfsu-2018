@@ -1,5 +1,6 @@
 from django.db import models
 from api.models import Hackathon
+from django.contrib import admin
 
 
 class HackathonSponsor(models.Model):
@@ -20,11 +21,30 @@ class HackathonSponsor(models.Model):
     order = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return 'hackathon={} name="{}" tier={} order={} website_link="{}" logo_link="{}"'.format(
-            self.hackathon.id,
-            self.name,
-            self.tier,
-            self.order,
-            self.website_link,
-            self.logo_link
-        )
+        return self.name
+
+
+@admin.register(HackathonSponsor)
+class HackathonSponsorAdmin(admin.ModelAdmin):
+    list_filter = ('hackathon', 'tier')
+    list_display = ('name', 'hackathon', 'tier', 'order', 'logo_link', 'website_link')
+    list_editable = ('hackathon', 'tier', 'order', 'logo_link')
+    list_display_links = ('name',)
+    actions = ('duplicate',)
+    search_fields = ('name',)
+    ordering = ('hackathon', 'tier', 'name')
+
+    def duplicate(self, request, queryset):
+        current_hackathon = Hackathon.objects.current()
+        new_count = 0
+        for sponsor in queryset:
+            HackathonSponsor.objects.create(
+                hackathon=current_hackathon,
+                name=sponsor.name,
+                website_link=sponsor.website_link,
+                logo_link=sponsor.logo_link
+            )
+            new_count += 1
+        self.message_user(request, str(new_count) + ' new sponsors created for ' + str(current_hackathon))
+
+    duplicate.short_description = 'Duplicate selected sponsors for current hackathon'

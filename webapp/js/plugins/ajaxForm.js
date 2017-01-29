@@ -22,6 +22,25 @@
         parsleyOptions: {}
     };
 
+    function fillValuesFromUrlParams(form) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            param, name, value, field, i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            param = sURLVariables[i].split('=');
+
+            if (param.length === 2) {
+                name = param[0].replace('"','');
+                value = param[1];
+                field = form.find('[name="' + name + '"]');
+                if (field.length === 1 && field.is('input, select, textarea')) {
+                    field.val(value);
+                }
+            }
+        }
+    }
+
     function ajaxJsonSubmit(options) {
         var dfd = $.Deferred();
         var defaultAjaxOptions = {
@@ -72,11 +91,12 @@
         if (!o.setDisabled) {
             o.setDisabled = function() {
                 self.find('input, textarea, select, button').prop('disabled', value);
-            }
+            };
         }
 
         var parsleyFormInstance = this.parsley(o.parsleyOptions);
         var canSubmit = true;
+        fillValuesFromUrlParams($(this));
 
         this.on('submit', function(ev) {
             ev.preventDefault();

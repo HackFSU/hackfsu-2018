@@ -69,6 +69,21 @@ body {
     }
 }
 
+.content-section {
+    margin-bottom: 100px;
+
+    > *:first-child {
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+    > *:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+}
+
+
 @media(max-width: $screen-sm-min) {
     // Mobile
     #content {

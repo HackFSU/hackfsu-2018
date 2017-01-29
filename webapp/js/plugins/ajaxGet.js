@@ -8,20 +8,17 @@
         type: 'GET',
         headers: {
             'X-CSRFToken': Cookies.get('csrftoken')
+        },
+        error: function(response) {
+            console.error('Server Error:', response);
+            var err = JSON.parse(response.responseText);
+            alert(err.cause + ': ' + err.message);
         }
     };
 
     $.ajaxGet = function(options) {
         var o = $.extend({}, defaultAjaxSettings, options);
 
-        if (!o.error) {
-            o.error = function(response) {
-                console.error('Server Error:', response);
-                var err = JSON.parse(response.responseText);
-                alert(err.cause + ': ' + err.message);
-            }
-        }
-
         return $.ajax(o);
-    }
+    };
 })(jQuery);

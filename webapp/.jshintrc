@@ -2,7 +2,8 @@
   "extends": "../.jshintrc",
 
   "globals": {
-      "Cookies": true
+      "Cookies": true,
+      "moment": true
   },
 
   "node": false,

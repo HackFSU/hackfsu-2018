@@ -9,17 +9,49 @@ block append styles
     link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
 
 block append scripts
+    script(src="/static/bower_components/moment/min/moment.min.js")
     script(src=`${viewDir}/script.js`)
 
 block content
-    h1.text-center HackFSU '17
-    .profile-action-buttons
-        button#hackerBtn.btn.btn-form(type="button" disabled)  Hacker Registration
-        button#mentorBtn.btn.btn-form(type="button" disabled title="Coming soon")  Mentor Registration
-        button#judgeBtn.btn.btn-form(type="button" disabled title="Coming soon")  Judge Registration
-        button#organizerBtn.btn.btn-form(type="button" disabled title="Coming soon")  Organizer Registration
 
-    #account.profile-section
+
+    #hackathon.content-section
+        h1 HackFSU
+        h3 Be there!
+        h4 You are
+        table.table
+            thead
+                tr
+                    th
+                    th Registered
+                    th Approved
+                    th Checked-in
+            tbody
+                tr
+                    th Hackers
+                    td
+                    td
+                    td
+                tr
+                    th Mentors
+                    td
+                    td
+                    td
+                tr
+                    th Judges
+                    td
+                    td
+                    td
+                tr
+                    th Organizers
+                    td
+                    td
+                    td
+
+    .content-section
+        #action-buttons.profile-action-buttons
+
+    #account.content-section
         h1 Account
         form: .form-section
             fieldset.row
@@ -49,7 +81,7 @@ block content
                 label.col-md-3 Dietary Restrictions
                 .col-md-9: textarea.responsive(name="diet" placeholder="None" disabled)
 
-    #hacker.profile-section(style="display:none")
+    #hacker.content-section(style="display:none")
         h1 Hacker
         h3 Status
         form: .form-section
@@ -89,11 +121,11 @@ block content
                 label.col-md-3 Interests
                 .col-md-9: textarea.responsive(name="interests" placeholder="None" disabled)
 
-    #mentor.profile-section(style="display:none")
+    #mentor.content-section(style="display:none")
         h1 Mentor Info
 
-    #judge.profile-section(style="display:none")
+    #judge.content-section(style="display:none")
         h1 Judge Info
 
-    #organizer.profile-section(style="display:none")
+    #organizer.content-section(style="display:none")
         h1 Organizer Info

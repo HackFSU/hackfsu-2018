@@ -21,11 +21,16 @@ class ScheduleItemsView(PublicApiView):
 
         items_list = []
         for item in items:
-            items_list.append({
+            item_data = {
                 'name': item.name,
                 'description': item.description,
                 'start': item.start.isoformat(),
-                'end': item.end.isoformat()
-            })
+                'type': item.type
+            }
+
+            if item.end is not None:
+                item_data['end'] = item.end.isoformat()
+
+            items_list.append(item_data)
 
         res['schedule_items'] = items_list

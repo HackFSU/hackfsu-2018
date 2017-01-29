@@ -18,8 +18,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic.base import RedirectView
-from django.urls import reverse
 
 app_name = 'hackfsu'
 handler404 = 'webapp.views.handler404'
@@ -30,13 +28,6 @@ urlpatterns = [
     url(r'^admin/django/', admin.site.urls),
     url('', include('webapp.urls', namespace='webapp'))
 ]
-
-# Shortcuts
-urlpatterns.extend([
-    url(r'^register/$', RedirectView.as_view(url=reverse('webapp:registration-user'))),
-    url(r'^login/$', RedirectView.as_view(url=reverse('webapp:user-login'))),
-    url(r'^logout/$', RedirectView.as_view(url=reverse('webapp:user-logout')))
-])
 
 if settings.DEBUG:
     urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

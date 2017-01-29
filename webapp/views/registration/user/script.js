@@ -6,6 +6,7 @@
     'use strict';
 
     var form = $('form#register_user');
+    var attendeeType = form.find('select[name="attendee_type"]');
     var firstName = form.find('input[name="first_name"]');
     var lastName = form.find('input[name="last_name"]');
     var emailInput = form.find('input[name="email"]');
@@ -17,6 +18,8 @@
     var shirtSize = form.find('select[name="shirt_size"]');
     var mlhCoc = form.find('input[name="mlhcoc"]');
     var mlhTac = form.find('input[name="mlhtac"]');
+
+
 
     $('#diet-detail, #allergy').change(function () {
         dietInput.toggle($('#diet-other').is(':checked') || $('#allergy').is(':checked'));
@@ -51,13 +54,17 @@
                 diet: getDiet()
             };
         },
-        onAjaxComplete: function(response) {
-            console.log('complete', response);
-            if (response.logged_in) {
-                window.location.href = '/user/profile';
-            } else {
-                window.location.href = '/user/login';
+        onAjaxComplete: function() {
+            var destination = '/user/profile';
+            var type = attendeeType.val();
+            if (type !== 'other') {
+                destination = '/registration/' + type;
             }
+
+            window.location.href = destination;
+        },
+        afterError: function() {
+            window.grecaptcha.reset();
         }
     });
 

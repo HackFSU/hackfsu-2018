@@ -19,6 +19,7 @@
         setDisabled: function(value) { return value; },
         onAjaxComplete: function(response, data) { console.log(response, data); },
         onAjaxError: function(error, data) { console.error(error); },
+        afterError: function() {},
         parsleyOptions: {}
     };
 
@@ -131,6 +132,7 @@
                     canSubmit = true;
                     o.setDisabled(false);
                     o.onAjaxError(error, jsonData);
+                    o.afterError();
                 });
             });
 

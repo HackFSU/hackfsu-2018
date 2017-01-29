@@ -14,6 +14,18 @@ block content
     form#register_user
         .form-section
             fieldset.row
+                .field-label.col-md-3 I want to... *
+                .col-md-9: select.responsive(name="attendee_type" required)
+                    option(value="" disabled selected)
+                    option(value="hacker") register as a hacker.
+                    option(value="mentor") register as a mentor.
+                    option(value="judge") register as a judge.
+                    option(value="organizer") register as an organizer.
+                    option(value="other") register as a combination of the above.
+                    option(value="other") figure out want I want to do later.
+                    option(value="other") just make an account.
+
+            fieldset.row
                 .field-label.col-md-3 Email *
                 .col-md-9: input.responsive(type="email" name="email" maxlength=100 placeholder="your@school.edu" required)
             fieldset.row

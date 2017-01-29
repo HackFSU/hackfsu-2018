@@ -31,17 +31,27 @@ urlpatterns = [
 
     url(r'^registration/user/$', views.registration.UserRegistrationPage.as_view(), name='registration-user'),
     url(r'^registration/hacker/$', views.registration.HackerRegistrationPage.as_view(), name='registration-hacker'),
-    # url(r'^registration/judge/$', views.registration.JudgeRegistrationPage.as_view(), name='registration-judge'),
-    # url(r'^registration/mentor/$', views.registration.MentorRegistrationPage.as_view(), name='registration-mentor'),
-    # url(r'^registration/organizer/$', views.registration.OrganizerRegistrationPage.as_view(),
-    #     name='registration-organizer'),
+    url(r'^registration/judge/$', views.registration.JudgeRegistrationPage.as_view(), name='registration-judge'),
+    url(r'^registration/mentor/$', views.registration.MentorRegistrationPage.as_view(), name='registration-mentor'),
+    url(r'^registration/organizer/$', views.registration.OrganizerRegistrationPage.as_view(),
+        name='registration-organizer'),
 
     url(r'^user/login/$', views.user.LoginPage.as_view(), name='user-login'),
     url(r'^user/logout/$', views.user.logout_view, name='user-logout'),
     url(r'^user/profile/$', views.user.ProfilePage.as_view(), name='user-profile'),
 
     url(r'^hype/$', views.hype.HypeIndex.as_view()),
-    url(r'^hype/registration$', views.hype.HypeRegistration.as_view())
+    url(r'^hype/registration$', views.hype.HypeRegistration.as_view()),
+
+
+    # Shortcuts
+    url(r'^register/$', RedirectView.as_view(url='/registration/user')),
+    url(r'^register/hacker/$', RedirectView.as_view(url='/registration/user?attendee_type=hacker')),
+    url(r'^register/organizer/$', RedirectView.as_view(url='/registration/user?attendee_type=organizer')),
+    url(r'^register/mentor/$', RedirectView.as_view(url='/registration/user?attendee_type=mentor')),
+    url(r'^register/judge$', RedirectView.as_view(url='/registration/user?attendee_type=judge')),
+    url(r'^login/$', RedirectView.as_view(url='/user/login')),
+    url(r'^logout/$', RedirectView.as_view(url='/user/logout'))
 ]
 
 if settings.DEBUG:

@@ -83,7 +83,7 @@ class ApiView(View):
             error.log()
 
             if not settings.DEBUG:
-                error.email_log_to_dev(request_info)
+                error.email_log_to_dev(request_info=request_info, user=request.user)
 
             return error.json_response(include_message=False)
         except Exception as e:
@@ -93,7 +93,7 @@ class ApiView(View):
             error.log()
 
             if not settings.DEBUG:
-                error.email_log_to_dev(request_info)
+                error.email_log_to_dev(request_info=request_info, user=request.user)
 
             return error.json_response(include_message=False)
 

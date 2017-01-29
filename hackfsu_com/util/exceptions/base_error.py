@@ -21,6 +21,12 @@ def get_admin_email_recipients() -> list:
     return recipients
 
 
+def email_log_html(title: str, code: str) -> str:
+    return '<h2><b>{}</b></h2><p style="font-family: Courier">{}</p><br>'.format(
+        title, code
+    )
+
+
 class BaseError(Exception):
     response_status = 500
 
@@ -36,14 +42,32 @@ class BaseError(Exception):
         self.message = str(source_exception)
         self.stack_trace = traceback.format_exc()
 
-    def email_log_to_dev(self, request_info: str):
-        html_str = '<p><b>Internal Server Error Detected!</b></p><br><br>'
-        html_str += '<p><b>Error Information:</b><br>{}<br><br>'.format(email.str_to_html_str(
-            '\tError Type: {}\n\tError Message: {}\n\tStack Trace: {}\n'.format(
-                self.cause.__class__.__name__, self.message, self.stack_trace
+    def email_log_to_dev(self, request_info: str, user=None):
+        html_str = '<h1><b>Internal Server Error Detected!</b></h1><br>'
+
+        if user is not None and not user.is_anonymous:
+            html_str += '<h2><b>Caused by User</b></h2><p>Name: {} {}<br>Email: {}<br>Groups: {}</p><br>'.format(
+                user.first_name, user.last_name,
+                user.email,
+                ', '.join(list(user.groups.values_list('name', flat=True)))
             )
-        ))
-        html_str += '<p><b>Response Information:</b><br>{}<br><br>'.format(email.str_to_html_str(request_info))
+        else:
+            html_str += '<h2><b>Caused by Anonymous User</b></h2>'
+
+        html_str += email_log_html(
+            title='Error Information:',
+            code=email.str_to_html_str(
+                '\tError Type: {}\n\tError Message: {}\n\tStack Trace: {}'.format(
+                    self.cause.__class__.__name__, self.message, self.stack_trace
+                )
+            )
+        )
+
+        html_str += email_log_html(
+            title='Response Information:',
+            code=email.str_to_html_str(request_info)
+        )
+
         merge_vars = email.MandrillContent()
         merge_vars['html_content'] = html_str
         send_results = email.email_recipients(

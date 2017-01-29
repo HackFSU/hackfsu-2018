@@ -1,5 +1,6 @@
 from django.db import models
 from api.models import Hackathon
+from django.contrib import admin
 
 
 class AnonStat(models.Model):
@@ -27,3 +28,13 @@ class AnonStat(models.Model):
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
     key = models.CharField(max_length=3, choices=KEY_CHOICES)
     value = models.CharField(max_length=3, choices=VALUE_CHOICES)
+
+
+@admin.register(AnonStat)
+class AnonStatAdmin(admin.ModelAdmin):
+    list_filter = ('hackathon', 'key')
+    list_display = ('id', 'key', 'value')
+    list_editable = ()
+    list_display_links = ('id',)
+    search_fields = ('key', 'value')
+    ordering = ('hackathon', 'key')

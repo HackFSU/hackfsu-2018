@@ -20,11 +20,14 @@ class ScheduleItem(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField(null=True, blank=True)
 
+    def __str__(self):
+        return '[ScheduleItem {}]'.format(self.name)
+
 
 @admin.register(ScheduleItem)
 class ScheduleItemAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
-    list_display = ('hackathon', 'type', 'name', 'start', 'end', 'description')
+    list_display = ('name', 'type', 'start', 'end', 'description')
     list_editable = ('start', 'end')
     list_display_links = ('name',)
     search_fields = ('name',)

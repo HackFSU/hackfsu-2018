@@ -32,13 +32,7 @@ class HackerInfo(models.Model):
     interests = models.CharField(max_length=500, default='', blank=True)
 
     def __str__(self):
-        summary = 'email="{}" name="{} {}" approved={}'.format(
-            self.user.email,
-            self.user.first_name, self.user.last_name,
-            self.approved
-        )
-
-        return summary
+        return '[HackerInfo {} {}]'.format(self.user.first_name, self.user.last_name)
 
 
 @receiver(pre_delete, sender=HackerInfo)
@@ -58,3 +52,9 @@ def on_pre_delete(**kwargs):
 @admin.register(HackerInfo)
 class HackerAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'approved', 'is_first_hackathon', 'is_adult', 'school_year')
+    list_display = ('id', 'user', 'attendee_status', 'approved', 'school', 'school_year', 'school_major',
+                    'is_first_hackathon', 'is_adult', 'interests', 'resume_file_name', 'created')
+    list_editable = ()
+    list_display_links = ('id',)
+    search_fields = ('user', 'school')
+    ordering = ('-created',)

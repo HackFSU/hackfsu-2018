@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from api.models import Hackathon
+from django.contrib import admin
 
 
 class UserInfo(models.Model):
@@ -27,12 +28,14 @@ class UserInfo(models.Model):
     comments = models.CharField(max_length=1000, default='', blank=True)
 
     def __str__(self):
-        summary = 'email="{}" name="{} {}"'.format(
-            self.user.email,
-            self.user.first_name, self.user.last_name
-        )
+        return '[UserInfo {} {}]'.format(self.user.first_name, self.user.last_name)
 
-        if len(self.comments) > 0:
-            summary += ' comments="{}"'.format(self.comments)
 
-        return summary
+@admin.register(UserInfo)
+class UserInfoAdmin(admin.ModelAdmin):
+    list_filter = ('shirt_size',)
+    list_display = ('id', 'user', 'phone_number', 'shirt_size', 'diet', 'github', 'linkedin', 'created')
+    list_editable = ()
+    list_display_links = ('id',)
+    search_fields = ('user', 'diet', 'github', 'linkedin')
+    ordering = ('-created',)

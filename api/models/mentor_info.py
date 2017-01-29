@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.db.models.signals import pre_delete
 from api.models import Hackathon, AttendeeStatus
 from hackfsu_com.util import acl
+from django.contrib import admin
 
 
 class MentorInfo(models.Model):
@@ -18,6 +19,9 @@ class MentorInfo(models.Model):
     skills = models.CharField(max_length=1000)
     motivation = models.CharField(max_length=1000)
 
+    def __str__(self):
+        return '[MentorInfo {} {}]'.format(self.user.first_name, self.user.last_name)
+
 
 @receiver(pre_delete, sender=MentorInfo)
 def on_pre_delete(**kwargs):
@@ -25,3 +29,14 @@ def on_pre_delete(**kwargs):
     instance = kwargs['instance']
     if instance.hackathon == Hackathon.objects.current():
         acl.remove_user_from_groups(instance.user, [acl.group_mentor, acl.group_pending_mentor])
+
+
+@admin.register(MentorInfo)
+class MentorInfoAdmin(admin.ModelAdmin):
+    list_filter = ('hackathon', 'approved')
+    list_display = ('id', 'user', 'approved', 'affiliation', 'skills', 'motivation', 'created')
+    list_editable = ()
+    list_display_links = ('id',)
+    search_fields = ('user', 'affiliation', 'skills', 'motivation')
+    ordering = ('-created',)
+

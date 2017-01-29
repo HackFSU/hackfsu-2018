@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from api import cache
+from django.contrib import admin
 
 
 class HackathonManager(models.Manager):
@@ -25,4 +26,17 @@ class Hackathon(models.Model):
     # attendee_shirt_sizes = JSONField()
 
     def __str__(self):
-        return self.name + (' [CURRENT]' if self.current else '')
+        if self.current:
+            return '** {} **'.format(self.name)
+        else:
+            return self.name
+
+
+@admin.register(Hackathon)
+class HackathonAdmin(admin.ModelAdmin):
+    list_filter = ()
+    list_display = ('id', 'name', 'current', 'start_date', 'end_date')
+    list_editable = ()
+    list_display_links = ('id',)
+    search_fields = ('name',)
+    ordering = ('-current', '-start_date')

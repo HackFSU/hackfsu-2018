@@ -2,10 +2,10 @@ from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from django.contrib import admin
 from django.core.exceptions import ObjectDoesNotExist
 from hackfsu_com.util import acl
 from api.models import Hackathon
+from django.contrib import admin
 
 
 class AttendeeStatusManager(models.Manager):
@@ -34,10 +34,8 @@ class AttendeeStatus(models.Model):
     checked_in = models.BooleanField(default=False)
     checked_in_timestamp = models.DateTimeField(null=True)
 
-
-@admin.register(AttendeeStatus)
-class AttendeeStatusAdmin(admin.ModelAdmin):
-    list_filter = ('rsvp_email_sent', 'rsvp_confirmed', 'checked_in')
+    def __str__(self):
+        return '[{} {}\'s Attendee Status]'.format(self.user.first_name, self.user.last_name)
 
 
 @receiver(pre_delete, sender=AttendeeStatus)
@@ -48,3 +46,11 @@ def on_pre_delete(**kwargs):
         acl.remove_user_from_group(instance.user, acl.group_attendee)
 
 
+@admin.register(AttendeeStatus)
+class AttendeeStatusAdmin(admin.ModelAdmin):
+    list_filter = ('hackathon', 'rsvp_email_sent', 'rsvp_confirmed', 'checked_in')
+    list_display = ('id', 'user', 'created', 'comments')
+    list_editable = ('comments',)
+    list_display_links = ('id',)
+    search_fields = ('user', 'comments')
+    ordering = ('-created',)

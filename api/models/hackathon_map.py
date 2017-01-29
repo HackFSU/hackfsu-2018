@@ -1,5 +1,6 @@
 from django.db import models
 from api.models import Hackathon
+from django.contrib import admin
 
 
 class HackathonMap(models.Model):
@@ -9,9 +10,14 @@ class HackathonMap(models.Model):
     order = models.SmallIntegerField()
 
     def __str__(self):
-        return 'hackathon={} title="{}" order={} link="{}"' .format(
-            self.hackathon.id,
-            self.title,
-            self.order,
-            self.link
-        )
+        return '[HackathonMap {}]'.format(self.title)
+
+
+@admin.register(HackathonMap)
+class HackathonMapAdmin(admin.ModelAdmin):
+    list_filter = ('hackathon',)
+    list_display = ('id', 'title', 'link', 'order')
+    list_editable = ('title', 'link', 'order')
+    list_display_links = ('id',)
+    search_fields = ('title',)
+    ordering = ('hackathon', 'title')

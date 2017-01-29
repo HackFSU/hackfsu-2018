@@ -27,9 +27,9 @@ class HackathonSponsor(models.Model):
 @admin.register(HackathonSponsor)
 class HackathonSponsorAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'tier')
-    list_display = ('name', 'hackathon', 'tier', 'order', 'logo_link', 'website_link')
+    list_display = ('id', 'hackathon', 'name', 'tier', 'order', 'logo_link', 'website_link')
     list_editable = ('hackathon', 'tier', 'order', 'logo_link')
-    list_display_links = ('name',)
+    list_display_links = ('id',)
     actions = ('duplicate',)
     search_fields = ('name',)
     ordering = ('hackathon', 'tier', 'name')

@@ -17,17 +17,15 @@ class School(models.Model):
     user_submitted = models.BooleanField()
 
     def __str__(self):
-        summary = "{} - {}".format(
-            self.type,
-            self.name
-        )
-
-        if self.user_submitted:
-            summary += ' - USER SUBMITTED'
-
-        return summary
+        return self.name
 
 
 @admin.register(School)
 class SchoolAdmin(admin.ModelAdmin):
     list_filter = ('type', 'user_submitted')
+    list_display = ('name', 'type', 'user_submitted', 'url',)
+    list_editable = ()
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    ordering = ('name',)
+

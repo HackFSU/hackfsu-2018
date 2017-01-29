@@ -1,5 +1,6 @@
 from django.db import models
 from api.models import Hackathon
+from django.contrib import admin
 
 
 class HackathonCountdown(models.Model):
@@ -9,10 +10,14 @@ class HackathonCountdown(models.Model):
     end = models.DateTimeField()
 
     def __str__(self):
-        return 'hackathon={} title="{}" start={} end={}'.format(
-            self.hackathon.id,
-            self.title,
-            self.start,
-            self.end
-        )
+        return self.title
 
+
+@admin.register(HackathonCountdown)
+class HackathonCountdownAdmin(admin.ModelAdmin):
+    list_filter = ('hackathon',)
+    list_display = ('id', 'title', 'start', 'end')
+    list_editable = ('title', 'start', 'end')
+    list_display_links = ('id',)
+    search_fields = ('title',)
+    ordering = ('hackathon', 'start')

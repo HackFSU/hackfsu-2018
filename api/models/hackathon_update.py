@@ -1,5 +1,6 @@
 from django.db import models
 from api.models import Hackathon
+from django.contrib import admin
 
 
 class HackathonUpdate(models.Model):
@@ -9,9 +10,14 @@ class HackathonUpdate(models.Model):
     submit_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'hackathon={} submit_time={} title="{}" content="{}"'.format(
-            self.hackathon.id,
-            self.submit_time,
-            self.title,
-            self.content
-        )
+        return '[HackathonUpdate {} - {}]'.format(self.submit_time, self.title)
+
+
+@admin.register(HackathonUpdate)
+class HackathonUpdateAdmin(admin.ModelAdmin):
+    list_filter = ('hackathon',)
+    list_display = ('id', 'title', 'content', 'submit_time')
+    list_editable = ('title', 'content')
+    list_display_links = ('id',)
+    search_fields = ('title', 'content')
+    ordering = ('-submit_time',)

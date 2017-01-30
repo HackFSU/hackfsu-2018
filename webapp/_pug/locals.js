@@ -88,6 +88,12 @@ var sponsorData = locals.sponsorData = {
         href: 'http://www.accenture.com',
         logo: '/static/img/logos/accenture.png'
     },
+    acmAtFsu: {
+        name:'ACM at FSU',
+        href: 'https://www.facebook.com/groups/cs.fsu.acm/',
+        logo: '/static/img/logos/acm-at-fsu.png',
+        logoStyle: 'padding: 20px;'
+    },
     apple: {
         name: 'Apple',
         href: 'http://www.apple.com/',
@@ -207,7 +213,7 @@ var sponsorData = locals.sponsorData = {
     },
     techNole: {
         name: 'TechNole',
-        href: 'http://www.technole.org/',
+        href: 'https://nolecentral.dsa.fsu.edu/organization/technole',
         logo: '/static/img/logos/technole/technole-horizontal.png'
     },
     theCrepeVine: {
@@ -242,7 +248,8 @@ locals.sponsors = {
         },
         partners: [
             sponsorData.techNole,
-            sponsorData.mlh
+            sponsorData.mlh,
+            sponsorData.acmAtFsu
         ]
     },
 

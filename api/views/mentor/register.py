@@ -25,7 +25,7 @@ class RegisterView(ApiView):
         attendee_status = AttendeeStatus.objects.get_or_create(user=request.user, hackathon=current_hackathon)
 
         MentorInfo.objects.create(
-            hackathon=Hackathon.objects.current(),
+            hackathon=current_hackathon,
             user=request.user,
             attendee_status=attendee_status,
             affiliation=req['affiliation'],

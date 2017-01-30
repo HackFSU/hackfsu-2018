@@ -59,9 +59,7 @@
 
                 buttons.push({
                     'text': 'Register as a organizer',
-                    'url': '/registration/organizer',
-                    'title': 'Coming soon',
-                    'disabled': true
+                    'url': '/registration/organizer'
                 });
             }
         } else if (!groups.includes(GROUP.mentor) &&
@@ -203,14 +201,14 @@
     }
 
     function init(pData) {
-        initActionButtons(pData.groups);
-
         $.ajaxGet({
             url: '/api/hackathon/get/stats',
             success: function (data) {
                 initHackathonSection(data, pData.groups);
             }
         });
+
+        initActionButtons(pData.groups);
 
         initAccountSection(pData);
 

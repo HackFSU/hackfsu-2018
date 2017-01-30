@@ -16,7 +16,9 @@
         url: '',
         useFormData: false,
         getData: function() { return {}; },
-        setDisabled: function(value) { return value; },
+        setDisabled: function(value, form) {
+            form.find('input, textarea, select, button').prop('disabled', value);
+        },
         onAjaxComplete: function(response, data) { console.log(response, data); },
         onAjaxError: function(error, data) { console.error(error); },
         afterError: function() {},
@@ -86,18 +88,12 @@
         if (!this.is('form')) {
             throw TypeError('Must be a form element');
         }
-
+        var self = $(this);
         var o = $.extend({}, defaultOptions, options);
-
-        if (!o.setDisabled) {
-            o.setDisabled = function() {
-                self.find('input, textarea, select, button').prop('disabled', value);
-            };
-        }
-
         var parsleyFormInstance = this.parsley(o.parsleyOptions);
         var canSubmit = true;
-        fillValuesFromUrlParams($(this));
+
+        fillValuesFromUrlParams(self);
 
         this.on('submit', function(ev) {
             ev.preventDefault();
@@ -105,7 +101,7 @@
                 return;
             }
             canSubmit = false;
-            o.setDisabled(true);
+            o.setDisabled(true, self);
 
             parsleyFormInstance.whenValidate()
             .done(function() {
@@ -119,7 +115,7 @@
                 } catch (err) {
                     console.error('Unable to retrieve data: ', err);
                     canSubmit = true;
-                    o.setDisabled(false);
+                    o.setDisabled(false, self);
                     o.onAjaxError(err, {});
                     o.afterError();
                     return;
@@ -141,7 +137,7 @@
                 })
                 .fail(function(error) {
                     canSubmit = true;
-                    o.setDisabled(false);
+                    o.setDisabled(false, self);
                     o.onAjaxError(error, jsonData);
                     o.afterError();
                 });

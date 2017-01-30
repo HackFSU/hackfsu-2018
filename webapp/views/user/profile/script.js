@@ -50,9 +50,7 @@
 
                 buttons.push({
                     'text': 'Register as a judge',
-                    'url': '/registration/judge',
-                    'title': 'Coming soon',
-                    'disabled': true
+                    'url': '/registration/judge'
                 });
             }
 
@@ -113,9 +111,8 @@
             groups.push('regular ' + GROUP.user);
         }
 
-        var groupString = 'You are a ' +
-            groups.sort().join(' and a ').replace('-', ' ');
-        groupString = groupString.replace(/(a)\s([aeio])/g, 'an $2') + '.';
+        var groupString = 'You are a ' + groups.sort().join(' and a ');
+        groupString = groupString.replace(/-/g, ' ').replace(/(a)\s([aeio])/g, 'an $2') + '.';
 
         // Account for not allowed data (-1)
         for (i in hackathonData) {

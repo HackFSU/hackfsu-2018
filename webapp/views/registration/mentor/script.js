@@ -1,13 +1,11 @@
 /**
- * User registration
+ * Mentor registration
  */
 
 (function($) {
     'use strict';
 
     var form = $('form#register');
-    var affiliationInput = form.find('input[name="school"]');
-    var motivationInput = form.find('textarea[name="school"]');
     var projectTypes = form.find('textarea[name="project-types"]');
 
     function getAvailability() {

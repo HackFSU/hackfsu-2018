@@ -109,10 +109,21 @@
 
             parsleyFormInstance.whenValidate()
             .done(function() {
-                var jsonData = o.getData();
+                var jsonData;
                 var ajaxOptions = {
                     url: o.url
                 };
+
+                try {
+                    jsonData = o.getData();
+                } catch (err) {
+                    console.error('Unable to retrieve data: ', err);
+                    canSubmit = true;
+                    o.setDisabled(false);
+                    o.onAjaxError(err, {});
+                    o.afterError();
+                    return;
+                }
 
                 if (o.useFormData) {
                     // Send formData

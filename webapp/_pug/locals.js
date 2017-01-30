@@ -391,4 +391,32 @@ locals.job_seeker_options = {
 };
 
 
+locals.options = {
+    mentor_availability: {},
+    project_types: [
+        'Front-End',
+        'Back-End',
+        'Web',
+        'Hardware',
+        'iOS',
+        'Android',
+        'Virtual Reality',
+        'Design'
+    ]
+};
+
+// Keys as bit flags
+locals.options.mentor_availability[''+Math.pow(2,0)] = 'Friday - Late Night';
+locals.options.mentor_availability[''+Math.pow(2,1)] = 'Saturday - Early Morning';
+locals.options.mentor_availability[''+Math.pow(2,2)] = 'Saturday - Morning';
+locals.options.mentor_availability[''+Math.pow(2,3)] = 'Saturday - Afternoon';
+locals.options.mentor_availability[''+Math.pow(2,4)] = 'Saturday - Night';
+locals.options.mentor_availability[''+Math.pow(2,5)] = 'Saturday - Late Night';
+locals.options.mentor_availability[''+Math.pow(2,6)] = 'Sunday - Early Morning';
+locals.options.mentor_availability[''+Math.pow(2,7)] = 'Sunday - Morning';
+locals.options.mentor_availability[''+Math.pow(2,8)] = 'Sunday - Afternoon';
+
+
+
+
 module.exports = locals;

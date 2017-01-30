@@ -23,19 +23,25 @@
         if (!groups.includes(GROUP.hacker) &&
             !groups.includes(GROUP.pending_hacker)) {
 
-            buttons.push({
-                'text': 'Register as a hacker',
-                'url': '/registration/hacker'
-            });
+            if (!groups.includes(GROUP.organizer) &&
+                !groups.includes(GROUP.pending_organizer) &&
+                !groups.includes(GROUP.judge) &&
+                !groups.includes(GROUP.pending_judge)) {
+
+                buttons.push({
+                    'text': 'Register as a hacker',
+                    'url': '/registration/hacker'
+                });
+            }
+
+
 
             if (!groups.includes(GROUP.mentor) &&
                 !groups.includes(GROUP.pending_mentor)) {
 
                 buttons.push({
                     'text': 'Register as a mentor',
-                    'url': '/registration/mentor',
-                    'title': 'Coming soon',
-                    'disabled': true
+                    'url': '/registration/mentor'
                 });
             }
 
@@ -65,9 +71,7 @@
 
             buttons.push({
                 'text': 'Register as a mentor',
-                'url': '/registration/mentor',
-                'title': 'Coming soon',
-                'disabled': true
+                'url': '/registration/mentor'
             });
         }
 
@@ -110,7 +114,8 @@
         }
 
         var groupString = 'You are a ' +
-            groups.sort().join(' and a ').replace('-', ' ').replace(/(a)\s([aeio])/g, 'an $2') + '.';
+            groups.sort().join(' and a ').replace('-', ' ');
+        groupString = groupString.replace(/(a)\s([aeio])/g, 'an $2') + '.';
 
         section.children('h1').text(hackathonData.hackathon_name);
         section.children('h3').text(start.format('MMM Do') + ' - ' + end.format('MMM Do'));
@@ -214,6 +219,7 @@
                 }
             });
         }
+
     }
 
     $.ajaxGet({

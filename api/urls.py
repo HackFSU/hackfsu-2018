@@ -20,10 +20,10 @@ urlpatterns = [
     url(r'judge/register$', views.judge.RegisterView.as_view(), name='judge-register'),
     url(r'judge/get/profile$', views.judge.get.ProfileView.as_view(), name='judge-get-profile'),
 
-    url(r'mentor/register$', views.hacker.RegisterView.as_view(), name='mentor-register'),
+    url(r'mentor/register$', views.mentor.RegisterView.as_view(), name='mentor-register'),
     url(r'mentor/get/profile$', views.mentor.get.ProfileView.as_view(), name='mentor-get-profile'),
 
-    url(r'organizer/register$', views.hacker.RegisterView.as_view(), name='organizer-register'),
+    url(r'organizer/register$', views.organizer.RegisterView.as_view(), name='organizer-register'),
     url(r'organizer/get/profile$', views.organizer.get.ProfileView.as_view(), name='organizer-get-profile'),
 
     url(r'school/get$', views.school.GetView.as_view(), name='organizer-register'),

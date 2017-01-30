@@ -12,4 +12,39 @@ block append scripts
     script(src=`${viewDir}/script.js`)
 
 block content
-    h1 TODO: #{pageName}
+    h1 Mentor Registration
+    p TODO - Mentor registration prompt
+    form#register
+        .form-section
+            fieldset.row
+                .field-label.col-md-4 What organization are you a part of and/or who do you know on our organizer team? *
+                .col-md-8
+                    input.responsive(type="text" name="affiliation" maxlength=100 placeholder="Where you work, TechNole, Nick, Jared, etc." required)
+
+            fieldset.row
+                .field-label.col-md-4 Why do you want to be a mentor? *
+                .col-md-8
+                    textarea.responsive(maxlength="500" name="motivation" placeholder="It's fun, I like teaching, I am a sponsor, etc." required)
+
+            fieldset.row
+                .field-label.col-md-4 When do you think you can help? *
+                .col-md-8: .row
+                    each val, key in locals.options.mentor_availability
+                        .col-md-4
+                            input.availability(type="checkbox" id=`availability-${key}` data-value=`${key}` name="availability[]" data-parsley-mincheck="1")
+                            label(for=`availability-${key}`)=val
+
+            fieldset.row
+                .field-label.col-md-4 What can you help with? *
+                .col-md-8: .row
+                    each type, index in locals.options.project_types
+                        .col-md-4
+                            input.project-type(type="checkbox" id=`project-type-${index}` data-value=`${type}`)
+                            label(for=`project-type-${index}`)=type
+
+                    textarea.responsive(maxlength="500" name="project-types" placeholder="Other...")
+
+
+        .form-section
+            .text-right
+                button.btn.btn-form(type="submit") Submit

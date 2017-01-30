@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from api.models import Hackathon, AttendeeStatus
+from api.models import Hackathon, AttendeeStatus, School, HackerInfo
 from terminaltables import AsciiTable
 from datetime import datetime
 from dateutil import tz
@@ -83,9 +83,73 @@ def print_now():
     print('{} ({})'.format(now.strftime('Totals as of %c'), now.tzname()))
 
 
+def print_school_totals(h: Hackathon):
+    title = 'Hacker totals by school'
+
+    school_counts = {}
+
+    for hacker in HackerInfo.objects.filter(hackathon=h):
+        if hacker.school not in school_counts:
+             school_counts[hacker.school] = {
+                'registered': 0,
+                'approved': 0,
+                'rsvp': 0,
+                'checked-in': 0
+             }
+        school_counts[hacker.school]['registered'] += 1
+
+        if hacker.approved:
+            school_counts[hacker.school]['approved'] += 1
+
+        if hacker.attendee_status.rsvp_confirmed:
+            school_counts[hacker.school]['rsvp'] += 1
+
+        if hacker.attendee_status.checked_in:
+            school_counts[hacker.school]['checked-in'] += 1
+
+    table_rows = [('School', 'Registered', 'Approved', 'RSVP\'d', 'Checked-in')]
+
+    totals = {
+        'registered': 0,
+        'approved': 0,
+        'rsvp': 0,
+        'checked-in': 0
+    }
+
+    data = []
+    for school, counts in school_counts.items():
+        data.append((
+            school.name + (' [U]' if school.user_submitted else ''),
+            counts['registered'],
+            counts['approved'],
+            counts['rsvp'],
+            counts['checked-in']
+        ))
+        for key in counts:
+            totals[key] += counts[key]
+
+    # Sort by school name
+    data.sort(key=lambda x: x[0])
+
+    data.append((
+        '*** TOTALS ***',
+        str(totals['registered']),
+        str(totals['approved']),
+        str(totals['rsvp']),
+        str(totals['checked-in']),
+    ))
+
+    table_rows.extend(data)
+
+    table = AsciiTable(table_data=table_rows, title=title)
+    print(table.table)
+    print()
+
+
 def run():
+    current_hackathon = Hackathon.objects.current()
     print_now()
     print_error_checks()
     print_accounts()
-    print_hackathon_attendees(Hackathon.objects.current())
-
+    print_hackathon_attendees(current_hackathon)
+    print_school_totals(current_hackathon)

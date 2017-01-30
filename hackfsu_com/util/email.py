@@ -24,7 +24,8 @@ templates = [
     'organizer_register_waiting',
     'organizer_register_accepted',
     'mandrill_test',
-    'standard_html'
+    'standard_html',
+    'unassigned_register_reminder'
 ]
 
 default_from_email = 'noreply@hackfsu.com'

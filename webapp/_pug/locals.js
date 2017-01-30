@@ -89,10 +89,14 @@ var sponsorData = locals.sponsorData = {
         logo: '/static/img/logos/accenture.png'
     },
     acmAtFsu: {
-        name:'ACM at FSU',
+        name: 'ACM at FSU',
         href: 'https://www.facebook.com/groups/cs.fsu.acm/',
-        logo: '/static/img/logos/acm-at-fsu.png',
-        logoStyle: 'padding: 20px;'
+        logo: '/static/img/logos/acm-at-fsu.png'
+    },
+    acmSiggraphAtFsu: {
+        name: 'ACM SIGGRAPH at FSU',
+        href: 'http://fsusiggraph.org',
+        logo: '/static/img/logos/acm-siggraph-at-fsu.png'
     },
     apple: {
         name: 'Apple',
@@ -249,7 +253,8 @@ locals.sponsors = {
         partners: [
             sponsorData.techNole,
             sponsorData.mlh,
-            sponsorData.acmAtFsu
+            sponsorData.acmAtFsu,
+            sponsorData.acmSiggraphAtFsu
         ]
     },
 

@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import JSONField
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
 from api.models import Hackathon, AttendeeStatus
@@ -9,13 +8,28 @@ from django.contrib import admin
 
 
 class MentorInfo(models.Model):
+
+    # Stored as bit flags
+    AVAILABILITY_CHOICES = (
+        (2**1, 'Friday - Late Night'),
+        (2**2, 'Saturday - Early Morning'),
+        (2**3, 'Saturday - Morning'),
+        (2**4, 'Saturday - Afternoon'),
+        (2**5, 'Saturday - Night'),
+        (2**6, 'Saturday - Late Night'),
+        (2**7, 'Sunday - Early Morning'),
+        (2**8, 'Sunday - Morning'),
+        (2**9, 'Sunday - Afternoon')
+    )
+    MAX_AVAILABILITY = sum(2 ** k for k in range(0, len(AVAILABILITY_CHOICES)))
+
     created = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
     attendee_status = models.OneToOneField(to=AttendeeStatus, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
     affiliation = models.CharField(max_length=100)
-    availability = JSONField()
+    availability = models.IntegerField()
     skills = models.CharField(max_length=1000)
     motivation = models.CharField(max_length=1000)
 

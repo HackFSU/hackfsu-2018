@@ -117,6 +117,13 @@
             groups.sort().join(' and a ').replace('-', ' ');
         groupString = groupString.replace(/(a)\s([aeio])/g, 'an $2') + '.';
 
+        // Account for not allowed data (-1)
+        for (i in hackathonData) {
+            if (hackathonData.hasOwnProperty(i) && hackathonData[i] === -1) {
+                hackathonData[i] = 'N/A';
+            }
+        }
+
         section.children('h1').text(hackathonData.hackathon_name);
         section.children('h3').text(start.format('MMM Do') + ' - ' + end.format('MMM Do'));
         section.children('h4').text(groupString);

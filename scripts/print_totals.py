@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from api.models import Hackathon, AttendeeStatus, School, HackerInfo
+from api.models import Hackathon, AttendeeStatus, MentorInfo, HackerInfo, HelpRequest, JudgeInfo, OrganizerInfo
 from terminaltables import AsciiTable
 from datetime import datetime
 from dateutil import tz
@@ -146,6 +146,73 @@ def print_school_totals(h: Hackathon):
     print()
 
 
+def print_mentors(h: Hackathon):
+    title = 'Mentors'
+
+    table_rows = [('Name', 'Approved?', 'RSVP\'d?', 'Checked-in?', 'Help Requests Claimed')]
+    data = []
+
+    mentors = MentorInfo.objects.filter(hackathon=h)
+    for mentor in mentors:
+        data.append((
+            '{} {}'.format(mentor.user.first_name, mentor.user.last_name),
+            'Yes' if mentor.approved else '',
+            'Yes' if mentor.attendee_status.rsvp_confirmed else '',
+            'Yes' if mentor.attendee_status.checked_in else '',
+            HelpRequest.objects.filter(assigned_mentor=mentor).count()
+        ))
+
+    data.sort(key=lambda x: x[0])
+    table_rows.extend(data)
+    table = AsciiTable(table_data=table_rows, title=title)
+    print(table.table)
+    print()
+
+
+def print_judges(h: Hackathon):
+    title = 'Judges'
+
+    table_rows = [('Name', 'Approved?', 'RSVP\'d?', 'Checked-in?')]
+    data = []
+
+    judges = JudgeInfo.objects.filter(hackathon=h)
+    for judge in judges:
+        data.append((
+            '{} {}'.format(judge.user.first_name, judge.user.last_name),
+            'Yes' if judge.approved else '',
+            'Yes' if judge.attendee_status.rsvp_confirmed else '',
+            'Yes' if judge.attendee_status.checked_in else ''
+        ))
+
+    data.sort(key=lambda x: x[0])
+    table_rows.extend(data)
+    table = AsciiTable(table_data=table_rows, title=title)
+    print(table.table)
+    print()
+
+
+def print_organizers(h: Hackathon):
+    title = 'Organizers'
+
+    table_rows = [('Name', 'Approved?', 'RSVP\'d?', 'Checked-in?')]
+    data = []
+
+    organizers = OrganizerInfo.objects.filter(hackathon=h)
+    for organizer in organizers:
+        data.append((
+            '{} {}'.format(organizer.user.first_name, organizer.user.last_name),
+            'Yes' if organizer.approved else '',
+            'Yes' if organizer.attendee_status.rsvp_confirmed else '',
+            'Yes' if organizer.attendee_status.checked_in else ''
+        ))
+
+    data.sort(key=lambda x: x[0])
+    table_rows.extend(data)
+    table = AsciiTable(table_data=table_rows, title=title)
+    print(table.table)
+    print()
+
+
 def run():
     current_hackathon = Hackathon.objects.current()
     print_now()
@@ -153,3 +220,6 @@ def run():
     print_accounts()
     print_hackathon_attendees(current_hackathon)
     print_school_totals(current_hackathon)
+    print_mentors(current_hackathon)
+    print_judges(current_hackathon)
+    print_organizers(current_hackathon)

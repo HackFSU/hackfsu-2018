@@ -12,6 +12,7 @@
   },
   "main": "",
   "scripts": {
+    "stats": "python3.5 manage.py runscript print_totals > scripts/data/stats.txt --traceback",
     "gulp-bower": "gulp bower",
     "gulp-build": "gulp build",
     "gulp-html-watch": "gulp html:watch",

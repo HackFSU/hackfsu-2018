@@ -91,12 +91,12 @@ var sponsorData = locals.sponsorData = {
     acmAtFsu: {
         name: 'ACM at FSU',
         href: 'https://www.facebook.com/groups/cs.fsu.acm/',
-        logo: '/static/img/logos/acm-at-fsu.png'
+        logo: '/static/img/logos/acm/acm-at-fsu.png'
     },
     acmSiggraphAtFsu: {
         name: 'ACM SIGGRAPH at FSU',
         href: 'http://fsusiggraph.org',
-        logo: '/static/img/logos/acm-siggraph-at-fsu.png'
+        logo: '/static/img/logos/acm/acm-siggraph-at-fsu.png'
     },
     apple: {
         name: 'Apple',
@@ -112,17 +112,27 @@ var sponsorData = locals.sponsorData = {
     domiStation: {
         name: 'Domi Station',
         href: 'https://www.domistation.com',
-        logo: '/static/img/logos/domi-station.png'
+        logo: '/static/img/logos/domi/domi.png'
     },
     fitc: {
         name: 'Florida IT Career Alliance (FITC)',
         href: 'http://fitc.cci.fsu.edu/',
         logo: '/static/img/logos/fitc.png'
     },
+    github: {
+        name: 'GitHub',
+        href: 'https://education.github.com/pack',
+        logo: '/static/img/logos/github.png'
+    },
     fsuCollegeOfArtsAndSciences: {
         name: 'FSU College of Arts & Sciences',
         href: 'http://artsandsciences.fsu.edu/',
-        logo: '/static/img/logos/fsu-arts-sciences.png'
+        logo: '/static/img/logos/fsu/fsu-arts-sciences.png'
+    },
+    fsuDepartmentOfScientificComputing: {
+        name: 'FSU Department of Scientific Computing',
+        href: 'https://www.sc.fsu.edu',
+        logo: '#TODO'
     },
     genivia: {
         name: 'Genivia',
@@ -139,6 +149,11 @@ var sponsorData = locals.sponsorData = {
         href: 'http://hashrocket.com/',
         logo: '/static/img/logos/hashrocket.png'
     },
+    ibm: {
+        name: 'International Business Machines (IBM)',
+        href: 'http://ibm.com/bluemix',
+        logo: '/static/img/logos/ibm.png'
+    },
     ionicSecurity: {
         name: 'Ionic Security',
         href: 'https://www.ionic.com/',
@@ -147,7 +162,12 @@ var sponsorData = locals.sponsorData = {
     jmi: {
         name: 'The Jim Moran Institute For Global Entrepreneurship (JMI)',
         href: 'http://business.fsu.edu/jmi',
-        logo: '/static/img/logos/jmi.png'
+        logo: '/static/img/logos/jim-moran/jmi.png'
+    },
+    jms: {
+        name: 'Jim Moran School of Entrepreneurship',
+        href: 'http://business.fsu.edu/jmi',
+        logo: '/static/img/logos/jim-moran/jms-stacked.png'
     },
     lob: {
         name: 'Lob',
@@ -215,10 +235,15 @@ var sponsorData = locals.sponsorData = {
         href: 'http://www.taltech.org/',
         logo: '/static/img/logos/taltech.png'
     },
+    techDomains: {
+        name: '.tech Domains',
+        href: 'http://get.tech',
+        logo: '/static/img/logos/tech-domains.png'
+    },
     techNole: {
         name: 'TechNole',
         href: 'https://nolecentral.dsa.fsu.edu/organization/technole',
-        logo: '/static/img/logos/technole/technole-horizontal.png'
+        logo: '/static/img/logos/technole/technole-block.png'
     },
     theCrepeVine: {
         name: 'The Crepe Vine',
@@ -247,8 +272,18 @@ locals.sponsors = {
      '2017': {
         sponsors: {
             '3': [],
-            '2': [],
-            '1': []
+            '2': [
+                sponsorData.jms,
+                sponsorData.ibm
+                // sponsorData.fsuDepartmentOfScientificComputing TODO need logo
+            ],
+            '1': [
+                sponsorData.techDomains,
+                sponsorData.github,
+                sponsorData.domiStation,
+                sponsorData.stateFarm,
+                sponsorData.genivia
+            ]
         },
         partners: [
             sponsorData.techNole,

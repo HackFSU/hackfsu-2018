@@ -335,6 +335,10 @@
 }
 
 #sponsors-section {
+    .section-title-container {
+        padding-bottom: 0;
+    }
+
     .sponsor-tier {
         display: flex;
         width: 100%;
@@ -357,12 +361,11 @@
         max-width: 200px;
     }
     .sponsor-tier-1 .sponsor-logo-image {
-        max-width: 150px;
-        max-height: 140px;
+        max-width: 100px;
     }
     .sponsor-tier-title {
         text-align: center;
-        margin-top: 15px;
+        margin-top: 1em;
     }
 
     .sponsors-past {

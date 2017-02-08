@@ -203,7 +203,7 @@
             background-color: $color-light;
         }
         .section-content-container {
-            padding-top: 0px;
+            padding-top: 0;
             background-color: $color-light;
         }
 
@@ -277,14 +277,52 @@
 
 #schedule-section {
     .section-content-container {
-        background-color: transparent;
-        background-image: url('/static/img/pictures/time.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
+        background-color: $color-dark;
+
+        .schedule-day {
+            font-size: 1.2em;
+        }
     }
     .schedule-temp-filler {
         padding-bottom: 600px;
+    }
+
+    .schedule-item {
+        padding-bottom: 0.5em;
+
+        &:hover {
+            font-weight: bold;
+
+            .fa {
+                display: inline-block;
+            }
+        }
+
+        .fa {
+            display: none;
+            margin-left: 0.5em;
+        }
+
+    }
+
+    .schedule-item-description {
+        line-height: 0.8em;
+
+        span {
+            font-size: 0.7em;
+        }
+    }
+
+    .schedule-item-time {
+        text-align: right;
+    }
+
+    .schedule-day {
+        margin-bottom: 2em;
+
+        h1 {
+            font-size: 2em;
+        }
     }
 }
 
@@ -480,7 +518,38 @@
         }
     }
 
+    #schedule-section {
+        .container {
+            margin: 0;
+            width: 100%;
+        }
+    }
+}
 
+@media(min-width: $screen-md-min) {
+    #schedule-section {
+        $color-bg: darken(#c17254, 25%);     /* Sampled from image */
+        $color-bg-overlay: rgba($color-bg, 0.45);
+
+        .section-title-container .section-title-text {
+            color: $color-bg;
+        }
+
+        .section-content-container {
+            background-color: transparent;
+            background:
+                    linear-gradient(
+                        $color-bg-overlay,
+                        $color-bg-overlay
+                    ),
+                    url('/static/img/pictures/time.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            text-shadow: 1px 1px 1px $color-bg;
+
+        }
+    }
 }
 
 

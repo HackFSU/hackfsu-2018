@@ -3,7 +3,8 @@
 
   "globals": {
       "Cookies": true,
-      "moment": true
+      "moment": true,
+      "hackUtil": true
   },
 
   "node": false,

@@ -255,9 +255,10 @@ A list of all requests handled by the api in the format `<REQUEST_TYPE> <REQUEST
 ## Actions
 * POST `/api/hackathon/subscribe` [] - Subscribes an email for updates about the current hackathon
 ### Access
-* GET `/api/hackathon/get/schedule` [] - Returns current hackathon's schedule items in a list
+* GET `/api/hackathon/get/schedule_items` [] - Returns current hackathon's schedule items in a list
 * GET `/api/hackathon/get/sponsors` [] - Returns current hackathon's public sponsor list with logo image links
 * GET `/api/hackathon/get/stats` [] - Returns current hackathon's public statistics
+* GET `/api/hackathon/get/maps` [] - Returns the maps
 
 
 ## User

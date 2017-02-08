@@ -1,5 +1,6 @@
 from django.contrib.admin import AdminSite
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.admin import UserAdmin, GroupAdmin
 
 
 class HackFsuAdminSite(AdminSite):
@@ -9,7 +10,7 @@ class HackFsuAdminSite(AdminSite):
 
 
 hackfsu_admin = HackFsuAdminSite(name='hackfsu_admin')
-hackfsu_admin.register(User)
-hackfsu_admin.register(Group)
+hackfsu_admin.register(User, UserAdmin)
+hackfsu_admin.register(Group, GroupAdmin)
 
 

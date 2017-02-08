@@ -45,33 +45,6 @@ class MandrillContent(dict):
 global_merge_vars = MandrillContent()
 
 
-def send_template(to_email, to_first_name, to_last_name, template_name, subject, merge_vars=None,
-                  template_content=None):
-    """ Template sending wrapper for ease of use """
-
-    # Automatically add first and last name to context
-    merge_vars = MandrillContent(merge_vars if merge_vars is not None else {})
-
-    # Defaults
-    if 'first_name' not in merge_vars:
-        merge_vars['first_name'] = to_first_name
-    if 'last_name' not in merge_vars:
-        merge_vars['last_name'] = to_last_name
-
-    to = [{
-        'email': to_email,
-        'name': to_first_name + ' ' + to_last_name
-    }]
-
-    return email_recipients(
-        template_name=template_name,
-        template_content=template_content,
-        extra_global_merge_vars=merge_vars.list(),
-        subject=subject,
-        to=to,
-    )
-
-
 def email_recipients(template_name: str, subject: str, to: list, extra_global_merge_vars=list(), merge_vars=list(),
                      template_content=None):
     """ Template sending wrapper for ease of use """
@@ -103,6 +76,43 @@ def email_recipients(template_name: str, subject: str, to: list, extra_global_me
             logging.error('Unable to send email. Mandrill result: ' + str(result))
 
     return send_results
+
+
+def send_template(to_email, to_first_name, to_last_name, template_name, subject, merge_vars=None,
+                  template_content=None):
+    """ Template sending wrapper for ease of use """
+
+    # Automatically add first and last name to context
+    merge_vars = MandrillContent(merge_vars if merge_vars is not None else {})
+
+    # Defaults
+    if 'first_name' not in merge_vars:
+        merge_vars['first_name'] = to_first_name
+    if 'last_name' not in merge_vars:
+        merge_vars['last_name'] = to_last_name
+
+    to = [{
+        'email': to_email,
+        'name': to_first_name + ' ' + to_last_name
+    }]
+
+    return email_recipients(
+        template_name=template_name,
+        template_content=template_content,
+        extra_global_merge_vars=merge_vars.list(),
+        subject=subject,
+        to=to,
+    )
+
+
+def send_template_to_user(user: User, template_name, subject):
+    return send_template(
+        to_email=user.email,
+        to_first_name=user.first_name,
+        to_last_name=user.last_name,
+        template_name=template_name,
+        subject=subject
+    )
 
 
 def str_to_html_str(base_string: str) -> str:

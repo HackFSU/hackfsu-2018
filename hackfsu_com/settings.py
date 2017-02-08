@@ -58,7 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'api.middleware.JsonLoader'
+    'api.middleware.JsonLoader',
+    'hackfsu_com.middleware.RestrictStaffToAdminMiddleware'
 ]
 
 ROOT_URLCONF = 'hackfsu_com.urls'

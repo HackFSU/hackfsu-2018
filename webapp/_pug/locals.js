@@ -109,6 +109,12 @@ var sponsorData = locals.sponsorData = {
         href: 'https://www.codeschool.com/',
         logo: '/static/img/logos/code-school.png'
     },
+    cuttlesoft: {
+        name: 'Cuttlesoft',
+        href: 'https://www.cuttlesoft.com/',
+        logo: '/static/img/logos/cuttlesoft.png'
+
+    },
     domiStation: {
         name: 'Domi Station',
         href: 'https://www.domistation.com',
@@ -132,7 +138,8 @@ var sponsorData = locals.sponsorData = {
     fsuDepartmentOfScientificComputing: {
         name: 'FSU Department of Scientific Computing',
         href: 'https://www.sc.fsu.edu',
-        logo: '#TODO'
+        logo: '/static/img/logos/fsu/deptscicomp.png',
+        logoStyle: 'padding: 0 32px;'
     },
     genivia: {
         name: 'Genivia',
@@ -230,6 +237,11 @@ var sponsorData = locals.sponsorData = {
         href: 'http://www.statefarm.com',
         logo: '/static/img/logos/state-farm.png'
     },
+    syntech: {
+        name: 'Syntech',
+        href: 'http://www.myfuelmaster.com/careers',
+        logo: '/static/img/logos/syntech.png'
+    },
     talTech: {
         name: 'TalTech Alliance',
         href: 'http://www.taltech.org/',
@@ -274,15 +286,17 @@ locals.sponsors = {
             '3': [],
             '2': [
                 sponsorData.jms,
-                sponsorData.ibm
-                // sponsorData.fsuDepartmentOfScientificComputing TODO need logo
+                sponsorData.ibm,
+                sponsorData.fsuDepartmentOfScientificComputing,
+                sponsorData.cuttlesoft
             ],
             '1': [
                 sponsorData.techDomains,
                 sponsorData.github,
                 sponsorData.domiStation,
                 sponsorData.stateFarm,
-                sponsorData.genivia
+                sponsorData.genivia,
+                sponsorData.syntech
             ]
         },
         partners: [

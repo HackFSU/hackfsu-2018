@@ -5,7 +5,7 @@
 from django.db import models
 from django.contrib import admin
 from hackfsu_com.admin import hackfsu_admin
-
+from api.models import Hackathon, AttendeeStatus
 
 class School(models.Model):
     TYPE_CHOICES = (
@@ -24,9 +24,30 @@ class School(models.Model):
 @admin.register(School, site=hackfsu_admin)
 class SchoolAdmin(admin.ModelAdmin):
     list_filter = ('type', 'user_submitted')
-    list_display = ('name', 'type', 'user_submitted', 'url',)
+    list_display = (
+        'name', 'type', 'user_submitted', 'url',
+        'current_hackers_registered', 'current_hackers_rsvp', 'current_hackers_checked_in'
+    )
     list_editable = ()
     list_display_links = ('name',)
     search_fields = ('name',)
     ordering = ('name',)
 
+    @staticmethod
+    def current_hackers_registered(obj):
+        h = Hackathon.objects.current()
+        return AttendeeStatus.objects.filter(hackathon=h, hackerinfo__isnull=False, hackerinfo__school=obj).count()
+
+    @staticmethod
+    def current_hackers_rsvp(obj):
+        h = Hackathon.objects.current()
+        return AttendeeStatus.objects.filter(
+            hackathon=h, rsvp_confirmed=True, hackerinfo__isnull=False, hackerinfo__school=obj,
+        ).count()
+
+    @staticmethod
+    def current_hackers_checked_in(obj):
+        h = Hackathon.objects.current()
+        return AttendeeStatus.objects.filter(
+            hackathon=h, checked_in=True, hackerinfo__isnull=False, hackerinfo__school=obj,
+        ).count()

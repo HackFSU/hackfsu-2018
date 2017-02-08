@@ -292,15 +292,12 @@
 
         &:hover {
             font-weight: bold;
-
-            .fa {
-                display: inline-block;
-            }
         }
 
         .fa {
             display: none;
             margin-left: 0.5em;
+            font-size: 0.8em;
         }
 
     }
@@ -548,6 +545,10 @@
             background-position: center;
             text-shadow: 1px 1px 1px $color-bg;
 
+        }
+
+        .schedule-item:hover .fa {
+            display: inline-block;
         }
     }
 }

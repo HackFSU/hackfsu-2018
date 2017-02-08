@@ -4,7 +4,7 @@ from django.dispatch import receiver
 from django.db.models.signals import pre_delete
 from django.contrib import admin
 from api.models import Hackathon, School, AttendeeStatus
-from hackfsu_com.util import acl, files
+from hackfsu_com.util import acl, files, email
 from hackfsu_com.admin import hackfsu_admin
 
 
@@ -59,7 +59,35 @@ class HackerAdmin(admin.ModelAdmin):
     list_display_links = ('id',)
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'school__name')
     ordering = ('-created',)
+    # actions = ('approve_application', 'un_approve_application')
 
     @staticmethod
     def user_info(obj):
         return "{} {} - {}".format(obj.user.first_name, obj.user.last_name, obj.user.email)
+
+    def approve_application(self, request, queryset):
+        total = 0
+        for obj in queryset:
+            if obj.approved is False:
+                acl.add_user_to_group(obj.user, acl.group_hacker)
+                acl.remove_user_from_group(obj.user, acl.group_pending_hacker)
+                obj.approved = True
+                obj.save()
+                total += 1
+                email.send_template_to_user(
+                    obj.user, 'hacker_register_accepted', 'HackFSU Hacker Registration Approved'
+                )
+        self.message_user(request, 'Approved & emailed {} pending hackers'.format(total))
+    approve_application.short_description = 'Approve pending-hacker'
+
+    def un_approve_application(self, request, queryset):
+        total = 0
+        for obj in queryset:
+            if obj.approved is True:
+                acl.remove_user_from_group(obj.user, acl.group_hacker)
+                acl.add_user_to_group(obj.user, acl.group_pending_hacker)
+                obj.approved = False
+                obj.save()
+                total += 1
+        self.message_user(request, 'Un-approved {} hackers'.format(total))
+    un_approve_application.short_description = 'Un-Approve hacker'

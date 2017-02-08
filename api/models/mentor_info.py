@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
 from api.models import Hackathon, AttendeeStatus
-from hackfsu_com.util import acl
+from hackfsu_com.util import acl, email
 from django.contrib import admin
 from hackfsu_com.admin import hackfsu_admin
 
@@ -54,8 +54,35 @@ class MentorInfoAdmin(admin.ModelAdmin):
     list_display_links = ('id',)
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'affiliation', 'skills', 'motivation')
     ordering = ('-created',)
+    # actions = ('approve_application', 'un_approve_application')
 
     @staticmethod
     def user_info(obj):
         return "{} {} - {}".format(obj.user.first_name, obj.user.last_name, obj.user.email)
 
+    def approve_application(self, request, queryset):
+        total = 0
+        for obj in queryset:
+            if obj.approved is False:
+                acl.add_user_to_group(obj.user, acl.group_mentor)
+                acl.remove_user_from_group(obj.user, acl.group_pending_mentor)
+                obj.approved = True
+                obj.save()
+                total += 1
+                email.send_template_to_user(
+                    obj.user, 'mentor_register_accepted', 'HackFSU Mentor Registration Approved'
+                )
+        self.message_user(request, 'Approved & emailed {} pending mentors'.format(total))
+    approve_application.short_description = 'Approve pending-mentor'
+
+    def un_approve_application(self, request, queryset):
+        total = 0
+        for obj in queryset:
+            if obj.approved is True:
+                acl.remove_user_from_group(obj.user, acl.group_mentor)
+                acl.add_user_to_group(obj.user, acl.group_pending_mentor)
+                obj.approved = False
+                obj.save()
+                total += 1
+        self.message_user(request, 'Un-approved {} mentors'.format(total))
+    un_approve_application.short_description = 'Un-Approve mentor'

@@ -6,3 +6,4 @@ mandrill
 django-extensions
 terminaltables
 python-dateutil
+pytz

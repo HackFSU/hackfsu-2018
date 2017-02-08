@@ -142,8 +142,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'webapp/build/static'),
 ]
 
-
-
 IGNORABLE_404_URLS = [
     re.compile(r'\.(php|cgi|pug|scss)$'),
     re.compile(r'^/node_modules/'),

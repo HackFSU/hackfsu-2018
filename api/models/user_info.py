@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from api.models import Hackathon
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class UserInfo(models.Model):
@@ -31,7 +32,7 @@ class UserInfo(models.Model):
         return '[UserInfo {} {}]'.format(self.user.first_name, self.user.last_name)
 
 
-@admin.register(UserInfo)
+@admin.register(UserInfo, site=hackfsu_admin)
 class UserInfoAdmin(admin.ModelAdmin):
     list_filter = ('shirt_size',)
     list_display = ('id', 'user_info', 'phone_number', 'shirt_size', 'diet', 'github', 'linkedin', 'created')

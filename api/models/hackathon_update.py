@@ -1,6 +1,7 @@
 from django.db import models
 from api.models import Hackathon
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class HackathonUpdate(models.Model):
@@ -13,7 +14,7 @@ class HackathonUpdate(models.Model):
         return '[HackathonUpdate {} - {}]'.format(self.submit_time, self.title)
 
 
-@admin.register(HackathonUpdate)
+@admin.register(HackathonUpdate, site=hackfsu_admin)
 class HackathonUpdateAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
     list_display = ('id', 'title', 'content', 'submit_time')

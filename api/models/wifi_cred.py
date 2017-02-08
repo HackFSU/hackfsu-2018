@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 from api.models import Hackathon
+from hackfsu_com.admin import hackfsu_admin
 
 
 class WifiCred(models.Model):
@@ -14,7 +15,7 @@ class WifiCred(models.Model):
         return '[WifiCred {}]'.format(self.username)
 
 
-@admin.register(WifiCred)
+@admin.register(WifiCred, site=hackfsu_admin)
 class WifiCredAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
     list_display = ('username', 'assigned_user',)

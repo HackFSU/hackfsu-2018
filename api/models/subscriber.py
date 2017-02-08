@@ -1,6 +1,7 @@
 from django.db import models
 from api.models import Hackathon
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class Subscriber(models.Model):
@@ -12,7 +13,7 @@ class Subscriber(models.Model):
         return '[{} Subscriber, {}]'.format(self.hackathon, self.email)
 
 
-@admin.register(Subscriber)
+@admin.register(Subscriber, site=hackfsu_admin)
 class SubscriberAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
     list_display = ('email', 'hackathon', 'created')

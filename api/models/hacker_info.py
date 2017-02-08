@@ -5,6 +5,7 @@ from django.db.models.signals import pre_delete
 from django.contrib import admin
 from api.models import Hackathon, School, AttendeeStatus
 from hackfsu_com.util import acl, files
+from hackfsu_com.admin import hackfsu_admin
 
 
 class HackerInfo(models.Model):
@@ -49,7 +50,7 @@ def on_pre_delete(**kwargs):
         files.delete_if_exists(instance.resume_file_name)
 
 
-@admin.register(HackerInfo)
+@admin.register(HackerInfo, site=hackfsu_admin)
 class HackerAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'approved', 'is_first_hackathon', 'is_adult', 'school_year')
     list_display = ('id', 'user_info', 'attendee_status', 'approved', 'school', 'school_year', 'school_major',

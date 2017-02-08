@@ -1,6 +1,7 @@
 from django.db import models
 from api.models import Hackathon
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class HackathonMap(models.Model):
@@ -13,7 +14,7 @@ class HackathonMap(models.Model):
         return '[HackathonMap {}]'.format(self.title)
 
 
-@admin.register(HackathonMap)
+@admin.register(HackathonMap, site=hackfsu_admin)
 class HackathonMapAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
     list_display = ('id', 'title', 'link', 'order')

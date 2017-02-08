@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from hackfsu_com.util import acl
 from api.models import Hackathon
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class AttendeeStatusManager(models.Manager):
@@ -46,7 +47,7 @@ def on_pre_delete(**kwargs):
         acl.remove_user_from_group(instance.user, acl.group_attendee)
 
 
-@admin.register(AttendeeStatus)
+@admin.register(AttendeeStatus, site=hackfsu_admin)
 class AttendeeStatusAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'rsvp_email_sent', 'rsvp_confirmed', 'checked_in')
     list_display = ('id', 'user_info', 'created', 'comments')

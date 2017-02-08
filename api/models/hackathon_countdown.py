@@ -1,6 +1,7 @@
 from django.db import models
 from api.models import Hackathon
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class HackathonCountdown(models.Model):
@@ -13,7 +14,7 @@ class HackathonCountdown(models.Model):
         return self.title
 
 
-@admin.register(HackathonCountdown)
+@admin.register(HackathonCountdown, site=hackfsu_admin)
 class HackathonCountdownAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
     list_display = ('id', 'title', 'start', 'end')

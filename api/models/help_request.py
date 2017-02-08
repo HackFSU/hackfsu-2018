@@ -1,6 +1,7 @@
 from django.db import models
 from api.models import Hackathon, MentorInfo
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class HelpRequest(models.Model):
@@ -15,7 +16,7 @@ class HelpRequest(models.Model):
         return '[HelpRequest @ {}]'.format(self.created)
 
 
-@admin.register(HelpRequest)
+@admin.register(HelpRequest, site=hackfsu_admin)
 class HelpRequestAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
     list_display = ('id', 'created', 'assigned_mentor_info', 'attendee_name', 'location', 'description')

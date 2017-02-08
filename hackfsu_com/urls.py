@@ -15,9 +15,10 @@ Including another URL conf
 """
 
 from django.conf.urls import include, url
-from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from hackfsu_com.admin import hackfsu_admin
+
 
 app_name = 'hackfsu'
 handler404 = 'webapp.views.handler404'
@@ -25,7 +26,7 @@ handler500 = 'webapp.views.handler500'
 
 urlpatterns = [
     url(r'^api/', include('api.urls', namespace='api')),
-    url(r'^admin/django/', admin.site.urls),
+    url(r'^admin/django/', hackfsu_admin.urls),
     url('', include('webapp.urls', namespace='webapp'))
 ]
 

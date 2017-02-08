@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from api.models import Hackathon
+from hackfsu_com.admin import hackfsu_admin
 
 
 class ScheduleItem(models.Model):
@@ -24,7 +25,7 @@ class ScheduleItem(models.Model):
         return '[ScheduleItem {}]'.format(self.name)
 
 
-@admin.register(ScheduleItem)
+@admin.register(ScheduleItem, site=hackfsu_admin)
 class ScheduleItemAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
     list_display = ('id', 'name', 'type', 'start', 'end', 'description')

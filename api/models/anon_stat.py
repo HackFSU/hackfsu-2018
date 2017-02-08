@@ -1,6 +1,7 @@
 from django.db import models
 from api.models import Hackathon
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class AnonStat(models.Model):
@@ -30,7 +31,7 @@ class AnonStat(models.Model):
     value = models.CharField(max_length=3, choices=VALUE_CHOICES)
 
 
-@admin.register(AnonStat)
+@admin.register(AnonStat, site=hackfsu_admin)
 class AnonStatAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'key')
     list_display = ('id', 'key', 'value')

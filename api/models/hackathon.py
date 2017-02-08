@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 from api import cache
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class HackathonManager(models.Manager):
@@ -32,7 +33,7 @@ class Hackathon(models.Model):
             return self.name
 
 
-@admin.register(Hackathon)
+@admin.register(Hackathon, site=hackfsu_admin)
 class HackathonAdmin(admin.ModelAdmin):
     list_filter = ()
     list_display = ('id', 'name', 'current', 'start_date', 'end_date')

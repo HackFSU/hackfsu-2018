@@ -5,6 +5,7 @@ from django.db.models.signals import pre_delete
 from api.models import Hackathon, AttendeeStatus
 from hackfsu_com.util import acl
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class OrganizerInfo(models.Model):
@@ -29,7 +30,7 @@ def on_pre_delete(**kwargs):
         acl.remove_user_from_groups(instance.user, [acl.group_organizer, acl.group_pending_organizer])
 
 
-@admin.register(OrganizerInfo)
+@admin.register(OrganizerInfo, site=hackfsu_admin)
 class OrganizerInfoAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'approved')
     list_display = ('id', 'user_info', 'approved', 'teams', 'affiliation', 'motivation', 'created')

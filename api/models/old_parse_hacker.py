@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 # class OldParseHacker(models.Model):
 #     """ TODO """

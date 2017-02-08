@@ -4,6 +4,7 @@
 
 from django.db import models
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class School(models.Model):
@@ -20,7 +21,7 @@ class School(models.Model):
         return self.name
 
 
-@admin.register(School)
+@admin.register(School, site=hackfsu_admin)
 class SchoolAdmin(admin.ModelAdmin):
     list_filter = ('type', 'user_submitted')
     list_display = ('name', 'type', 'user_submitted', 'url',)

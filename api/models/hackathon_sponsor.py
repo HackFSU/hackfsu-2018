@@ -1,6 +1,7 @@
 from django.db import models
 from api.models import Hackathon
 from django.contrib import admin
+from hackfsu_com.admin import hackfsu_admin
 
 
 class HackathonSponsor(models.Model):
@@ -24,7 +25,7 @@ class HackathonSponsor(models.Model):
         return self.name
 
 
-@admin.register(HackathonSponsor)
+@admin.register(HackathonSponsor, site=hackfsu_admin)
 class HackathonSponsorAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'tier')
     list_display = ('id', 'hackathon', 'name', 'tier', 'order', 'logo_link', 'website_link')

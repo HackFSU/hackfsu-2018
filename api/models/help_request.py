@@ -18,8 +18,13 @@ class HelpRequest(models.Model):
 @admin.register(HelpRequest)
 class HelpRequestAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
-    list_display = ('id', 'created', 'assigned_mentor', 'attendee_name', 'location', 'description')
+    list_display = ('id', 'created', 'assigned_mentor_info', 'attendee_name', 'location', 'description')
     list_editable = ()
     list_display_links = ('id',)
     search_fields = ('attendee_name', 'location', 'description')
     ordering = ('-created',)
+
+    @staticmethod
+    def assigned_mentor_info(obj):
+        return "{} {} - {}".format(obj.assigned_mentor.first_name, obj.assigned_mentor.last_name,
+                                   obj.assigned_mentor.email)

@@ -60,7 +60,7 @@ def remove_user_from_group(user: User, group_name: str):
     validate_db_group(group_name)
     matched_group = user.groups.filter(name=group_name)
     if matched_group.exists():
-        user.groups.remove(matched_group)
+        user.groups.remove(matched_group[0])
     user.save()
 
 

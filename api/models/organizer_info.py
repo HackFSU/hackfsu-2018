@@ -32,9 +32,12 @@ def on_pre_delete(**kwargs):
 @admin.register(OrganizerInfo)
 class OrganizerInfoAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'approved')
-    list_display = ('id', 'user', 'approved', 'teams', 'affiliation', 'motivation', 'created')
+    list_display = ('id', 'user_info', 'approved', 'teams', 'affiliation', 'motivation', 'created')
     list_editable = ()
     list_display_links = ('id',)
-    search_fields = ('user', 'affiliation', 'teams', 'motivation')
+    search_fields = ('user__email', 'user__first_name', 'user__last_name', 'affiliation', 'teams', 'motivation')
     ordering = ('-created',)
 
+    @staticmethod
+    def user_info(obj):
+        return "{} {} - {}".format(obj.user.first_name, obj.user.last_name, obj.user.email)

@@ -52,9 +52,13 @@ def on_pre_delete(**kwargs):
 @admin.register(HackerInfo)
 class HackerAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'approved', 'is_first_hackathon', 'is_adult', 'school_year')
-    list_display = ('id', 'user', 'attendee_status', 'approved', 'school', 'school_year', 'school_major',
+    list_display = ('id', 'user_info', 'attendee_status', 'approved', 'school', 'school_year', 'school_major',
                     'is_first_hackathon', 'is_adult', 'interests', 'resume_file_name', 'created')
     list_editable = ()
     list_display_links = ('id',)
-    search_fields = ('user', 'school')
+    search_fields = ('user__email', 'user__first_name', 'user__last_name', 'school__name')
     ordering = ('-created',)
+
+    @staticmethod
+    def user_info(obj):
+        return "{} {} - {}".format(obj.user.first_name, obj.user.last_name, obj.user.email)

@@ -49,8 +49,12 @@ def on_pre_delete(**kwargs):
 @admin.register(AttendeeStatus)
 class AttendeeStatusAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'rsvp_email_sent', 'rsvp_confirmed', 'checked_in')
-    list_display = ('id', 'user', 'created', 'comments')
+    list_display = ('id', 'user_info', 'created', 'comments')
     list_editable = ('comments',)
     list_display_links = ('id',)
-    search_fields = ('user', 'comments')
+    search_fields = ('user__email', 'user__first_name', 'user__last_name', 'comments')
     ordering = ('-created',)
+
+    @staticmethod
+    def user_info(obj):
+        return "{} {} - {}".format(obj.user.first_name, obj.user.last_name, obj.user.email)

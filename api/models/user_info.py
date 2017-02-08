@@ -34,8 +34,12 @@ class UserInfo(models.Model):
 @admin.register(UserInfo)
 class UserInfoAdmin(admin.ModelAdmin):
     list_filter = ('shirt_size',)
-    list_display = ('id', 'user', 'phone_number', 'shirt_size', 'diet', 'github', 'linkedin', 'created')
+    list_display = ('id', 'user_info', 'phone_number', 'shirt_size', 'diet', 'github', 'linkedin', 'created')
     list_editable = ()
     list_display_links = ('id',)
-    search_fields = ('user', 'diet', 'github', 'linkedin')
+    search_fields = ('user__email', 'user__first_name', 'user__last_name', 'diet', 'github', 'linkedin')
     ordering = ('-created',)
+
+    @staticmethod
+    def user_info(obj):
+        return "{} {} - {}".format(obj.user.first_name, obj.user.last_name, obj.user.email)

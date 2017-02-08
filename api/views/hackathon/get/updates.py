@@ -17,7 +17,7 @@ class UpdatesView(PublicApiView):
 
     def work(self, request: HttpRequest, req: dict, res: dict):
         current_hackathon = Hackathon.objects.current()
-        updates = HackathonUpdate.objects.filter(hackathon=current_hackathon)
+        updates = HackathonUpdate.objects.filter(hackathon=current_hackathon).order_by('-submit_time')
 
         updates_list = []
         for update in updates:

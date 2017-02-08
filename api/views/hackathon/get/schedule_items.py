@@ -17,7 +17,7 @@ class ScheduleItemsView(PublicApiView):
 
     def work(self, request: HttpRequest, req: dict, res: dict):
         current_hackathon = Hackathon.objects.current()
-        items = ScheduleItem.objects.filter(hackathon=current_hackathon)
+        items = ScheduleItem.objects.filter(hackathon=current_hackathon).order_by('start', 'end')
 
         items_list = []
         for item in items:

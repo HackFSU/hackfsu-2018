@@ -21,13 +21,15 @@ def run():
     items = ScheduleItem.objects.filter(hackathon=h).order_by('start', 'end')
 
     title = '{} Schedule in {}'.format(h.name, EASTERN.zone)
-    data = [('Start', 'End', 'Event Name')]
+    data = [('Start', 'End', 'Type', 'Event Name', 'Description')]
 
     for item in items:
         data.append((
             format_time(item.start),
             format_time(item.end) if item.end is not None else 'n/a',
-            item.name
+            ScheduleItem.EVENT_TYPE[item.type][1],
+            item.name,
+            item.description
         ))
 
     table = AsciiTable(table_data=data, title=title)

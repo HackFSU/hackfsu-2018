@@ -27,8 +27,8 @@ class ScheduleItem(models.Model):
 @admin.register(ScheduleItem)
 class ScheduleItemAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
-    list_display = ('name', 'type', 'start', 'end', 'description')
-    list_editable = ('start', 'end')
-    list_display_links = ('name',)
+    list_display = ('id', 'name', 'type', 'start', 'end', 'description')
+    list_editable = ('name', 'start', 'end', 'description', 'type')
+    list_display_links = ('id',)
     search_fields = ('name',)
     ordering = ('hackathon', 'start')

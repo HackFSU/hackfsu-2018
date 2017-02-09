@@ -15,7 +15,7 @@ class PageView(View):
 
     def get(self, request):
         # Authenticate Access
-        if not self.access_manager.check_user(request.user):
+        if not self.authenticate(request):
             # Access denied
             return redirect(self.get_access_denied_redirect_url(request))
 
@@ -31,6 +31,10 @@ class PageView(View):
             look weird not initialized on html load.
         """
         pass
+
+    def authenticate(self, request):
+        """ May be overwritten to add more extensive auth. Should still be called via super """
+        return self.access_manager.check_user(request.user)
 
     def get_access_denied_redirect_url(self, request):
         """ May be overwritten if desired """

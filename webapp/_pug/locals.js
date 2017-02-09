@@ -42,7 +42,7 @@ locals.emails = {
 
 locals.navLinks = {
     index: [
-        { name: 'Register', url: '/register' },
+        { name: 'Login', url: '/login' },
         { name: 'About', url: '#about' },
         { name: 'Sponsors', url: '#sponsors' },
         { name: 'FAQ', url: '#faq' }

@@ -1,24 +1,32 @@
 (function($) {
     'use strict';
 
-    var GROUP = {
-        user: 'user',
-        attendee: 'attendee',
-        hacker: 'hacker',
-        judge: 'judge',
-        mentor: 'mentor',
-        organizer: 'organizer',
-        pending_hacker: 'pending-hacker',
-        pending_judge: 'pending-judge',
-        pending_mentor: 'pending-mentor',
-        pending_organizer: 'pending-organizer',
-        admin: 'admin'
-    };
+    var buttonContainer = $('#action-buttons');
 
-    function initActionButtons(groups) {
-        var buttonContainer = $('#action-buttons');
-        var buttons = [];
-        var i, btn;
+    var GROUP = hackUtil.GROUP;
+
+    function addActionButton(action) {
+        var btn = $('<button class="btn btn-form"></button>');
+        btn.prop('title', action.title);
+        btn.prop('disabled', !!action.disabled);
+        btn.text(action.text);
+        btn.appendTo(buttonContainer);
+        btn.wrap('<a href="'+action.url+'"></a>');
+    }
+
+    function initActionButtons(groups, rsvpConfirmed) {
+        if (!rsvpConfirmed && (
+            groups.includes(GROUP.hacker) ||
+            groups.includes(GROUP.mentor) ||
+            groups.includes(GROUP.judge) ||
+            groups.includes(GROUP.organizer))) {
+
+            addActionButton({
+                'text': 'RSVP!',
+                'url': '/user/rsvp'
+            });
+        }
+
 
         if (!groups.includes(GROUP.hacker) &&
             !groups.includes(GROUP.pending_hacker)) {
@@ -28,18 +36,16 @@
                 !groups.includes(GROUP.judge) &&
                 !groups.includes(GROUP.pending_judge)) {
 
-                buttons.push({
+                addActionButton({
                     'text': 'Register as a hacker',
                     'url': '/registration/hacker'
                 });
             }
 
-
-
             if (!groups.includes(GROUP.mentor) &&
                 !groups.includes(GROUP.pending_mentor)) {
 
-                buttons.push({
+                addActionButton({
                     'text': 'Register as a mentor',
                     'url': '/registration/mentor'
                 });
@@ -48,7 +54,7 @@
             if (!groups.includes(GROUP.judge) &&
                 !groups.includes(GROUP.pending_judge)) {
 
-                buttons.push({
+                addActionButton({
                     'text': 'Register as a judge',
                     'url': '/registration/judge'
                 });
@@ -57,7 +63,7 @@
             if (!groups.includes(GROUP.organizer) &&
                 !groups.includes(GROUP.pending_organizer)) {
 
-                buttons.push({
+                addActionButton({
                     'text': 'Register as a organizer',
                     'url': '/registration/organizer'
                 });
@@ -65,54 +71,33 @@
         } else if (!groups.includes(GROUP.mentor) &&
             !groups.includes(GROUP.pending_mentor)) {
 
-            buttons.push({
+            addActionButton({
                 'text': 'Register as a mentor',
                 'url': '/registration/mentor'
             });
         }
 
         if (groups.includes(GROUP.organizer)) {
-            buttons.push({
+            addActionButton({
                 'text': 'Django Admin Panel',
                 'url': '/admin/django'
             });
         }
-
-        var onClick = function() {
-            window.location.href = $(this).data('url');
-        };
-
-        for (i = 0; i < buttons.length; ++i) {
-            btn = $('<button class="btn btn-form"></button>');
-            btn.prop('title', buttons[i].title);
-            btn.prop('disabled', !!buttons[i].disabled);
-            btn.data('url', buttons[i].url);
-            btn.text(buttons[i].text);
-
-            btn.appendTo(buttonContainer);
-            btn.click(onClick);
-        }
     }
 
-    function initHackathonSection(hackathonData, groups) {
+    function initHackathonSection(hackathonData, groups, rsvpConfirmed) {
         var section = $('#hackathon');
         var start = moment(hackathonData.hackathon_start, 'YYYY-MM-DD');
         var end = moment(hackathonData.hackathon_end, 'YYYY-MM-DD');
 
-        groups = [].concat(groups);
-        var i = groups.indexOf(GROUP.attendee);
-        if (i !== -1) {
-            groups.splice(i, 1);
-        }
+        var groupString = hackUtil.getNiceGroupList('You are', groups);
 
-        if (groups.length === 0) {
-            groups.push('regular ' + GROUP.user);
+        if (rsvpConfirmed) {
+            groupString += ' You have also RSVP\'d for this hackathon!';
         }
-
-        var groupString = 'You are a ' + groups.sort().join(' and a ');
-        groupString = groupString.replace(/-/g, ' ').replace(/(a)\s([aeio])/g, 'an $2') + '.';
 
         // Account for not allowed data (-1)
+        var i;
         for (i in hackathonData) {
             if (hackathonData.hasOwnProperty(i) && hackathonData[i] === -1) {
                 hackathonData[i] = 'N/A';
@@ -204,11 +189,11 @@
         $.ajaxGet({
             url: '/api/hackathon/get/stats',
             success: function (data) {
-                initHackathonSection(data, pData.groups);
+                initHackathonSection(data, pData.groups, pData.rsvp_confirmed);
             }
         });
 
-        initActionButtons(pData.groups);
+        initActionButtons(pData.groups, pData.rsvp_confirmed);
 
         initAccountSection(pData);
 

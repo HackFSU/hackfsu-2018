@@ -3,7 +3,7 @@ from django import forms
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl
 from hackfsu_com.util.forms import JsonField
-from api.models import UserInfo
+from api.models import UserInfo, AttendeeStatus, Hackathon
 
 
 class ResponseForm(forms.Form):
@@ -16,6 +16,7 @@ class ResponseForm(forms.Form):
     diet = forms.CharField(required=False)
     github = forms.CharField(required=False)
     linkedin = forms.CharField(required=False)
+    rsvp_confirmed = forms.BooleanField(required=False)
 
 
 class ProfileView(ApiView):
@@ -37,4 +38,9 @@ class ProfileView(ApiView):
         res['linkedin'] = user_info.linkedin
         res['phone_number'] = user_info.phone_number
         res['diet'] = user_info.diet
+
+        # Attendee Status info
+        res['rsvp_confirmed'] = AttendeeStatus.objects.filter(
+            hackathon=Hackathon.objects.current(), user=request.user, rsvp_confirmed=True
+        ).exists()
 

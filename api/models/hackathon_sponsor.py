@@ -20,6 +20,7 @@ class HackathonSponsor(models.Model):
     logo_link = models.CharField(max_length=500)
     tier = models.SmallIntegerField(default=0, choices=SPONSOR_TIERS)
     order = models.SmallIntegerField(default=0)
+    on_mobile = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -27,9 +28,9 @@ class HackathonSponsor(models.Model):
 
 @admin.register(HackathonSponsor, site=hackfsu_admin)
 class HackathonSponsorAdmin(admin.ModelAdmin):
-    list_filter = ('hackathon', 'tier')
-    list_display = ('id', 'hackathon', 'name', 'tier', 'order', 'logo_link', 'website_link')
-    list_editable = ('hackathon', 'tier', 'order', 'logo_link')
+    list_filter = ('hackathon', 'tier', 'on_mobile')
+    list_display = ('id', 'hackathon', 'name', 'tier', 'order', 'on_mobile', 'logo_link', 'website_link')
+    list_editable = ('hackathon', 'tier', 'order', 'logo_link', 'on_mobile')
     list_display_links = ('id',)
     actions = ('duplicate',)
     search_fields = ('name',)

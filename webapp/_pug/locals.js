@@ -287,16 +287,16 @@ locals.sponsors = {
             '2': [
                 sponsorData.jms,
                 sponsorData.ibm,
-                sponsorData.fsuDepartmentOfScientificComputing,
-                sponsorData.cuttlesoft
+                sponsorData.fsuDepartmentOfScientificComputing
             ],
             '1': [
-                sponsorData.techDomains,
                 sponsorData.github,
-                sponsorData.domiStation,
                 sponsorData.stateFarm,
                 sponsorData.genivia,
-                sponsorData.syntech
+                sponsorData.domiStation,
+                sponsorData.cuttlesoft,
+                sponsorData.syntech,
+                sponsorData.techDomains
             ]
         },
         partners: [

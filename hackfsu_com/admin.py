@@ -7,6 +7,7 @@ class HackFsuAdminSite(AdminSite):
     site_header = 'HackFSU Administration'
     site_title = 'HackFSU Django Admin Panel'
     index_title = 'Home'
+    site_url = '/user/profile'
 
 
 hackfsu_admin = HackFsuAdminSite(name='hackfsu_admin')

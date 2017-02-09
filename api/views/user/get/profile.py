@@ -1,3 +1,6 @@
+"""
+    Retrieves basic user profile info
+"""
 
 from django import forms
 from hackfsu_com.views.generic import ApiView

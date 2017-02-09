@@ -1,5 +1,7 @@
 """
     Get list of countdowns for current hackathon
+
+    Will only return sponsors for app unless all=True
 """
 from django import forms
 from django.http.request import HttpRequest
@@ -8,16 +10,24 @@ from hackfsu_com.util.forms import JsonField
 from api.models import Hackathon, HackathonSponsor
 
 
+class RequestForm(forms.Form):
+    all = forms.BooleanField(required=False)
+
+
 class ResponseForm(forms.Form):
     sponsors = JsonField()
 
 
 class SponsorsView(PublicApiView):
+    request_form_class = RequestForm
     response_form_class = ResponseForm
 
     def work(self, request: HttpRequest, req: dict, res: dict):
         current_hackathon = Hackathon.objects.current()
         sponsors = HackathonSponsor.objects.filter(hackathon=current_hackathon)
+
+        if not req['all']:
+            sponsors = sponsors.filter(on_mobile=True)
 
         sponsors_list = []
         for sponsor in sponsors:

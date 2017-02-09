@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'organizer/get/profile$', views.organizer.get.ProfileView.as_view(), name='organizer-get-profile'),
 
     url(r'school/get$', views.school.GetView.as_view(), name='organizer-register'),
+
+    url(r'attendee/rsvp$', views.attendee.RsvpView.as_view())
 ]
 
 if settings.DEBUG:

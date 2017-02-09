@@ -40,7 +40,7 @@ class ApiView(View):
         """ Validates input and attempts to preform work() logic. Returns the correct JsonResponse """
 
         # Authenticate Access
-        if not self.access_manager.check_user(request.user):
+        if not self.authenticate(request):
             return JsonResponse({
                 'cause': _('Unauthorized')
             }, status=401)
@@ -105,3 +105,7 @@ class ApiView(View):
             :param res response data to be checked after this call
         """
         pass
+
+    def authenticate(self, request):
+        """ To be overridden if necessary. Should still be called with super """
+        return self.access_manager.check_user(request.user)

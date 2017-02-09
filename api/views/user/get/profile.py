@@ -44,6 +44,6 @@ class ProfileView(ApiView):
 
         # Attendee Status info
         res['rsvp_confirmed'] = AttendeeStatus.objects.filter(
-            hackathon=Hackathon.objects.current(), user=request.user, rsvp_confirmed=True
+            hackathon=Hackathon.objects.current(), user=request.user, rsvp_result=True
         ).exists()
 

@@ -13,40 +13,43 @@ def print_hackathon_attendees(hackathon: Hackathon):
             'All',
             AttendeeStatus.objects.filter(hackathon=hackathon).count(),
             'n/a',
-            AttendeeStatus.objects.filter(hackathon=hackathon, rsvp_confirmed=True).count(),
-            AttendeeStatus.objects.filter(hackathon=hackathon, checked_in=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, rsvp_result=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, checked_in_at__isnull=False).count(),
         ),
         (
             'Hackers',
             AttendeeStatus.objects.filter(hackathon=hackathon, hackerinfo__isnull=False).count(),
             AttendeeStatus.objects.filter(hackathon=hackathon, hackerinfo__isnull=False,
                                           hackerinfo__approved=True).count(),
-            AttendeeStatus.objects.filter(hackathon=hackathon, hackerinfo__isnull=False, rsvp_confirmed=True).count(),
-            AttendeeStatus.objects.filter(hackathon=hackathon, hackerinfo__isnull=False, checked_in=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, hackerinfo__isnull=False, rsvp_result=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, hackerinfo__isnull=False, checked_in_at__isnull=False).count(),
         ),
         (
             'Mentors',
             AttendeeStatus.objects.filter(hackathon=hackathon, mentorinfo__isnull=False).count(),
             AttendeeStatus.objects.filter(hackathon=hackathon, mentorinfo__isnull=False,
                                           mentorinfo__approved=True).count(),
-            AttendeeStatus.objects.filter(hackathon=hackathon, mentorinfo__isnull=False, rsvp_confirmed=True).count(),
-            AttendeeStatus.objects.filter(hackathon=hackathon, mentorinfo__isnull=False, checked_in=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, mentorinfo__isnull=False, rsvp_result=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, mentorinfo__isnull=False,
+                                          checked_in_at__isnull=False).count(),
         ),
         (
             'Judges',
             AttendeeStatus.objects.filter(hackathon=hackathon, judgeinfo__isnull=False).count(),
             AttendeeStatus.objects.filter(hackathon=hackathon, judgeinfo__isnull=False,
                                           judgeinfo__approved=True).count(),
-            AttendeeStatus.objects.filter(hackathon=hackathon, judgeinfo__isnull=False, rsvp_confirmed=True).count(),
-            AttendeeStatus.objects.filter(hackathon=hackathon, judgeinfo__isnull=False, checked_in=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, judgeinfo__isnull=False, rsvp_result=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, judgeinfo__isnull=False,
+                                          checked_in_at__isnull=False).count(),
         ),
         (
             'Organizers',
             AttendeeStatus.objects.filter(hackathon=hackathon, organizerinfo__isnull=False).count(),
             AttendeeStatus.objects.filter(hackathon=hackathon, organizerinfo__isnull=False,
                                           organizerinfo__approved=True).count(),
-            AttendeeStatus.objects.filter(hackathon=hackathon, organizerinfo__isnull=False, rsvp_confirmed=True).count(),
-            AttendeeStatus.objects.filter(hackathon=hackathon, organizerinfo__isnull=False, checked_in=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, organizerinfo__isnull=False, rsvp_result=True).count(),
+            AttendeeStatus.objects.filter(hackathon=hackathon, organizerinfo__isnull=False,
+                                          checked_in_at__isnull=False).count(),
         ),
     )
 
@@ -90,21 +93,21 @@ def print_school_totals(h: Hackathon):
 
     for hacker in HackerInfo.objects.filter(hackathon=h):
         if hacker.school not in school_counts:
-             school_counts[hacker.school] = {
+            school_counts[hacker.school] = {
                 'registered': 0,
                 'approved': 0,
                 'rsvp': 0,
                 'checked-in': 0
-             }
+            }
         school_counts[hacker.school]['registered'] += 1
 
         if hacker.approved:
             school_counts[hacker.school]['approved'] += 1
 
-        if hacker.attendee_status.rsvp_confirmed:
+        if hacker.attendee_status.rsvp_result:
             school_counts[hacker.school]['rsvp'] += 1
 
-        if hacker.attendee_status.checked_in:
+        if hacker.attendee_status.checked_in is not None:
             school_counts[hacker.school]['checked-in'] += 1
 
     table_rows = [('School', 'Registered', 'Approved', 'RSVP\'d', 'Checked-in')]

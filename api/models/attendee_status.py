@@ -27,13 +27,14 @@ class AttendeeStatus(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
-    comments = models.CharField(max_length=1000, default='', blank=True)
-    rsvp_email_sent = models.BooleanField(default=False)
-    rsvp_email_sent_timestamp = models.DateTimeField(null=True, blank=True)
-    rsvp_confirmed = models.BooleanField(default=False)
-    rsvp_confirmed_timestamp = models.DateTimeField(null=True, blank=True)
-    checked_in = models.BooleanField(default=False)
-    checked_in_timestamp = models.DateTimeField(null=True, blank=True)
+
+    comments = models.CharField(max_length=1000, default='', blank=True)    # Written by an admin manually if needed
+    extra_info = models.CharField(max_length=500, default='', blank=True)   # User submitted in RSVP
+
+    rsvp_email_sent_at = models.DateTimeField(null=True, blank=True)    # We asked them to rsvp
+    rsvp_submitted_at = models.DateTimeField(null=True, blank=True)     # They have submitted the RSVP form
+    rsvp_result = models.BooleanField(default=False)                    # True = Going, False = Not Going
+    checked_in_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return '[{} {}\'s Attendee Status]'.format(self.user.first_name, self.user.last_name)
@@ -47,10 +48,28 @@ def on_pre_delete(**kwargs):
         acl.remove_user_from_group(instance.user, acl.group_attendee)
 
 
+class CheckedInFilter(admin.SimpleListFilter):
+    title = 'Checked in'
+    parameter_name = 'checked_in_at'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('1', 'No'),
+            ('0', 'Yes')
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() in ('0', '1'):
+            kwargs = {'{}__isnull'.format(self.parameter_name): self.value() == '1'}
+            return queryset.filter(**kwargs)
+        return queryset
+
+
 @admin.register(AttendeeStatus, site=hackfsu_admin)
 class AttendeeStatusAdmin(admin.ModelAdmin):
-    list_filter = ('hackathon', 'rsvp_email_sent', 'rsvp_confirmed', 'checked_in')
-    list_display = ('id', 'user_info', 'created', 'comments')
+    list_filter = ('hackathon', 'rsvp_result', CheckedInFilter)
+    list_display = ('id', 'user_info', 'created', 'rsvp_email_sent_at',
+                    'rsvp_submitted_at', 'checked_in_at', 'comments', 'extra_info')
     list_editable = ('comments',)
     list_display_links = ('id',)
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'comments')

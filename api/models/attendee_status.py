@@ -27,13 +27,13 @@ class AttendeeStatus(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
-    comments = models.CharField(max_length=1000, default='')
+    comments = models.CharField(max_length=1000, default='', blank=True)
     rsvp_email_sent = models.BooleanField(default=False)
-    rsvp_email_sent_timestamp = models.DateTimeField(null=True)
+    rsvp_email_sent_timestamp = models.DateTimeField(null=True, blank=True)
     rsvp_confirmed = models.BooleanField(default=False)
-    rsvp_confirmed_timestamp = models.DateTimeField(null=True)
+    rsvp_confirmed_timestamp = models.DateTimeField(null=True, blank=True)
     checked_in = models.BooleanField(default=False)
-    checked_in_timestamp = models.DateTimeField(null=True)
+    checked_in_timestamp = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return '[{} {}\'s Attendee Status]'.format(self.user.first_name, self.user.last_name)

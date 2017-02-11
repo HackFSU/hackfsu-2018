@@ -14,6 +14,8 @@ from . import keys
 import os
 import re
 
+URL_BASE = "https://hackfsu.com/"
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -61,6 +63,9 @@ MIDDLEWARE = [
     'api.middleware.JsonLoader',
     'hackfsu_com.middleware.RestrictStaffToAdminMiddleware'
 ]
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+
 
 ROOT_URLCONF = 'hackfsu_com.urls'
 

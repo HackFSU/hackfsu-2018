@@ -40,6 +40,8 @@ urlpatterns = [
     url(r'^user/logout/$', views.user.logout_view, name='user-logout'),
     url(r'^user/profile/$', views.user.ProfilePage.as_view(), name='user-profile'),
     url(r'^user/rsvp/$', views.user.RsvpPage.as_view(), name='user-rsvp'),
+    url(r'^user/password/reset/$', views.user.password.StartResetPage.as_view()),
+    url(r'^user/password/reset/(?P<link_key>[A-Za-z0-9]{64})/$', views.user.password.CompleteResetPage.as_view()),
 
     url(r'^hype/$', views.hype.HypeIndex.as_view()),
     url(r'^hype/registration$', views.hype.HypeRegistration.as_view()),

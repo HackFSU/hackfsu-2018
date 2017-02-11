@@ -23,7 +23,7 @@ def log_user_in(request, email, password):
 
 class RequestForm(forms.Form):
     email = forms.EmailField(max_length=100)
-    password = forms.CharField(max_length=1000)
+    password = forms.CharField(min_length=8, max_length=1000)
 
 
 class LogInView(ApiView):

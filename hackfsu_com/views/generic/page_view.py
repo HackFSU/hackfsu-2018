@@ -13,7 +13,15 @@ class PageView(View):
     context = None
     access_manager = acl.AccessManager()
 
-    def get(self, request):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.args = list()
+        self.kwargs = dict()
+
+    def get(self, request, *args, **kwargs):
+        self.args = args
+        self.kwargs = kwargs
+
         # Authenticate Access
         if not self.authenticate(request):
             # Access denied

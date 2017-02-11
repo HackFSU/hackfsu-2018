@@ -18,7 +18,7 @@ class RequestForm(forms.Form):
     first_name = forms.CharField(max_length=100)
     last_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
-    password = forms.CharField(max_length=1000)
+    password = forms.CharField(min_length=8, max_length=1000)
     shirt_size = forms.ChoiceField(choices=UserInfo.SHIRT_SIZE_CHOICES)
     phone_number = forms.CharField(max_length=20)
     github = forms.CharField(required=False, max_length=100)

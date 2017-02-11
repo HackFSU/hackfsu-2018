@@ -13,11 +13,14 @@ block content
     form#login
         .form-section
             fieldset.row
-                label.col-md-2(for="email") Email *
-                .col-md-10: input.responsive(type="email" name="email" maxlength=100 placeholder="your@school.edu" required)
+                .field-label.col-md-2 Email *
+                .col-md-10: input.responsive(type="email" name="email" maxlength=100 placeholder="your@email.com" required)
             fieldset.row
-                label.col-md-2(for="password") Password *
-                .col-md-10: input.responsive(type="password" id="password" name="password" minlength=8 maxlength=100 placeholder="********************" required)
+                .field-label.col-md-2 Password *
+
+                .col-md-10: input.responsive(type="password" id="password" name="password" minlength=8 maxlength=1000 placeholder="********************" required)
         .form-section
-            .text-right
-                button.btn.btn-form(type="submit") Log in
+            fieldset.row
+                .field-label.col-md-3: a(href="/user/password/reset" title="Reset Password") Forgot your password?
+                .col-md-9.text-right
+                    button.btn.btn-form(type="submit") Log in

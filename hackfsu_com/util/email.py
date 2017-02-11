@@ -25,7 +25,9 @@ templates = [
     'organizer_register_accepted',
     'mandrill_test',
     'standard_html',
-    'unassigned_register_reminder'
+    'unassigned_register_reminder',
+    'password_reset',
+    'password_changed'
 ]
 
 default_from_email = 'noreply@hackfsu.com'
@@ -105,13 +107,14 @@ def send_template(to_email, to_first_name, to_last_name, template_name, subject,
     )
 
 
-def send_template_to_user(user: User, template_name, subject):
+def send_template_to_user(user: User, template_name, subject, merge_vars=None):
     return send_template(
         to_email=user.email,
         to_first_name=user.first_name,
         to_last_name=user.last_name,
         template_name=template_name,
-        subject=subject
+        subject=subject,
+        merge_vars=merge_vars
     )
 
 

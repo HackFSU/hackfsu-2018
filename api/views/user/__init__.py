@@ -5,5 +5,7 @@
 """
 
 from . import get
+from . import password
 from .login import LogInView
 from .register import RegisterView
+

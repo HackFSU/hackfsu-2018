@@ -39,7 +39,7 @@
     form.ajaxForm({
         url: '/api/user/register',
         getData: function() {
-            return {
+            var data =  {
                 agree_to_mlh_coc: mlhCoc.is(':checked'),
                 agree_to_mlh_data_sharing: mlhTac.is(':checked'),
                 g_recaptcha_response: window.grecaptcha.getResponse(),
@@ -53,6 +53,13 @@
                 linkedin: linkedInProfile.val().trim(),
                 diet: getDiet()
             };
+
+            if (!data.g_recaptcha_response) {
+                alert('Captcha required.');
+                throw new Error('Captcha required.');
+            }
+
+            return data;
         },
         onAjaxComplete: function() {
             var destination = '/user/profile';

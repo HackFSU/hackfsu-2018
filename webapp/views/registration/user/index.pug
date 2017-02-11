@@ -6,8 +6,8 @@ block vars
         var viewDir = "/static/views/registration/user"
 
 block append scripts
-    script(src=`${viewDir}/script.js`)
     script(src="https://www.google.com/recaptcha/api.js" async defer)
+    script(src=`${viewDir}/script.js`)
 
 block content
     h1 Registration
@@ -27,17 +27,17 @@ block content
 
             fieldset.row
                 .field-label.col-md-3 Email *
-                .col-md-9: input.responsive(type="email" name="email" maxlength=100 placeholder="your@school.edu" required)
+                .col-md-9: input.responsive(type="email" name="email" maxlength=100 placeholder="your@email.com (.edu preferred)" required)
             fieldset.row
                 .field-label.col-md-3 Password *
-                .col-md-9: input.responsive(type="password" id="password" name="password" minlength=8 maxlength=100 placeholder="********************" required)
+                .col-md-9: input.responsive(type="password" id="password" name="password" minlength=8 maxlength=1000 placeholder="********************" required)
             fieldset.row
                 label.col-md-3 Confirm Password *
                 .col-md-9: input.responsive(type="password" name="password2" minlength=8 maxlength=100 placeholder="********************" required data-parsley-equalto="#password")
         .form-section
             h2.form-section-title Who are you?
             fieldset.row
-                .field-label.col-md-3(for="first_name") First Name *
+                .field-label.col-md-3 First Name *
                 .col-md-9: input.responsive(type="text" name="first_name" maxlength=100 placeholder="John" required)
             fieldset.row
                 .field-label.col-md-3 Last Name *
@@ -106,7 +106,7 @@ block content
                     label(for="mlhtac") I agree to the terms of both the #[a(href=links.mlh.contestTerms target="_blank") MLH Contest Terms and Conditions] and the #[a(href=links.mlh.privatePolicy target="_blank") MLH Privacy Policy]. Please note that you may receive pre and post-event informational e-mails and occasional messages about hackathons from MLH as per the MLH Privacy Policy.
         .form-section
             .flex-center
-                .g-recaptcha(data-sitekey=keys.reCaptchaSiteKey)
+                .g-recaptcha(data-sitekey=locals.keys.reCaptchaSiteKey)
         .form-section
             .text-center
                 button.btn.btn-form(type="submit") Submit

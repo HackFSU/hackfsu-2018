@@ -107,7 +107,7 @@ def print_school_totals(h: Hackathon):
         if hacker.attendee_status.rsvp_result:
             school_counts[hacker.school]['rsvp'] += 1
 
-        if hacker.attendee_status.checked_in is not None:
+        if hacker.attendee_status.checked_in_at is not None:
             school_counts[hacker.school]['checked-in'] += 1
 
     table_rows = [('School', 'Registered', 'Approved', 'RSVP\'d', 'Checked-in')]
@@ -160,8 +160,8 @@ def print_mentors(h: Hackathon):
         data.append((
             '{} {}'.format(mentor.user.first_name, mentor.user.last_name),
             'Yes' if mentor.approved else '',
-            'Yes' if mentor.attendee_status.rsvp_confirmed else '',
-            'Yes' if mentor.attendee_status.checked_in else '',
+            'Yes' if mentor.attendee_status.rsvp_result else '',
+            'Yes' if mentor.attendee_status.checked_in_at is not None else '',
             HelpRequest.objects.filter(assigned_mentor=mentor).count()
         ))
 
@@ -183,8 +183,8 @@ def print_judges(h: Hackathon):
         data.append((
             '{} {}'.format(judge.user.first_name, judge.user.last_name),
             'Yes' if judge.approved else '',
-            'Yes' if judge.attendee_status.rsvp_confirmed else '',
-            'Yes' if judge.attendee_status.checked_in else ''
+            'Yes' if judge.attendee_status.rsvp_result else '',
+            'Yes' if judge.attendee_status.checked_in_at is not None else ''
         ))
 
     data.sort(key=lambda x: x[0])
@@ -205,8 +205,8 @@ def print_organizers(h: Hackathon):
         data.append((
             '{} {}'.format(organizer.user.first_name, organizer.user.last_name),
             'Yes' if organizer.approved else '',
-            'Yes' if organizer.attendee_status.rsvp_confirmed else '',
-            'Yes' if organizer.attendee_status.checked_in else ''
+            'Yes' if organizer.attendee_status.rsvp_result else '',
+            'Yes' if organizer.attendee_status.checked_in_at is not None else ''
         ))
 
     data.sort(key=lambda x: x[0])

@@ -19,10 +19,7 @@
     /**
      * Schedule
      */
-
-    var friSchedule = $('#friSchedule');
-    var satSchedule = $('#satSchedule');
-    var sunSchedule = $('#sunSchedule');
+    var scheduleDayContainer = $('#schedule-day-container');
     var timeFormat = 'h:mma';
 
     function getScheduleItemIconClass(type) {
@@ -67,13 +64,22 @@
             '</div></div>'
         );
 
-        switch (item.start.format('ddd')) {
-            case 'Fri': friSchedule.append(e); break;
-            case 'Sat': satSchedule.append(e); break;
-            case 'Sun': sunSchedule.append(e); break;
-            default:
-                console.error('Invalid schedule item start date', item);
+        // Add it to correct day
+        var date = item.start.format('YYYY-MM-DD');
+        var scheduleDay = scheduleDayContainer.find('.schedule-day').filter(function() {
+            return $(this).data('date') === date;
+        });
+
+        if (scheduleDay.length === 0) {
+            scheduleDay = $(
+                '<div class="schedule-day">' +
+                    '<h1>'+item.start.format('dddd')+'</h1>' +
+                    '<div class="schedule-item-container"></div>' +
+                '</div>'
+            ).appendTo(scheduleDayContainer);
+            scheduleDay.data('date', date);
         }
+        scheduleDay.find('.schedule-item-container').append(e);
     }
 
     $.ajaxGet({

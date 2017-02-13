@@ -69,7 +69,7 @@ class AccessManager(object):
                 return False
         else:
             # Anonymous user, not logged in
-            return self.allow_anon_users
+            return len(self.acl_accept) == 0 and self.allow_anon_users
 
         # Preform accept/deny checks
         if len(self.acl_accept) > 0 and not user.groups.filter(name__in=self.acl_accept).exists():

@@ -1,0 +1,130 @@
+extends ../../../_pug/userLayout.pug
+
+block vars
+    -
+        var pageName = "User Profile"
+        var viewDir = "/static/views/user/profile"
+
+block append styles
+    link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
+
+block append scripts
+    script(src=`${viewDir}/script.js`)
+
+block content
+
+
+    #hackathon.content-section
+        h1 HackFSU
+        h3 Be there!
+        h4 Loading profile information...
+        table.table
+            thead
+                tr
+                    th
+                    th Registered
+                    th Approved
+                    th Checked-in
+            tbody
+                tr
+                    th Hackers
+                    td N/A
+                    td N/A
+                    td N/A
+                tr
+                    th Mentors
+                    td N/A
+                    td N/A
+                    td N/A
+                tr
+                    th Judges
+                    td N/A
+                    td N/A
+                    td N/A
+                tr
+                    th Organizers
+                    td N/A
+                    td N/A
+                    td N/A
+
+    .content-section
+        #action-buttons.profile-action-buttons
+
+    #account.content-section
+        h1 Account
+        form: .form-section
+            fieldset.row
+                label.col-md-3 Email
+                .col-md-9: input.responsive(type="email" name="email" disabled)
+            fieldset.row
+                label.col-md-3 First Name
+                .col-md-9: input.responsive(type="text" name="first_name" disabled)
+            fieldset.row
+                label.col-md-3 Last Name
+                .col-md-9: input.responsive(type="text" name="last_name" disabled)
+            fieldset.row
+                label.col-md-3 Phone Number
+                .col-md-9: input.responsive(type="tel" name="phone" disabled)
+            fieldset.row
+                label.col-md-3 Shirt Size
+                .col-md-9: select.responsive(name="shirt_size" disabled)
+                    each val, key in locals.shirt_size_choices
+                        option(value=`${key}`)=val
+            fieldset.row
+                label.col-md-3 Github
+                .col-md-9: input.responsive(type="text" name="github" placeholder="None" disabled)
+            fieldset.row
+                label.col-md-3 LinkedIn
+                .col-md-9: input.responsive(type="url" name="linkedin" placeholder="None" disabled)
+            fieldset.row
+                label.col-md-3 Dietary Restrictions
+                .col-md-9: textarea.responsive(name="diet" placeholder="None" disabled)
+
+    #hacker.content-section(style="display:none")
+        h1 Hacker
+        h3 Status
+        form: .form-section
+            fieldset.row
+                label.col-md-3 School
+                .col-md-9: input.responsive(type="text" name="school" disabled)
+            fieldset.row
+                label.col-md-3 Status
+                .col-md-9: select.responsive(name="year" disabled)
+                    each val, key in locals.school_year_choices_all
+                        option(value=`${key}`)=val
+            fieldset.row
+                label.col-md-3 Major
+                .col-md-9: input.responsive(type="text" name="major" disabled)
+            fieldset.row
+                label.col-md-3 Will this be your first hackathon?
+                .col-md-9
+                    .col-md-2
+                        input(type="radio" name="first_hackathon" id="first-hack-true" disabled)
+                        label(for="first-hack-true") Yes
+                    .col-md-2
+                        input(type="radio" name="first_hackathon" id="first-hack-false" disabled)
+                        label(for="first-hack-false") No
+            fieldset.row
+                label.col-md-3 Are you 18 years or older?
+                .col-md-9
+                    .col-md-2
+                        input(type="radio" name="over_18" id="yes_adult" disabled)
+                        label(for="yes_adult") Yes
+                    .col-md-2
+                        input(type="radio" name="over_18" id="no_adult" disabled)
+                        label(for="no_adult") No
+            fieldset.row
+                label.col-md-3 Resume (PDF)
+                .col-md-9: span#hacker-resume
+            fieldset.row
+                label.col-md-3 Interests
+                .col-md-9: textarea.responsive(name="interests" placeholder="None" disabled)
+
+    #mentor.content-section(style="display:none")
+        h1 Mentor Info
+
+    #judge.content-section(style="display:none")
+        h1 Judge Info
+
+    #organizer.content-section(style="display:none")
+        h1 Organizer Info

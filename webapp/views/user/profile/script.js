@@ -82,6 +82,11 @@
                 'text': 'Django Admin Panel',
                 'url': '/admin/django'
             });
+
+            addActionButton({
+                'text': 'Organize',
+                'url': '/organize/'
+            });
         }
     }
 

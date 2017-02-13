@@ -46,6 +46,8 @@ urlpatterns = [
     url(r'^hype/$', views.hype.HypeIndex.as_view()),
     url(r'^hype/registration$', views.hype.HypeRegistration.as_view()),
 
+    url(r'^organize/$', views.organize.IndexPage.as_view()),
+
 
     # Shortcuts
     url(r'^register/$', RedirectView.as_view(url='/registration/user')),

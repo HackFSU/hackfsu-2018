@@ -19,6 +19,7 @@ urlpatterns = [
 
     url(r'hacker/register$', views.hacker.RegisterView.as_view(), name='hacker-register'),
     url(r'hacker/get/profile$', views.hacker.get.ProfileView.as_view(), name='hacker-get-profile'),
+    url(r'hacker/csv/by_school', views.hacker.csv.BySchoolCsv.as_view()),
 
     url(r'judge/register$', views.judge.RegisterView.as_view(), name='judge-register'),
     url(r'judge/get/profile$', views.judge.get.ProfileView.as_view(), name='judge-get-profile'),

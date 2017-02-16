@@ -27,7 +27,7 @@ def static_redirect(path):
 urlpatterns = [
     # Static Website Pages
     url(r'^$', views.IndexPage.as_view(), name='index'),
-    # url(r'^help$', views.HelpPage.as_view(), name='help'),
+    url(r'^help$', views.HelpPage.as_view(), name='help'),
 
     url(r'^registration/user/$', views.registration.UserRegistrationPage.as_view(), name='registration-user'),
     url(r'^registration/hacker/$', views.registration.HackerRegistrationPage.as_view(), name='registration-hacker'),

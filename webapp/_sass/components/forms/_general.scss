@@ -26,11 +26,7 @@
         }
 
     }
-    textarea {
-        border-radius: 5px;
-        height: 60px;
-        resize: vertical;
-    }
+
     input[type='text'],
     input[type='email'],
     input[type='password'],
@@ -59,6 +55,13 @@
     select:disabled {
         cursor: auto;
     }
+
+    textarea {
+        min-height: 6em;
+        max-height: 15em;
+        resize: vertical;
+    }
+
     textarea,
     select {
         border: 0.2em solid $form-border-color;

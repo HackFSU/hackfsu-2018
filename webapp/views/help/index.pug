@@ -1,4 +1,58 @@
 extends ../../_pug/standardLayout.pug
 
 block vars
-    - var pageName = "Help"
+    -
+        var pageName = "Help"
+        var viewDir = "/static/views/help"
+
+block append styles
+    script(src="https://www.google.com/recaptcha/api.js" async defer)
+    link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
+
+block append scripts
+    script(src=`${viewDir}/script.js`)
+
+block content
+    h1 Ask a mentor for help
+    p
+        | Having trouble with your hack? You can use this page to submit a help request to our mentors. They will seek you out and see if they can help you! If a mentor hasn't come to you after 10 minutes, just walk on over to the mentor lounge.
+
+    form#help
+        .form-section
+            fieldset.row
+                .field-label.col-md-2 Your Name *
+                .col-md-10: input.responsive(type="text" name="attendee_name" maxlength="100" placeholder="John Doe" required)
+            fieldset.row
+                .field-label.col-md-2 Your Description *
+                .col-md-10: input.responsive(type="text" name="attendee_description" maxlength="100" placeholder="I am wearing a black shirt, I am a penguin, etc." required)
+            fieldset.row
+                .field-label.col-md-2 Your Location *
+                .col-md-10
+                    select.responsive(name="location_floor" required)
+                        option(value="3" data-img=locals.maps.dirac[3] selected)= locals.options.location_floor[3]
+                        option(value="2" data-img=locals.maps.dirac[2])= locals.options.location_floor[2]
+                        option(value="1" data-img=locals.maps.dirac[1])= locals.options.location_floor[1]
+                    br
+                    br
+                    #floor-map
+                        p.map-text.text-center
+                            | Click where you are on the map
+                        .map-pin(style="display: none;"): span.fa.fa-2x.fa-map-marker
+                        img(width="100%" height="auto" src=locals.maps.dirac[3])
+
+            fieldset.row
+                .field-label.col-md-2 Topic(s) *
+                .col-md-10: .row
+                    each type, index in locals.options.help_topics
+                        .col-sm-4
+                            input.request-topic(type="checkbox" id=`request-topic-${index}` data-value=`${type}`)
+                            label(for=`request-topic-${index}`)=type
+            fieldset.row
+                .field-label.col-md-2 Details *
+                .col-md-10: textarea.responsive(name="request_details" maxlength="500" placeholder="I've never done this before and I'm frustrated... I have this bug and it is driving me insane... I would like help learning..." required)
+
+        .form-section
+            .flex-center
+                .g-recaptcha(data-sitekey=locals.keys.reCaptchaSiteKey)
+        .form-section.text-center
+            button.btn.btn-form(type="submit") Help Me!

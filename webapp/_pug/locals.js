@@ -43,7 +43,7 @@ locals.emails = {
 locals.navLinks = {
     index: [
         { name: 'Login', url: '/login' },
-        { name: 'About', url: '#about' },
+        { name: 'Get Help', url: '/help' },
         { name: 'Sponsors', url: '#sponsors' },
         { name: 'FAQ', url: '#faq' }
     ],
@@ -63,13 +63,14 @@ locals.navLinks = {
 
     // For regular non-index pages
     standard: [
+        { name: 'Get Help', url: '/help' },
         { name: 'Register', url: '/register' },
-        // { name: 'Help', url: '/help' },
         { name: 'Login', url: '/user/login' }
     ],
 
     // For regular user pages
     user: [
+        { name: 'Get Help', url: '/help' },
         { name: 'Profile', url: '/user/profile' },
         { name: 'Logout', url: '/user/logout' }
     ]
@@ -463,8 +464,43 @@ locals.options = {
         'Android',
         'Virtual Reality',
         'Design'
-    ]
+    ],
+    location_floor: {
+        1: 'Basement Level',
+        2: 'Entrance Level',
+        3: 'Upper Level'
+    }
 };
+
+locals.options.help_topics = locals.options.project_types.slice().concat([
+    'Hosting Servers',
+    'Domain Names',
+    'Databases',
+    'NodeJS',
+    'Git/GitHub',
+    'Django',
+    'Bootstrap',
+    'C',
+    'C++',
+    'Java',
+    'Python',
+    'Swift',
+    'Objective-C',
+    'PHP',
+    'Ruby',
+    'C#',
+    'SQL',
+    'NoSQL',
+    'JavaScript',
+    'HTML/CSS',
+    'Jade/Pug',
+    'Sass/Less',
+    'HackFSU General',
+    'HackFSU Wifi',
+    'HackFSU DevPost',
+    'Other'
+]);
+
 
 // Keys as bit flags
 locals.options.mentor_availability[''+Math.pow(2,0)] = 'Friday - Late Night';
@@ -477,6 +513,13 @@ locals.options.mentor_availability[''+Math.pow(2,6)] = 'Sunday - Early Morning';
 locals.options.mentor_availability[''+Math.pow(2,7)] = 'Sunday - Morning';
 locals.options.mentor_availability[''+Math.pow(2,8)] = 'Sunday - Afternoon';
 
+locals.maps = {
+    dirac: {
+        1: '/static/img/maps/dirac-b.png',
+        2: '/static/img/maps/dirac-1.png',
+        3: '/static/img/maps/dirac-2.png'
+    }
+};
 
 
 

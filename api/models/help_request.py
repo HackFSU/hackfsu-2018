@@ -26,10 +26,27 @@ class HelpRequest(models.Model):
         return '[HelpRequest @ {}]'.format(self.created)
 
 
+class ClaimedFilter(admin.SimpleListFilter):
+    title = 'Claimed'
+    parameter_name = 'assigned_mentor'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('1', 'No'),
+            ('0', 'Yes')
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() in ('0', '1'):
+            kwargs = {'{}__isnull'.format(self.parameter_name): self.value() == '1'}
+            return queryset.filter(**kwargs)
+        return queryset
+
+
 @admin.register(HelpRequest, site=hackfsu_admin)
 class HelpRequestAdmin(admin.ModelAdmin):
-    list_filter = ('hackathon',)
-    list_display = ('id', 'created', 'assigned_mentor_info', 'attendee_name', 'request')
+    list_filter = ('hackathon', ClaimedFilter)
+    list_display = ('id', 'assigned_mentor_info', 'attendee_name', 'request', 'location_floor', 'created')
     list_editable = ()
     list_display_links = ('id',)
     search_fields = ('attendee_name', 'location', 'description')
@@ -37,5 +54,11 @@ class HelpRequestAdmin(admin.ModelAdmin):
 
     @staticmethod
     def assigned_mentor_info(obj):
-        return "{} {} - {}".format(obj.assigned_mentor.first_name, obj.assigned_mentor.last_name,
-                                   obj.assigned_mentor.email)
+        if obj.assigned_mentor is not None:
+            return "{} {} - {}".format(
+                obj.assigned_mentor.user.first_name,
+                obj.assigned_mentor.user.last_name,
+                obj.assigned_mentor.user.email
+            )
+        else:
+            return '<unclaimed>'

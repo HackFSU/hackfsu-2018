@@ -1,0 +1,32 @@
+#floor-map {
+    display: block;
+    width: 100%;
+    position: relative;
+
+    .map-pin {
+        font-size: 16px;
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        color: red;
+
+        .fa {
+            margin-left: -10px;
+        }
+    }
+
+    img {
+        z-index: 1;
+        border: 3px solid;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .map-text-error {
+        color: red;
+    }
+}

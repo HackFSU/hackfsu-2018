@@ -6,7 +6,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl
-from api.models import HelpRequest
+from api.models import HelpRequest, MentorInfo
 
 
 class RequestForm(forms.Form):
@@ -24,10 +24,10 @@ class ClaimView(ApiView):
         else:
             raise ValidationError('Invalid help request id')
 
-        if hasattr(help_request, 'assigned_mentor'):
+        if help_request.assigned_mentor is not None:
             # Already claimed
             raise ValidationError('Cannot claim help request because it is already claimed')
 
         # Assign to mentor
-        help_request.assigned_mentor = request.user.mentor_info
+        help_request.assigned_mentor = MentorInfo.objects.get(user=request.user)
         help_request.save()

@@ -48,6 +48,9 @@ urlpatterns = [
 
     url(r'^organize/$', views.organize.IndexPage.as_view()),
 
+    url(r'^mentor/$', views.mentor.IndexPage.as_view()),
+    url(r'^mentor/request/(?P<id>\d+)/$', views.mentor.RequestPage.as_view()),
+
 
     # Shortcuts
     url(r'^register/$', RedirectView.as_view(url='/registration/user')),

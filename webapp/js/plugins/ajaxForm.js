@@ -44,46 +44,6 @@
         }
     }
 
-    function ajaxJsonSubmit(options) {
-        var dfd = $.Deferred();
-        var defaultAjaxOptions = {
-            type: 'POST',
-            contentType: 'application/json; charset=UTF-8',
-            headers: {
-                'X-CSRFToken': Cookies.get('csrftoken')
-            },
-            success: function(response) {
-                if (response.error) {
-                    console.error('Server Error:', response.error);
-                    dfd.reject(response.error);
-                } else {
-                    dfd.resolve(response);
-                }
-            },
-            error: function(response) {
-                console.error('Server Error:', response);
-                var err = JSON.parse(response.responseText);
-                alert(err.cause + ': ' + err.message);
-                dfd.reject(response);
-            }
-        };
-
-        $.ajax($.extend({}, defaultAjaxOptions, options));
-
-        return dfd.promise();
-    }
-
-    function jsonToFormData(jsonData) {
-        var fd = new FormData();
-        for (var key in jsonData) {
-            if (jsonData.hasOwnProperty(key) && jsonData[key] !== null && jsonData[key] !== undefined) {
-                fd.append(key, jsonData[key]);
-            }
-        }
-        return fd;
-    }
-
-
     $.fn.ajaxForm = function(options) {
         if (!this.is('form')) {
             throw TypeError('Must be a form element');
@@ -123,7 +83,7 @@
 
                 if (o.useFormData) {
                     // Send formData
-                    ajaxOptions.data = jsonToFormData(jsonData);
+                    ajaxOptions.data = window.hackUtil.jsonToFormData(jsonData);
                     ajaxOptions.processData = false;
                     ajaxOptions.contentType = false;
                 } else {
@@ -131,7 +91,7 @@
                     ajaxOptions.data = JSON.stringify(jsonData);
                 }
 
-                ajaxJsonSubmit(ajaxOptions)
+                window.hackUtil.ajaxJsonSubmit(ajaxOptions)
                 .done(function(response) {
                     o.onAjaxComplete(response, jsonData);
                 })

@@ -61,4 +61,45 @@
         return moment.utc(pythonIsoDateString, hackUtil.PYTHON_DATETIME_SERIALIZED_ISO_FORMAT).local();
     };
 
+    hackUtil.jsonToFormData = function(jsonData) {
+        var fd = new FormData();
+        for (var key in jsonData) {
+            if (jsonData.hasOwnProperty(key) && jsonData[key] !== null && jsonData[key] !== undefined) {
+                fd.append(key, jsonData[key]);
+            }
+        }
+        return fd;
+    };
+
+    hackUtil.ajaxJsonSubmit = function(options) {
+        var dfd = $.Deferred();
+        var defaultAjaxOptions = {
+            type: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            headers: {
+                'X-CSRFToken': Cookies.get('csrftoken')
+            },
+            success: function(response) {
+                if (response.error) {
+                    console.error('Server Error:', response.error);
+                    dfd.reject(response.error);
+                } else {
+                    dfd.resolve(response);
+                }
+            },
+            error: function(response) {
+                console.error('Server Error:', response);
+                var err = JSON.parse(response.responseText);
+                alert(err.cause + ': ' + err.message);
+                dfd.reject(response);
+            }
+        };
+
+        $.ajax($.extend({}, defaultAjaxOptions, options));
+
+        return dfd.promise();
+    };
+
+
+
 })();

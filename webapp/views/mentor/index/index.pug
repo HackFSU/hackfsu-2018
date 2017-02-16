@@ -1,0 +1,12 @@
+extends ../../../_pug/standardLayout.pug
+
+block vars
+    -
+        var pageName = "Mentor"
+        var viewDir = "/static/views/mentor/index"
+
+block append scripts
+    script(src=`${viewDir}/script.js`)
+
+block content
+    h1 Mentor

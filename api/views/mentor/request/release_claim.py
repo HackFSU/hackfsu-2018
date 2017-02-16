@@ -6,7 +6,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl
-from api.models import HelpRequest
+from api.models import HelpRequest, MentorInfo
 
 
 class RequestForm(forms.Form):
@@ -24,8 +24,8 @@ class ReleaseClaimView(ApiView):
         else:
             raise ValidationError('Invalid help request id')
 
-        if not hasattr(help_request, 'assigned_mentor') \
-                or help_request.assigned_mentor is not request.user.mentor_info:
+        if help_request.assigned_mentor is None \
+                or help_request.assigned_mentor != MentorInfo.objects.get(user=request.user):
             raise ValidationError('You may only un-claim your own claimed requests')
 
         # Remove claim

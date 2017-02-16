@@ -3,6 +3,7 @@ from django.contrib.postgres.fields import JSONField
 from api import cache
 from django.contrib import admin
 from hackfsu_com.admin import hackfsu_admin
+from django.utils import timezone
 
 
 class HackathonManager(models.Manager):
@@ -31,6 +32,13 @@ class Hackathon(models.Model):
             return '** {} **'.format(self.name)
         else:
             return self.name
+
+    def is_today(self):
+        """
+            Returns t/f based on if the hackathon is happening today
+        """
+        today = timezone.now().date()
+        return (self.start_date <= today) and (today <= self.end_date)
 
 
 @admin.register(Hackathon, site=hackfsu_admin)

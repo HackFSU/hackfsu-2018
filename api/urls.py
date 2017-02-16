@@ -26,6 +26,10 @@ urlpatterns = [
 
     url(r'mentor/register$', views.mentor.RegisterView.as_view(), name='mentor-register'),
     url(r'mentor/get/profile$', views.mentor.get.ProfileView.as_view(), name='mentor-get-profile'),
+    url(r'mentor/request/create$', views.mentor.request.CreateView.as_view()),
+    url(r'mentor/request/claim$', views.mentor.request.ClaimView.as_view()),
+    url(r'mentor/request/release_claim$', views.mentor.request.ReleaseClaimView.as_view()),
+    url(r'mentor/request/get/all$', views.mentor.request.get.AllView.as_view()),
 
     url(r'organizer/register$', views.organizer.RegisterView.as_view(), name='organizer-register'),
     url(r'organizer/get/profile$', views.organizer.get.ProfileView.as_view(), name='organizer-get-profile'),

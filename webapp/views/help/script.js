@@ -42,8 +42,8 @@
         var y = Math.round(ev.pageY - offset.top);
 
         mapPin.toggle(true);
-        mapPin.data('x-percent', Math.round(x/mapImage.innerWidth()*10000));
-        mapPin.data('y-percent', Math.round(y/mapImage.innerHeight()*10000));
+        mapPin.data('x-percent', Math.round(x/mapImage.innerWidth()*10000.0));
+        mapPin.data('y-percent', Math.round(y/mapImage.innerHeight()*10000.0));
         positionPin();
     });
 

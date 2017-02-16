@@ -5,11 +5,8 @@ block vars
         var pageName = "Help"
         var viewDir = "/static/views/help"
 
-block append styles
-    script(src="https://www.google.com/recaptcha/api.js" async defer)
-    link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
-
 block append scripts
+    script(src="https://www.google.com/recaptcha/api.js" async defer)
     script(src=`${viewDir}/script.js`)
 
 block content
@@ -34,10 +31,11 @@ block content
                         option(value="1" data-img=locals.maps.dirac[1])= locals.options.location_floor[1]
                     br
                     br
-                    #floor-map
-                        p.map-text.text-center
-                            | Click where you are on the map
-                        .map-pin(style="display: none;"): span.fa.fa-2x.fa-map-marker
+                    p.map-text.text-center
+                        | Click where you are on the map
+                    #floor-map.editable
+                        .map-pin(style="display: none;")
+                            .map-pin-icon-container: span.fa.fa-3x.fa-map-marker
                         img(width="100%" height="auto" src=locals.maps.dirac[3])
 
             fieldset.row

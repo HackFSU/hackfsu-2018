@@ -25,3 +25,43 @@
         width: 53px;
     }
 }
+
+
+#floor-map {
+    display: block;
+    width: 100%;
+    position: relative;
+
+    .map-pin {
+        font-size: 16px;
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        color: red;
+
+
+    }
+    .map-pin-icon-container {
+        position: relative;
+
+        .fa {
+            position: absolute;
+            top: -1em;
+            left: -0.3em;
+        }
+    }
+
+    img {
+        z-index: 1;
+        border: 3px solid;
+    }
+
+    &.editable {
+        img {
+            cursor: pointer;
+        }
+    }
+
+}

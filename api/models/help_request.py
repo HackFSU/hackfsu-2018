@@ -25,6 +25,29 @@ class HelpRequest(models.Model):
     def __str__(self):
         return '[HelpRequest @ {}]'.format(self.created)
 
+    def json(self, check_user):
+        r = {
+            'id': self.id,
+            'location': {
+                'floor': self.location_floor,
+                'x': self.location_x,
+                'y': self.location_y
+            },
+            'attendee': {
+                'name': self.attendee_name,
+                'description': self.attendee_description
+            },
+            'request': self.request
+        }
+
+        if self.assigned_mentor is not None:
+            user = self.assigned_mentor.user
+            r['assigned_mentor'] = {
+                'name': '{} {}'.format(user.first_name, user.last_name),
+                'is_me': user.id == check_user.id
+            }
+        return r
+
 
 class ClaimedFilter(admin.SimpleListFilter):
     title = 'Claimed'

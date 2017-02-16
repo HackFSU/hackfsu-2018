@@ -30,10 +30,19 @@ class ApiView(View):
     response_form_class = forms.Form    # Override each time
     access_manager = acl.AccessManager()
 
-    def get(self, request: HttpRequest):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.kwargs = list()
+        self.args = list()
+
+    def get(self, request: HttpRequest,  *args, **kwargs):
+        self.args = args
+        self.kwargs = kwargs
         return self.process(request, request.GET)
 
-    def post(self, request: HttpRequest):
+    def post(self, request: HttpRequest, *args, **kwargs):
+        self.args = args
+        self.kwargs = kwargs
         return self.process(request, request.POST)
 
     def process(self, request: HttpRequest, input_data: dict):

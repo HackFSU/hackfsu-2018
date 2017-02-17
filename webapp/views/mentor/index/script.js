@@ -85,6 +85,7 @@
                 "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             // scrollX: true,
             responsive: true,
+            lengthMenu: [[25, 50, 100, -1], [25, 50, 100, 'All']],
             data: data,
             columns: $.map(colData, function(data) {
                 return data;

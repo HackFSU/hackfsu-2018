@@ -1,0 +1,19 @@
+extends ../../../_pug/userLayout.pug
+
+block vars
+    -
+        var pageName = "Organize Attendees"
+        var viewDir = "/static/views/organize/attendees"
+        var DataTables = true
+
+block append scripts
+    script(src=`${viewDir}/script.js`)
+
+block content
+    h1 Organize Attendees
+
+    p You can use this page to check in any attendee (Hacker/Mentor/Judge/Organizer).
+
+    br
+    h3 Approved Attendees
+    table#attendees.table.table-striped.table-bordered(cellspacing="0" width="100%")

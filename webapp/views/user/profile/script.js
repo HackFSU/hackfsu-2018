@@ -97,7 +97,7 @@
         }
     }
 
-    function initHackathonSection(hackathonData, groups, rsvpConfirmed) {
+    function initHackathonSection(hackathonData, groups, rsvpConfirmed, checkedIn) {
         var section = $('#hackathon');
         var start = moment(hackathonData.hackathon_start, 'YYYY-MM-DD');
         var end = moment(hackathonData.hackathon_end, 'YYYY-MM-DD');
@@ -105,7 +105,10 @@
         var groupString = hackUtil.getNiceGroupList('You are', groups);
 
         if (rsvpConfirmed) {
-            groupString += ' You have also RSVP\'d for this hackathon!';
+            groupString += ' You have RSVP\'d.';
+        }
+        if (checkedIn) {
+            groupString += ' You have checked in.';
         }
 
         // Account for not allowed data (-1)
@@ -207,7 +210,7 @@
         $.ajaxGet({
             url: '/api/hackathon/get/stats',
             success: function (data) {
-                initHackathonSection(data, pData.groups, pData.rsvp_confirmed);
+                initHackathonSection(data, pData.groups, pData.rsvp_confirmed, pData.checked_in);
             }
         });
 

@@ -20,6 +20,7 @@ class ResponseForm(forms.Form):
     github = forms.CharField(required=False)
     linkedin = forms.CharField(required=False)
     rsvp_confirmed = forms.BooleanField(required=False)
+    checked_in = forms.BooleanField(required=False)
 
 
 class ProfileView(ApiView):
@@ -44,6 +45,10 @@ class ProfileView(ApiView):
 
         # Attendee Status info
         res['rsvp_confirmed'] = AttendeeStatus.objects.filter(
-            hackathon=Hackathon.objects.current(), user=request.user, rsvp_result=True
+            hackathon=Hackathon.objects.current(), user=request.user, rsvp_submitted_at__isnull=False
         ).exists()
+        res['checked_in'] = AttendeeStatus.objects.filter(
+            hackathon=Hackathon.objects.current(), user=request.user, checked_in_at__isnull=False
+        ).exists()
+
 

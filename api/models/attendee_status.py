@@ -7,6 +7,7 @@ from hackfsu_com.util import acl
 from api.models import Hackathon
 from django.contrib import admin
 from hackfsu_com.admin import hackfsu_admin
+from django.utils import timezone
 
 
 class AttendeeStatusManager(models.Manager):
@@ -74,7 +75,18 @@ class AttendeeStatusAdmin(admin.ModelAdmin):
     list_display_links = ('id',)
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'comments')
     ordering = ('-created',)
+    actions = ('check_in',)
 
     @staticmethod
     def user_info(obj):
         return "{} {} - {}".format(obj.user.first_name, obj.user.last_name, obj.user.email)
+
+    def check_in(self, request, queryset):
+        total = 0
+        for obj in queryset:
+            if obj.checked_in_at is None:
+                obj.checked_in_at = timezone.now()
+                obj.save()
+                total += 1
+        self.message_user(request, 'Checked in {} attendees'.format(total))
+    check_in.short_description = 'Check in attendee'

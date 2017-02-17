@@ -21,6 +21,7 @@ locals.keys = {
 };
 
 locals.links = {
+    facebookAttendees: 'https://www.facebook.com/groups/1696150600675680/',
     twitter: 'http://www.twitter.com/HackFSU',
     facebook: 'https://www.facebook.com/hackfsu',
     instagram: 'https://www.instagram.com/hackfsu',
@@ -30,6 +31,14 @@ locals.links = {
         codeOfConduct: 'https://static.mlh.io/docs/mlh-code-of-conduct.pdf',
         contestTerms: 'https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions',
         privatePolicy: 'https://mlh.io/privacy'
+    },
+    workshops: {
+        android: 'http://andrewsosa.com/workshop.pdf',
+        github: 'https://lionex.github.io/github-workshop/'
+    },
+    apps: {
+        ios: 'http://andrewsosa.com/workshop.pdf',
+        android: 'https://play.google.com/store/apps/details?id=com.hackfsu.android.hackfsu&hl=en'
     }
 };
 

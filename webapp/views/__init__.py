@@ -6,6 +6,7 @@ from . import organize
 from . import mentor
 from .index import IndexPage
 from .help import HelpPage
+from .links.index import LinksPage
 from django.shortcuts import render
 
 

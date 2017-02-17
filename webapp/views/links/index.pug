@@ -1,0 +1,35 @@
+extends ../../_pug/standardLayout.pug
+
+block vars
+    -
+        var pageName = "Links"
+        var viewDir = "/static/views/links"
+
+block content
+
+    h1 Quick Links
+
+    h3 Workshops
+    ul
+        li: a(href=links.workshops.github) GitHub
+        li: a(href=links.workshops.android) Android
+
+    h3 Mobile Apps
+    ul
+        li: a(href=links.apps.android) Android
+        li: a(href=links.apps.ios) iOS
+
+    h3 Social Media
+    ul
+        li #[a(href=links.facebookAttendees) Facebook Attendees Group] (HackFSU '17)
+        li #[a(href=links.github) GitHub] (Our code is open source!)
+        li: a(href=links.facebook) Facebook
+        li: a(href=links.twitter) Twitter
+        li: a(href=links.instagram) Instagram
+
+    h3 Email Us
+    ul
+        li #[a(href=`mailto:${emails.info}`)=emails.info] - General information, questions
+        li #[a(href=`mailto:${emails.sponsors}`)=emails.sponsors] - Sponsor Team
+        li #[a(href=`mailto:${emails.travel}`)=emails.travel] - Travel Team
+        li #[a(href=`mailto:${emails.dev}`)=emails.dev] - Development Team (Website/Apps)

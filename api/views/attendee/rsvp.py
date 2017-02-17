@@ -6,7 +6,7 @@ from django import forms
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl
 from api.models import AttendeeStatus, Hackathon
-from datetime import datetime
+from django.utils import timezone
 
 
 class RequestForm(forms.Form):
@@ -37,7 +37,7 @@ class RsvpView(ApiView):
         status = AttendeeStatus.objects.get(hackathon=Hackathon.objects.current(), user=request.user)
 
         status.rsvp_result = req['rsvp_answer']
-        status.rsvp_submitted_at = datetime.now()
+        status.rsvp_submitted_at = timezone.now()
         status.extra_info = req['extra_info']
         status.save()
 

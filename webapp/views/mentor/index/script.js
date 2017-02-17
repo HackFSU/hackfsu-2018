@@ -83,7 +83,8 @@
                 "<'row flex-align-center flex-wrap'<'col-sm-4'l><'col-sm-4'<'flex-center'B>><'col-sm-4'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-
+            // scrollX: true,
+            responsive: true,
             data: data,
             columns: $.map(colData, function(data) {
                 return data;
@@ -118,6 +119,12 @@
         console.log(requests);
         populateTable(table, COLS, requests);
     });
+
+
+    // Reload after a minute
+    setTimeout(function() {
+       window.location.reload(1);
+    }, 60*1000);
 
 
 })(jQuery);

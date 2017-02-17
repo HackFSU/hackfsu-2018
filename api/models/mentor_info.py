@@ -54,7 +54,7 @@ class MentorInfoAdmin(admin.ModelAdmin):
     list_display_links = ('id',)
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'affiliation', 'skills', 'motivation')
     ordering = ('-created',)
-    # actions = ('approve_application', 'un_approve_application')
+    actions = ('approve_application', 'un_approve_application')
 
     @staticmethod
     def user_info(obj):

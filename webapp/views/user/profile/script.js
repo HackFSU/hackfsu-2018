@@ -125,6 +125,7 @@
                     '<th></th>' +
                     '<th>Registered</th>' +
                     '<th>Approved</th>' +
+                    '<th>RSVP\'d</th>' +
                     '<th>Checked-in</th>' +
                 '</tr>' +
             '</thead>' +
@@ -133,24 +134,29 @@
                     '<th>Hackers</th>' +
                     '<td>' + hackathonData.hackers_registered + '</td>' +
                     '<td>' + hackathonData.hackers_approved + '</td>' +
+                    '<td>' + hackathonData.hackers_rsvp + '</td>' +
                     '<td>' + hackathonData.hackers_checked_in + '</td>' +
                 '</tr>' +
                 '<tr>' +
                     '<th>Mentors</th>' +
                     '<td>' + hackathonData.mentors_registered + '</td>' +
                     '<td>' + hackathonData.mentors_approved + '</td>' +
+                    '<td>' + hackathonData.mentors_rsvp + '</td>' +
                     '<td>' + hackathonData.mentors_checked_in + '</td>' +
                 '</tr>' +
                 '<tr>' +
                     '<th>Judges</th>' +
                     '<td>' + hackathonData.judges_registered + '</td>' +
                     '<td>' + hackathonData.judges_approved + '</td>' +
+                    '<td>' + hackathonData.judges_rsvp + '</td>' +
                     '<td>' + hackathonData.judges_checked_in + '</td>' +
+
                 '</tr>' +
                 '<tr>' +
                     '<th>Organizers</th>' +
                     '<td>' + hackathonData.organizers_registered + '</td>' +
                     '<td>' + hackathonData.organizers_approved + '</td>' +
+                    '<td>' + hackathonData.organizers_rsvp + '</td>' +
                     '<td>' + hackathonData.organizers_checked_in + '</td>' +
                 '</tr>' +
             '</tbody>'

@@ -77,6 +77,13 @@
             });
         }
 
+        if (groups.includes(GROUP.mentor)) {
+            addActionButton({
+                'text': 'Mentor',
+                'url': '/mentor'
+            });
+        }
+
         if (groups.includes(GROUP.organizer)) {
             addActionButton({
                 'text': 'Django Admin Panel',

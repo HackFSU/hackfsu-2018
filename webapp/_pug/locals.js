@@ -37,7 +37,7 @@ locals.links = {
         github: 'https://lionex.github.io/github-workshop/'
     },
     apps: {
-        ios: 'http://andrewsosa.com/workshop.pdf',
+        ios: '#todo',
         android: 'https://play.google.com/store/apps/details?id=com.hackfsu.android.hackfsu&hl=en'
     }
 };
@@ -53,7 +53,6 @@ locals.cdn = {
 locals.emails = {
     info: 'info@hackfsu.com',
     sponsors: 'sponsors@hackfsu.com',
-    travel: 'travel@hackfsu.com',
     dev: 'dev@hackfsu.com'
 };
 

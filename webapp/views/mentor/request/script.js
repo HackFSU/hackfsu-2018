@@ -94,12 +94,17 @@
             positionPin();
 
             submitBtn.data('id', hr.id);
-            if (hr.assigned_mentor && hr.assigned_mentor.is_me) {
-                submitBtn.text('Release Claim');
-                form.submit(function(ev) {
-                    ev.preventDefault();
-                    releaseClaim();
-                });
+            if (hr.assigned_mentor) {
+                if (hr.assigned_mentor.is_me) {
+                    submitBtn.text('Release Claim');
+                    form.submit(function(ev) {
+                        ev.preventDefault();
+                        releaseClaim();
+                    });
+                } else {
+                    submitBtn.text('Claim');
+                    submitBtn.prop('disabled', true);
+                }
             } else {
                 submitBtn.text('Claim');
                 form.submit(function(ev) {

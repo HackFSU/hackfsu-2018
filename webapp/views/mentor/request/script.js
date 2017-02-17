@@ -35,6 +35,17 @@
     var pathArray = window.location.pathname.split('/');
     var requestId = pathArray[pathArray.length - 2];
 
+
+    function getStatusFromRequest(request) {
+        if (request.assigned_mentor) {
+            if (request.assigned_mentor.is_me) {
+                return 'Claimed by you';
+            }
+            return 'Claimed by ' + request.assigned_mentor.name;
+        }
+        return 'Waiting for mentor!';
+    }
+
     function submitClaim() {
         submitBtn.prop('disabled', true);
         window.hackUtil.ajaxJsonSubmit({
@@ -44,6 +55,7 @@
             })
         }).done(function() {
             alert('You have successfully claimed this request');
+            $('#status').text('Claimed by me');
         }).fail(function() {
             submitBtn.prop('disabled', false);
         });
@@ -96,6 +108,10 @@
                 });
             }
             submitBtn.toggle(true);
+
+            // Update status
+            $('#status').text(getStatusFromRequest(hr));
+
         }
     });
 

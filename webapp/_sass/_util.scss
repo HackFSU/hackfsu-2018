@@ -17,3 +17,12 @@
     flex-direction: row;
     width: 100%;
 }
+
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}

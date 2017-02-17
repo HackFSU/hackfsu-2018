@@ -16,6 +16,11 @@ html
         block styles
             link(rel="stylesheet" type="text/css" href="/static/bower_components/font-awesome/css/font-awesome.min.css")
             link(rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css")
+
+            if DataTables
+                link(rel="stylesheet" type="text/css" href=locals.cdn.dataTables.css)
+
+
             link(rel="stylesheet" type="text/css" href="/static/css/main.css")
 
     body
@@ -45,6 +50,10 @@ html
             script(src="/static/bower_components/parsleyjs/dist/parsley.min.js")
             script(src="/static/bower_components/js-cookie/src/js.cookie.js")
             script(src="/static/bower_components/moment/min/moment.min.js")
+
+            if DataTables
+                script(src=locals.cdn.dataTables.js)
+
             script(src="/static/js/plugins/ajaxForm.js")
             script(src="/static/js/plugins/ajaxGet.js")
             script(src="/static/js/plugins/parallaxIt.js")

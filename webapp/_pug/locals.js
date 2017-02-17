@@ -33,6 +33,14 @@ locals.links = {
     }
 };
 
+locals.cdn = {
+    dataTables: {
+        css: "https://cdn.datatables.net/v/bs/pdfmake-0.1.18/dt-1.10.13/b-1.2.4/b-colvis-1.2.4/b-html5-1.2.4/b-print-1.2.4/r-2.1.1/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.css",
+        js: "https://cdn.datatables.net/v/bs/pdfmake-0.1.18/dt-1.10.13/b-1.2.4/b-colvis-1.2.4/b-html5-1.2.4/b-print-1.2.4/r-2.1.1/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.js"
+    }
+};
+
+
 locals.emails = {
     info: 'info@hackfsu.com',
     sponsors: 'sponsors@hackfsu.com',

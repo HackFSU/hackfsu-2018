@@ -1,12 +1,14 @@
-extends ../../../_pug/standardLayout.pug
+extends ../../../_pug/userLayout.pug
 
 block vars
     -
         var pageName = "Mentor"
         var viewDir = "/static/views/mentor/index"
+        var DataTables = true
 
 block append scripts
     script(src=`${viewDir}/script.js`)
 
 block content
     h1 Mentor
+    table#help-requests.table.table-striped.table-bordered(cellspacing="0" width="100%")

@@ -15,6 +15,10 @@
     padding-bottom: 0.3em;
 }
 
+.btn-form-sm {
+    font-size: 1em;
+}
+
 .btn-form:hover:not(:disabled) {
     background-color: $form-border-color;
     color: #fff;

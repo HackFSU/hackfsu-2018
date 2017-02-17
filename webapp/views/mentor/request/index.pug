@@ -1,4 +1,4 @@
-extends ../../../_pug/standardLayout.pug
+extends ../../../_pug/userLayout.pug
 
 block vars
     -
@@ -9,6 +9,8 @@ block append scripts
     script(src=`${viewDir}/script.js`)
 
 block content
+    h1 Help Request Details
+    h3#status Loading
     form#help
         .form-section
             fieldset.row

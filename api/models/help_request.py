@@ -37,7 +37,8 @@ class HelpRequest(models.Model):
                 'name': self.attendee_name,
                 'description': self.attendee_description
             },
-            'request': self.request
+            'request': self.request,
+            'created': self.created.isoformat()
         }
 
         if self.assigned_mentor is not None:

@@ -33,6 +33,7 @@ a:active {
     a:active {
         text-decoration: underline;
 
+        &.btn,
         &.no-underline {
             text-decoration: none;
         }

@@ -36,7 +36,7 @@ class ApprovedFullView(ApiView):
         statuses = AttendeeStatus.objects.filter(
                 hackathon=Hackathon.objects.current(),
                 user__groups__name__in=[
-                    # acl.group_hacker,
+                    acl.group_hacker,
                     acl.group_mentor,
                     acl.group_judge,
                     acl.group_organizer

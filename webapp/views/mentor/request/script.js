@@ -85,6 +85,7 @@
             form.find('input[name="attendee_name"]').val(hr.attendee.name);
             form.find('input[name="attendee_description"]').val(hr.attendee.description);
             form.find('textarea[name="request"]').val(hr.request);
+            form.find('input[name="phone"]').val(hr.attendee_phone);
             locationFloor.val(hr.location.floor);
             mapImage.attr('src', locationFloor.find('option:selected').data('img'));
 

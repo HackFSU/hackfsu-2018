@@ -19,6 +19,7 @@ class RequestForm(forms.Form):
     attendee_name = forms.CharField(max_length=100)
     attendee_description = forms.CharField(max_length=100)
     request = forms.CharField(max_length=1000)
+    attendee_phone = forms.CharField(max_length=20)
 
 
 class CreateView(ApiView):
@@ -39,7 +40,8 @@ class CreateView(ApiView):
             location_floor=req['location_floor'],
             attendee_name=req['attendee_name'],
             attendee_description=req['attendee_description'],
-            request=req['request']
+            request=req['request'],
+            attendee_phone=req['attendee_phone']
         )
 
 

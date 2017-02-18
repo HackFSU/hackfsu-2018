@@ -20,6 +20,7 @@ class HelpRequest(models.Model):
     location_floor = models.PositiveSmallIntegerField(choices=LOCATION_FLOORS)
     attendee_name = models.CharField(max_length=100)
     attendee_description = models.CharField(max_length=100)
+    attendee_phone = models.CharField(max_length=20)
     request = models.CharField(max_length=1000)
 
     def __str__(self):
@@ -38,7 +39,8 @@ class HelpRequest(models.Model):
                 'description': self.attendee_description
             },
             'request': self.request,
-            'created': self.created.isoformat()
+            'created': self.created.isoformat(),
+            'attendee_phone': self.attendee_phone
         }
 
         if self.assigned_mentor is not None:

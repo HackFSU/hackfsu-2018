@@ -150,7 +150,7 @@ var sponsorData = locals.sponsorData = {
     fsuCollegeOfArtsAndSciences: {
         name: 'FSU College of Arts & Sciences',
         href: 'http://artsandsciences.fsu.edu/',
-        logo: '/static/img/logos/fsu/fsu-arts-sciences.png'
+        logo: '/static/img/logos/fsu/college-of-arts-and-sciences.png'
     },
     fsuDepartmentOfScientificComputing: {
         name: 'FSU Department of Scientific Computing',
@@ -223,6 +223,11 @@ var sponsorData = locals.sponsorData = {
         href: 'http://sga.fsu.edu/oei/',
         logo: '/static/img/logos/oei.png',
         logoStyle: 'padding: 0 40px;'
+    },
+    parseval: {
+        name: 'Parseval',
+        href: 'http://parsevalisolation.com/',
+        logo: '/static/img/logos/parseval.png'
     },
     sds: {
         name: 'Strategic Digital Services (SDS)',
@@ -304,7 +309,8 @@ locals.sponsors = {
             '2': [
                 sponsorData.jms,
                 sponsorData.ibm,
-                sponsorData.fsuDepartmentOfScientificComputing
+                sponsorData.fsuDepartmentOfScientificComputing,
+                sponsorData.fsuCollegeOfArtsAndSciences
             ],
             '1': [
                 sponsorData.github,
@@ -313,7 +319,8 @@ locals.sponsors = {
                 sponsorData.domiStation,
                 sponsorData.cuttlesoft,
                 sponsorData.syntech,
-                sponsorData.techDomains
+                sponsorData.techDomains,
+                sponsorData.parseval
             ]
         },
         partners: [

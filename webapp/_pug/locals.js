@@ -43,7 +43,7 @@ locals.links = {
     },
     sponsors: {
         parseval: {
-            prizeInfo: 'https://www.facebook.com/ParsevalSound/'
+            prizeInfo: 'http://bit.ly/2ltSFvm'
         }
     }
 };
@@ -232,7 +232,7 @@ var sponsorData = locals.sponsorData = {
     },
     parseval: {
         name: 'Parseval',
-        href: 'http://parsevalisolation.com/',
+        href: 'http://parseval.tech',
         logo: '/static/img/logos/parseval.png'
     },
     sds: {

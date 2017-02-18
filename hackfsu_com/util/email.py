@@ -27,7 +27,8 @@ templates = [
     'standard_html',
     'unassigned_register_reminder',
     'password_reset',
-    'password_changed'
+    'password_changed',
+    'wifi_credentials'
 ]
 
 default_from_email = 'noreply@hackfsu.com'

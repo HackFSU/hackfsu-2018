@@ -10,12 +10,13 @@
     var COLS = {
         'Name': { data: 'name'},
         'Email': { data: 'email' },
-        'Checked In': { data: 'checked_in' },
+        'Checked In?': { data: 'checked_in' },
         'Approved As': { data: function (row, type) {
             if (row.groups) {
                 return row.groups.join(', ');
             }
-        }}
+        }},
+        'Wifi Account?': { data: 'has_wifi_credentials' }
     };
 
     /**
@@ -41,7 +42,7 @@
 
         table.DataTable({
             dom:
-                "<'row flex-align-center flex-wrap'<'col-sm-4'l><'col-sm-4'<'flex-center'B>><'col-sm-4'f>>" +
+                "<'row flex-align-center flex-wrap'<'col-sm-4'l><'col-sm-4'<'text-center'B>><'col-sm-4'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             responsive: true,
@@ -75,15 +76,23 @@
                         });
                     }
                 },
-                // {
-                //     extend: 'selected',
-                //     text: 'Give Wifi',
-                //     className: 'btn-form btn-form-sm',
-                //     action: function (e, dt) {
-                //         var row = dt.rows({selected: true}).data()[0];
-                //         alert('TODO');
-                //     }
-                // }
+                {
+                    extend: 'selected',
+                    text: 'Give Wifi',
+                    className: 'btn-form btn-form-sm',
+                    action: function (e, dt) {
+                        var row = dt.rows({selected: true}).data()[0];
+                        hackUtil.ajaxJsonSubmit({
+                            'url': '/api/attendee/assign_wifi_credentials',
+                            data: JSON.stringify({
+                                attendee_status_id: row.id
+                            })
+                        }).done(function () {
+                            alert(row.name + ' has been emailed wifi credentials');
+                            dt.ajax.reload();
+                        });
+                    }
+                }
             ]
         });
     }

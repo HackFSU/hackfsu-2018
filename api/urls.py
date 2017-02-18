@@ -39,6 +39,7 @@ urlpatterns = [
 
     url(r'attendee/rsvp$', views.attendee.RsvpView.as_view()),
     url(r'attendee/check_in', views.attendee.CheckInView.as_view()),
+    url(r'attendee/assign_wifi_credentials', views.attendee.AssignWifiCredentialsView.as_view()),
     url(r'attendee/get/approved_full$', views.attendee.get.ApprovedFullView.as_view())
 ]
 

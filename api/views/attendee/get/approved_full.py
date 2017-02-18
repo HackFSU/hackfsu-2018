@@ -77,6 +77,7 @@ class ApprovedFullView(ApiView):
                 attendee['name'] = '{} {}'.format(status.user.first_name, status.user.last_name)
                 attendee['email'] = status.user.email
                 attendee['checked_in'] = status.checked_in_at is not None
+                attendee['has_wifi_credentials'] = hasattr(status.user, 'wificred')
                 attendees.append(attendee)
 
         res['data'] = attendees

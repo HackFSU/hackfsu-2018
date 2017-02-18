@@ -18,7 +18,7 @@ urlpatterns = [
 
     url(r'hacker/register$', views.hacker.RegisterView.as_view(), name='hacker-register'),
     url(r'hacker/get/profile$', views.hacker.get.ProfileView.as_view(), name='hacker-get-profile'),
-    url(r'hacker/csv/by_school', views.hacker.csv.BySchoolCsv.as_view()),
+    url(r'hacker/get/csv/by_school', views.hacker.get.csv.BySchoolCsv.as_view()),
 
     url(r'judge/register$', views.judge.RegisterView.as_view(), name='judge-register'),
     url(r'judge/get/profile$', views.judge.get.ProfileView.as_view(), name='judge-get-profile'),
@@ -33,6 +33,7 @@ urlpatterns = [
 
     url(r'organizer/register$', views.organizer.RegisterView.as_view(), name='organizer-register'),
     url(r'organizer/get/profile$', views.organizer.get.ProfileView.as_view(), name='organizer-get-profile'),
+    url(r'organizer/get/csv/roster$', views.organizer.get.csv.RosterCsv.as_view()),
 
     url(r'school/get$', views.school.GetView.as_view(), name='organizer-register'),
 

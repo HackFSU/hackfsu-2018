@@ -73,7 +73,7 @@
                 location_y: mapPin.data('y-percent'),
                 attendee_name: $('input[name="attendee_name"]').val().trim(),
                 attendee_description: $('input[name="attendee_description"]').val().trim(),
-                attendee_phone: $('input[name="attendee_phone"]').val().trim().replace(/[\D]/g, '')
+                attendee_phone: $('input[name="phone"]').val().trim().replace(/[\D]/g, '')
             };
 
             console.log(data);

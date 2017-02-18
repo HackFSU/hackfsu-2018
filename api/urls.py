@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'hackathon/get/updates$', views.hackathon.get.UpdatesView.as_view()),
     url(r'hackathon/get/stats$', views.hackathon.get.StatsView.as_view()),
     url(r'hackathon/get/prizes$', views.hackathon.get.PrizesView.as_view()),
+    url(r'hackathon/get/csv/attendees_checked_in$', views.hackathon.get.csv.AttendeesCheckedInCsv.as_view()),
 
     url(r'user/login$', views.user.LogInView.as_view(), name='user-login'),
     url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),

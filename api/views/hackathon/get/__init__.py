@@ -5,3 +5,4 @@ from .sponsors import SponsorsView
 from .updates import UpdatesView
 from .stats import StatsView
 from .prizes import PrizesView
+from . import csv

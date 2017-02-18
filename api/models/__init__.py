@@ -31,6 +31,7 @@ from .help_request import HelpRequest
 from .subscriber import Subscriber
 from .wifi_cred import WifiCred
 from .link_key import LinkKey
+from .hackathon_prize import HackathonPrize
 # TODO OldParseUser
 # TODO OldParseHacker
 # TODO OldParseMentor

@@ -34,11 +34,17 @@ locals.links = {
     },
     workshops: {
         android: 'http://andrewsosa.com/workshop.pdf',
-        github: 'https://lionex.github.io/github-workshop/'
+        github: 'https://lionex.github.io/github-workshop/',
+        webdev: 'https://docs.google.com/document/d/1L6JlHs8EVDDIJ69D_y4aqlpCZQIVA8tugQkvCmhTpvA/edit'
     },
     apps: {
-        ios: '#todo',
+        ios: 'https://itunes.apple.com/us/app/hackfsu/id1203569834?mt=8',
         android: 'https://play.google.com/store/apps/details?id=com.hackfsu.android.hackfsu&hl=en'
+    },
+    sponsors: {
+        parseval: {
+            prizeInfo: 'https://www.facebook.com/ParsevalSound/'
+        }
     }
 };
 

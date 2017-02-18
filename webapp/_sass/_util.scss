@@ -26,3 +26,8 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.flex-justify-around {
+    display: flex;
+    justify-content: space-around;
+}

@@ -6,7 +6,10 @@
     'use strict';
 
     // Setup DataTable
-    var table = $('table#help-requests');
+    var tablePending = $('table#requests-pending');
+    var tableClaimedUser = $('table#requests-claimed-user');
+    var tableClaimedOther = $('table#requests-claimed-other');
+
     var COLS = {
         'Name': { data: 'attendee.name' },
         'Request': { data: 'request' },
@@ -114,18 +117,47 @@
     }
 
 
+    function filterData(data, type) {
+        var filteredData = [];
+
+        data.forEach(function(row) {
+            switch (type) {
+                case 'user':
+                    if (row.assigned_mentor && row.assigned_mentor.is_me) {
+                        filteredData.push(row);
+                    }
+                    break;
+                case 'other':
+                    if (row.assigned_mentor && !row.assigned_mentor.is_me) {
+                        filteredData.push(row);
+                    }
+                    break;
+                case 'pending':
+                default:
+                    if (!row.assigned_mentor) {
+                        filteredData.push(row);
+                    }
+            }
+        });
+
+        return filteredData;
+    }
+
     // Create page
-    createTable(table, COLS);
+    createTable(tablePending, COLS);
+    createTable(tableClaimedOther, COLS);
+    createTable(tableClaimedUser, COLS);
     getData().done(function(requests) {
-        console.log(requests);
-        populateTable(table, COLS, requests);
+        populateTable(tablePending, COLS, filterData(requests, 'pending'));
+        populateTable(tableClaimedUser, COLS, filterData(requests, 'user'));
+        populateTable(tableClaimedOther, COLS, filterData(requests, 'other'));
     });
 
 
     // Reload after a minute
     setTimeout(function() {
        window.location.reload(1);
-    }, 60*1000);
+    }, 2*60*1000);
 
 
 })(jQuery);

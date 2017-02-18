@@ -17,7 +17,7 @@ class PrizesView(PublicApiView):
 
     def work(self, request: HttpRequest, req: dict, res: dict):
         current_hackathon = Hackathon.objects.current()
-        prizes = HackathonPrize.objects.filter(hackathon=current_hackathon)
+        prizes = HackathonPrize.objects.filter(hackathon=current_hackathon).order_by('award_giver')
 
         prize_list = []
         for prize in prizes:

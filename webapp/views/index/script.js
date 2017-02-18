@@ -14,8 +14,6 @@
     $('#content-container').parallaxIt();
 
 
-
-
     /**
      * Schedule
      */
@@ -82,6 +80,7 @@
         scheduleDay.find('.schedule-item-container').append(e);
     }
 
+
     $.ajaxGet({
         url: '/api/hackathon/get/schedule_items',
         success: function(data) {
@@ -90,5 +89,39 @@
             });
         }
     });
+
+
+
+    /**
+     * Prizes
+     */
+    var prizesContainer = $('#prize-container');
+
+    function addPrize(prize) {
+        prizesContainer.append(
+            '<div class="prize"><div class="row">' +
+
+                '<div class="col-xs-7">' +
+                    '<span class="prize-title">'+prize.title+'</span>' +
+                    '<span class="fa fa-trophy"></span>' +
+                    (prize.description? '<div class="prize-description"><span>'+prize.description+'</span></div>' : '') +
+                '</div>' +
+                '<div class="col-xs-5 prize-award-giver">' +
+                    '<span>'+prize.award_giver+'</span>' +
+                '</div>' +
+            '</div></div>'
+        );
+    }
+
+
+    $.ajaxGet({
+        url: '/api/hackathon/get/prizes',
+        success: function(data) {
+            data.prizes.forEach(function(prize) {
+                addPrize(prize);
+            });
+        }
+    });
+
 
 })();

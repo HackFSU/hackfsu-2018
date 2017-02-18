@@ -323,6 +323,41 @@
     }
 }
 
+#prize-section {
+    .section-content-container {
+        background-color: $color-dark;
+
+    }
+
+    .prize {
+        padding-bottom: 0.5em;
+
+        &:hover {
+            font-weight: bold;
+        }
+
+        .fa {
+            display: none;
+            margin-left: 0.5em;
+            font-size: 0.8em;
+        }
+
+    }
+
+    .prize-description {
+        line-height: 0.8em;
+
+        span {
+            font-size: 0.7em;
+        }
+    }
+
+    .prize-award-giver {
+        text-align: right;
+    }
+
+}
+
 #faq-section {
     .section-content-container {
         background-color: $color-light-blue;
@@ -548,6 +583,12 @@
         }
 
         .schedule-item:hover .fa {
+            display: inline-block;
+        }
+    }
+
+    #prize-section {
+        .prize:hover .fa {
             display: inline-block;
         }
     }

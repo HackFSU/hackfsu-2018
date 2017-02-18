@@ -153,6 +153,12 @@ var sponsorData = locals.sponsorData = {
         href: 'https://education.github.com/pack',
         logo: '/static/img/logos/github.png'
     },
+    floridaHackers: {
+        name: 'Florida Hackers'  ,
+        href: 'http://www.floridahackers.com/',
+        logo: '/static/img/logos/florida-hackers.png',
+        logoStyle: 'padding: 0 6px;'
+    },
     fsuCollegeOfArtsAndSciences: {
         name: 'FSU College of Arts & Sciences',
         href: 'http://artsandsciences.fsu.edu/',
@@ -330,6 +336,7 @@ locals.sponsors = {
             ]
         },
         partners: [
+            sponsorData.floridaHackers,
             sponsorData.techNole,
             sponsorData.mlh,
             sponsorData.acmAtFsu,

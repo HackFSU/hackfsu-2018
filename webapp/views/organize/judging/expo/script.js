@@ -6,6 +6,7 @@
     'use strict';
 
     var table = $('table#judges');
+    var form = $('form#settings');
 
     var COLS = {
         'Name': { data: 'name' },
@@ -78,7 +79,17 @@
                     className: 'btn-form btn-form-sm',
                     action: function (e, dt) {
                         var row = dt.rows({selected: true}).data()[0];
-                        // TODO
+                        hackUtil.ajaxJsonSubmit({
+                            url: '/api/judge/assign_hacks',
+                            data: JSON.stringify({
+                                max_hacks: form.find('input[name="max_hacks"]').val(),
+                                max_judge_count: form.find('input[name="max_judge_count"]').val(),
+                                judge_info_id: row.id
+                            })
+                        }).done(function(res) {
+                            alert('Assigned ' + res.new_assignments  + ' new hacks to ' + row.name);
+                            window.location.reload(1);
+                        });
                     }
                 }
             ]

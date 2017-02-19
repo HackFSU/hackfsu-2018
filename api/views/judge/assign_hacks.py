@@ -64,7 +64,7 @@ class AssignHacksView(ApiView):
             raise ValidationError('Judge is not approved for this hackathon', params=['judge_info_id'])
 
         # Get the current expo
-        expo = JudgingExpo.objects.current()
+        expo = JudgingExpo.objects.current(hackathon=hackathon)
         if expo is None:
             raise ValidationError('There is not an expo going on to get hacks for!')
 

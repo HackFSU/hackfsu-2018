@@ -54,6 +54,8 @@ urlpatterns = [
 
     url(r'^links/$', views.LinksPage.as_view()),
 
+    url(r'^hacks/$', views.HacksPage.as_view()),
+
     # Shortcuts
     url(r'^register/$', RedirectView.as_view(url='/registration/user')),
     url(r'^register/hacker/$', RedirectView.as_view(url='/registration/user?attendee_type=hacker')),

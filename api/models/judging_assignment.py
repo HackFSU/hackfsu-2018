@@ -16,7 +16,7 @@ class JudgingAssignment(models.Model):
 
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
     hack = models.ForeignKey(to=Hack, on_delete=models.CASCADE)
-    judge = models.ForeignKey(to=JudgeInfo, on_delete=models.CASCADE),
+    judge = models.ForeignKey(to=JudgeInfo, on_delete=models.CASCADE)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=STATUS_PENDING)
 
 

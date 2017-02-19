@@ -7,6 +7,7 @@ from . import mentor
 from .index import IndexPage
 from .help import HelpPage
 from .links.index import LinksPage
+from .hacks.index import HacksPage
 from django.shortcuts import render
 
 

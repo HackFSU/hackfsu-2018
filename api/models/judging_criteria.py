@@ -5,7 +5,7 @@ from hackfsu_com.admin import hackfsu_admin
 
 
 class JudgingCriteria(models.Model):
-    CRITERIA_TYPE_OVERALL = 0,
+    CRITERIA_TYPE_OVERALL = 0
     CRITERIA_TYPE_SUPERLATIVE = 1
     CRITERIA_TYPE_MANUAL = 2
     CRITERIA_TYPE = (
@@ -15,18 +15,20 @@ class JudgingCriteria(models.Model):
     )
 
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)                  # Must correspond EXACTLY with Devpost name
     point_contribution = models.IntegerField()
     criteria_type = models.SmallIntegerField(choices=CRITERIA_TYPE)
     description_long = models.CharField(max_length=500)     # Displayed in instructions
     description_short = models.CharField(max_length=100)    # Displayed next to score entry
-    devpost_name = models.CharField(max_length=200)  # The name that should correspond with devpost csv 'Desired Prizes'
+
+    def __str__(self):
+        return self.name
 
 
 @admin.register(JudgingCriteria, site=hackfsu_admin)
 class JudgingCriteriaAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'criteria_type')
-    list_display = ('id', 'criteria_type', 'point_contribution', 'name', 'description_long', 'description_short')
+    list_display = ('id', 'criteria_type', 'name', 'point_contribution', 'description_long', 'description_short')
     list_editable = ('criteria_type', 'point_contribution', 'name', 'description_long', 'description_short')
     list_display_links = ('id',)
     search_fields = ('name',)

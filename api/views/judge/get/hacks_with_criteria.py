@@ -19,14 +19,10 @@ class HacksWithCriteriaView(ApiView):
     def work(self, request, req, res):
         hacks = []
         for hack in Hack.objects.filter(hackathon=Hackathon.objects.current()):
-            criteria_names = []
-            for criteria in hack.extra_judging_criteria.filter(status=JudgingCriteria.CRITERIA_TYPE_MANUAL)\
-                    .order_by('id').all():
-                criteria_names.append(criteria.name)
             hacks.append({
                 'table_number': hack.table_number,
                 'name': hack.name,
                 'expo': hack.get_expo_name(),
-                'criteria': ', '.join(criteria_names)
+                'criteria': hack.get_criteria_names()
             })
         res['hacks'] = hacks

@@ -14,22 +14,22 @@ CRITERIA_OVERALL_ID = -1
 
 def average_criteria_result(result):
     """ Averages a single criteria section and determines point value """
-    result['contribution'] = 1.0 * result['running_total'] / result['times_graded'] * result['max_contribution']
+    result['contribution'] = 1.0 * result['running_total'] / result['times_graded'] / 100 * result['max_contribution']
 
 
-def average_criteria_results(results):
+def average_criteria_results(results: dict):
     # Get point contributions for every criteria
-    for grade_group in results:
-        for criteria_result in grade_group:
+    for type_id, grade_group in results.items():
+        for result_id, criteria_result in grade_group.items():
             average_criteria_result(criteria_result)
 
     # Add overall grade (sum of overall criteria contributions)
     final_grade = 0.0
-    for criteria_result in results[JudgingCriteria.CRITERIA_TYPE_OVERALL]:
+    for criteria_id, criteria_result in results[JudgingCriteria.CRITERIA_TYPE_OVERALL].items():
         final_grade += criteria_result['contribution']
     results[JudgingCriteria.CRITERIA_TYPE_OVERALL][CRITERIA_OVERALL_ID] = {
         'running_total': final_grade,
-        'times_graded': results[JudgingCriteria.CRITERIA_TYPE_OVERALL][0]['times_graded'],
+        'times_graded': next(iter(results[JudgingCriteria.CRITERIA_TYPE_OVERALL].values()))['times_graded'],
         'max_contribution': 100,
         'contribution': final_grade
     }
@@ -52,10 +52,12 @@ class GradesView(ApiView):
         current_hack = None
         current_hack_results = None
         for grade in JudgingGrade.objects.filter(hackathon=hackathon).order_by('hack').all():
+            print('{} {} {}'.format(grade.hack.table_number, grade.criteria.name, grade.grade))
             if current_hack != grade.hack:
                 if current_hack is not None:
                     # Accumulate and save final results
                     average_criteria_results(current_hack_results)
+                    print('hack results', current_hack_results)
                     graded_hacks.append({
                         'hack': {
                             'name': current_hack.name,
@@ -84,6 +86,19 @@ class GradesView(ApiView):
             result['running_total'] += grade.grade
             result['times_graded'] += 1
 
+        # Do last hack
+        if current_hack is not None and current_hack_results is not None:
+            # Accumulate and save final results
+            average_criteria_results(current_hack_results)
+            print('hack results', current_hack_results)
+            graded_hacks.append({
+                'hack': {
+                    'name': current_hack.name,
+                    'table_number': current_hack.table_number
+                },
+                'results': current_hack_results
+            })
+
         res['graded_hacks'] = graded_hacks
 
         # Map criteria id to name
@@ -91,7 +106,10 @@ class GradesView(ApiView):
             JudgingCriteria.CRITERIA_TYPE_OVERALL: dict(),
             JudgingCriteria.CRITERIA_TYPE_SUPERLATIVE: dict()
         }
-        for criteria in JudgingCriteria.objects.filter(hackathon=hackathon).all():
+        for criteria in JudgingCriteria.objects.filter(
+            hackathon=hackathon,
+            criteria_type__in=[JudgingCriteria.CRITERIA_TYPE_OVERALL, JudgingCriteria.CRITERIA_TYPE_SUPERLATIVE]
+        ).distinct().all():
             criteria_names[criteria.criteria_type][criteria.id] = criteria.name
 
         res['criteria_names'] = criteria_names

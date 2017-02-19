@@ -17,9 +17,9 @@ class Hack(models.Model):
     objects = HackManager()
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
     table_number = models.IntegerField()
-    name = models.CharField(max_length=100)                                 # Devpost "Submission Title"
-    description = models.TextField()                                        # Devpost "Plain Description"
-    extra_judging_criteria = models.ManyToManyField(to=JudgingCriteria)     # Devpost "Desired Prizes"
+    name = models.CharField(max_length=100)                                             # Devpost "Submission Title"
+    description = models.TextField()                                                    # Devpost "Plain Description"
+    extra_judging_criteria = models.ManyToManyField(to=JudgingCriteria, blank=True)     # Devpost "Desired Prizes"
 
     def get_expo(self):
         expo = JudgingExpo.objects.filter(
@@ -37,6 +37,15 @@ class Hack(models.Model):
             return 'N/A'
         return expo.name
 
+    def get_criteria_names(self) -> str:
+        names = []
+        for criteria in self.extra_judging_criteria.all():
+            names.append(criteria.name)
+        return ', '.join(names)
+
+    def __str__(self):
+        return self.name
+
 
 @admin.register(Hack, site=hackfsu_admin)
 class HackAdmin(admin.ModelAdmin):
@@ -52,8 +61,5 @@ class HackAdmin(admin.ModelAdmin):
         return obj.get_expo_name()
 
     @staticmethod
-    def extra_criteria(obj: Hack):
-        names = []
-        for criteria in obj.extra_judging_criteria.all():
-            names.append(criteria.name)
-        return ', '.join(names)
+    def extra_criteria(obj: Hack) -> str:
+        return obj.get_criteria_names()

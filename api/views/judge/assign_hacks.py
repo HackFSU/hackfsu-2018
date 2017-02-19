@@ -7,7 +7,7 @@ from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util import acl
 from api.models import JudgeInfo, Hackathon, Hack, JudgingAssignment, JudgingExpo
 
-CANCEL_THRESHOLD = 5    # If hack assignment cancel count reaches this number, it is no longer assigned
+CANCEL_THRESHOLD = 10    # If hack assignment cancel count reaches this number, it is no longer assigned
 
 
 def get_sorted_possible_hacks(expo: JudgingExpo, hackathon: Hackathon, judge: JudgeInfo, max_judge_count: int):

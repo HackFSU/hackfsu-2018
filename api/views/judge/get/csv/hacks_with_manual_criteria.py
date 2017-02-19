@@ -16,13 +16,13 @@ class HacksWithManualCriteriaCsv(StreamedCsvView):
         h = Hackathon.objects.current()
         yield ['Table Number', 'Hack Name', 'Manual Judging Criteria']
 
-        for hack in Hack.objects.filter(hackathon=h):
+        for hack in Hack.objects.filter(hackathon=h).all():
             row = [
                 hack.table_number,
                 hack.name,
             ]
 
-            for criteria in hack.extra_judging_criteria.filter(status=JudgingCriteria.CRITERIA_TYPE_MANUAL)\
+            for criteria in hack.extra_judging_criteria.filter(criteria_type=JudgingCriteria.CRITERIA_TYPE_MANUAL) \
                     .order_by('id').all():
                 row.append(criteria.name)
 

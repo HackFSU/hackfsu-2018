@@ -15,7 +15,6 @@ class JudgingGrade(models.Model):
 @admin.register(JudgingGrade, site=hackfsu_admin)
 class JudgingGradeAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'criteria')
-    list_display = ('id', 'grade_type', 'criteria__name', 'grade', 'by_judge')
+    list_display = ('id', 'grade', 'by_judge')
     list_display_links = ('id',)
     search_fields = ('hack__name', 'hack__table_number', 'judge__user__first_name', 'judge__user__last_name')
-    ordering = ('grade_type', '-grade')

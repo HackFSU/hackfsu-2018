@@ -41,7 +41,7 @@ class Hack(models.Model):
 @admin.register(Hack, site=hackfsu_admin)
 class HackAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
-    list_display = ('id', 'name', 'expo')
+    list_display = ('id', 'name', 'expo', 'table_number', 'extra_criteria')
     list_editable = ('table_number',)
     list_display_links = ('id',)
     search_fields = ('name', 'table_number')
@@ -50,3 +50,10 @@ class HackAdmin(admin.ModelAdmin):
     @staticmethod
     def expo(obj: Hack):
         return obj.get_expo_name()
+
+    @staticmethod
+    def extra_criteria(obj: Hack):
+        names = []
+        for criteria in obj.extra_judging_criteria.all():
+            names.append(criteria.name)
+        return ', '.join(names)

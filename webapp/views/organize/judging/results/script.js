@@ -105,33 +105,50 @@
         // Create columns with order;
         var crit_id_order = [];
         var OVERALL_ID = 100;
-        COLS['Overall Score'] = { data: function(row) {
-            if (row[OVERALL_ID]) {
-                return row[OVERALL_ID]
-            } else {
-                return 'N/A'
-            }
-        }};
 
-        Object.keys(crits[CRITERIA_TYPE_OVERALL]).forEach(function(critId) {
-            crit_id_order += critId;
-            COLS[crits[CRITERIA_TYPE_OVERALL][critId]] = { data: function(row) {
-                if (row[critId]) {
-                    return row[critId]
+        function getDataFunc(id) {
+            return function(row, type) {
+                var result = row[id];
+                console.log(result);
+
+                if (type === 'display') {
+                    if (result) {
+                        return result['contribution'] + ' of ' + result['times_graded'];
+                    } else {
+                        return 'N/A'
+                    }
+                }
+
+                if (result) {
+                    return result['contribution'];
+                }
+                return 0;
+            };
+        }
+
+        COLS['Overall Score'] = { data: function(row, type) {
+            var result = row[OVERALL_ID];
+
+            if (type === 'display') {
+                if (result) {
+                    return result['contribution'] + ' of ' + result['times_graded'];
                 } else {
                     return 'N/A'
                 }
-            }};
+            }
+            if (result) {
+                return result['contribution'];
+            }
+            return 0;
+        }};
+
+        Object.keys(crits[CRITERIA_TYPE_OVERALL]).forEach(function(id, critId) {
+            crit_id_order += critId;
+            COLS[crits[CRITERIA_TYPE_OVERALL][critId]] = { data: getDataFunc(critId) };
         });
         Object.keys(crits[CRITERIA_TYPE_SUPERLATIVE]).forEach(function(critId) {
             crit_id_order += critId;
-            COLS[crits[CRITERIA_TYPE_SUPERLATIVE][critId]] = { data: function(row) {
-                if (row[critId]) {
-                    return row[critId]
-                } else {
-                    return 'N/A'
-                }
-            }};
+            COLS[crits[CRITERIA_TYPE_SUPERLATIVE][critId]] = { data: getDataFunc(critId) };
         });
 
         // Summarize data
@@ -143,12 +160,10 @@
             };
 
             Object.keys(results[CRITERIA_TYPE_OVERALL]).forEach(function(critId) {
-                var result = results[CRITERIA_TYPE_OVERALL][critId];
-                hData[critId] = result['contribution'] + ' of ' + result['times_graded'];
+                hData[critId] = results[CRITERIA_TYPE_OVERALL][critId];;
             });
             Object.keys(results[CRITERIA_TYPE_SUPERLATIVE]).forEach(function(critId) {
-                var result = results[CRITERIA_TYPE_SUPERLATIVE][critId];
-                hData[critId] = result['contribution'] + ' of ' + result['times_graded'];
+                hData[critId] = results[CRITERIA_TYPE_SUPERLATIVE][critId];;
             });
 
             hack_rows.push(hData);

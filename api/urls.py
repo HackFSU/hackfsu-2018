@@ -23,6 +23,14 @@ urlpatterns = [
     url(r'hacker/get/csv/by_school', views.hacker.get.csv.BySchoolCsv.as_view()),
 
     url(r'judge/register$', views.judge.RegisterView.as_view(), name='judge-register'),
+    url(r'judge/assign_hacks$', views.judge.AssignHacksView.as_view()),
+    url(r'judge/get/approved_and_checked_in$', views.judge.get.ApprovedAndCheckedInView.as_view()),
+    url(r'judge/get/grades$', views.judge.get.GradesView.as_view()),
+    url(r'judge/get/hack_with_criteria$', views.judge.get.HackWithCriteriaView.as_view()),
+    url(r'judge/get/pending_hack_assignments$', views.judge.get.PendingHackAssignmentView.as_view()),
+    url(r'judge/get/csv/hacks_with_manual_criteria$', views.judge.get.csv.HacksWithManualCriteriaCsv.as_view()),
+    url(r'judge/assignment/cancel$', views.judge.assignment.CancelView.as_view()),
+    url(r'judge/assignment/submit_grades$', views.judge.assignment.SubmitGradesView.as_view()),
     url(r'judge/get/profile$', views.judge.get.ProfileView.as_view(), name='judge-get-profile'),
 
     url(r'mentor/register$', views.mentor.RegisterView.as_view(), name='mentor-register'),

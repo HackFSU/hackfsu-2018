@@ -32,6 +32,12 @@ from .subscriber import Subscriber
 from .wifi_cred import WifiCred
 from .link_key import LinkKey
 from .hackathon_prize import HackathonPrize
+from .judging_expo import JudgingExpo
+from .judging_criteria import JudgingCriteria
+from .hack import Hack
+from .judging_grade import JudgingGrade
+from .judging_assignment import JudgingAssignment
+
 # TODO OldParseUser
 # TODO OldParseHacker
 # TODO OldParseMentor

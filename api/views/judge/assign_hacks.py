@@ -78,7 +78,7 @@ class AssignHacksView(ApiView):
 
         new_assignments = 0
         possible_hacks = get_sorted_possible_hacks(expo, hackathon, judge, req['max_judge_count'])
-        for i in range(len(possible_hacks)-1):
+        for i in range(len(possible_hacks)):
             # Assign next
             JudgingAssignment.objects.create(hackathon=hackathon, judge=judge, hack=possible_hacks[i])
             new_assignments += 1

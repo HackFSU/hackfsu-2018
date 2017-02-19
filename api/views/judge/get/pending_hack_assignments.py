@@ -37,7 +37,7 @@ class PendingHackAssignmentView(ApiView):
             hackathon=hackathon,
             judge=judge,
             status=JudgingAssignment.STATUS_PENDING
-        ).order_by('hack__table_number').all()[0]
+        ).order_by('hack__table_number').all()
         for assignment in assignments:
             hack = assignment.hack
             hacks.append({

@@ -84,6 +84,13 @@
             });
         }
 
+        if (groups.includes(GROUP.judge)) {
+            addActionButton({
+                'text': 'Judge',
+                'url': '/judge'
+            });
+        }
+
         if (groups.includes(GROUP.organizer)) {
             addActionButton({
                 'text': 'Django Admin Panel',

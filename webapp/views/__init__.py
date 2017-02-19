@@ -4,6 +4,7 @@ from . import test
 from . import hype
 from . import organize
 from . import mentor
+from . import judge
 from .index import IndexPage
 from .help import HelpPage
 from .links.index import LinksPage

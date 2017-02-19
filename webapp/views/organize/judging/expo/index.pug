@@ -1,0 +1,17 @@
+extends ../../../../_pug/standardLayout.pug
+
+block vars
+    -
+        var pageName = "Expo Management"
+        var viewDir = "/static/views/organize/judging/expo"
+        var DataTables = true
+
+block append scripts
+    script(src=`${viewDir}/script.js`)
+
+block content
+    h1 Expo Management
+    p TODO - Explain
+
+    h3 Approved & Checked-in Judges
+    table#judges.table.table-striped.table-bordered(cellspacing="0" width="100%")

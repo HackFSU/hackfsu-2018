@@ -24,6 +24,7 @@ class ApprovedAndCheckedInView(ApiView):
         ):
             assignments = JudgingAssignment.objects.filter(judge=info)
             judges.append({
+                'id': info.id,
                 'name': '{} {}'.format(info.user.first_name, info.user.last_name),
                 'assignments_pending': assignments.filter(status=JudgingAssignment.STATUS_PENDING).count(),
                 'assignments_completed': assignments.filter(status=JudgingAssignment.STATUS_COMPLETE).count(),

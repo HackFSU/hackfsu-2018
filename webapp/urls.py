@@ -52,6 +52,7 @@ urlpatterns = [
     url(r'^organize/$', views.organize.IndexPage.as_view()),
     url(r'^organize/attendees/$', views.organize.AttendeesPage.as_view()),
     url(r'^organize/judging/expo/$', views.organize.judging.ExpoPage.as_view()),
+    url(r'^organize/judging/results/$', views.organize.judging.ResultsPage.as_view()),
 
     url(r'^mentor/$', views.mentor.IndexPage.as_view()),
     url(r'^mentor/request/(?P<id>\d+)/$', views.mentor.RequestPage.as_view()),

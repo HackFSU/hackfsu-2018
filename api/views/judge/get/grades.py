@@ -9,7 +9,7 @@ from hackfsu_com.util import acl
 from hackfsu_com.util.forms import JsonField
 from api.models import Hackathon, JudgingGrade, JudgingCriteria
 
-CRITERIA_OVERALL_ID = -1
+CRITERIA_OVERALL_ID = 100
 
 
 def average_criteria_result(result):
@@ -52,12 +52,12 @@ class GradesView(ApiView):
         current_hack = None
         current_hack_results = None
         for grade in JudgingGrade.objects.filter(hackathon=hackathon).order_by('hack').all():
-            print('{} {} {}'.format(grade.hack.table_number, grade.criteria.name, grade.grade))
+            # print('{} {} {}'.format(grade.hack.table_number, grade.criteria.name, grade.grade))
             if current_hack != grade.hack:
                 if current_hack is not None:
                     # Accumulate and save final results
                     average_criteria_results(current_hack_results)
-                    print('hack results', current_hack_results)
+                    # print('hack results', current_hack_results)
                     graded_hacks.append({
                         'hack': {
                             'name': current_hack.name,
@@ -90,7 +90,7 @@ class GradesView(ApiView):
         if current_hack is not None and current_hack_results is not None:
             # Accumulate and save final results
             average_criteria_results(current_hack_results)
-            print('hack results', current_hack_results)
+            # print('hack results', current_hack_results)
             graded_hacks.append({
                 'hack': {
                     'name': current_hack.name,

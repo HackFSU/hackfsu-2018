@@ -1,0 +1,37 @@
+extends ../../../_pug/userLayout.pug
+
+block vars
+    -
+        var pageName = "Grade Hack"
+        var viewDir = "/static/views/judge/hack"
+
+block append scripts
+    script(src=`${viewDir}/script.js`)
+
+block content
+    h1 Grade Hack
+
+    p 1 = Worst, 5 = Best
+
+    ul
+        li #[b Table]: #[span#table-number loading..]
+        li #[b Hack Name]: #[span#hack-name loading..]
+
+    form#grade
+        h1 Overall Score
+        .form-section#overall
+
+
+        h2 Extra scoring
+        .form-section#extra
+
+
+
+        .form-section.text-center
+            .text-center
+                button.btn.btn-form(type="submit") Submit Grade
+            br
+            br
+            .text-center
+                a(href="/judge/"): button.btn.btn-form(type="button") Go Back
+                button.btn.btn-form#cancel(type="button") Cancel

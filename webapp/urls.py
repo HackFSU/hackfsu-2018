@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^hype/registration$', views.hype.HypeRegistration.as_view()),
 
     url(r'^judge/$', views.judge.IndexPage.as_view()),
+    url(r'^judge/hack/(?P<id>\d+)/$', views.judge.HackPage.as_view()),
 
     url(r'^organize/$', views.organize.IndexPage.as_view()),
     url(r'^organize/attendees/$', views.organize.AttendeesPage.as_view()),

@@ -59,8 +59,18 @@ class HackWithCriteriaView(ApiView):
 
         # Criteria
         h = Hackathon.objects.current()
-        res['overall_criteria'] = get_criteria_type_summary(
-            JudgingCriteria.objects.filter(hackathon=h, criteria_type=JudgingCriteria.CRITERIA_TYPE_OVERALL).all()
-        )
-        res['extra_criteria'] = get_criteria_type_summary(assignment.hack.extra_judging_criteria.all())
+        overall = []
+        for criteria in JudgingCriteria.objects.filter(
+                hackathon=h,
+                criteria_type=JudgingCriteria.CRITERIA_TYPE_OVERALL
+        ).order_by('id').all():
+            overall.append(get_criteria_type_summary(criteria))
+        res['overall_criteria'] = overall
+
+        extra = []
+        for criteria in assignment.hack.extra_judging_criteria.filter(
+            criteria_type=JudgingCriteria.CRITERIA_TYPE_SUPERLATIVE
+        ).order_by('id').all():
+            extra.append(get_criteria_type_summary(criteria))
+        res['extra_criteria'] = extra
 

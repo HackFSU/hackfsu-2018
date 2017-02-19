@@ -28,13 +28,15 @@ def parse_criteria(criteria_name: str) -> JudgingCriteria:
 def parse_opt_in_list(opt_ins: str) -> list:
     criteria = []
     for name in opt_ins.split(','):
-        criteria.append(parse_criteria(name.strip()))
+        name = name.strip()
+        if len(name) > 0:
+            criteria.append(parse_criteria(name))
     return criteria
 
 
 def read_hacks_from_csv() -> list:
     hacks = []
-    with open(INPUT_FILE_PATH, 'rb') as f:
+    with open(INPUT_FILE_PATH, 'r') as f:
         reader = csv.reader(f)
         row_num = 0
         for row in reader:
@@ -46,13 +48,13 @@ def read_hacks_from_csv() -> list:
             col_num = 0
             hack = {}
             for col in row:
-                col_num += 1
                 if col_num == COL_HACK_NAME:
                     hack['name'] = col
                 elif col_num == COL_HACK_DESCRIPTION:
                     hack['description'] = col
                 elif col_num == COL_HACK_OPT_IN_CRITERIA:
                     hack['opt_in_list'] = col
+                col_num += 1
 
             hacks.append(hack)
     return hacks
@@ -62,14 +64,14 @@ def save_hack_if_new(hackDict: Hack) -> bool:
     if Hack.objects.filter(hackathon=H, name=hackDict['name']).exists():
         return False
 
-    hack = Hack(
+    hack = Hack.objects.create(
         hackathon=H,
         name=hackDict['name'],
         description=hackDict['description'],
         table_number=Hack.objects.get_next_table_number()
     )
     for criteria in parse_opt_in_list(hackDict['opt_in_list']):
-        hack.extra_judging_criteria.add(criteria)
+            hack.extra_judging_criteria.add(criteria)
 
     hack.save()
     return True
@@ -81,4 +83,4 @@ def run():
     for hack in hacks:
         if save_hack_if_new(hack):
             total += 1
-    print('Saved {} new hacks of {} hacks in file', total, len(hacks))
+    print('Saved {} new hacks of {} hacks in file'.format(total, len(hacks)))

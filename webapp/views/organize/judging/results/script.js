@@ -143,10 +143,12 @@
             };
 
             Object.keys(results[CRITERIA_TYPE_OVERALL]).forEach(function(critId) {
-                hData[critId] = results[CRITERIA_TYPE_OVERALL][critId]['contribution']
+                var result = results[CRITERIA_TYPE_OVERALL][critId];
+                hData[critId] = result['contribution'] + ' of ' + result['times_graded'];
             });
             Object.keys(results[CRITERIA_TYPE_SUPERLATIVE]).forEach(function(critId) {
-                hData[critId] = results[CRITERIA_TYPE_SUPERLATIVE][critId]['contribution']
+                var result = results[CRITERIA_TYPE_SUPERLATIVE][critId];
+                hData[critId] = result['contribution'] + ' of ' + result['times_graded'];
             });
 
             hack_rows.push(hData);

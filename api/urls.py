@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'judge/get/approved_and_checked_in$', views.judge.get.ApprovedAndCheckedInView.as_view()),
     url(r'judge/get/grades$', views.judge.get.GradesView.as_view()),
     url(r'judge/get/hack_with_criteria$', views.judge.get.HackWithCriteriaView.as_view()),
+    url(r'judge/get/hacks_with_criteria$', views.judge.get.HacksWithCriteriaView.as_view()),
     url(r'judge/get/pending_hack_assignments$', views.judge.get.PendingHackAssignmentView.as_view()),
     url(r'judge/get/csv/hacks_with_manual_criteria$', views.judge.get.csv.HacksWithManualCriteriaCsv.as_view()),
     url(r'judge/assignment/cancel$', views.judge.assignment.CancelView.as_view()),

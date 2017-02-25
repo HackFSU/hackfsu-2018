@@ -33,12 +33,19 @@ class Hackathon(models.Model):
         else:
             return self.name
 
-    def is_today(self):
+    def is_today(self) -> bool:
         """
             Returns t/f based on if the hackathon is happening today
         """
         today = timezone.now().date()
         return (self.start_date <= today) and (today <= self.end_date)
+
+    def is_over(self) -> bool:
+        """
+        :return: True if hackathon is over, false if upcoming/happening
+        """
+        today = timezone.now().date()
+        return self.end_date < today
 
 
 @admin.register(Hackathon, site=hackfsu_admin)

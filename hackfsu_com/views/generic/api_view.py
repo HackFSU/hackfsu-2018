@@ -13,6 +13,7 @@ from django.views.generic import View
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from django import forms
+from api.models import Hackathon
 from hackfsu_com.util import acl
 from hackfsu_com.util.exceptions import InternalServerError, ExternalUserError
 import logging
@@ -29,6 +30,7 @@ class ApiView(View):
     request_form_class = forms.Form     # Override each time
     response_form_class = forms.Form    # Override each time
     access_manager = acl.AccessManager()
+    allowed_after_current_hackathon_ends = True
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -117,4 +119,5 @@ class ApiView(View):
 
     def authenticate(self, request):
         """ To be overridden if necessary. Should still be called with super """
-        return self.access_manager.check_user(request.user)
+        return self.access_manager.check_user(request.user) and \
+            (self.allowed_after_current_hackathon_ends or not Hackathon.objects.current().is_over())

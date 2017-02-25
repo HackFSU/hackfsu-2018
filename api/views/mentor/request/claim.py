@@ -15,6 +15,7 @@ class RequestForm(forms.Form):
 
 class ClaimView(ApiView):
     request_form_class = RequestForm
+    allowed_after_current_hackathon_ends = False
     access_manager = acl.AccessManager(acl_accept=[acl.group_mentor])
 
     def work(self, request, req, res):

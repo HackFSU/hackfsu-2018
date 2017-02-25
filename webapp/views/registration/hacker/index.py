@@ -7,6 +7,7 @@ from hackfsu_com.util import acl
 
 
 class HackerRegistrationPage(PageView):
+    allowed_after_current_hackathon_ends = False
     template_name = 'registration/hacker/index.html'
     access_manager = acl.AccessManager(acl_accept=[acl.group_user],
                                        acl_deny=[acl.group_hacker, acl.group_judge, acl.group_organizer,

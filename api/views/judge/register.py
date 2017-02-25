@@ -14,6 +14,7 @@ class RequestForm(forms.Form):
 
 class RegisterView(ApiView):
     request_form_class = RequestForm
+    allowed_after_current_hackathon_ends = False
     access_manager = acl.AccessManager(acl_accept=[acl.group_user],
                                        acl_deny=[acl.group_hacker, acl.group_judge, acl.group_pending_judge,
                                                  acl.group_pending_hacker])

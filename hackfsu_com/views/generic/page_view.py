@@ -6,12 +6,13 @@ from django.views.generic.base import View
 from django.shortcuts import render
 from django.shortcuts import redirect
 from hackfsu_com.util import acl
-
+from api.models import Hackathon
 
 class PageView(View):
     template_name = None
     context = None
     access_manager = acl.AccessManager()
+    allowed_after_current_hackathon_ends = True
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -41,8 +42,9 @@ class PageView(View):
         pass
 
     def authenticate(self, request):
-        """ May be overwritten to add more extensive auth. Should still be called via super """
-        return self.access_manager.check_user(request.user)
+        """ To be overridden if necessary. Should still be called with super """
+        return self.access_manager.check_user(request.user) and \
+               (self.allowed_after_current_hackathon_ends or not Hackathon.objects.current().is_over())
 
     def get_access_denied_redirect_url(self, request):
         """ May be overwritten if desired """

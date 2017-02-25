@@ -23,6 +23,7 @@ class RequestForm(forms.Form):
 
 
 class CreateView(ApiView):
+    allowed_after_current_hackathon_ends = False
     request_form_class = RequestForm
 
     def authenticate(self, request):

@@ -14,6 +14,7 @@ class RequestForm(forms.Form):
 
 
 class ReleaseClaimView(ApiView):
+    allowed_after_current_hackathon_ends = False
     request_form_class = RequestForm
     access_manager = acl.AccessManager(acl_accept=[acl.group_mentor])
 

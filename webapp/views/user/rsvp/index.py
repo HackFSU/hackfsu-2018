@@ -8,6 +8,7 @@ from api.models import AttendeeStatus, Hackathon
 
 
 class RsvpPage(PageView):
+    allowed_after_current_hackathon_ends = False
     template_name = 'user/rsvp/index.html'
     access_manager = acl.AccessManager(acl_accept=[
         acl.group_hacker,

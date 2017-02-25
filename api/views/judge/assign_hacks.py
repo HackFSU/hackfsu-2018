@@ -50,6 +50,7 @@ class ResponseForm(forms.Form):
 class AssignHacksView(ApiView):
     request_form_class = RequestForm
     response_form_class = ResponseForm
+    allowed_after_current_hackathon_ends = False
     access_manager = acl.AccessManager(acl_accept=[acl.group_organizer])
 
     def work(self, request, req, res):

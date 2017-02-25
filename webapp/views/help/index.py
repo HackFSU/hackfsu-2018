@@ -7,6 +7,7 @@ from api.models import Hackathon
 
 
 class HelpPage(PageView):
+    allowed_after_current_hackathon_ends = False
     template_name = 'help/index.html'
 
     def work(self, request):

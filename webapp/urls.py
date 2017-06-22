@@ -27,6 +27,7 @@ def static_redirect(path):
 urlpatterns = [
     # Static Website Pages
     url(r'^$', views.IndexPage.as_view(), name='index'),
+    url(r'^preview$', views.PreviewPage.as_view(), name='preview'),
     url(r'^help$', views.HelpPage.as_view(), name='help'),
 
     url(r'^registration/user/$', views.registration.UserRegistrationPage.as_view(), name='registration-user'),
@@ -84,5 +85,3 @@ if settings.DEBUG:
         # Test Pages
         url(r'^test/captcha/$', views.test.CaptchaTestPage.as_view())
     ])
-
-

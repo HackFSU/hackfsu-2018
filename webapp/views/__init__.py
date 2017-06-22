@@ -6,6 +6,7 @@ from . import organize
 from . import mentor
 from . import judge
 from .index import IndexPage
+from .preview import PreviewPage
 from .help import HelpPage
 from .links.index import LinksPage
 from .hacks.index import HacksPage

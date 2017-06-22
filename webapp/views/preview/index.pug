@@ -1,0 +1,24 @@
+//- extends ../../_pug/baseLayout.pug
+
+//- mixin sponsorLogoTier(sponsorsList, tier)
+//-     div(class=`sponsor-tier sponsor-tier-${tier}`)
+//-         each s in sponsorsList
+//-             a(href=s.href alt=s.name target="_blank")
+//-                 img.sponsor-logo-image(title=s.name alt=s.name src=s.logo style=s.logoStyle)
+
+-
+    var pageName = "Preview"
+    var viewDir = "/static/views/preview/index"
+
+
+html 
+    head
+        title HackFSU
+        include ../../_pug/includes/metadata.pug
+        script(src=`${viewDir}/script.js`)
+    
+        link(rel="stylesheet" type="text/css" href="/static/bower_components/font-awesome/css/font-awesome.min.css")
+        link(rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css")
+            
+    body
+        h1 Hello, world!

@@ -1,0 +1,27 @@
+extends ./baseLayout.pug
+
+include mixins/navbar.pug
+
+block append styles    
+    if DataTables
+        link(rel="stylesheet" type="text/css" href=locals.cdn.dataTables.css)
+    link(rel="stylesheet" type="text/css" href="/static/css/main.css")
+
+block page
+    include ./includes/mlh-season-badge.pug
+    #page-container
+        #header-container
+            #header.container
+                block navbar
+                    +navbar(navLinks.standard)
+        #content-container
+            block page
+                #content.container
+                    block content
+                        h1 TODO
+        #footer-container
+            #footer.container
+                include ./includes/footer.pug
+
+block append scripts
+    script(src="/static/js/main.js")

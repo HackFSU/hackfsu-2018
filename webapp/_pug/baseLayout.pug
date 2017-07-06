@@ -1,5 +1,3 @@
-include mixins/navbar.pug
-
 block vars
     -
         var pageName = ""
@@ -17,32 +15,12 @@ html
             link(rel="stylesheet" type="text/css" href="/static/bower_components/font-awesome/css/font-awesome.min.css")
             link(rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css")
 
-            if DataTables
-                link(rel="stylesheet" type="text/css" href=locals.cdn.dataTables.css)
-
-
-            link(rel="stylesheet" type="text/css" href="/static/css/main.css")
-
     body
 
         include ./includes/googleAnalytics.html
-        include ./includes/mlh-season-badge.pug
 
-        block body-container
-            #page-container
-                #header-container
-                    #header.container
-                        block navbar
-                            +navbar(navLinks.standard)
-                #content-container
-                    block page
-                        #content.container
-                            block content
-                                h1 TODO
-                #footer-container
-                    #footer.container
-                        include ./includes/footer.pug
-
+        block page
+            
         //- JavaScript
         block scripts
             script(src="/static/bower_components/jquery/dist/jquery.min.js")
@@ -57,4 +35,3 @@ html
             script(src="/static/js/plugins/ajaxForm.js")
             script(src="/static/js/plugins/ajaxGet.js")
             script(src="/static/js/plugins/parallaxIt.js")
-            script(src="/static/js/main.js")

@@ -8,6 +8,7 @@ bower_components
 *.sqlite3
 /venv
 *.tmp
+*.DS_Store
 
 # Project
 /static_collected

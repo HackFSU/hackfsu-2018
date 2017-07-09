@@ -37,6 +37,7 @@ from .judging_criteria import JudgingCriteria
 from .hack import Hack
 from .judging_grade import JudgingGrade
 from .judging_assignment import JudgingAssignment
+from .preview_email import PreviewEmail
 
 # TODO OldParseUser
 # TODO OldParseHacker

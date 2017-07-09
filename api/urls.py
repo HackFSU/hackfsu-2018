@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'hackathon/get/csv/attendees_checked_in$', views.hackathon.get.csv.AttendeesCheckedInCsv.as_view()),
 
     url(r'user/login$', views.user.LogInView.as_view(), name='user-login'),
-    url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),
+    # url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),
     url(r'user/get/profile$', views.user.get.ProfileView.as_view(), name='user-get-profile'),
     url(r'user/get/groups', views.user.get.GroupsView.as_view(), name='user-get-groups'),
     url(r'user/password/reset/complete', views.user.password.CompleteResetView.as_view()),
@@ -52,7 +52,9 @@ urlpatterns = [
     url(r'attendee/rsvp$', views.attendee.RsvpView.as_view()),
     url(r'attendee/check_in', views.attendee.CheckInView.as_view()),
     url(r'attendee/assign_wifi_credentials', views.attendee.AssignWifiCredentialsView.as_view()),
-    url(r'attendee/get/approved_full$', views.attendee.get.ApprovedFullView.as_view())
+    url(r'attendee/get/approved_full$', views.attendee.get.ApprovedFullView.as_view()),
+
+    url(r'preview/register$', views.preview.RegisterView.as_view(), name='preview-register'),
 ]
 
 

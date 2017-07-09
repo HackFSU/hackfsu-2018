@@ -37,6 +37,3 @@ class RegisterView(ApiView):
             email=req['email'],
             interest=req['interest']
         ).save()
-
-
-        pass

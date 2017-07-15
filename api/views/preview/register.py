@@ -9,6 +9,9 @@ from django.core.exceptions import ValidationError
 from hackfsu_com.util import acl
 from api.models import PreviewEmail, Hackathon
 
+EMAIL = 'email'
+INTEREST = 'interest'
+
 class RequestForm(forms.Form):
     email = forms.CharField(max_length=100)
     interest = forms.CharField(max_length=100)
@@ -18,12 +21,15 @@ class RegisterView(ApiView):
 
     def work(self, request: HttpRequest, req: dict, res: dict):
         # Clean fields
-        req['email'] = req['email'].lower()
-        req['interest'] = req['interest'].lower()
+        req[EMAIL] = req[EMAIL].lower()
+        req[INTEREST] = req[INTEREST].lower()
 
         # Make sure interest is okay
-        if req['interest'] not in ['volunteer', 'hacker', 'sponsor']:
-            raise ValidationError('Not a valid interest.', params=['interest'])
+        if req[INTEREST] not in ['volunteer', 'hacker', 'sponsor']:
+            raise ValidationError('Not a valid interest.', params=[INTEREST])
+
+        if PreviewEmail.objects.filter(email=req[EMAIL], interest=req[INTEREST]).exists():
+            raise ValidationError('Email already submitted for that role.', params=[EMAIL])
 
         # TODO: at the time of writing this, we had not yet updated
         # the current hackathon value, meaning that this is being written
@@ -34,6 +40,6 @@ class RegisterView(ApiView):
         # Attempt to save the user
         PreviewEmail(
             hackathon=current_hackathon,
-            email=req['email'],
-            interest=req['interest']
+            email=req[EMAIL],
+            interest=req[INTEREST]
         ).save()

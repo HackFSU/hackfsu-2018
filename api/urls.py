@@ -55,6 +55,9 @@ urlpatterns = [
     url(r'attendee/get/approved_full$', views.attendee.get.ApprovedFullView.as_view()),
 
     url(r'preview/register$', views.preview.RegisterView.as_view(), name='preview-register'),
+    url(r'preview/get/hackers$', views.preview.get.HackersView.as_view()),
+    url(r'preview/get/volunteers$', views.preview.get.VolunteersView.as_view()),
+    url(r'preview/get/sponsors$', views.preview.get.SponsorsView.as_view()),
 ]
 
 

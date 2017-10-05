@@ -1,0 +1,132 @@
+extends ../../_pug/mainLayout.pug
+
+mixin sponsorLogoTier(sponsorsList, tier)
+    div(class=`sponsor-tier sponsor-tier-${tier}`)
+        each s in sponsorsList
+            a(href=s.href alt=s.name target="_blank")
+                img.sponsor-logo-image(title=s.name alt=s.name src=s.logo style=s.logoStyle)
+
+block append styles
+    link(rel="stylesheet" type="text/css" href="/static/views/index/style.css")
+
+block append scripts
+    script(src="/static/views/index/script.js")
+
+block navbar
+    +navbar(navLinks.index)
+
+block page
+    #title-section
+        .container
+            .title-images-container
+                .title-images
+                    .title-image.title-image-one
+                    .title-image.title-image-two
+                    .title-image.title-image-three
+            .title-content
+                .title-buttons-container
+                    .title-buttons
+                        a.no-underline(href="/register"): .button.button-light Register
+                        a.no-underline(href="mailto:sponsors@hackfsu.com?subject HackFSU 5 Sponsorship Inquiry" target="_blank"): .button.button-light Sponsor
+                .title-text
+                    p.title-text-title.uni-fix HackFSU
+                    p.title-text-date-location
+                        span#fsu.uni-fix Florida State University
+                        span#date
+                            img(src="/static/img/logos/hackfsu/hackfsu-2016.png")
+                            span.uni-fix FEB. 17-19 '17
+
+
+    a#about
+    #what-is-section.section.section-right
+        .section-title-container: .section-title
+            .section-title-spacer-empty
+            .section-title-text: .uni-fix SO, WHAT'S A HACKATHON?
+            .section-title-spacer-filled
+        .section-content-container: .container
+            .what-is-info
+                .icon-container: .icon.icon-computer-chip
+                .description
+                    h3 A PLACE TO #[span CREATE]
+                    p: i
+                        | At hackathons, you have the ability to build on any idea you can come up with. Web design, frontend/backend development, iOS and Android apps, hardware hacks, and server management are just a few of the possibilities!
+            .what-is-info
+                .icon-container: .icon.icon-laptop
+                .description
+                    h3 AN OPPORTUNITY FOR #[span EXPERIENCE]
+                    p: i
+                        | Workshops, tech talks, and access to mentors allows both beginning and experienced students to learn new technologies. Head over to our sponsor tables and find out about potential internship and career opportunities!
+            .what-is-info
+                .icon-container: .icon.icon-gameboy
+                .description
+                    h3 A CHANCE TO #[span COLLABORATE]
+                    p: i
+                        | Working alongside equally passionate people allows you to become encouraged to keep building and learning. You’ll be amazed what you can accomplish as a team.
+
+
+    a#schedule
+    #schedule-section.section.section-left
+        .section-title-container: .section-title
+            .section-title-spacer-filled
+            .section-title-text: .uni-fix SCHEDULE
+            .section-title-spacer-empty
+        .section-content-container
+            #schedule-day-container.container
+
+    a#prizes
+    #prize-section.section.section-left
+        .section-title-container: .section-title
+            .section-title-spacer-filled
+            .section-title-text: .uni-fix PRIZES
+            .section-title-spacer-empty
+        .section-content-container
+            #prize-container.container
+
+
+    a#faq
+    #faq-section.section.section-right
+        .section-title-container: .section-title
+            .section-title-spacer-empty
+            .section-title-text: .uni-fix FAQ
+            .section-title-spacer-filled
+        .section-content-container: .container
+            .row: .faq-item-container
+                include ./_faqs.pug
+
+    a#culture
+    #culture-section.section.section-left
+        .section-title-container: .section-title
+            .section-title-spacer-filled
+            .section-title-text: .uni-fix THE HACKING CULTURE
+            .section-title-spacer-empty
+        .section-content-container: .container: .row
+            .col-lg-8.pull-right.img-container
+                img.img-responsive(src="/static/img/pictures/trio.jpg")
+            p.col-lg-4
+                | Each year, we set out to build a culture of creation. Students put aside their weekend for the opportunity to build whatever they can think of alongside hundreds of other students from around the country. Mentors from the industry volunteer their knowledge to support your crazy ideas. All we ask is that you come prepared with an open mind, ready to dedicate thirty hours to learn something new.
+
+    a#sponsors
+    #sponsors-section.section.section-center
+        .section-title-container: .section-title
+            .section-title-text: .uni-fix SPONSORS
+        .section-content-container: .container
+            //- +sponsorLogoTier(sponsors["2017"].sponsors["3"], 3)
+            +sponsorLogoTier(sponsors["2017"].sponsors["2"], 2)
+            +sponsorLogoTier(sponsors["2017"].sponsors["1"], 1)
+
+
+            h1.sponsor-tier-title  Partners
+            +sponsorLogoTier(sponsors["2017"].partners, 1)
+
+            //.flex-center.text-center
+                br
+                p We will update this list as we continue to finalize our sponsors for this year!
+                br
+                p Interested in sponsoring HackFSU '17? Check out our sponsorship #[a(href=links.sponsorshipPacket target="_blank" download) packet] and then shoot us an email at #[a(href=`mailto:${emails.sponsors}`) #{emails.sponsors}]!
+            //-.sponsors-past-container
+                .sponsors-past
+                    h1 HackFSU '16
+                    +sponsorLogoTier(sponsors["2016"].sponsors["3"], 3)
+                    +sponsorLogoTier(sponsors["2016"].sponsors["2"], 2)
+                    +sponsorLogoTier(sponsors["2016"].sponsors["1"], 1)
+                    +sponsorLogoTier(sponsors["2016"].partners, 1)

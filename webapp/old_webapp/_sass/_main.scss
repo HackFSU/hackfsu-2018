@@ -1,0 +1,67 @@
+#mlh-trust-badge {
+    display: block;
+    max-width: 100px;
+    position: fixed;
+    right: 50px;
+    top: 0;
+    width: 10%;
+    z-index: 10000;
+
+    img {
+        width: 100%;
+    }
+}
+
+@media(max-width: 1500px) {
+    #mlh-trust-badge {
+        right: 10px;
+        width: 80px;
+    }
+}
+
+@media(max-width: 1356px) {
+    #mlh-trust-badge {
+        position: absolute;
+        width: 53px;
+    }
+}
+
+
+#floor-map {
+    display: block;
+    width: 100%;
+    position: relative;
+
+    .map-pin {
+        font-size: 16px;
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        color: red;
+
+
+    }
+    .map-pin-icon-container {
+        position: relative;
+
+        .fa {
+            position: absolute;
+            top: -1em;
+            left: -0.3em;
+        }
+    }
+
+    img {
+        z-index: 1;
+        border: 3px solid;
+    }
+
+    &.editable {
+        img {
+            cursor: pointer;
+        }
+    }
+
+}

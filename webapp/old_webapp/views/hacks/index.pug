@@ -1,0 +1,18 @@
+extends ../../_pug/standardLayout.pug
+
+block vars
+    -
+        var pageName = "Submitted Hacks"
+        var viewDir = "/static/views/hacks"
+        var DataTables = true
+
+block append scripts
+    script(src=`${viewDir}/script.js`)
+
+block content
+    h1 Submitted Hacks
+    p If you do not see yourself or something is wrong, notify an organizer! This list was exported from Devpost and then imported into our internal judging system. Our system will ensure that your hack is graded in a fair and timely manner. Good luck!
+    p When it is not your turn to expo, check out the other hackers' projects!
+    p: b: i IF YOU ARE NOT AT YOUR TABLE YOU MAY BE DISQUALIFIED, STAY THERE.
+
+    table#hacks.table.table-striped.table-bordered(cellspacing="0" width="100%")

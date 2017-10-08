@@ -7,12 +7,14 @@ services:
         ports:
             - "8000:8000"
         volumes:
-            - ./webapp:/usr/src/app
+            - ./api:/usr/src/app
     webapp:
         extends:
             file: docker-compose.yml
             service: webapp
         command: sh -c "yarn install && yarn dev"
+            # on windows, add `--no-bin-links` after `yarn install`
+            # DO NOT COMMIT THIS CHANGE
         ports:
             - "3000:3000"
         volumes:

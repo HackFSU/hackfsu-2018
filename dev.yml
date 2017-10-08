@@ -8,6 +8,9 @@ services:
             - "8000:8000"
         volumes:
             - ./api:/usr/src/app
+        environment:
+            - APP_DEBUG
+            # set APP_DEBUG env var to true on localmachine
     webapp:
         extends:
             file: docker-compose.yml

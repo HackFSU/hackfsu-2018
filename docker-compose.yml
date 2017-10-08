@@ -3,8 +3,8 @@ services:
     api:
         image: "hackfsu_api"
         build:
-            context: "api"
+            context: "./api"
     webapp:
         image: "hackfsu_webapp"
         build:
-            context: "webapp"
+            context: "./webapp"

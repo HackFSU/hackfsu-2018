@@ -5,10 +5,20 @@ RUN apt-get update \
         postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && apt-get install -y nodejs
+
 WORKDIR /usr/src/app
+
+COPY package.json ./
+RUN npm install
+
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
+
 COPY . .
+
+RUN npm run build
 
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

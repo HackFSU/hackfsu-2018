@@ -35,7 +35,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'hackfsu.com',
-    '.hackfsu.com'
+    '.hackfsu.com',
+	'192.168.99.100'
 ]
 
 

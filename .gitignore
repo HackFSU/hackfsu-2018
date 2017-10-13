@@ -16,3 +16,5 @@ api/media
 api/webapp/build
 api/scripts/data
 secret_keys.json
+
+custom\.yml

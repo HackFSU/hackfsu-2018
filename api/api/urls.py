@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.conf import settings
 from . import views
+
 urlpatterns = [
     url(r'hackathon/get/countdowns$', views.hackathon.get.CountdownsView.as_view()),
     url(r'hackathon/get/maps$', views.hackathon.get.MapsView.as_view()),
@@ -12,7 +13,7 @@ urlpatterns = [
     url(r'hackathon/get/csv/attendees_checked_in$', views.hackathon.get.csv.AttendeesCheckedInCsv.as_view()),
 
     url(r'user/login$', views.user.LogInView.as_view(), name='user-login'),
-    # url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),
+    url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),
     url(r'user/get/profile$', views.user.get.ProfileView.as_view(), name='user-get-profile'),
     url(r'user/get/groups$', views.user.get.GroupsView.as_view(), name='user-get-groups'),
     url(r'user/password/reset/complete$', views.user.password.CompleteResetView.as_view()),

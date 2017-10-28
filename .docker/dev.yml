@@ -1,0 +1,28 @@
+version: '2'
+services:
+
+    api:
+        extends:
+            file: base.yml
+            service: api
+        ports:
+            - "8080:8000"
+        volumes:
+            - ./api:/usr/src/app
+        environment:
+            APP_DEBUG: "true"
+
+    webapp:
+        extends:
+            file: base.yml
+            service: webapp
+
+    db:
+        extends:
+            file: base.yml
+            service: db
+        environment:
+            POSTGRES_USER: "hackfsu"
+            POSTGRES_PASSWORD: "password"
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data

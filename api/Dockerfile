@@ -10,6 +10,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
 
 WORKDIR /usr/src/app
 
+RUN npm install -g gulp
 COPY package.json ./
 RUN npm install
 
@@ -18,7 +19,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN npm run build
+RUN gulp
 
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -17,7 +17,7 @@ locals.getTitle = function(subtitle) {
 };
 
 locals.keys = {
-    reCaptchaSiteKey: '6LffORIUAAAAAL0tK0lbV9sJ1AWO5Q_FMBNh51Dv'
+    reCaptchaSiteKey: '6LcrLjYUAAAAAGXmRcU6IwQdiGeC_6uPPBCHuJau'
 };
 
 locals.links = {

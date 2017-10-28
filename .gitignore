@@ -17,4 +17,6 @@ api/webapp/build
 api/scripts/data
 secret_keys.json
 
-custom\.yml
+# Ignore root dir compose configs
+/docker-compose.yml
+/dev.yml

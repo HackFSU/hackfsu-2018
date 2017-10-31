@@ -15,7 +15,10 @@ There are many advantages to Docker, including automatic dependency installation
 3. Clone this repo: `git clone https://github.com/hackfsu/hackfsu_com`
 
 ### Docker Compose Configs
-Existing configs for `docker-compose` exist already in the `.docker` folder of the project root. We recommend copying the
+We provide several Compose configurations in the `.docker` folder. We recommend copying the `dev.yml` configuration into the project root as `docker-compose.yml`, so you may use the `docker-compose ...` commands without the `-f .docker/dev.yml` option. You also can customize the `docker-compose.yml` file to your liking as it will be ignored by git. 
+
+To reiterate; if you choose the use a `docker-compose.yml` file you can use `docker-compose [command]`, otherwise you will need `docker-compose -f <.docker/compose_file> [command]`. 
+
 
 ## Contributing
 
@@ -24,15 +27,15 @@ Existing configs for `docker-compose` exist already in the `.docker` folder of t
 You can launch the webapp with the following commannd:
 
 ```
-docker-compose -f dev.yml up webapp
+docker-compose up webapp
 ```
 
 If you want to connect to use the local API, don't include the webapp tag. Also, see the **Database Migration** section under **API Development**.
 
 **Notes**:
-1. Windows users may need to type `docker-compose.exe`
-2. Windows users will need to edit the launch commannd, see the `dev.yml` comment below the command tag in the webapp service
-3. Use `up -d` to detach from the container
+1. Windows users may need to type `docker-compose.exe`.
+2. Windows users will need to edit the launch commannd, see the `dev.yml` comment below the command tag in the webapp service.
+3. Use `up -d` to detach from the container.
 
 ### API Development
 
@@ -51,10 +54,10 @@ The core of the system requires a `hackathon` object to function. In order to se
 
 Create a superuser using an email address as the username.
 ```bash
-docker-compose [-f compose file] run api python manage.py createsuperuser
+docker-compose [-f compose_file] run api python manage.py createsuperuser
 ```
 
 Then, log in at `<hostname>/login`. Then navigate to `<hostname>/django/admin`, and click on the `hackathon` class. Create a hackathon object and check the `current` checkbox.
 
 #### API v5 note
-Dockerfile currently contains Nodejs depts for compatibility with v4. These can be removed when webpages are no longer served from the API.
+Dockerfile currently contains Node.js deps for compatibility with v4. These can be removed when webpages are no longer served from the API.

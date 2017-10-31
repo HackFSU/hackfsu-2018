@@ -57,7 +57,7 @@ Create a superuser using an email address as the username.
 docker-compose [-f compose_file] run api python manage.py createsuperuser
 ```
 
-Then, log in at `<hostname>/login`. Then navigate to `<hostname>/django/admin`, and click on the `hackathon` class. Create a hackathon object and check the `current` checkbox.
+Then, log in at `<hostname>/login`. Then navigate to `<hostname>/admin/django`, and click on the `hackathon` class. Create a hackathon object and check the `current` checkbox.
 
 #### API v5 note
 Dockerfile currently contains Node.js deps for compatibility with v4. These can be removed when webpages are no longer served from the API.

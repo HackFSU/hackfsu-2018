@@ -2,7 +2,7 @@
 
 ## Installation
 
-These are some notes for how to set up this repository
+These are some docs on how to set up this repository.
 
 ### Getting Started
 
@@ -14,13 +14,18 @@ There are many advantages to Docker, including automatic dependency installation
 2. [Get Docker Compose](https://docs.docker.com/compose/install/)
 3. Clone this repo: `git clone https://github.com/hackfsu/hackfsu_com`
 
+*Also see `/docs/Docker.md` for details on what to install and how to configure your Docker hosts.*
+
 ### Docker Compose Configs
 We provide several Compose configurations in the `.docker` folder. We recommend copying the `dev.yml` configuration into the project root as `docker-compose.yml`, so you may use the `docker-compose ...` commands without the `-f .docker/dev.yml` option. You also can customize the `docker-compose.yml` file to your liking as it will be ignored by git. 
 
 To reiterate; if you choose the use a `docker-compose.yml` file you can use `docker-compose [command]`, otherwise you will need `docker-compose -f <.docker/compose_file> [command]`. 
 
+*Also see README.md in the `.docker` folder for a full list of pre-made configurations and details on environmental variable configuration.*
 
 ## Contributing
+
+Before starting, see `/docs/IDEs.md` for instructions on configuring Pycharm (API development) or Webstorm (Webapp development).
 
 ### Webapp Development
 
@@ -38,6 +43,7 @@ If you want to connect to use the local API, don't include the webapp tag. Also,
 3. Use `up -d` to detach from the container.
 
 ### API Development
+Be sure to setup Pycharm per `/docs/IDEs.md` before starting.
 
 #### Database Migration
 The first time the API launches, you need to apply the database migrations.
@@ -59,5 +65,11 @@ docker-compose [-f compose_file] run api python manage.py createsuperuser
 
 Then, log in at `<hostname>/login`. Then navigate to `<hostname>/admin/django`, and click on the `hackathon` class. Create a hackathon object and check the `current` checkbox.
 
-#### API v5 note
-Dockerfile currently contains Node.js deps for compatibility with v4. These can be removed when webpages are no longer served from the API.
+#### API v5+ and the v4 Webapp
+HackFSU 4 hosted the website as static files served by Django. These files were built using Node.js + Gulp. 
+
+Currently the API/Dockerfile contains instructions for compatibility with the v4 webapp. However, the Docker Compose volumes directive to mount the API for development causes some sort of conflict with the build step and the templates are not rendered into pages. 
+
+To use the legacy site, disable the volume flag in the Compose file. 
+
+Eventually we will remove the legacy site from the API, and this notice should also be removed. 

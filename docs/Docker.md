@@ -19,7 +19,7 @@ On Windows systems, you need to use the Docker Machine tool to provision a virtu
 
 When Docker Toolbox installs, it should have automatically provisioned a Virtualbox VM to serve as the Docker host. This is what the "Quickstart Terminal" connects to to run commands. You can confirm whether or not this is true by running `docker-machine ls` in your command prompt, *not* the quickstart terminal. 
 
-If you already have the Docker Machine Virtual Host created, you can activate it using the `docker-compose env` command. 
+If you already have the Docker Machine Virtual Host created, you can activate it using the `docker-machine env` command. 
 
 
 ### Compose Configurations

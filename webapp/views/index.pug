@@ -1,5 +1,105 @@
 extends layout
 
+
 block content
-  h1= title
-  p Welcome to #{title}
+  head
+    link(rel='stylesheet/scss', type='text/scss', href='/confetti.scss')
+    //link(rel='stylesheet', type='text/css', href='./stylesheets/confetti.css')
+
+  .wrapper
+    .conf-cont
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+      .confetti
+
+    .content
+    .header
+      p HACKFSU
+        strong  5
+    .subheader
+      p DARE TO BE
+        strong  BOLD
+
+      ul
+        a(href="./registration")
+          button(type="button") Register
+        a(href="./registration")
+          button(type="button") Login
+  style.
+    body {
+      text-align: center;
+      background-color: white;
+      height: 100%;
+      padding: 0px;
+      overflow: hidden;
+
+    }
+    h1 {
+      padding-top: 8%;
+      font-size: 75px;
+      }
+    .wrapper {
+      height:100%;
+    }
+    .header{
+      font-size: 80px;
+    }
+    .subheader{
+      font-size: 20px;
+      margin-top: -50px;
+    }
+    .subheader strong {
+      color: coral;
+    }
+    .content{
+      padding-top: 10em;
+    }
+    ul {
+      margin-top: 50px;
+      padding: 20px;
+    }
+    a {
+      padding: 20px;
+    }
+    strong{
+      font-weight: 900;
+    }
+    button {
+      background-color: coral;
+      border: none;
+      color: white;
+      border-radius: 12px;
+      padding: 15px 32px;
+      text-align: center;
+      font-size: 16px;
+      width: 10em;
+    }
+    button

@@ -1,0 +1,97 @@
+/*
+*
+* My attempt at confetti, not sure of any other way to make it more random (on load etc)
+*
+*/
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+.conf-cont{
+  position:absolute;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index: -100;
+}
+
+.confetti{
+  position:absolute;
+  width:12px;
+  height:12px;
+  background-color:#f00;
+  opacity:0.0;
+
+  animation-name: fallsway;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+
+  @for $i from 1 through 20 {
+      &:nth-child(#{$i}) {
+        z-index: $i;
+        animation-name: fallsway#{$i};
+        animation-delay: (4 / 20) * $i + s;
+        background-color:rgb(random(255),random(255),random(255));
+      }
+    }
+}
+
+@for $i from 1 through 20 {
+  @keyframes fallsway#{$i} {
+  0%{
+    top:-5%;
+    left:0%+random(95);
+    opacity:1.0;
+    transform:skew(-30deg);
+  }
+  25%{
+    left:100%-random(105);
+    transform:skew(30deg);
+  }
+  50%{
+    left:0%+random(95);
+    transform:skew(-30deg);
+  }
+  75%{
+    left:100%-random(105);
+    transform:skew(30deg);
+  }
+  100% {
+    top:100%;
+    left:0%+random(95);
+    opacity:1.0;
+    transform:skew(-30deg);
+  }
+}
+}
+
+@keyframes fallsway {
+  0%{
+    top:-10%;
+    left:0%+random(95);
+    opacity:1.0;
+  }
+  25%{
+    left:0%+random(95);
+  }
+  50%{
+    left:0%+random(95);
+  }
+  75%{
+    left:0%+random(95);
+  }
+  100% {
+    top:110%;
+    left:0%+random(95);
+    opacity:1.0;
+  }
+}

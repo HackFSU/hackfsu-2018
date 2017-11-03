@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'judge/assignment/cancel$', views.judge.assignment.CancelView.as_view()),
     url(r'judge/assignment/submit_grades$', views.judge.assignment.SubmitGradesView.as_view()),
     url(r'judge/get/profile$', views.judge.get.ProfileView.as_view(), name='judge-get-profile'),
+    url(r'judge/hacks$', views.judge.HacksView.as_view()),
 
     url(r'mentor/register$', views.mentor.RegisterView.as_view(), name='mentor-register'),
     url(r'mentor/get/profile$', views.mentor.get.ProfileView.as_view(), name='mentor-get-profile'),

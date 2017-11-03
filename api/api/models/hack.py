@@ -1,5 +1,5 @@
 from django.db import models
-from api.models import Hackathon, JudgingExpo, JudgingCriteria
+from api.models import Hackathon, JudgingExpo, JudgingCriteria, JudgeInfo
 from django.contrib import admin
 from hackfsu_com.admin import hackfsu_admin
 
@@ -20,6 +20,14 @@ class Hack(models.Model):
     name = models.CharField(max_length=100)                                             # Devpost "Submission Title"
     description = models.TextField()                                                    # Devpost "Plain Description"
     extra_judging_criteria = models.ManyToManyField(to=JudgingCriteria, blank=True)     # Devpost "Desired Prizes"
+    current_judges = models.ManyToManyField(to=JudgeInfo, blank=True, related_name='judges_current')
+    judges = models.ManyToManyField(to=JudgeInfo, blank=True, related_name='judges')
+    total_judge_score = models.IntegerField(default=0)
+    times_judged = models.IntegerField(default=0)
+
+    @staticmethod
+    def get_active_hacks_for_judge(judge):
+        return Hack.objects.filter(current_judges=judge)
 
     def get_expo(self):
         expo = JudgingExpo.objects.filter(

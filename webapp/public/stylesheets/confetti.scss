@@ -35,7 +35,7 @@ html, body {
   animation-fill-mode: none;
   animation-play-state: running;
 
-  @for $i from 1 through 20 {
+  @for $i from 1 through 200 {
       &:nth-child(#{$i}) {
         z-index: $i;
         animation-name: fallsway#{$i};
@@ -45,7 +45,7 @@ html, body {
     }
 }
 
-@for $i from 1 through 20 {
+@for $i from 1 through 200 {
   @keyframes fallsway#{$i} {
   0%{
     top:-5%;

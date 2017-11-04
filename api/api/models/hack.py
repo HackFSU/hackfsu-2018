@@ -20,8 +20,8 @@ class Hack(models.Model):
     name = models.CharField(max_length=100)                                             # Devpost "Submission Title"
     description = models.TextField()                                                    # Devpost "Plain Description"
     extra_judging_criteria = models.ManyToManyField(to=JudgingCriteria, blank=True)     # Devpost "Desired Prizes"
-    current_judges = models.ManyToManyField(to=JudgeInfo, blank=True, related_name='judges_current')
-    judges = models.ManyToManyField(to=JudgeInfo, blank=True, related_name='judges')
+    current_judges = models.ManyToManyField(to='api.JudgeInfo', blank=True, related_name='judges_current')
+    judges = models.ManyToManyField(to='api.JudgeInfo', blank=True, related_name='judges')
     total_judge_score = models.IntegerField(default=0)
     times_judged = models.IntegerField(default=0)
 

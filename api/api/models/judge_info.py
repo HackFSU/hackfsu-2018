@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
+from django.forms import forms
+
 from api.models import Hackathon, AttendeeStatus
 from hackfsu_com.util import acl, email
 from django.contrib import admin
@@ -29,15 +31,22 @@ def on_pre_delete(**kwargs):
         acl.remove_user_from_groups(instance.user, [acl.group_judge, acl.group_pending_judge])
 
 
+class ActiveHacksInline(admin.TabularInline):
+    from api.models.hack import Hack
+    model = Hack.current_judges.through
+
+
 @admin.register(JudgeInfo, site=hackfsu_admin)
 class JudgeInfoAdmin(admin.ModelAdmin):
     list_filter = ('hackathon', 'approved')
     list_display = ('id', 'user_info', 'approved', 'affiliation', 'organizer_contact', 'created')
     list_editable = ()
-    list_display_links = ('id',)
+    list_display_links = ('id', 'user_info')
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'affiliation', 'organizer_contact')
     ordering = ('-created',)
     actions = ('approve_application', 'un_approve_application')
+
+    inlines = [ActiveHacksInline]
 
     @staticmethod
     def user_info(obj):

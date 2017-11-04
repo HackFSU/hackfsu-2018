@@ -55,14 +55,16 @@ class Hack(models.Model):
         return self.name
 
 
+
+
 @admin.register(Hack, site=hackfsu_admin)
 class HackAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
-    list_display = ('id', 'name', 'expo', 'table_number', 'extra_criteria')
+    list_display = ('id', 'name', 'expo', 'table_number', 'total_judge_score')
     list_editable = ('table_number',)
-    list_display_links = ('id',)
+    list_display_links = ('id', 'name')
     search_fields = ('name', 'table_number')
-    ordering = ('table_number',)
+    ordering = ('table_number', 'total_judge_score')
 
     @staticmethod
     def expo(obj: Hack):

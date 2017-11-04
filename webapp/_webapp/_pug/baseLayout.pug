@@ -1,0 +1,37 @@
+block vars
+    -
+        var pageName = ""
+
+include ./includes/ascii-logo.pug
+doctype html
+html
+    head
+        title=getTitle(pageName)
+
+        include ./includes/metadata.pug
+
+        //- CSS
+        block styles
+            link(rel="stylesheet" type="text/css" href="/static/bower_components/font-awesome/css/font-awesome.min.css")
+            link(rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css")
+
+    body
+
+        include ./includes/googleAnalytics.html
+
+        block body-container
+            
+        //- JavaScript
+        block scripts
+            script(src="/static/bower_components/jquery/dist/jquery.min.js")
+            script(src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js")
+            script(src="/static/bower_components/parsleyjs/dist/parsley.min.js")
+            script(src="/static/bower_components/js-cookie/src/js.cookie.js")
+            script(src="/static/bower_components/moment/min/moment.min.js")
+
+            if DataTables
+                script(src=locals.cdn.dataTables.js)
+
+            script(src="/static/js/plugins/ajaxForm.js")
+            script(src="/static/js/plugins/ajaxGet.js")
+            script(src="/static/js/plugins/parallaxIt.js")

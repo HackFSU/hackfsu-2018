@@ -1,0 +1,12 @@
+extends ../../../_pug/standardLayout.pug
+
+block vars
+    -
+        var pageName = "404 Page Not Found"
+
+block navbar
+    +navbar(navLinks.error)
+
+block content
+    h1 404 It's a trap!
+    p Just kidding... but this is not the #[a(href="https://www.youtube.com/watch?v=8yy3q9f84EA" target="_blank") page] you're looking for.

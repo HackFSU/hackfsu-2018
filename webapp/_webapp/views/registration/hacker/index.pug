@@ -1,0 +1,84 @@
+extends ../../../_pug/userLayout.pug
+
+block vars
+    -
+        var pageName = "Hacker Registration"
+        var viewDir = "/static/views/registration/hacker"
+
+block append styles
+    link(rel="stylesheet" type="text/css" href=`${viewDir}/style.css`)
+
+block append scripts
+    script(src="/static/bower_components/devbridge-autocomplete/dist/jquery.autocomplete.min.js")
+    script(src="/static/js/plugins/schoolAutocomplete.js")
+    script(src="/static/js/plugins/fileUpload.js")
+    script(src=`${viewDir}/script.js`)
+
+block content
+    h1 Hacker Registration
+    form#register_hacker
+        .form-section
+            h2.form-section-title Education
+            fieldset.row
+                .field-label.col-md-3 Student Type *
+                .col-md-9: select.responsive(name="student_type" required)
+                    each val, key in locals.student_types
+                        option(value=`${key}`)=val
+            fieldset.row
+                .field-label.col-md-3 School *
+                .col-md-9
+                    input.responsive(type="text" name="school" minlength="5" maxlength="100" placeholder="Florida State University" required)
+            fieldset#year.row
+                .field-label.col-md-3 Status *
+                .col-md-9: select.responsive(name="year" required)
+                    option(value="" disabled selected)
+                    each val, key in locals.school_year_choices
+                        option(value=`${key}`)=val
+            fieldset#major.row
+                .field-label.col-md-3 Major *
+                .col-md-9: input.responsive(type="text" name="major" maxlength=100 placeholder="Computer Science" required)
+        .form-section
+            h2.form-section-title About You
+            fieldset.row
+                .field-label.col-md-3 Will this be your first hackathon? *
+                .col-md-9
+                    .col-md-2
+                        input(type="radio" name="first_hackathon" id="first-hack-true" value="true" required)
+                        label(for="first-hack-true") Yes
+                    .col-md-2
+                        input(type="radio" name="first_hackathon" id="first-hack-false" value="false" required)
+                        label(for="first-hack-false") No
+
+            fieldset.row
+                .field-label.col-md-3 Are you 18 years or older? *
+                .col-md-9
+                    .col-md-2
+                        input(type="radio" name="over_18" id="yes_adult" value="true" required)
+                        label(for="yes_adult") Yes
+                    .col-md-2
+                        input(type="radio" name="over_18" id="no_adult" value="false" required)
+                        label(for="no_adult") No
+            //- fieldset.row
+                label.col-md-3(for="job") Looking for a job? *
+                .col-md-9: select.responsive(name="job" required)
+                    option(value="" disabled selected) Select option
+                    each val, key in locals.job_seeker_options
+                        option(value=`${key}`)=val
+            fieldset.row
+                .field-label.col-md-3 Resume (PDF)
+                .col-md-9
+                    input.file-upload.responsive(type="file" id="resume" name="resume" accept=".pdf" placeholder="upload file" )
+                    label.btn.btn-form-file(for="resume")
+                        span Choose a file&hellip;
+
+            fieldset.row
+                .field-label.col-md-3 What are you interested in hacking?
+                .col-md-9: .row
+                    each type, index in locals.options.project_types
+                        .col-md-4
+                            input.project-type(type="checkbox" id=`project-type-${index}` data-value=`${type}`)
+                            label(for=`project-type-${index}`)=type
+                    .col-md-12: textarea.responsive(maxlength="200" name="project-types" placeholder="Other...")
+        .form-section
+            .text-right
+                button.btn.btn-form(type="submit") Submit

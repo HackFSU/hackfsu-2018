@@ -1,0 +1,15 @@
+@import "../../../_sass/vars";
+
+.profile-action-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+
+  button {
+    width: 400px;
+    max-width: 100%;
+    margin: 5px;
+  }
+}

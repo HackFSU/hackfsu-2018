@@ -1,0 +1,112 @@
+$navbar-height: 100px;
+$navbar-line-height: 50px;
+$navbar-margin-vertical: (($navbar-height - $navbar-line-height) / 2);
+$navbar-margin: $navbar-margin-vertical 0;
+
+nav.navbar-custom {
+    background-color: $color-dark;
+    font-size: 30px;
+    border: 0;
+    margin-bottom: 0;
+
+    .navbar-header {
+        line-height: $navbar-line-height;
+        color: $color-light;
+
+        button {
+            padding: (($navbar-height - $navbar-line-height) / 4);
+            margin: (($navbar-height - $navbar-line-height) / 4) 0;
+            margin-right: 70px;
+        }
+    }
+
+    .navbar-brand {
+        padding-top: $navbar-margin-vertical;
+        height: $navbar-line-height;
+        line-height: $navbar-line-height;
+        font-family: $font-header;
+        color: $color-light;
+        font-size: 1.0em;
+
+        img {
+            display: inline-block;
+            height: 0.75em;
+            margin-top: -0.25em;
+        }
+        .brand-title {
+            display: inline-block;
+            margin-left: 0.2em;
+        }
+    }
+
+    .nav > li {
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: transparent;
+        margin: $navbar-margin;
+        line-height: $navbar-line-height;
+        font-size: 20px;
+        font-family: $font-header;
+        color: $color-light;
+
+        > a,
+        > a:hover,
+        > a:link,
+        > a:visited,
+        > a:hover,
+        > a:focus,
+        > a:active {
+            background-color: transparent;
+        }
+
+    }
+
+    .collapse:not([aria-expanded="true"]) {
+        // Styles when not in dropdown
+
+        li {
+            > a:hover {
+                &:after {
+                    position: absolute;
+                    height: 2px;
+                    width: 80%;
+                    margin-left: 10%;
+                    bottom: 7px;
+                    left: 0;
+                    right: 0;
+                    content: '';
+                    background-color: $color-light;
+                }
+            }
+
+            &.active,
+            &.active > a:hover {
+                &:after {
+                    position: absolute;
+                    height: 5px;
+                    width: 80%;
+                    margin-left: 10%;
+                    bottom: 4px;
+                    left: 0;
+                    right: 0;
+                    content: '';
+                    background-color: $color-light;
+                }
+            }
+        }
+    }
+}
+
+
+@media(max-width: $screen-sm-min) {
+    nav.navbar-custom {
+        .navbar-brand {
+            padding-left: (($navbar-height - $navbar-line-height) / 4);
+
+            .brand-title {
+                display: none;
+            }
+        }
+    }
+}

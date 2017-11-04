@@ -11,8 +11,12 @@ bower_components
 *.DS_Store
 
 # Project
-/static_collected
-/media
-/webapp/build
-scripts/data
+api/static_collected
+api/media
+api/webapp/build
+api/scripts/data
 secret_keys.json
+
+# Ignore root dir compose configs
+/docker-compose.yml
+/dev.yml

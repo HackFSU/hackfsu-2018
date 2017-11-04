@@ -1,0 +1,27 @@
+extends ../../../../_pug/userLayout.pug
+
+block vars
+    -
+        var pageName = "Expo Management"
+        var viewDir = "/static/views/organize/judging/expo"
+        var DataTables = true
+
+block append scripts
+    script(src=`${viewDir}/script.js`)
+
+block content
+    h1 Expo Management
+    p TODO - Explain
+
+    h3 Settings
+    form#settings
+        .form-section
+            fieldset.row
+                .field-label.col-md-3 Max Hacks Per Assign *
+                .col-md-9: input.responsive(type="number" name="max_hacks" value=5 min=1)
+            fieldset.row
+                .field-label.col-md-3 Max Assignments Per Hack *
+                .col-md-9: input.responsive(type="number" name="max_judge_count" value=5 min=1)
+
+    h3 Approved & Checked-in Judges
+    table#judges.table.table-striped.table-bordered(cellspacing="0" width="100%")

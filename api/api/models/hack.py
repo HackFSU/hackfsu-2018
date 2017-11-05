@@ -69,8 +69,6 @@ class Hack(models.Model):
         return self.name
 
 
-
-
 @admin.register(Hack, site=hackfsu_admin)
 class HackAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)

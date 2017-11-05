@@ -23,6 +23,13 @@ def get_order(req: dict) -> dict:
     return dict()
 
 
+def get_superlatives(req: dict) -> dict:
+    sups = req.get('superlatives', dict())
+    if isinstance(sups, dict):
+        return sups
+    return dict()
+
+
 class ResponseForm(forms.Form):
     hacks = JsonField()
     superlatives = JsonField()
@@ -63,6 +70,12 @@ class HacksView(ApiView):
                     hack.save()
 
                 # TODO ... annotate superlatives ...
+                nominations = get_superlatives(req)
+                for table, superlative_names in nominations.items():
+                    hack = Hack.objects.filter(table_number=table).first()
+                    for name in superlative_names:
+                        superlative = JudgingCriteria.objects.filter(name=name).first()
+                        hack.nomination_set.create(superlative=superlative)
 
                 # ... and remove judge from assignments
                 for hack in judge_hack_assignment:

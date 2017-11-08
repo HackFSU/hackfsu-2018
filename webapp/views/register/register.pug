@@ -1,0 +1,118 @@
+extends ../layout
+
+block content 
+  form.registerForm.row
+    .col.s12  
+      .header
+        h1 Registration
+      .row
+        .input-field.col.s6.offset-s3
+          select#registrationType
+            option(value="" disabled selected) Select One
+            option(value="hacker") hacker
+            option(value="mentor") mentor
+            option(value="judge") judge
+          label(for="registrationType") I want to... *
+      .row
+        .input-field.col.s6.offset-s3
+          label(for="email") Email*
+          input#email.validate(type="email")
+      .row
+        .input-field.col.s6.offset-s3
+          label(for="password") Password*
+          input#password.validate(type="password")
+      .row
+        .input-field.col.s6.offset-s3
+          label(for="confirmPassword") Confirm Password*
+          input#confirmPassword.validate(type="password")
+      .header 
+        h1 Who Are You?
+      .row 
+        .input-field.col.s6.offset-s3
+          label(for="firstName") First Name*
+          input#firstName.validate(type="text")
+      .row
+        .input-field.col.s6.offset-s3
+          label(for="lastName") Last Name* 
+          input#lastName.validate(type="text")
+      .row 
+        .input-field.col.s6.offset-s3
+          label(for="phoneNumber") Phone Number* 
+          input#phoneNumber.validate(type="text")
+      .row
+        .input-field.col.s6.offset-s3
+          select#shirtSize.validate
+            option(value="" disabled selected) Shirt Size
+            option(value="S") S
+            option(value="M") M
+            option(value="L") L
+            option(value="XL") XL
+      .row 
+        .input-field.col.s6.offset-s3
+          label(for="github") Github
+          input#github.validate(type="text")
+      .row 
+        .input-field.col.s6.offset-s3 
+          label(for="linkedin") LinkedIn
+          input#linkedin.validate(type="text")
+      .row 
+        label.col.s2.offset-s3.left-align Dietary restrictions?
+        .col.s4
+          .col.s6.left-align
+            input#vegetarian(type="checkbox")
+            label(for="vegetarian") Vegetarian
+          .col.s6.left-align
+            input#vegan(type="checkbox") 
+            label(for="vegan") Vegan
+        .col.s4.offset-s5
+          .col.s6.left-align
+            input#allergies(type="checkbox") 
+            label(for="allergies") Allergies
+          .col.s6.left-align
+            input#other(type="checkbox") 
+            label(for="other") Other
+      .header
+        h1 Legal Stuff
+      .row 
+        .col.s6.offset-s3
+          input#codeOfConduct(type="checkbox")
+          label(for="codeOfConduct")
+            span
+              p I will abide by the 
+              a MLH Code Of Conduct 
+              p for the duration of the event
+
+      - var registrationType = 'Hacker'
+      if registrationType === 'Hacker'
+        .header
+          h1 Hacker Registration
+        .row 
+          .col.s6.offset-s3 Student Type*
+            select#studentType 
+              option(value="" disabled selected) Student Type*
+              option(value="College Student") College Student
+              option(value="Graduate Student") Graduate Student
+        .row School*
+          input
+        .form-label Status*
+          select
+            option
+        .form-label Major*
+          input
+        .header
+          h1 About You
+        .form-label Will this be your first hackathon?*
+          input(type="radio" value="Yes")
+          label Yes
+          input(type="radio" value="No")
+          label No
+        .form-label Are you 18 years or older?*
+          input(type="radio" value="Yes")
+          label Yes
+          input(type="radio" value="No")
+          label No
+        .form-label Resume (PDF)
+        .form-label What are you interested in hacking?
+
+
+

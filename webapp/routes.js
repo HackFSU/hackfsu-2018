@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'HackFSU 5' });
 });
 
 /* GET users listing. */
@@ -12,8 +12,8 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET registration page. */
-router.get('/registration', function(req, res, next) {
-  res.render('registration/registration', { title: 'registration page' });
+router.get('/register', function(req, res, next) {
+  res.render('register/register', { title: 'Registration Page' });
 });
 
 

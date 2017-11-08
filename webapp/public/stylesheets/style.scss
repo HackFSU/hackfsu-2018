@@ -1,14 +1,44 @@
 @import 'confetti';
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    .main {
+      flex-grow: 1;
+    }
+  }
 }
+
 a {
   color: #00B7FF;
 }
 
+body {
+  text-align: center;
+  background-color: white;
+  height: 100%;
+  padding: 0px;
+
+}
+h1 {
+  padding-top: 8%;
+  font-size: 75px;
+}
+.wrapper {
+  height:100%;
+}
+.header{
+  font-size: 80px;
+}
+
+
 * {
-  box-sizing: border-box;
+  box-sizing: border-box
 }
 
 

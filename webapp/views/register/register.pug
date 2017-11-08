@@ -92,27 +92,68 @@ block content
               option(value="" disabled selected) Student Type*
               option(value="College Student") College Student
               option(value="Graduate Student") Graduate Student
-        .row School*
-          input
-        .form-label Status*
-          select
-            option
-        .form-label Major*
-          input
+        .row 
+          .col.s6.offset-s3
+            label(for="school") School*
+            input#school.validate(type="text")
+        .row 
+          .col.s6.offset-s3 
+            label(for="status") Status*
+            input#status.validate(type="text")
+        .row 
+          .col.s6.offset-s3 
+            label(for="major") Major*
+            input#major.validate(type="text")
         .header
           h1 About You
-        .form-label Will this be your first hackathon?*
-          input(type="radio" value="Yes")
-          label Yes
-          input(type="radio" value="No")
-          label No
-        .form-label Are you 18 years or older?*
-          input(type="radio" value="Yes")
-          label Yes
-          input(type="radio" value="No")
-          label No
-        .form-label Resume (PDF)
-        .form-label What are you interested in hacking?
-
-
+        .row
+          .col.s6.offset-s3.left-align 
+            .col.s6 Will this be your first hackathon?*
+            .col.s6
+              input(type="radio" value="Yes")
+              label Yes
+              input(type="radio" value="No")
+              label No
+        .row
+           .col.s6.offset-s3.left-align 
+            .col.s6 Are you 18 years or older?*
+            .col.s6
+                input(type="radio" value="Yes")
+                label Yes
+                input(type="radio" value="No")
+                label No
+        .row 
+          .col.s6.offset-s3.left-align.file-field.input-field Resume (PDF)
+            .btn
+              span File
+                input(type="file")
+        .row
+          .col.s2.offset-s3.left-align What are you interested in hacking?
+          .col.s4
+            .col.s4.left-align
+              input#vegetarian(type="checkbox")
+              label(for="vegetarian") Vegetarian
+            .col.s4.left-align
+              input#vegan(type="checkbox") 
+              label(for="vegan") Vegan
+            .col.s4.left-align
+              input#vegan(type="checkbox") 
+              label(for="vegan") Vegan
+          .col.s4.offset-s5
+            .col.s4.left-align
+              input#allergies(type="checkbox") 
+              label(for="allergies") Allergies
+            .col.s4.left-align
+              input#allergies(type="checkbox") 
+              label(for="allergies") Allergies
+            .col.s4.left-align
+              input#other(type="checkbox") 
+              label(for="other") Other
+          .col.s4.offset-s5
+            .col.s4.left-align
+              input#allergies(type="checkbox") 
+              label(for="allergies") Allergies
+            .col.s4.left-align
+              input#allergies(type="checkbox") 
+              label(for="allergies") Allergies
 

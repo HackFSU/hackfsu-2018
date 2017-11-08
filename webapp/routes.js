@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
 /* GET registration page. */
 router.get('/registration', function(req, res, next) {
-  res.render('registration', { title: 'registration page' });
+  res.render('registration/registration', { title: 'registration page' });
 });
 
 

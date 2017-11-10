@@ -4,7 +4,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 
-  .wrapper {
+  .confetti-wrapper {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -29,10 +29,10 @@ h1 {
   padding-top: 8%;
   font-size: 75px;
 }
-.wrapper {
+.confetti-wrapper {
   height:100%;
 }
-.header{
+.heading{
   font-size: 80px;
 }
 

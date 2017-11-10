@@ -1,0 +1,57 @@
+@import 'confetti'
+
+
+body
+  height: 100%
+
+  *
+    box-sizing: border-box
+
+
+section.header
+  text-align: center
+  //background-color: white
+  height: 100%
+  padding: 0
+  overflow: hidden
+
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+  a
+    color: #00B7FF
+
+  .confetti-wrapper
+    position: absolute
+    display: flex
+    flex-direction: column
+    height: 100vh
+    width: 100vw
+
+  .content
+    max-width: 500px
+    padding-bottom: 100px
+
+    strong
+      font-weight: 900
+
+    .heading
+      font-size: 80px
+
+    .subheading
+      font-size: 20px
+      margin-top: -50px
+
+      strong
+        color: coral
+
+    button
+      background-color: coral
+      border: none
+      color: white
+      border-radius: 12px
+      padding: 15px 32px
+      text-align: center
+      font-size: 16px
+      width: 10em

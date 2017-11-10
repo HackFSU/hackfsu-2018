@@ -3,88 +3,43 @@ extends ../layout
 
 block content
   include ../partials/mlh-badge.pug
-  .wrapper.container
-    .conf-cont
-      .confetti
 
-    .content
-    .header
-      p HACKFSU
-        strong  5
-    .subheader
-      p DARE TO BE
-        strong  BOLD
+  section.header
 
-    section.section.main.columns.is-gapless
-        .column.is-8-widescreen.content-wrap.row     
-            .date March 2nd - 4th
-              
-            .form.col.s12         
-              .selection
-                .label I want to be a &hellip;
-                .buttons
-                  span: a(name="hacker") Hacker
-                  span: a(name="volunteer") Volunteer
-                  span: a(name="sponsor") Sponsor
-                  
-              input#email.input-field.col.s6.offset-s3(type="email", placeholder="My Email Is ...")
-              .submit.row
-                button#submit-button.col.s2.offset-s5
-                  img(src=`${locals.img}/celebration.png`)
-        //- .column.logo
-        //-   img(src=`${locals.img}/half.png`)
-        //- ul
-        //-   a(href="./registration")
-        //-     button(type="button") Register
-        //-   a(href="./registration")
-        //-     button(type="button") Login
-  style.
-    body {
-      text-align: center;
-      background-color: white;
-      height: 100%;
-      padding: 0px;
-      overflow: hidden;
+    .confetti-wrapper.container
+      .conf-cont
+        .confetti
 
-    }
-    h1 {
-      padding-top: 8%;
-      font-size: 75px;
-    }
-    .wrapper {
-      height:100%;
-    }
-    .header{
-      font-size: 80px;
-    }
-    .subheader{
-      font-size: 20px;
-      margin-top: -50px;
-    }
-    .subheader strong {
-      color: coral;
-    }
-    .content{
-      padding-top: 10em;
-    }
-    ul {
-      margin-top: 50px;
-      padding: 20px;
-    }
-    a {
-      padding: 20px;
-    }
-    strong{
-      font-weight: 900;
-    }
-    button {
-      background-color: coral;
-      border: none;
-      color: white;
-      border-radius: 12px;
-      padding: 15px 32px;
-      text-align: center;
-      font-size: 16px;
-      width: 10em;
-    }
+    .content.container
+      .heading
+        p HACKFSU
+          strong  5
+      .subheading
+        p DARE TO BE
+          strong  BOLD
+
+      .preview-form
+        .column.is-8-widescreen.content-wrap.row
+          .date March 2nd - 4th
+
+          .form.col.s12
+            .selection
+              .label I want to be a &hellip;
+              .buttons
+                span: a(name="hacker") Hacker
+                span: a(name="volunteer") Volunteer
+                span: a(name="sponsor") Sponsor
+
+            input#email.input-field(type="email", placeholder="My Email Is ...")
+            .submit.row
+              button#submit-button.col.s2.offset-s5
+                img(src=`${locals.img}/celebration.png`)
+          //- .column.logo
+          //-   img(src=`${locals.img}/half.png`)
+          //- ul
+          //-   a(href="./registration")
+          //-     button(type="button") Register
+          //-   a(href="./registration")
+          //-     button(type="button") Login
+
 

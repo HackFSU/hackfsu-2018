@@ -3,16 +3,16 @@ extends ../layout
 block content 
   form.registerForm.row
     .col.s12  
-      .header
+      .header.col.s4.offset-s4.center-align
         h1 Registration
       .row
         .input-field.col.s6.offset-s3
-          select#registrationType
+          select#interest
             option(value="" disabled selected) Select One
             option(value="hacker") hacker
             option(value="mentor") mentor
             option(value="judge") judge
-          label(for="registrationType") I want to... *
+          label(for="interest") I want to... *
       .row
         .input-field.col.s6.offset-s3
           label(for="email") Email*
@@ -25,8 +25,8 @@ block content
         .input-field.col.s6.offset-s3
           label(for="confirmPassword") Confirm Password*
           input#confirmPassword.validate(type="password")
-      .header 
-        h1 Who Are You?
+      .header.col.s4.offset-s4.center-align
+        h3 Who Are You?
       .row 
         .input-field.col.s6.offset-s3
           label(for="firstName") First Name*
@@ -40,9 +40,10 @@ block content
           label(for="phoneNumber") Phone Number* 
           input#phoneNumber.validate(type="text")
       .row
-        .input-field.col.s6.offset-s3
+        .col.s6.offset-s3
+          label(for="shirtSize") Shirt Size*
           select#shirtSize.validate
-            option(value="" disabled selected) Shirt Size
+            option(value="" disabled selected) Select One
             option(value="S") S
             option(value="M") M
             option(value="L") L
@@ -71,25 +72,25 @@ block content
           .col.s6.left-align
             input#other(type="checkbox") 
             label(for="other") Other
-      .header
-        h1 Legal Stuff
+      .header.col.s4.offset-s4.center-align
+        h3 Legal Stuff
       .row 
-        .col.s6.offset-s3
+        label.col.s2.offset-s3.left-align I will abide by the 
+          a MLH Code Of Conduct 
+          label for the duration of the event
+        .col.s3
           input#codeOfConduct(type="checkbox")
           label(for="codeOfConduct")
-            span
-              p I will abide by the 
-              a MLH Code Of Conduct 
-              p for the duration of the event
 
       - var registrationType = 'Hacker'
       if registrationType === 'Hacker'
-        .header
-          h1 Hacker Registration
+        .header.col.s4.offset-s4
+          h3 Hacker Registration
         .row 
-          .col.s6.offset-s3 Student Type*
+          .col.s6.offset-s3
+            label(for="studentType") Student Type*
             select#studentType 
-              option(value="" disabled selected) Student Type*
+              option(value="" disabled selected) Select One
               option(value="College Student") College Student
               option(value="Graduate Student") Graduate Student
         .row 
@@ -104,56 +105,64 @@ block content
           .col.s6.offset-s3 
             label(for="major") Major*
             input#major.validate(type="text")
-        .header
-          h1 About You
+        .header.col.s4.offset-s4.center-align
+          h3 About You
         .row
           .col.s6.offset-s3.left-align 
-            .col.s6 Will this be your first hackathon?*
+            label.col.s6 Will this be your first hackathon?*
             .col.s6
-              input(type="radio" value="Yes")
-              label Yes
-              input(type="radio" value="No")
-              label No
+              .col.s6
+                input#firstHackathonYes(name="firstHackathon" type="radio" value="Yes")
+                label(for="firstHackathonYes") Yes
+              .col.s6
+                input#firstHackathonNo(name="firstHackathon" type="radio" value="No")
+                label(for="firstHackathonNo") No
         .row
-           .col.s6.offset-s3.left-align 
-            .col.s6 Are you 18 years or older?*
+          .col.s6.offset-s3.left-align 
+            label.col.s6 Are you 18 years or older?*
             .col.s6
-                input(type="radio" value="Yes")
-                label Yes
-                input(type="radio" value="No")
-                label No
+              .col.s6
+                input#ageRadioYes(name="ageRadio" type="radio" value="Yes")
+                label(for="ageRadioYes") Yes
+              .col.s6
+                input#ageRadioNo(name="ageRadio" type="radio" value="No")
+                label(for="ageRadioNo") No
         .row 
-          .col.s6.offset-s3.left-align.file-field.input-field Resume (PDF)
+          label.col.s6.offset-s3.left-align.file-field.input-field Resume (PDF)
             .btn
               span File
                 input(type="file")
         .row
-          .col.s2.offset-s3.left-align What are you interested in hacking?
-          .col.s4
-            .col.s4.left-align
-              input#vegetarian(type="checkbox")
-              label(for="vegetarian") Vegetarian
-            .col.s4.left-align
-              input#vegan(type="checkbox") 
-              label(for="vegan") Vegan
-            .col.s4.left-align
-              input#vegan(type="checkbox") 
-              label(for="vegan") Vegan
-          .col.s4.offset-s5
-            .col.s4.left-align
-              input#allergies(type="checkbox") 
-              label(for="allergies") Allergies
-            .col.s4.left-align
-              input#allergies(type="checkbox") 
-              label(for="allergies") Allergies
-            .col.s4.left-align
-              input#other(type="checkbox") 
-              label(for="other") Other
-          .col.s4.offset-s5
-            .col.s4.left-align
-              input#allergies(type="checkbox") 
-              label(for="allergies") Allergies
-            .col.s4.left-align
-              input#allergies(type="checkbox") 
-              label(for="allergies") Allergies
-
+          .col.s6.offset-s3
+            label.col.s6.left-align What are you interested in hacking?
+            .col.s6
+              .col.s6.left-align
+                input#frontEnd(type="checkbox")
+                label(for="frontEnd") Front-End
+              .col.s6.left-align
+                input#backEnd(type="checkbox") 
+                label(for="backEnd") Back-End
+            .col.s6.offset-s6
+              .col.s6.left-align
+                input#web(type="checkbox") 
+                label(for="web") Web
+              .col.s6.left-align
+                input#hardware(type="checkbox") 
+                label(for="hardware") Hardware
+            .col.s6.offset-s6
+              .col.s6.left-align
+                input#ios(type="checkbox") 
+                label(for="ios") iOS
+              .col.s6.left-align
+                input#android(type="checkbox") 
+                label(for="android") Android
+            .col.s6.offset-s6
+              .col.s6.left-align
+                input#virtualReality(type="checkbox") 
+                label(for="virtualReality") Virtual Reality
+              .col.s6.left-align
+                input#design(type="checkbox") 
+                label(for="design") Design
+        .row
+          .col.s6.offset-s3
+            button#submit-button.waves-effect.waves-teal.btn-large.col.s2.offset-s5 Register

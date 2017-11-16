@@ -24,22 +24,22 @@ block content
 
           .form.col.s12
             .selection
-              .label I want to be a &hellip;
-              .buttons
-                span: a(name="hacker") Hacker
-                span: a(name="volunteer") Volunteer
-                span: a(name="sponsor") Sponsor
+              select#interest.validate
+                option(value="" disabled selected) I want to be a &hellip;
+                option(value="hacker") Hacker
+                option(value="volunteer") Volunteer
+                option(value="sponsor") Sponsor
 
             input#email.input-field(type="email", placeholder="My Email Is ...")
             .submit.row
-              button#submit-button.col.s2.offset-s5
-                img(src=`${locals.img}/celebration.png`)
-          //- .column.logo
-          //-   img(src=`${locals.img}/half.png`)
-          //- ul
-          //-   a(href="./registration")
-          //-     button(type="button") Register
-          //-   a(href="./registration")
-          //-     button(type="button") Login
+              button#submit-button.waves-effect.waves-teal.btn-large.col.s2.offset-s5 
+                img(src="/img/celebration.png")
+    section.footer
+      .content.container
+        p
+          a(href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf") MLH Code Of Conduct
+
+
+    
 
 

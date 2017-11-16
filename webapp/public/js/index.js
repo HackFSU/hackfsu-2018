@@ -19,10 +19,10 @@ function landingPageInit() {
         return re.test(email);
       }
 
-      if(!email || !validateEmail(email)) {
-        alert("Please enter a valid email.");
-      } else if(!interest) {
+      if(!interest) {
         alert("Please indicate your preference.");
+      } else if(!email || !validateEmail(email)) {
+        alert("Please enter a valid email.");
       } else {
         $.post(url, {
           email: email,
@@ -30,7 +30,7 @@ function landingPageInit() {
         });
 
           $('#submit-button img').toggle()
-          $('#submit-button').append("<span>Submitted!</span>");
+          $('#submit-button').append("Submitted!");
           $('#submit-button').unbind("click");
       }
     })

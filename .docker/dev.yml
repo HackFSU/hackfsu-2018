@@ -3,7 +3,7 @@ services:
 
     api:
         extends:
-            file: base.yml
+            file: .docker/base.yml
             service: api
         ports:
             - "8080:8000"
@@ -14,12 +14,16 @@ services:
 
     webapp:
         extends:
-            file: base.yml
+            file: .docker/base.yml
             service: webapp
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./webapp:/usr/src/app
 
     db:
         extends:
-            file: base.yml
+            file: .docker/base.yml
             service: db
         environment:
             POSTGRES_USER: "hackfsu"

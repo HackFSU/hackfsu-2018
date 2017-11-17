@@ -1,14 +1,20 @@
 # Docker Compose Configurations
-Available configurations for this project. 
+Available configurations for this project.
+
+Use the configs by copying them into the `hackfsu_com` folder as
+`docker-compose.yml`.
 
 #### `base.yml`
-Base definitions of our codebase (`webapp` + `api`) and directly dependant database. 
+Base definitions of our codebase (`webapp` + `api`) and directly dependent database. Do **not** use this as your `docker-compose.yml`.
 
 #### `dev.yml`
-Extends `base.yml` with extra options for ease of development. Copy this as `docker-compose.yml` to the root of the project. 
+Extends `base.yml` with extra options for ease of development.
 
-#### `production.yml` 
-(TODO) Will extend `base.yml` and add deployment containers such as Nginx. 
+#### `webapp.yml`
+Custom dev profile for working strictly on the webapp development.
+
+#### `production.yml`
+Configuration for deploying to the server.
 
 ## Environment Variables
 You need to set these on your host or manually write them in the

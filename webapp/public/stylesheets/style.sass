@@ -1,4 +1,5 @@
-@import 'confetti'
+@import "compat"
+@import "confetti"
 
 @font-face
   font-family: 'Graphik'
@@ -33,6 +34,7 @@ $heavy: 900
 
 $bg1: #f451e1
 $bg2: #7d48ef
+$accent: #ff904d
 
 body
   height: 100%
@@ -57,12 +59,6 @@ section.header.landing
     color: white
     position: relative
     z-index: 1
-    text-decoration: underline
-
-  .celebrationImg
-    position: relative
-    padding-top: 5px
-    max-width: 70%
 
   .confetti-wrapper
     position: absolute
@@ -72,47 +68,14 @@ section.header.landing
     width: 100vw
     min-width: 100%
 
-
-  #submit-button
-    background-color: coral
-
-    p
-      padding-bottom: 20px
-      margin: 0 auto
-
-
   .content
     max-width: 500px
-    //padding-bottom: 100px
 
     strong
       font-weight: $bold
 
-    .caret
-      right: 16px
-      color: black !important
-
-    .input-field
-      margin-left: 16px
-      margin-bottom: 0px
-      color: white
-      border-bottom: 0px !important
-
-      &:active, &:focus
-        text-decoration: none
-
-    input
-      color: black
-
-      &::placeholder
-        color: black
-
-    input.select-dropdown
-      margin-left: 16px
-      border-bottom: 0px
-
     .heading
-      font-size: 80px
+      font-size: 8vh
 
       p
         margin: 0px
@@ -127,26 +90,61 @@ section.header.landing
       // font-style: italic
 
       strong
-        color: coral
-
-    button
-      background-color: coral
-      border: none
-      color: white
-      border-radius: 12px
-      text-align: center
-      font-size: 16px
-      width: 10em
-
-    .form.col.s12 .selection .buttons a
-      padding-left: 10px
-
-    .form.col.s12
-      .caret
-        color: white
-      .submit.row
-        font-weight: 500
+        color: $accent
 
     .preview-form
+
       .date
         padding-bottom: 20px
+
+      .form
+
+        .card
+
+          input
+            color: black
+
+            @include placeholder
+              color: black
+
+            &.select-dropdown
+              margin-left: 16px
+              border-bottom: 0px
+
+            &.input-field
+              margin-bottom: 0px
+              border-bottom: 0px !important
+
+            &#email
+              @include placeholder
+                color: black
+
+          .caret
+            right: 16px
+            color: black !important
+
+        .email-card
+          padding: 0 16px 0 16px
+
+          *:focus
+            border-bottom: none !important
+            @include box-shadow(none !important)
+
+        .submit.row
+          font-weight: 500
+
+          #submit-button
+            background-color: $accent
+
+            &.finished
+              // background: none
+              background-image: linear-gradient(-45deg, #34d7ae -10%, #34d7ae 100%)
+              // border: solid white 2px
+              @include box-shadow(none !important)
+
+            p
+              padding-bottom: 20px
+              margin: 0 auto
+
+    .conduct a
+      text-decoration: underline

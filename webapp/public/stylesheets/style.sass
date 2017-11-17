@@ -50,7 +50,7 @@ section.header
     color: coral
     position: relative
     z-index: 1
-  
+
   .celebrationImg
     position: relative
     padding-top: 5px
@@ -62,16 +62,19 @@ section.header
     flex-direction: column
     height: 100vh
     width: 100vw
+    min-width: 100%
 
-  #submit-button 
+  #submit-button
+    background-color: coral;
+
     p
       padding-bottom: 20px
       margin: 0 auto
-    
+
 
   .content
     max-width: 500px
-    padding-bottom: 100px
+    //padding-bottom: 100px
 
     strong
       font-weight: 900
@@ -79,9 +82,13 @@ section.header
     .heading
       font-size: 80px
 
+    .heading p
+      margin: 0px
+
     .subheading
       font-size: 20px
       margin-top: -50px
+      padding-top: 30px
 
       strong
         color: coral
@@ -95,12 +102,5 @@ section.header
       font-size: 16px
       width: 10em
 
-
-section.footer a 
-    color: coral
-    text-decoration: underline
-
-
-.registerForm a
-  position: relative 
-  z-index: 1
+    .form.col.s12 .selection .buttons a
+      padding-left: 10px

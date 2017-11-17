@@ -5,7 +5,6 @@ $(document).ready(function() {
 
 function landingPageInit() {
     if(window.location.pathname === '/') {
-      console.log('working');
       var confetti = $('.confetti');
       for(var i = 0; i < 100; i++) {
         confetti.clone().appendTo(".conf-cont");
@@ -29,9 +28,10 @@ function landingPageInit() {
           interest: interest
         });
 
-          $('#submit-button img').toggle()
-          $('#submit-button').append("Submitted!");
+          $('#submit-text').html("Okay, we'll be in touch!");
           $('#submit-button').unbind("click");
+          $('#submit-button').toggleClass("finished");
+
       }
     })
   }
@@ -131,7 +131,7 @@ function registerPageInit() {
         } else {
           validated = true;
         }
-        
+
         return validated;
 
         function validateEmail(email) {

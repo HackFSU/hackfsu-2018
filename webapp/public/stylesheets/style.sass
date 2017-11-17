@@ -43,13 +43,12 @@ body
     font-family: 'Graphik'
     color: white
 
-section.header
+section.header.landing
   text-align: center
   //background-color: white
   height: 100%
   padding: 0
   overflow: hidden
-
   display: flex
   flex-direction: column
   justify-content: center
@@ -72,8 +71,9 @@ section.header
     width: 100vw
     min-width: 100%
 
+
   #submit-button
-    background-color: coral;
+    background-color: coral
 
     p
       padding-bottom: 20px
@@ -86,6 +86,23 @@ section.header
 
     strong
       font-weight: $bold
+
+    .caret
+      right: 16px
+
+    .input-field
+      margin-left: 16px 
+      margin-bottom: 0px 
+      color: white
+      border-bottom: 0px !important
+
+      &:active, &:focus
+        text-decoration: none
+
+
+    .select-dropdown
+      margin-left: 16px
+      border-bottom: 0px
 
     .heading
       font-size: 80px

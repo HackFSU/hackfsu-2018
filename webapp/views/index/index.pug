@@ -4,7 +4,7 @@ extends ../layout
 block content
   include ../partials/mlh-badge.pug
 
-  section.header
+  section.header.landing
 
     .confetti-wrapper.container
       .conf-cont
@@ -23,18 +23,19 @@ block content
           .date March 2nd - 4th
 
           .form.col.s12
-            .selection
-              select#interest.validate
-                option(value="" disabled selected) I want to be a &hellip;
-                option(value="hacker") Hacker
-                option(value="volunteer") Volunteer
-                option(value="sponsor") Sponsor
-
-            input#email.input-field(type="email", placeholder="My Email Is ...")
-            .submit.row
-              a#submit-button.waves-effect.waves-teal.btn-large.col.s2.offset-s5 
-                img.celebrationImg(src="/img/celebration.png")
-                p Submitted!
+            .select-card.col.s12
+              .selection
+                select#interest.validate.card.blue
+                  option(value="" disabled selected) I want to be a &hellip;
+                  option(value="hacker") Hacker
+                  option(value="volunteer") Volunteer
+                  option(value="sponsor") Sponsor
+              .card.blue
+                input#email.input-field(type="email", placeholder="My Email Is ...")
+              .submit.row
+                a#submit-button.waves-effect.waves-teal.btn-large.col.s2.offset-s5 
+                  img.celebrationImg(src="/img/celebration.png")
+                  p Submitted!
 
     section.footer
       .content.container

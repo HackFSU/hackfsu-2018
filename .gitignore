@@ -16,5 +16,7 @@ api/media
 api/webapp/build
 api/scripts/data
 secret_keys.json
+webapp/public/stylesheets/style.css
+webapp/public/stylesheets/style.css.map
 
 custom\.yml

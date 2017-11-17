@@ -1,0 +1,152 @@
+@import 'confetti'
+
+@font-face
+  font-family: 'Graphik'
+  font-style: normal
+  font-weight: 400
+  src: url("/fonts/Graphik-Light.woff")
+
+@font-face
+  font-family: 'Graphik'
+  font-style: normal
+  font-weight: 500
+  src: url("/fonts/Graphik-Medium.otf")
+
+@font-face
+  font-family: 'Graphik'
+  font-style: normal
+  font-weight: 700
+  src: url("/fonts/Graphik-Bold.woff")
+
+@mixin Graphik($weight:400)
+  font-family: 'Graphik', sans-serif
+  @if $weight == 400
+    font-weight: 400
+  @else
+    font-weight: 700
+
+$light: 300
+$regular: 400
+$medium: 500
+$bold: 700
+$heavy: 900
+
+$bg1: #f451e1
+$bg2: #7d48ef
+
+body
+  height: 100%
+  background-image: linear-gradient(-45deg, $bg1 -10%, $bg2 100%)
+
+  *
+    box-sizing: border-box
+    font-family: 'Graphik'
+    color: white
+
+section.header.landing
+  text-align: center
+  //background-color: white
+  height: 100%
+  padding: 0
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+  a
+    color: white
+    position: relative
+    z-index: 1
+    text-decoration: underline
+
+  .celebrationImg
+    position: relative
+    padding-top: 5px
+    max-width: 70%
+
+  .confetti-wrapper
+    position: absolute
+    display: flex
+    flex-direction: column
+    height: 100vh
+    width: 100vw
+    min-width: 100%
+
+
+  #submit-button
+    background-color: coral
+
+    p
+      padding-bottom: 20px
+      margin: 0 auto
+
+
+  .content
+    max-width: 500px
+    //padding-bottom: 100px
+
+    strong
+      font-weight: $bold
+
+    .caret
+      right: 16px
+      color: black !important
+
+    .input-field
+      margin-left: 16px
+      margin-bottom: 0px
+      color: white
+      border-bottom: 0px !important
+
+      &:active, &:focus
+        text-decoration: none
+
+    input
+      color: black
+
+      &::placeholder
+        color: black
+
+    input.select-dropdown
+      margin-left: 16px
+      border-bottom: 0px
+
+    .heading
+      font-size: 80px
+
+      p
+        margin: 0px
+        font-weight: $light
+        letter-spacing: 5px
+
+    .subheading
+      font-size: 20px
+      margin-top: -50px
+      padding-top: 30px
+      font-weight: $medium
+      // font-style: italic
+
+      strong
+        color: coral
+
+    button
+      background-color: coral
+      border: none
+      color: white
+      border-radius: 12px
+      text-align: center
+      font-size: 16px
+      width: 10em
+
+    .form.col.s12 .selection .buttons a
+      padding-left: 10px
+
+    .form.col.s12
+      .caret
+        color: white
+      .submit.row
+        font-weight: 500
+
+    .preview-form
+      .date
+        padding-bottom: 20px

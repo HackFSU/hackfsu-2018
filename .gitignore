@@ -16,3 +16,5 @@ bower_components
 /webapp/build
 scripts/data
 secret_keys.json
+/webapp/public/stylesheets/style.css
+/webapp/public/stylesheets/style.css.map

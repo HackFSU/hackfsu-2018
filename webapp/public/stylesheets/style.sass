@@ -90,6 +90,7 @@ section.header.landing
 
     .caret
       right: 16px
+      color: black !important
 
     .input-field
       margin-left: 16px 
@@ -100,8 +101,13 @@ section.header.landing
       &:active, &:focus
         text-decoration: none
 
+    input
+      color: black
 
-    .select-dropdown
+      &::placeholder
+        color: black
+
+    input.select-dropdown
       margin-left: 16px
       border-bottom: 0px
 

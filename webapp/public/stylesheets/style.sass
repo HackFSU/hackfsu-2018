@@ -9,14 +9,14 @@
 @font-face
   font-family: 'Graphik'
   font-style: normal
-  font-weight: 700
-  src: url("/fonts/Graphik-Bold.woff")
+  font-weight: 500
+  src: url("/fonts/Graphik-Medium.otf")
 
 @font-face
-  font-family: 'HackFSU5'
+  font-family: 'Graphik'
   font-style: normal
   font-weight: 700
-  src: url("/fonts/hackfsu5.woff")
+  src: url("/fonts/Graphik-Bold.woff")
 
 @mixin Graphik($weight:400)
   font-family: 'Graphik', sans-serif
@@ -25,15 +25,23 @@
   @else
     font-weight: 700
 
-@mixin Five-Font
-  font-family: 'HackFSU5', 'Graphik', sans-serif
+$light: 300
+$regular: 400
+$medium: 500
+$bold: 700
+$heavy: 900
+
+$bg1: #f451e1
+$bg2: #7d48ef
 
 body
   height: 100%
+  background-image: linear-gradient(-45deg, $bg1 -10%, $bg2 100%)
 
   *
     box-sizing: border-box
-
+    font-family: 'Graphik'
+    color: white
 
 section.header
   text-align: center
@@ -77,18 +85,22 @@ section.header
     //padding-bottom: 100px
 
     strong
-      font-weight: 900
+      font-weight: $bold
 
     .heading
       font-size: 80px
 
-    .heading p
-      margin: 0px
+      p
+        margin: 0px
+        font-weight: $light
+        letter-spacing: 5px
 
     .subheading
       font-size: 20px
       margin-top: -50px
       padding-top: 30px
+      font-weight: $medium
+      // font-style: italic
 
       strong
         color: coral

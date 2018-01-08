@@ -31,12 +31,13 @@ $medium: 500
 $bold: 700
 $heavy: 900
 
-$bg1: #f451e1
-$bg2: #7d48ef
+$bg1: #8A35FB
+$bg2: #9E64EA
 
 body
   height: 100%
-  background-image: linear-gradient(-45deg, $bg1 -10%, $bg2 100%)
+  background-color: $bg1
+
 
   *
     box-sizing: border-box
@@ -72,9 +73,30 @@ section.header.landing
     width: 100vw
     min-width: 100%
 
+  .presenting
+    transform: rotate(-5deg)
+    font-size: 30px
+    font-weight: 500
+
+  img.hackSymbol
+    width: 400px
+
+
+  .background-Letters
+      background-image: url("/img/index/funLines.svg"), url("/img/index/backgroundLetters.svg")
+      min-width: 100%
+      min-height: 100%
+      z-index: -50
+      background-repeat: no-repeat
+      background-size: cover
+
+
 
   #submit-button
-    background-color: coral
+    background-color: #F960FF
+    border-radius: 40px
+    text-decoration: none
+    width: 75%
 
     p
       padding-bottom: 20px
@@ -116,8 +138,8 @@ section.header.landing
 
       p
         margin: 0px
-        font-weight: $light
-        letter-spacing: 5px
+        font-weight: bold
+        font-size: smaller
 
     .subheading
       font-size: 20px
@@ -150,3 +172,4 @@ section.header.landing
     .preview-form
       .date
         padding-bottom: 20px
+        letter-spacing: 2px

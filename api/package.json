@@ -39,13 +39,13 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-bower": "0.0.13",
-    "gulp-clean-css": "^2.3.2",
-    "gulp-header": "^1.8.8",
-    "gulp-pug": "^3.1.0",
+    "gulp-clean-css": "^2.4.0",
+    "gulp-header": "^1.8.9",
+    "gulp-pug": "^3.3.0",
     "gulp-sass": "^2.3.2",
-    "gulp-sourcemaps": "^2.2.0",
-    "gulp-uglify": "^2.0.0",
-    "moment": "^2.17.1"
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify": "^2.1.2",
+    "moment": "^2.19.1"
   },
   "devDependencies": {
     "concurrently": "^3.1.0",

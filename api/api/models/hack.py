@@ -1,7 +1,25 @@
 from django.db import models
-from api.models import Hackathon, JudgingExpo, JudgingCriteria
+from api.models import Hackathon
+from api.models.judging_criteria import JudgingCriteria
+from api.models.judging_expo import JudgingExpo
 from django.contrib import admin
 from hackfsu_com.admin import hackfsu_admin
+
+
+class HackQuerySet(models.QuerySet):
+    from api.models.judge_info import JudgeInfo
+
+    def from_expo(self, expo: JudgingExpo):
+        return self.filter(
+            table_number__gte=expo.table_number_start,
+            table_number__lte=expo.table_number_end
+        )
+
+    def with_active_judge(self, judge: JudgeInfo):
+        return self.filter(current_judges=judge)
+
+    def without_previous_judge(self, judge: JudgeInfo):
+        return self.exclude(judges=judge)
 
 
 class HackManager(models.Manager):
@@ -14,12 +32,16 @@ class HackManager(models.Manager):
 
 
 class Hack(models.Model):
-    objects = HackManager()
+    objects = HackManager.from_queryset(HackQuerySet)()
     hackathon = models.ForeignKey(to=Hackathon, on_delete=models.CASCADE)
     table_number = models.IntegerField()
     name = models.CharField(max_length=100)                                             # Devpost "Submission Title"
     description = models.TextField()                                                    # Devpost "Plain Description"
     extra_judging_criteria = models.ManyToManyField(to=JudgingCriteria, blank=True)     # Devpost "Desired Prizes"
+    current_judges = models.ManyToManyField(to='api.JudgeInfo', blank=True, related_name='judges_current')
+    judges = models.ManyToManyField(to='api.JudgeInfo', blank=True, related_name='judges')
+    total_judge_score = models.IntegerField(default=0)
+    times_judged = models.IntegerField(default=0)
 
     def get_expo(self):
         expo = JudgingExpo.objects.filter(
@@ -50,11 +72,11 @@ class Hack(models.Model):
 @admin.register(Hack, site=hackfsu_admin)
 class HackAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
-    list_display = ('id', 'name', 'expo', 'table_number', 'extra_criteria')
+    list_display = ('id', 'name', 'expo', 'table_number', 'total_judge_score')
     list_editable = ('table_number',)
-    list_display_links = ('id',)
+    list_display_links = ('id', 'name')
     search_fields = ('name', 'table_number')
-    ordering = ('table_number',)
+    ordering = ('table_number', 'total_judge_score')
 
     @staticmethod
     def expo(obj: Hack):

@@ -13,9 +13,7 @@ services:
         image: "postgres"
         ports:
             - "127.0.0.1:5432:5432"
-        environment:
-            - POSTGRES_USER
-            - POSTGRES_PASSWORD
+        env_file: ".env"
         volumes:
             - /data/postgres:/var/lib/postgresql/data
 
@@ -33,14 +31,14 @@ services:
 
     # [Django] Backend API
     api:
-        image: "@hackfsu/api"
+        image: "hackfsu/api"
         build: "./api"
         ports:
             - "8080:8000"
 
     # [Express] Webapp
     webapp:
-        image: "@hackfsu/webapp"
+        image: "hackfsu/webapp"
         build: "./webapp"
         ports:
             - "3000:3000"

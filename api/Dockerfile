@@ -1,25 +1,25 @@
-FROM python:3.6
+#   See api-base.dockerfile
+#
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        postgresql-client \
-    && rm -rf /var/lib/apt/lists/*
+FROM hackfsu/api-base
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-    && apt-get install -y nodejs
-
-WORKDIR /usr/src/app
-
-RUN npm install -g gulp
-COPY package.json ./
-RUN npm install
+#
+#   Install python dependencies
+#
 
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
 
-COPY . .
+#
+#   Add files and run static build.
+#
 
+COPY . .
 RUN gulp
+
+#
+#   Launch the server.
+#
 
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

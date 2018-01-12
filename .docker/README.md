@@ -1,4 +1,10 @@
-# Docker Compose Configurations
+# NOTICE
+The following documentation is still mostly accruate, but we're not using these files anymore. See the
+new docker-compose.yml in the repo root.
+
+
+
+## Docker Compose Configurations
 Available configurations for this project.
 
 Use the configs by copying them into the `hackfsu_com` folder as

@@ -1,0 +1,46 @@
+#   This configuration is the full-scale deployment config. Create
+#   custom configurations to extend this for devleopment.
+
+version: '2'
+services:
+
+    #
+    #   Data stores
+    #
+
+    # [PostgreSQL] Database for Django API
+    postgres:
+        image: "postgres"
+        ports:
+            - "127.0.0.1:5432:5432"
+        environment:
+            - POSTGRES_USER
+            - POSTGRES_PASSWORD
+        volumes:
+            - /data/postgres:/var/lib/postgresql/data
+
+    # [MongoDB] Datastore for microservies
+    mongodb:
+        image: "mongo"
+        ports:
+            - "127.0.0.1:27017:27017"
+        volumes:
+            - /data/mongodb:/data/db
+
+    #
+    #   Core apps
+    #
+
+    # [Django] Backend API
+    api:
+        image: "@hackfsu/api"
+        build: "./api"
+        ports:
+            - "8080:8000"
+
+    # [Express] Webapp
+    webapp:
+        image: "@hackfsu/webapp"
+        build: "./webapp"
+        ports:
+            - "3000:3000"

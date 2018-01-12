@@ -18,8 +18,3 @@ api/scripts/data
 secret_keys.json
 webapp/public/stylesheets/style.css
 webapp/public/stylesheets/style.css.map
-
-# Ignore root dir compose configs
-/docker-compose.yml
-/dev.yml
-/migrations.yml

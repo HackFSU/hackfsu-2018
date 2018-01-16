@@ -11,11 +11,10 @@ COPY requirements.txt ./
 RUN pip install -r requirements.txt
 
 #
-#   Add files and run static build.
+#   Update Python source
 #
 
 COPY . .
-RUN gulp
 
 #
 #   Launch the server.

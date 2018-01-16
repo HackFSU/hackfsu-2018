@@ -18,7 +18,6 @@ RUN npm install -g gulp
 #   .sass files for legacy site.
 #
 
-
 COPY package.json ./
 RUN npm install
 
@@ -31,4 +30,11 @@ RUN apt-get update \
         postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
+#
+#   Add legacy site files and run static build.
+#
 
+COPY ./gulpfile.js ./bower.json ./.bowerrc ./
+COPY ./static ./static
+COPY ./webapp ./webapp
+RUN gulp

@@ -27,8 +27,8 @@ secret_keys.json
 #   Express Webapp Files
 #
 
-webapp/public/stylesheets/*.css
-webapp/public/stylesheets/*.css.map
+webapp/public/**/*.css
+webapp/public/**/*.css.map
 
 #
 #   Configuration

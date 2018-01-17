@@ -1,0 +1,34 @@
+@import "style.sass"
+
+section
+    min-height: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    form
+        min-width: 66%
+        max-width: 700px
+
+        .input-wrap
+            background: rgba(255, 255, 255, 200)
+            padding: 4px 18px
+            border-radius: 50px
+
+            .extra-wrap
+                position: relative
+
+                label.active
+                    font-size: 0
+
+                input
+                    color: black !important
+                    margin-bottom: 0px
+
+    button
+        min-width: 100%
+        border-radius: 100px !important
+
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea
+    border-bottom: rgba(0,0,0,0) !important

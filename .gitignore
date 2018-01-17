@@ -1,4 +1,6 @@
-# Editor/Enviroment
+#
+#    Editor/Enviroment
+#
 .idea
 *.pyc
 __pycache__
@@ -10,14 +12,26 @@ bower_components
 *.tmp
 *.DS_Store
 
-# Project
+
+#
+#   Django API Files
+#
+
 api/static_collected
 api/media
 api/webapp/build
 api/scripts/data
 secret_keys.json
-webapp/public/stylesheets/style.css
-webapp/public/stylesheets/style.css.map
 
+#
+#   Express Webapp Files
+#
+
+webapp/public/stylesheets/*.css
+webapp/public/stylesheets/*.css.map
+
+#
+#   Configuration
+#
 
 **/.env

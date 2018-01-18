@@ -1,0 +1,4 @@
+/dist
+/.vscode
+/.docker
+package.json

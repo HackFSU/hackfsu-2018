@@ -70,13 +70,13 @@ class RegisterView(ApiView):
         user_info.save()
 
         # Send email for confirmation
-        email.send_template(
-            to_email=req['email'],
-            to_first_name=req['first_name'],
-            to_last_name=req['last_name'],
-            subject='HackFSU Account Created',
-            template_name='user_registered'
-        )
+        # email.send_template(
+        #     to_email=req['email'],
+        #     to_first_name=req['first_name'],
+        #     to_last_name=req['last_name'],
+        #     subject='HackFSU Account Created',
+        #     template_name='user_registered'
+        # )
 
         # Log user in
         try:

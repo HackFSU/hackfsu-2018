@@ -29,12 +29,12 @@ services:
     #   Core apps
     #
 
-    # [Django] Backend API
+    # [Django] Backend API (also has Nginx)
     api:
         image: "hackfsu/api"
         build: "./api"
         ports:
-            - "8080:8000"
+            - "8080:8080"
 
     # [Express] Webapp
     webapp:

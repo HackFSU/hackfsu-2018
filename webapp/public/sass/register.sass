@@ -40,19 +40,25 @@ background
         z-index: 1
 
 
-section
-    min-height: 100%
-    position: relative
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    z-index: 100
+form
+    min-height: 100vh
 
-    .limit-width
-        max-width: 700px
+    section
+        min-height: 100vh
+        position: relative
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        z-index: 100
 
-    form
+        .limit-width
+            max-width: 700px
+
+        .g-recaptcha
+            display: flex
+            justify-content: center
+            padding: 16px
 
         *
             @include box-shadow(none)
@@ -129,13 +135,19 @@ section
             margin: 16px 0
 
             label.file-label
-                // width: 100%
+                width: 100%
 
-            .file-cta
+                *
+                    width: 100%
+
+            span.file-cta
                 background-color: rgba(0,0,0,0)
                 // width: 100%
-                // height: $control-height
-                // border-radius: 100px
+                height: $control-height
+                border-radius: 100px
 
                 &:hover
                     background-color: rgba(0,0,0,0)
+
+                .file-label
+                    justify-content: center

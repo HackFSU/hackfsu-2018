@@ -6,11 +6,11 @@ import empty from 'is-empty';
 //
 
 function getUserInfo () {
-    const userForm = $('form#userForm');
+    const form = $('form.registerForm');
 
-    const emailInput           = userForm.find('input[name="email"]');
-    const passwordInput        = userForm.find('input[name="password"]');
-    const passwordConfirmInput = userForm.find('input[name="confirmPassword"]');
+    const emailInput           = form.find('input[name="email"]');
+    const passwordInput        = form.find('input[name="password"]');
+    const passwordConfirmInput = form.find('input[name="confirmPassword"]');
 
     let email = emailInput.val().trim(),
         password = passwordInput.val().trim(),
@@ -24,17 +24,17 @@ function getUserInfo () {
 }
 
 function getAttendeeInfo () {
-    const attendeeForm = $('form#attendeeForm');
+    const form = $('form.registerForm');
 
-    const firstNameInput     = attendeeForm.find('input[name="firstName"]');
-    const lastNameInput      = attendeeForm.find('input[name="lastName"]');
-    const phoneNumberInput   = attendeeForm.find('input[name="phoneNumber"]');
-    const githubInput        = attendeeForm.find('input[name="github"]');
-    const linkedinInput      = attendeeForm.find('input[name="linkedin"]');
-    const shirtSizeSelect    = attendeeForm.find('select[name="shirtSize"]');
-    const commentsInput      = attendeeForm.find('input[name="comments"]');
-    const codeOfConductCheck = attendeeForm.find('input[name="codeOfConduct"]');
-    const termsAndCondCheck  = attendeeForm.find('input[name="termsAndConditions"]');
+    const firstNameInput     = form.find('input[name="firstName"]');
+    const lastNameInput      = form.find('input[name="lastName"]');
+    const phoneNumberInput   = form.find('input[name="phoneNumber"]');
+    const githubInput        = form.find('input[name="github"]');
+    const linkedinInput      = form.find('input[name="linkedin"]');
+    const shirtSizeSelect    = form.find('select[name="shirtSize"]');
+    const commentsInput      = form.find('input[name="comments"]');
+    const codeOfConductCheck = form.find('input[name="codeOfConduct"]');
+    const termsAndCondCheck  = form.find('input[name="termsAndConditions"]');
 
     let first_name = firstNameInput.val().trim(),
         last_name = lastNameInput.val().trim(),
@@ -71,6 +71,39 @@ function getAttendeeInfo () {
 
 }
 
+function getHackerInfo () {
+    const form = $('form.registerForm');
+
+    const studentTypeSelect     = form.find('select[name="studentType"]');
+    const schoolInput           = form.find('input[name="school"]');
+    const majorInput            = form.find('input[name="major"]');
+    const firstHackathonBox     = form.find('input[name="firstHackathonYes"]');
+    const adultRadioBox         = form.find('input[name="ageRadioYes"]');
+    const resumeField           = form.find('input[name="resume"]');
+
+    let school_year             = studentTypeSelect.val().trim(),
+        is_first_hackathon      = firstHackathonBox.is(':checked'),
+        is_adult                = adultRadioBox.is(':checked'),
+        school_major            = majorInput.val().trim(),
+        resume                  = resumeField[0].files[0],
+        g_recaptcha_response    = window.grecaptcha.getResponse();
+
+
+    let is_high_school = school_year === 'HS';
+    let new_school_name = schoolInput.val().trim();
+    //, school_id;
+
+    return {
+        school_year,
+        is_high_school,
+        is_first_hackathon,
+        is_adult,
+        school_major,
+        resume,
+        new_school_name,
+        g_recaptcha_response
+    };
+}
 
 //
 //  Validate and submit
@@ -99,7 +132,7 @@ function validateUserForm () {
     }
 }
 
-function validateAttendeeForm() {
+function validateAttendeeForm () {
 
     let {
         first_name,
@@ -123,17 +156,39 @@ function validateAttendeeForm() {
 
 }
 
-function submitAttendeeInfo (success) {
+function validateHackerForm () {
 
-    validateUserForm();
-    validateAttendeeForm();
+    let {
+        school_year,
+        school_major,
+        new_school_name
+    } = getHackerInfo();
 
+    if (empty(school_year) || empty(school_major) || empty(new_school_name)) {
+        let msg = 'Please complete all required fields.';
+        alert(msg);
+        throw new Error(msg);
+    }
+
+}
+
+function getHackerData () {
     let userInfo = getUserInfo();
-    let attedeeInfo = getAttendeeInfo();
-    let data = Object.assign(userInfo, attedeeInfo);
+    let attendeeInfo = getAttendeeInfo();
+    let hackerInfo = getHackerInfo();
+    return Object.assign({}, userInfo, attendeeInfo, hackerInfo);
+}
+
+function submitHackerInfo (success, failure) {
+
+    let data = new FormData();
+
+    Object.entries(getHackerData()).forEach(([key, value]) => {
+        data.append(key, value);
+    });
 
     $.ajax({
-        url: process.env.API_HOST + '/api/user/register',
+        url: process.env.API_HOST + '/api/hacker/register',
         method: 'POST',
         data: data,
         crossDomain: true,
@@ -141,17 +196,32 @@ function submitAttendeeInfo (success) {
             console.log('sending!');
         },
         success: success,
-        error: (e) => {
-            var msg = JSON.stringify(e.responseJSON.message);
-            msg = msg.replace(/{|}|'|"|\[|\]/g, '');
-            msg = msg.replace(/, /g, '\n');
-            alert(msg);
-        }
+        error: failure,
+        processData: false,
+        contentType: false
     });
 }
 
 
 export {
     validateUserForm,
-    submitAttendeeInfo
+    validateAttendeeForm,
+    validateHackerForm,
+    submitHackerInfo,
+    getHackerData
 };
+
+
+// $.ajax({
+//     url: process.env.API_HOST + '/api/hacker/register',
+//     method: 'POST',
+//     data: data,
+//     crossDomain: true,
+//     beforeSend: function () {
+//         console.log('sending!');
+//     },
+//     success: success,
+//     error: failure,
+//     // processData: false,
+//     // contentType: false
+// });

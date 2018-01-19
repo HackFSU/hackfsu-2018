@@ -4,6 +4,14 @@
 FROM hackfsu/api-base
 
 #
+#   Install Nginx to serve static files
+#   We'll collect them later
+#
+
+RUN apt-get update && apt-get install -y nginx
+COPY ./nginx-static.conf /etc/nginx/conf.d
+
+#
 #   Install python dependencies
 #
 
@@ -17,8 +25,22 @@ RUN pip install -r requirements.txt
 COPY . .
 
 #
-#   Launch the server.
+#   Collect the static files
 #
 
+RUN python manage.py collectstatic --noinput
+
+#
+#   Port 8080 is for the Nginx server (prod)
+#   Port 8000 goes directly to Django (dev)
+#
+
+EXPOSE 8080
 EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+#
+#   Launch the Nginx and Django
+#
+
+ENTRYPOINT ["./entrypoint.sh"]
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

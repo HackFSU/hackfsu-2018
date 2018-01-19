@@ -15,29 +15,28 @@ block append styles
   link(rel='stylesheet', href='/css/register.css')
 
 block append scripts
-  script(src="js/register.js")
   script(src='https://www.google.com/recaptcha/api.js')
+  script(src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js")
+  //- script(src="/static/bower_components/devbridge-autocomplete/dist/jquery.autocomplete.min.js")
+  //- script(src="js/schoolAutocomplete.js")
+  script(src="js/register.js")
 
 block content
   background
     .overlay
-    //- .color.part1
-    //- .color.part2
-  //- #fullpage
-  section.section#part1
-    +column
-      form.registerForm#userForm
+  form.registerForm
+    section.section#part1
+      +column
         +header
           h1.title Create an Account
         +field('Email*', 'email')(name="email")
         +field('Password*', 'password')(name="password")
         +field('Confirm Password*', 'password')(name="confirmPassword")
         +button('Next')
-        p.signin: a(href="/login") Already have an account?
+        //- p.signin: a Already have an account?
 
-  section.section#part2
-    +column
-      form.registerForm#attendeeForm
+    section.section#part2
+      +column
         +header
           h1.title Who Are You?
         +field('First Name*', 'text')(name="firstName")
@@ -87,22 +86,26 @@ block content
 
         +button('Next')
 
-  section.section#part3
-    +column
-      form.registerForm#hackerForm
+    section.section#part3
+      +column
         +header
           h1.title Final Details
         +select('studentType')
           option(value="" selected) Student Type*
-          option(value="College Student") College Student
-          option(value="Graduate Student") Graduate Student
+          option(value="FR") College Freshman
+          option(value="SO") College Sophomore
+          option(value="JR") College Junior
+          option(value="SR") College Senior
+          option(value="GS") Graduate Student
+          option(value="HS") High School Student
+          option(value="RG") Recent College Graduate
 
-        +field('School*', 'text')(id="school")
-        +field('Status*', 'text')(id="status")
-        +field('Major*', 'text')(id="major")
+        +field('School*', 'text')(name="school")
+        //- +field('Status*', 'text')(id="status")
+        +field('Major*', 'text')(name="major")
 
-        +checkbox('firstHackathonYes', 'Is this your first Hackathon?*')
-        +checkbox('ageRadioYes', 'Are you 18 years or older?*')
+        +checkbox('firstHackathonYes', 'This is my first Hackathon.')
+        +checkbox('ageRadioYes', 'I am 18 years or older. (Not Required)')
 
         .field.resume-wrap
           .file.is-centered
@@ -111,4 +114,6 @@ block content
               span.file-cta
                 span#file-label.file-label Upload Your Resume…
 
-        +button('Finish')
+        .g-recaptcha(data-sitekey="6LcrLjYUAAAAAGXmRcU6IwQdiGeC_6uPPBCHuJau")
+
+        +button('Submit')

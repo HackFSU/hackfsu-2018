@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [
     '[::1]',
     'hackfsu.com',
     '.hackfsu.com',
-	'192.168.99.100'
+    '192.168.99.100'
 ]
 
 
@@ -50,11 +50,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'corsheaders',
     'api',
     'webapp'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -152,6 +154,16 @@ IGNORABLE_404_URLS = [
     re.compile(r'^/node_modules/'),
     re.compile(r'/\.git.*')
 ]
+
+# CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = (
+    'hackfsu.com',
+    'api.hackfsu.com',
+    'localhost:8080',
+    'localhost:8000',
+    'localhost:3000'
+)
 
 # Add more strict rules in production TODO
 # if not DEBUG:

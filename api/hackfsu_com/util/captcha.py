@@ -1,6 +1,7 @@
 """
     Google reCAPTCHA validation
 """
+from django.conf import settings
 
 from hackfsu_com import keys
 import requests
@@ -11,6 +12,10 @@ GOOGLE_VERIFICATION_URL = "https://www.google.com/recaptcha/api/siteverify"
 
 
 def is_valid_response(g_recaptcha_response: str) -> bool:
+
+    if settings.DEBUG:
+        return True
+
     """ Sends a request to google and checks the captcha response for validity """
     response = requests.post(GOOGLE_VERIFICATION_URL, data={
         'secret': keys.RECAPTCHA_SECRET,

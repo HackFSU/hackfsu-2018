@@ -1,34 +1,141 @@
+@import "bulma"
 @import "style.sass"
+
+$field-bg: #A662F3
+$button-bg: #ED76CB
+$button-fg: #FEFE66
+$control-height: 48px
+
+html
+    background-color: #8A35FB
+
+background
+    position: absolute
+    z-index: 0
+    width: 100%
+    height: 100%
+
+    .color
+        position: relative
+        z-index: 0
+        width: 100%
+        height: 100%
+        // opacity: 0.5
+
+        &.part1
+            background-color: #8A35FB
+
+        &.part2
+            background-color: red
+            opacity: 0.5
+
+    .overlay
+        width: 100%
+        height: 100%
+        position: fixed
+        background-image: url("/img/index/funLines.svg"), url("/img/index/backgroundLetters.svg")
+        background-repeat: no-repeat
+        background-size: cover
+        background-attachment: fixed
+        z-index: 1
+
 
 section
     min-height: 100%
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
+    position: relative
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    z-index: 100
 
-    form
-        min-width: 66%
+    .limit-width
         max-width: 700px
 
-        .input-wrap
-            background: rgba(255, 255, 255, 200)
-            padding: 4px 18px
-            border-radius: 50px
+    form
 
-            .extra-wrap.field
-                position: relative
+        *
+            @include box-shadow(none)
+            color: white
 
-                label.active
-                    font-size: 0
+        a
+            text-decoration: underline
 
-                input
-                    color: black !important
-                    margin-bottom: 0px
+        p.signin
+            width: 100%
+            text-align: center
+            margin-top: 12px
 
-    button
-        min-width: 100%
-        border-radius: 100px !important
+        #diets
+            margin-bottom: 12px
 
-input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea
-    border-bottom: rgba(0,0,0,0) !important
+            .column
+                display: flex
+                justify-content: center
+
+        .header
+            text-align: center
+            margin-bottom: 1.25rem
+
+            *
+                color: white
+
+        .field
+            &:not(:last-child)
+                margin-bottom: 1rem
+
+        .control
+
+            > input, button, select, .select
+                border-width: 0px !important
+                font-weight: bold
+                height: $control-height !important
+
+            .select
+                width: 100%
+
+                select
+                    width: 100%
+                    text-align: center
+
+            input
+                text-align: center
+                background-color: $field-bg
+                color: white
+
+                &#comments
+                    margin-top: 16px
+                    background-color: rgba(255, 255, 255, 0.4)
+                    color: black
+
+                    @include placeholder
+                        color: black
+                        opacity: 1
+
+                @include placeholder
+                    color: white
+                    opacity: 1
+
+            button
+                min-width: 100%
+                background-color: $button-bg
+                color: $button-fg
+
+        .checkbox span
+            height: 100%
+            margin-left: 8px
+
+        .resume-wrap
+            margin: 16px 0
+
+            label.file-label
+                // width: 100%
+
+            .file-cta
+                background-color: rgba(0,0,0,0)
+                // width: 100%
+                // height: $control-height
+                // border-radius: 100px
+
+                &:hover
+                    background-color: rgba(0,0,0,0)

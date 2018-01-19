@@ -6,8 +6,6 @@ const logger            = require('morgan');
 const sassMiddleware    = require('node-sass-middleware');
 const path              = require('path');
 
-
-const routes = require('./routes');
 const app = express();
 
 // View engine setup

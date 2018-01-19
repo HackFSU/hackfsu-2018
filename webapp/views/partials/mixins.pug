@@ -1,7 +1,33 @@
-mixin field
-  .input-wrap
-    .extra-wrap.field
-      block
+mixin field(label, type)
+  .field
+    .control
+      input.input.is-rounded(type=type placeholder=label)&attributes(attributes)
 
 mixin button(label)
-  button.waves-effect.waves-teal.btn-large.center-align= label
+  .control
+    button.button.is-rounded(type='button')= label
+
+mixin select(name)
+  .field
+    .control
+      .select.is-rounded
+        select(name= name)
+          block
+
+mixin checkbox(name, text)
+  .control
+    label.checkbox
+      input(type="checkbox", name=name)
+      span= text
+
+mixin checkbox2(name, text)
+  .field
+    .control
+      label.checkbox
+        input(type="checkbox", name=name)
+        block
+
+mixin checkbox-group
+  .control.is-grouped
+    block
+

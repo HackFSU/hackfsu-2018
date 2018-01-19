@@ -33,6 +33,8 @@ services:
     api:
         image: "hackfsu/api"
         build: "./api"
+        environment:
+            - APP_DEBUG=true
         ports:
             - "8080:8000"
 

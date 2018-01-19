@@ -33,6 +33,7 @@ def get_superlatives(req: dict) -> dict:
 class ResponseForm(forms.Form):
     hacks = JsonField()
     superlatives = JsonField()
+    expo = JsonField()
 
 
 class RequestForm(forms.Form):
@@ -95,7 +96,7 @@ class HacksView(ApiView):
             hacks = Hack.objects.from_expo(current_expo) \
                 .without_previous_judge(judge) \
                 .annotate(num_judges=Count('current_judges')) \
-                .order_by('times_judged', 'num_judges')
+                .order_by('times_judged', 'num_judges')[:3]
             judge_hack_assignment = hacks
 
             # Add judge to hack's active judges
@@ -106,3 +107,4 @@ class HacksView(ApiView):
 
         res['hacks'] = list(judge_hack_assignment.values_list('table_number', flat=True))
         res['superlatives'] = list(superlative_categories.values_list('name', flat=True))
+        res['expo'] = JudgingExpo.objects.current(hackathon=current_hackathon).name

@@ -171,11 +171,11 @@ function validateHackerForm () {
         throw new Error(msg);
     }
 
-    if (!g_recaptcha_response) {
-        let msg = 'Please complete the recaptcha';
-        alert(msg);
-        throw new Error(msg);
-    }
+    // if (!g_recaptcha_response) {
+    //     let msg = 'Please complete the recaptcha';
+    //     alert(msg);
+    //     throw new Error(msg);
+    // }
 
 }
 

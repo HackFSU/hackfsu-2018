@@ -64,7 +64,7 @@ btn3.on('click', () => {
 
     submitHackerInfo(
         function success () {
-            alert('Okay, you\'re registered!');
+            alert('Okay, you\'re registered! Check your inbox for an email!');
         },
         function error (err) {
             btn3.removeAttr('disabled');

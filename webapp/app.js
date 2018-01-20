@@ -16,7 +16,7 @@ app.set('view engine', 'pug');
 //  Middleware
 //
 
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'img/icon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

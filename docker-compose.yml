@@ -33,14 +33,12 @@ services:
     api:
         image: "hackfsu/api"
         build: "./api"
-        environment:
-            - APP_DEBUG=true
         ports:
-            - "8080:8080"
+            - "127.0.0.1:8080:8080"
 
     # [Express] Webapp
     webapp:
         image: "hackfsu/webapp"
         build: "./webapp"
         ports:
-            - "3000:3000"
+            - "127.0.0.1:3000:3000"

@@ -161,11 +161,18 @@ function validateHackerForm () {
     let {
         school_year,
         school_major,
-        new_school_name
+        new_school_name,
+        g_recaptcha_response
     } = getHackerInfo();
 
     if (empty(school_year) || empty(school_major) || empty(new_school_name)) {
         let msg = 'Please complete all required fields.';
+        alert(msg);
+        throw new Error(msg);
+    }
+
+    if (!g_recaptcha_response) {
+        let msg = 'Please complete the recaptcha';
         alert(msg);
         throw new Error(msg);
     }

@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 });
 
 //  Other routes
-// router.use('/register', require('./register'));
+router.use('/register', require('./register'));
 
 //  Error Handling
 router.use(require('./errors'));

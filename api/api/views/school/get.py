@@ -3,7 +3,7 @@
 """
 from django import forms
 from django.http.request import HttpRequest
-from hackfsu_com.views.generic import ApiView
+from hackfsu_com.views.generic import PublicApiView
 from hackfsu_com.util.forms import JsonField
 from hackfsu_com.util import acl
 from api.models import School
@@ -17,11 +17,11 @@ class ResponseForm(forms.Form):
     school_choices = JsonField()        # [{id: "", name: ""}]
 
 
-class GetView(ApiView):
+class GetView(PublicApiView):
     http_method_names = ['get']
     request_form_class = RequestForm
     response_form_class = ResponseForm
-    access_manager = acl.AccessManager(acl_accept=[acl.group_user])
+    # access_manager = acl.AccessManager(acl_accept=[acl.group_user])
 
     def work(self, request: HttpRequest, req: dict, res: dict):
         schools = []

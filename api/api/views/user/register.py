@@ -14,7 +14,7 @@ from api.views.user.login import log_user_in
 class RequestForm(forms.Form):
     agree_to_mlh_coc = forms.BooleanField()                         # Must be true
     agree_to_mlh_data_sharing = forms.BooleanField()                # Must be true
-    g_recaptcha_response = forms.CharField(max_length=10000)
+    g_recaptcha_response = forms.CharField(max_length=10000, required=False)
     first_name = forms.CharField(max_length=100)
     last_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)

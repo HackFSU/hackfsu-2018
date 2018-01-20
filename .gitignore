@@ -29,6 +29,7 @@ secret_keys.json
 
 webapp/public/**/*.css
 webapp/public/**/*.css.map
+webapp/public/js/register.js
 
 #
 #   Configuration

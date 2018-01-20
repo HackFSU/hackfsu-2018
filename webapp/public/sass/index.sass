@@ -16,11 +16,6 @@ section.header.landing
     flex-direction: column
     justify-content: center
 
-    a
-        color: white
-        position: relative
-        z-index: 1
-
     .confetti-wrapper
         position: absolute
         display: flex
@@ -40,17 +35,6 @@ section.header.landing
             background-position: center
             background-attachment: fixed
 
-
-    #submit-button
-        background-color: #F960FF
-        border-radius: 40px
-        text-decoration: none
-        width: 75%
-
-        p
-            padding-bottom: 20px
-            margin: 0 auto
-
     > .columns
         z-index: 1
         height: 100vh
@@ -64,7 +48,6 @@ section.header.landing
             align-items: center
             // max-width: 500px
 
-
             strong
                 font-weight: $bold
 
@@ -72,7 +55,7 @@ section.header.landing
                 font-size: 8vh
 
                 *
-                    color: white !important
+                    color: white
 
                 p
                     margin: 0px
@@ -106,8 +89,12 @@ section.header.landing
                 // text-transform: uppercase
                 font-family: $family-primary
 
+                &:hover
+                    color: #363636
+
             .conduct a
                 text-decoration: underline
+                color: white
 
             .date, .conduct
                 font-weight: 500

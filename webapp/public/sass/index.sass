@@ -37,6 +37,9 @@ section.header.landing
             min-height: 100%
             background-repeat: no-repeat
             background-size: cover
+            background-position: center
+            background-attachment: fixed
+
 
     #submit-button
         background-color: #F960FF
@@ -48,13 +51,18 @@ section.header.landing
             padding-bottom: 20px
             margin: 0 auto
 
-
-    .columns
+    > .columns
         z-index: 1
+        height: 100vh
 
         .content
+            height: 100vh
             position: relative
-            max-width: 500px
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            // max-width: 500px
 
 
             strong
@@ -90,6 +98,7 @@ section.header.landing
                 background-color: $button-bg
                 color: $button-fg
                 width: 66%
+                max-width: 400px
                 border-width: 0px !important
                 font-weight: bold
                 height: 48px

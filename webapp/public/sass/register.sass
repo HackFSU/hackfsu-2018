@@ -9,6 +9,7 @@ $control-height: 48px
 html
     background-color: #8A35FB
 
+
 background
     position: absolute
     z-index: 0
@@ -36,8 +37,10 @@ background
         background-image: url("/img/index/funLines.svg"), url("/img/index/backgroundLetters.svg")
         background-repeat: no-repeat
         background-size: cover
+        background-position: center
         background-attachment: fixed
         z-index: 1
+        filter: blur(5px)
 
 
 form
@@ -85,6 +88,8 @@ form
 
             *
                 color: white
+                font-weight: 700
+
 
         .field
             &:not(:last-child)

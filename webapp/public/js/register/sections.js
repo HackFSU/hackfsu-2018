@@ -19,7 +19,7 @@ const setInitPageState = function (state, animate) {
     state = state || 1;
     if (!(1 <= state && state <= 3)) state = 1;
 
-    // stages.map(stage => stage.hide(animate || false));
+    stages.map(stage => stage.hide(animate || false));
 
     // stages[state - 1].show(animate || false);
     if (state == 1) stage1.show();

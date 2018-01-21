@@ -197,6 +197,7 @@ function submitHackerInfo (success, failure) {
     $.ajax({
         url: process.env.API_HOST + '/api/hacker/register',
         method: 'POST',
+        type: 'POST',
         data: data,
         crossDomain: true,
         beforeSend: function () {

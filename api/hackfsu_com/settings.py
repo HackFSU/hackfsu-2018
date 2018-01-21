@@ -156,15 +156,15 @@ IGNORABLE_404_URLS = [
     re.compile(r'/\.git.*')
 ]
 
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ORIGIN_WHITELIST = (
-    'hackfsu.com',
-    'api.hackfsu.com',
-    'localhost:8080',
-    'localhost:8000',
-    'localhost:3000'
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'hackfsu.com',
+#     'api.hackfsu.com',
+#     'localhost:8080',
+#     'localhost:8000',
+#     'localhost:3000'
+# )
 
 # Add more strict rules in production TODO
 # if not DEBUG:

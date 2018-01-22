@@ -84,9 +84,9 @@ class ApiView(View):
             return JsonResponse(res)
 
         except ExternalUserError as error:
-            if settings.DEBUG:
-                logging.error(format_request_info(request, input_data, res, req))
-                error.log()
+            # if settings.DEBUG:
+            logging.error(format_request_info(request, input_data, res, req))
+            error.log()
             return error.json_response()
         except InternalServerError as error:
             request_info = format_request_info(request, input_data, res, req)

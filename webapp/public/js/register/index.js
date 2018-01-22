@@ -68,7 +68,7 @@ btn3.on('click', () => {
         },
         function error (err) {
             btn3.removeAttr('disabled');
-            window.grecaptcha.reset();
+            grecaptcha.reset();
             displayErrorFromJson(err);
             console.log(err);
         }

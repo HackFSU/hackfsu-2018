@@ -86,7 +86,7 @@ function getHackerInfo () {
         is_adult                = adultRadioBox.is(':checked'),
         school_major            = majorInput.val().trim(),
         resume                  = resumeField[0].files[0],
-        g_recaptcha_response    = window.grecaptcha.getResponse();
+        g_recaptcha_response    = grecaptcha.getResponse();
 
 
     let is_high_school = school_year === 'HS';

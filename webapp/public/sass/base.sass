@@ -10,7 +10,17 @@
 //  Override Bulma styles
 //
 
-// TODO
+// Override base variables
+$pink: #ED76CB
+$pink-invert: #FEFE66
+
+$cyan: #65dde4
+$red: #ef6c67
+
+// Override ...
+$primary: $pink
+$primary-invert: $pink-invert
+
 
 
 //
@@ -28,6 +38,6 @@
 html, body
   min-height: 100vh
 
-@import "common/compat.sass"
 @import "common/type.sass"
+@import "common/compat.sass"
 @import "common/color"

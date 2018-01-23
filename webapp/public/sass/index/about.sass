@@ -1,0 +1,43 @@
+section.section.about
+    padding-top: 10%
+    padding-bottom: 10%
+
+    @include desktop-only
+        overflow: hidden
+
+    .column.pictures
+        position: relative
+
+        @include desktop-only
+            margin-top: 5%
+
+        @include widescreen-only
+            margin-top: 5%
+
+        .fig-wrap
+            width: 73%
+            position: absolute
+
+            figure
+                border: 8px $cyan  solid
+                margin: 8px
+
+            &#fig1
+                top: -250px
+                left: 10%
+
+            &#fig2
+                left: -30%
+
+            &#fig3
+                top: 400px
+                left: 20%
+
+
+    .column.text
+
+        .title
+            color: $cyan
+            font-weight: 500
+
+

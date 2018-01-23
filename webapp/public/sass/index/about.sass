@@ -2,9 +2,6 @@ section.section.about
     padding-top: 10%
     padding-bottom: 10%
 
-    @include desktop-only
-        overflow: hidden
-
     .column.pictures
         position: relative
 
@@ -19,7 +16,7 @@ section.section.about
             position: absolute
 
             figure
-                border: 8px $cyan  solid
+                border: 4px $cyan  solid
                 margin: 8px
 
             &#fig1
@@ -36,8 +33,16 @@ section.section.about
 
     .column.text
 
+        // @include Graphik(400)
+        font-family: $family-primary
+
         .title
-            color: $cyan
-            font-weight: 500
+            color: $red
+            // font-weight: 500
+            @include Graphik(700)
 
-
+        .subtitle
+            @include Graphik(700)
+            color: $orange
+            text-transform: uppercase
+            margin-bottom: 0

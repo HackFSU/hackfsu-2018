@@ -1,24 +1,72 @@
+block append styles
+  link(rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css")
+
+block append scripts
+  script(type="text/javascript" src="http://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js")
+  script.
+    var colorIndex = 0;
+    var colors = [
+      '#ef6c67',
+      '#fda500',
+      '#8A35FB'
+    ];
+
+    $('.slider').slick({
+      vertical: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      speed: 300,
+      arrows: false,
+      variableWidth: false,
+      respondTo: 'slider',
+      draggable: false
+    });
+
+    var changeColor = function () {
+      window.setTimeout(
+          function(ev, slick, curr, next) {
+            colorIndex = (colorIndex + 1) % colors.length;
+            $('section.header').css("background-color", colors[colorIndex]);
+          },
+          100);
+    }
+
+    $('.slider').on('beforeChange', changeColor);
+
+
 block append content
 
   section.section.header
 
-    .confetti-wrapper.container
-      .background-Letters
+    .background-wrapper
+      .letters
+        img(src="/img/index/header-background.svg")
+      //- .shapes
 
-    .columns.is-centered
+    .container
 
-      .column.is-half-desktop.content
-        .heading
-          .presenting FAMU & FSU PRESENTS
-          img.hackSymbol(src="/img/index/hackFSUSymbol.svg")
-          p HACKFSU
-            strong  5
+      .columns.is-centered
 
-        .date MARCH 2 - 4 / FLORIDA STATE UNIVERSITY
+        .column.is-half-desktop.is-hidden-touch
+          .hook
+            h1.title.is-1.lead a weekend to
+            .slider-wrap
+              .slider
+                h1.title.is-1.underline build your skills.
+                h1.title.is-1.underline do a thing.
+                h1.title.is-1.underline be a boss.
 
-        a.button.is-rounded.is-primary.hackfsu(href='/register') Apply
-        a.button.is-rounded.hackfsu(href='mailto:info@hackfsu.com') Contact
+        .column.is-half-desktop
+          .info
+            .heading
+              .logo
+                .presenting.title.is-5 FAMU & FSU PRESENTS
+                img.hackSymbol(src="/img/index/hackFSUSymbol.svg")
+              h1.title.is-1 HACKFSU 5
 
-        .conduct
-          p
-            a(href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf") MLH Code Of Conduct
+            .content.is-medium
+              .date March 2 &ndash; 4 | Florida State University
+
+            .buttons
+              a.button.is-rounded.is-primary.hackfsu(href='/register') Apply
+              a.button.is-rounded.hackfsu(href='mailto:info@hackfsu.com') Contact

@@ -1,81 +1,151 @@
 section.header
-    background-color: #8A35FB
+    background-color: $blue
     color: white
     text-align: center
     height: 90vh
     padding: 0
     // overflow: hidden    // HIDDEN for parallax
+    overflow: visible
     max-height: 1000px
+    transition: all 0.3s ease;
 
     @include touch
         overflow: hidden
 
-    .confetti-wrapper
+    .background-wrapper
         position: absolute
         height: 100vh
         width: 100vw
         min-width: 100%
         z-index: 0
+        overflow: visible
 
-        .background-Letters
-            background-image: url("/img/index/funLines.svg"), url("/img/index/backgroundLetters.svg")
+
+        .letters
+            position: absolute
             min-width: 100%
             min-height: 100%
-            background-repeat: no-repeat
             background-size: cover
-            background-position: center
-            // background-attachment: fixed       // FIXED for parallax
+            background-position: start
+            overflow: visible
+            position: relative
+
+            background-image: url("/img/index/header-background.svg")
 
             @include touch
                 background-attachment: fixed
 
-    > .columns
-        z-index: 1
+            @include widescreen
+                background-image: none
+
+            img
+                min-height: 100vh
+                display: none
+
+                @include widescreen
+                    display: inline
+
+
+
+        // .shapes
+        //     background-image: url("/img/index/funLines.svg")
+        //     background-repeat: repeat
+        //     @include css3-prefix(transform, scaleX(-1))
+        //     left: -7%
+
+
+    > .container
         height: 100%
 
-        .content
+        > .columns
+            z-index: 1
             height: 100%
-            position: relative
-            display: flex
-            flex-direction: column
-            justify-content: center
-            align-items: center
-            // max-width: 500px
 
-            strong
-                font-weight: $weight-bold
+            .column
+                height: 100%
 
-            .heading
-                font-size: 8vh
+            .hook
+                height: 100%
+                position: relative
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: flex-start
 
-                *
+
+                @include desktop
+                    // @include css3-prefix(transform, scale(1.25, 1.25))
+                    // @include css3-prefix(transform-origin, center left)
+                    justify-content: center
+                    align-items: flex-start
+
+                > *
+                    @include Graphik(500)
+
+                .lead
                     color: white
+                    margin-bottom: 1rem
 
-                p
-                    margin: 0px
-                    font-weight: bold
-                    font-size: smaller
+                .slider-wrap
 
-                .presenting
-                    transform: rotate(-5deg)
-                    font-size: 50%
-                    font-weight: 500
+                    $color: $cyan
 
-                img.hackSymbol
-                    width: 75%
-                    z-index: 1
+                    border-bottom: 4px $color solid
+                    // padding-right: 32px
+                    position: relative
+                    max-width: 450px
 
-            .date
-                padding-bottom: 20px
-                letter-spacing: 2px
+                    h1
+                        color: $color
+                        text-align: start !important
+                        margin-bottom: 0
 
-            .button
-                width: 66%
-                max-width: 400px
 
-            .conduct a
-                text-decoration: underline
-                color: white
 
-            .date, .conduct
-                font-weight: 500
+            .info
+                height: 100%
+                position: relative
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+
+                @include desktop
+                    justify-content: flex-end
+                    align-items: flex-end
+                    padding-bottom: 25%
+
+                .heading
+
+                    @include desktop
+                        transform-origin: bottom right
+                        transform: scale(1.2, 1.2)
+
+                    *
+                        color: white
+
+                    .logo
+
+
+                        .presenting
+                            transform: rotate(-5deg)
+                            font-weight: 500
+                            margin-bottom: 0
+
+                        img.hackSymbol
+                            width: 75%
+                            z-index: 1
+
+                h1.title
+                    @include Graphik(700)
+
+                .content
+                    margin-bottom: 0
+
+                    .date
+                        padding-bottom: 20px
+                        letter-spacing: 1.1px
+                        font-weight: 500
+
+                .buttons
+                    justify-content: center

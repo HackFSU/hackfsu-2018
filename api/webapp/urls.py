@@ -26,11 +26,12 @@ def static_redirect(path):
 
 urlpatterns = [
     # Static Website Pages
-    url(r'^$', views.IndexPage.as_view(), name='index'),
-    url(r'^help$', views.HelpPage.as_view(), name='help'),
+    url(r'^$', RedirectView.as_view(url='https://hackfsu.com')),
+    # url(r'^$', views.IndexPage.as_view(), name='index'),
+    # url(r'^help$', views.HelpPage.as_view(), name='help'),
 
     url(r'^registration/user/$', views.registration.UserRegistrationPage.as_view(), name='registration-user'),
-    url(r'^registration/hacker/$', views.registration.HackerRegistrationPage.as_view(), name='registration-hacker'),
+    # url(r'^registration/hacker/$', views.registration.HackerRegistrationPage.as_view(), name='registration-hacker'),
     url(r'^registration/judge/$', views.registration.JudgeRegistrationPage.as_view(), name='registration-judge'),
     url(r'^registration/mentor/$', views.registration.MentorRegistrationPage.as_view(), name='registration-mentor'),
     url(r'^registration/organizer/$', views.registration.OrganizerRegistrationPage.as_view(),
@@ -43,30 +44,30 @@ urlpatterns = [
     url(r'^user/password/reset/$', views.user.password.StartResetPage.as_view()),
     url(r'^user/password/reset/(?P<link_key>[A-Za-z0-9]{64})/$', views.user.password.CompleteResetPage.as_view()),
 
-    url(r'^hype/$', views.hype.HypeIndex.as_view()),
-    url(r'^hype/registration$', views.hype.HypeRegistration.as_view()),
+    # url(r'^hype/$', views.hype.HypeIndex.as_view()),
+    # url(r'^hype/registration$', views.hype.HypeRegistration.as_view()),
 
-    url(r'^judge/$', views.judge.IndexPage.as_view()),
-    url(r'^judge/hack/(?P<id>\d+)/$', views.judge.HackPage.as_view()),
+    # url(r'^judge/$', views.judge.IndexPage.as_view()),
+    # url(r'^judge/hack/(?P<id>\d+)/$', views.judge.HackPage.as_view()),
 
     url(r'^organize/$', views.organize.IndexPage.as_view()),
     url(r'^organize/attendees/$', views.organize.AttendeesPage.as_view()),
     url(r'^organize/judging/expo/$', views.organize.judging.ExpoPage.as_view()),
     url(r'^organize/judging/results/$', views.organize.judging.ResultsPage.as_view()),
 
-    url(r'^mentor/$', views.mentor.IndexPage.as_view()),
-    url(r'^mentor/request/(?P<id>\d+)/$', views.mentor.RequestPage.as_view()),
+    # url(r'^mentor/$', views.mentor.IndexPage.as_view()),
+    # url(r'^mentor/request/(?P<id>\d+)/$', views.mentor.RequestPage.as_view()),
 
-    url(r'^links/$', views.LinksPage.as_view()),
+    # url(r'^links/$', views.LinksPage.as_view()),
 
-    url(r'^hacks/$', views.HacksPage.as_view()),
+    # url(r'^hacks/$', views.HacksPage.as_view()),
 
     # Shortcuts
-    url(r'^register/$', RedirectView.as_view(url='/registration/user')),
-    url(r'^register/hacker/$', RedirectView.as_view(url='/registration/user?attendee_type=hacker')),
-    url(r'^register/organizer/$', RedirectView.as_view(url='/registration/user?attendee_type=organizer')),
-    url(r'^register/mentor/$', RedirectView.as_view(url='/registration/user?attendee_type=mentor')),
-    url(r'^register/judge$', RedirectView.as_view(url='/registration/user?attendee_type=judge')),
+    # url(r'^register/$', RedirectView.as_view(url='/registration/user')),
+    # url(r'^register/hacker/$', RedirectView.as_view(url='/registration/user?attendee_type=hacker')),
+    # url(r'^register/organizer/$', RedirectView.as_view(url='/registration/user?attendee_type=organizer')),
+    # url(r'^register/mentor/$', RedirectView.as_view(url='/registration/user?attendee_type=mentor')),
+    # url(r'^register/judge$', RedirectView.as_view(url='/registration/user?attendee_type=judge')),
     url(r'^login/$', RedirectView.as_view(url='/user/login')),
     url(r'^logout/$', RedirectView.as_view(url='/user/logout'))
 ]

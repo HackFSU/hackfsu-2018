@@ -19,9 +19,11 @@
   font-weight: 700
   src: url("/fonts/Graphik-Bold.woff")
 
-@mixin Graphik($weight:400)
+@mixin Graphik($weight:500)
   font-family: 'Graphik', sans-serif
   @if $weight == 400
     font-weight: 400
-  @else
+  @else if $weight == 700
     font-weight: 700
+  @else
+    font-weight: 500

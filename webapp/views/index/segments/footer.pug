@@ -1,19 +1,19 @@
-//- <footer class="footer">
-//-   <div class="container">
-//-     <div class="content has-text-centered">
-//-       <p>
-//-         <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-//-         <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-//-         is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-//-       </p>
-//-     </div>
-//-   </div>
-//- </footer>
-
 block append content
     block footer
         footer.footer
             .container
-                .content.has-text-centered
-                    p HackFSU 5
+                .buttons.is-centered
+                        a.button.is-primary.is-rounded.hackfsu(href='/register') Apply
+                        a.button.is-rounded.hackfsu(href='mailto:info@hackfsu.com') Contact
 
+                .content.has-text-centered
+                    .logo-links
+                        a(href="https://www.twitter.com/HackFSU" target="_blank" title="@HackFSU on Twitter")
+                            i.fa.fa-twitter
+                        a(href="https://www.facebook.com/hackfsu" target="_blank" title="HackFSU on Facebook")
+                            i.fa.fa-facebook
+                        a(href="https://www.instagram.com/hackfsu" target="_blank" title="HackFSU on Instagram")
+                            i.fa.fa-instagram
+                        a(href="https://github.com/HackFSU" target="_blank" title="HackFSU on GitHub")
+                            i.fa.fa-github
+                    .copyright © 2018 HackFSU

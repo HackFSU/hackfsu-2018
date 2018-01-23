@@ -13,9 +13,13 @@ html
       meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
       include ./meta.pug
 
+    //- Include early jQuery so it can be used by ad-hoc body scripts.
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous")
+
+
+
   body
     block content
     block scripts
-      script(src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous")
       //- script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js")
       //- script(src="js/index.js")

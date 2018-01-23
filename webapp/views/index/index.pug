@@ -7,25 +7,4 @@ block append styles
 block content
   include ../partials/mlh-badge.pug
 
-  section.header.landing
-
-    .confetti-wrapper.container
-      .background-Letters
-
-    .columns.is-centered
-
-      .column.is-half-desktop.content
-        .heading
-          .presenting FAMU & FSU PRESENTS
-          img.hackSymbol(src="/img/index/hackFSUSymbol.svg")
-          p HACKFSU
-            strong  5
-
-        .date MARCH 2 - 4 / FLORIDA STATE UNIVERSITY
-
-        a#register.button.is-rounded(href='/register') Register
-        a#contact.button.is-rounded(href='mailto:info@hackfsu.com') Contact
-
-        .conduct
-          p
-            a(href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf") MLH Code Of Conduct
+  include segments/header.pug

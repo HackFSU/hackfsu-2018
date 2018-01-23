@@ -1,0 +1,151 @@
+section.header
+    background-color: $blue
+    color: white
+    text-align: center
+    height: 90vh
+    padding: 0
+    // overflow: hidden    // HIDDEN for parallax
+    overflow: visible
+    max-height: 1000px
+    transition: all 0.3s ease;
+
+    @include touch
+        overflow: hidden
+
+    .background-wrapper
+        position: absolute
+        height: 100vh
+        width: 100vw
+        min-width: 100%
+        z-index: 0
+        overflow: visible
+
+
+        .letters
+            position: absolute
+            min-width: 100%
+            min-height: 100%
+            background-size: cover
+            background-position: start
+            overflow: visible
+            position: relative
+
+            background-image: url("/img/index/header-background.svg")
+
+            @include touch
+                background-attachment: fixed
+
+            @include widescreen
+                background-image: none
+
+            img
+                min-height: 100vh
+                display: none
+
+                @include widescreen
+                    display: inline
+
+
+
+        // .shapes
+        //     background-image: url("/img/index/funLines.svg")
+        //     background-repeat: repeat
+        //     @include css3-prefix(transform, scaleX(-1))
+        //     left: -7%
+
+
+    > .container
+        height: 100%
+
+        > .columns
+            z-index: 1
+            height: 100%
+
+            .column
+                height: 100%
+
+            .hook
+                height: 100%
+                position: relative
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: flex-start
+
+
+                @include desktop
+                    // @include css3-prefix(transform, scale(1.25, 1.25))
+                    // @include css3-prefix(transform-origin, center left)
+                    justify-content: center
+                    align-items: flex-start
+
+                > *
+                    @include Graphik(500)
+
+                .lead
+                    color: white
+                    margin-bottom: 1rem
+
+                .slider-wrap
+
+                    $color: $cyan
+
+                    border-bottom: 4px $color solid
+                    // padding-right: 32px
+                    position: relative
+                    max-width: 450px
+
+                    h1
+                        color: $color
+                        text-align: start !important
+                        margin-bottom: 0
+
+
+
+            .info
+                height: 100%
+                position: relative
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+
+                @include desktop
+                    justify-content: flex-end
+                    align-items: flex-end
+                    padding-bottom: 25%
+
+                .heading
+
+                    @include desktop
+                        transform-origin: bottom right
+                        transform: scale(1.2, 1.2)
+
+                    *
+                        color: white
+
+                    .logo
+
+
+                        .presenting
+                            transform: rotate(-5deg)
+                            font-weight: 500
+                            margin-bottom: 0
+
+                        img.hackSymbol
+                            width: 75%
+                            z-index: 1
+
+                h1.title
+                    @include Graphik(700)
+
+                .content
+                    margin-bottom: 0
+
+                    .date
+                        padding-bottom: 20px
+                        letter-spacing: 1.1px
+                        font-weight: 500
+
+                .buttons
+                    justify-content: center

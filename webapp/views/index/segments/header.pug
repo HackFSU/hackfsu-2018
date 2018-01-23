@@ -1,29 +1,72 @@
-section.header.landing
+block append styles
+  link(rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css")
 
-  .confetti-wrapper.container
-    .background-Letters
+block append scripts
+  script(type="text/javascript" src="http://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js")
+  script.
+    var colorIndex = 0;
+    var colors = [
+      '#8A35FB',
+      '#ef6c67',
+      '#fda500',
+    ];
 
-  .content.container.col.s12
-    .heading
-      .presenting FAMU & FSU PRESENTS
-      img.hackSymbol(src="/img/index/hackFSUSymbol.svg")
-      p HACKFSU
-        strong  5
+    $('.slider').slick({
+      vertical: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      speed: 300,
+      arrows: false,
+      variableWidth: false,
+      respondTo: 'slider',
+      draggable: false
+    });
 
-    .preview-form
-      .column.is-8-widescreen.content-wrap.row
-        .date March 2 - 4 / FLORIDA STATE UNIVERSITY
+    var changeColor = function () {
+      window.setTimeout(
+          function(ev, slick, curr, next) {
+            colorIndex = (colorIndex + 1) % colors.length;
+            $('section.header').css("background-color", colors[colorIndex]);
+          },
+          100);
+    }
+
+    $('.slider').on('beforeChange', changeColor);
 
 
-        .form.col.s12
-          .select-card.col.s12
-            .submit.row
-              .col.s12
-                  a(href='mailto:info@hackfsu.com')#submit-button.waves-effect.waves-teal.btn-large
-                    div#reg-button-wrap
-                      span Contact Us
-                      small Registration Coming Soon
+block append content
 
-    .conduct
-      p
-        a(href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf") MLH Code Of Conduct
+  section.section.header
+
+    .background-wrapper
+      .letters
+        img(src="/img/index/header-background.svg")
+      //- .shapes
+
+    .container
+
+      .columns.is-centered
+
+        .column.is-half-desktop.is-hidden-touch
+          .hook
+            h1.title.is-1.lead a weekend to
+            .slider-wrap
+              .slider
+                h1.title.is-1.underline build your skills.
+                h1.title.is-1.underline make a thing.
+                h1.title.is-1.underline hack together.
+
+        .column.is-half-desktop
+          .info
+            .heading
+              .logo
+                .presenting.title.is-5 FAMU & FSU PRESENTS
+                img.hackSymbol(src="/img/index/hackFSUSymbol.svg")
+              h1.title.is-1 HACKFSU 5
+
+            .content.is-medium
+              .date March 2 &ndash; 4 | Florida State University
+
+            .buttons
+              a.button.is-rounded.is-primary.hackfsu(href='/register') Apply
+              a.button.is-rounded.hackfsu(href='mailto:info@hackfsu.com') Contact

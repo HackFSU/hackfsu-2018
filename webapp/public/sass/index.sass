@@ -1,108 +1,27 @@
-// @import "materialize"
-@import "bulma"
-@import "style.sass"
+@import "base"
 
 body
-    background-color: #8A35FB
-    color: white
     font-family: 'Graphik', sans-serif
+    position: relative
 
-section.header.landing
-    text-align: center
-    height: 100%
-    padding: 0
-    overflow: hidden
-    display: flex
-    flex-direction: column
-    justify-content: center
-
-    .confetti-wrapper
-        position: absolute
-        display: flex
-        flex-direction: column
-        height: 100vh
-        width: 100vw
-        min-width: 100%
-        z-index: 0
+@import "index/header"
+@import "index/about"
+@import "index/schedule"
+@import "index/culture"
+@import "index/sponsors"
+@import "index/footer"
 
 
-        .background-Letters
-            background-image: url("/img/index/funLines.svg"), url("/img/index/backgroundLetters.svg")
-            min-width: 100%
-            min-height: 100%
-            background-repeat: no-repeat
-            background-size: cover
-            background-position: center
-            background-attachment: fixed
+//
+//  General Overrides
+//
 
-    > .columns
-        z-index: 1
-        height: 100vh
+section, footer
+    z-index: 10
+    position: relative
 
-        .content
-            height: 100vh
-            position: relative
-            display: flex
-            flex-direction: column
-            justify-content: center
-            align-items: center
-            // max-width: 500px
+section.header
+    z-index: 10
 
-            strong
-                font-weight: $bold
-
-            .heading
-                font-size: 8vh
-
-                *
-                    color: white
-
-                p
-                    margin: 0px
-                    font-weight: bold
-                    font-size: smaller
-
-                .presenting
-                    transform: rotate(-5deg)
-                    font-size: 50%
-                    font-weight: 500
-
-                img.hackSymbol
-                    width: 75%
-                    z-index: 1
-
-            .date
-                padding-bottom: 20px
-                letter-spacing: 2px
-
-            .button
-                $button-bg: #ED76CB
-                $button-fg: #FEFE66
-                background-color: $button-bg
-                color: $button-fg
-                width: 66%
-                max-width: 400px
-                border-width: 0px !important
-                font-weight: bold
-                height: 48px
-                margin-bottom: 16px
-                // text-transform: uppercase
-                font-family: $family-primary
-
-                &:hover
-                    color: #363636
-
-                &#contact
-                    background-color: white
-                    color: black
-                    opacity: .9
-
-                    &:hover
-                        color: #ED76CB
-
-            .conduct a
-                text-decoration: underline
-                color: white
-
-            .date, .conduct
-                font-weight: 500
+.title
+    font-weight: 500

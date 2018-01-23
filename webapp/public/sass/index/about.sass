@@ -1,0 +1,48 @@
+section.section.about
+    padding-top: 10%
+    padding-bottom: 10%
+
+    .column.pictures
+        position: relative
+
+        @include desktop-only
+            margin-top: 5%
+
+        @include widescreen-only
+            margin-top: 5%
+
+        .fig-wrap
+            width: 73%
+            position: absolute
+
+            figure
+                border: 4px $cyan  solid
+                margin: 8px
+
+            &#fig1
+                top: -250px
+                left: 10%
+
+            &#fig2
+                left: -30%
+
+            &#fig3
+                top: 400px
+                left: 20%
+
+
+    .column.text
+
+        // @include Graphik(400)
+        font-family: $family-primary
+
+        .title
+            color: $red
+            // font-weight: 500
+            @include Graphik(700)
+
+        .subtitle
+            @include Graphik(700)
+            color: $orange
+            text-transform: uppercase
+            margin-bottom: 0

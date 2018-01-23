@@ -1,0 +1,47 @@
+//
+//  Import Bulma base
+//
+
+@import "../../node_modules/bulma/sass/utilities/initial-variables"
+@import "../../node_modules/bulma/sass/utilities/functions"
+
+
+//
+//  Override Bulma styles
+//
+
+// Override base variables
+$pink: #ED76CB
+$pink-invert: #FEFE66
+
+$red: #ef6c67
+$orange: #fda500
+$cyan: #65dde4
+$blue: #8A35FB
+
+// Override ...
+$primary: $pink
+$primary-invert: $pink-invert
+
+
+
+//
+//  Import rest of Bulma either all-together
+//  or as-needed.
+//
+
+@import "../../node_modules/bulma/bulma"
+@import "../../node_modules/bulma-extensions/bulma-pageloader/pageloader.sass"
+
+
+//
+//  Import remaining customizations
+//
+
+html, body
+  min-height: 100vh
+
+@import "common/type.sass"
+@import "common/compat.sass"
+@import "common/color"
+@import "common/button"

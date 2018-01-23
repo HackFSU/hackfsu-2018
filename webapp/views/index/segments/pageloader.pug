@@ -1,0 +1,11 @@
+block append content
+    .pageloader.is-active
+        span.title HackFSU 5
+    script.
+        $(window).on('load', () => {
+            let hideLoader = function () {
+                $('.pageloader').toggleClass('is-active');
+            };
+
+            window.setTimeout(hideLoader, 1500);
+        });

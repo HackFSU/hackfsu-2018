@@ -14,7 +14,7 @@ app.set('env', env);
 
 let apiHost = env === 'development'
     ? 'http://localhost:8080'
-    : 'https://api.hackfsu.com';
+    : 'http://api:8080';
 app.set('api-host', apiHost);
 
 console.log('Starting in', env, 'mode.');

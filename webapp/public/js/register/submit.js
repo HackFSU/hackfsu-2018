@@ -186,7 +186,7 @@ function getHackerData () {
     return Object.assign({}, userInfo, attendeeInfo, hackerInfo);
 }
 
-function submitHackerInfo (success, failure) {
+function submitHackerInfo (before, success, failure) {
 
     let data = new FormData();
 
@@ -195,14 +195,12 @@ function submitHackerInfo (success, failure) {
     });
 
     $.ajax({
-        url: process.env.API_HOST + '/api/hacker/register',
+        url: '/register',
         method: 'POST',
         type: 'POST',
         data: data,
-        crossDomain: true,
-        beforeSend: function () {
-            console.log('sending!');
-        },
+        // crossDomain: true,
+        beforeSend: before,
         success: success,
         error: failure,
         processData: false,

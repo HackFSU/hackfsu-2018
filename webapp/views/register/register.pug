@@ -114,6 +114,11 @@ block content
               input#resume.file-input(type="file", name="resume")
               span.file-cta
                 span#file-label.file-label Upload Your Resume…
+        script.
+          $('#resume').on('change', function() {
+              if(resume.files.length > 0)
+                $('#file-label').html(resume.files[0].name);
+          });
 
         .g-recaptcha(data-sitekey="6LcrLjYUAAAAAGXmRcU6IwQdiGeC_6uPPBCHuJau")
 

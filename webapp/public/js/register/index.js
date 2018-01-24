@@ -8,8 +8,6 @@ import {
     validateHackerForm
 } from './submit';
 
-import './resume-upload';
-
 $(document).ready(function() {
     initSections();
 });
@@ -19,7 +17,7 @@ $(document).ready(function() {
 //
 
 function displayErrorFromJson (err) {
-    var msg = JSON.stringify(err.responseJSON.message);
+    var msg = err.responseText || err.responseJSON.message;
     msg = msg.replace(/{|}|'|"|\[|\]/g, '');
     msg = msg.replace(/, /g, '\n');
     alert(msg);
@@ -60,14 +58,16 @@ btn3.on('click', () => {
     validateAttendeeForm();
     validateHackerForm();
 
-    btn3.prop('disabled', true);
-
     submitHackerInfo(
+        function before () {
+            btn3.addClass('is-loading');
+        },
         function success () {
             alert('Okay, you\'re registered! Check your inbox for an email!');
+            window.location.href = '/';
         },
         function error (err) {
-            btn3.removeAttr('disabled');
+            btn3.removeClass('is-loading');
             grecaptcha.reset();
             displayErrorFromJson(err);
             console.log(err);

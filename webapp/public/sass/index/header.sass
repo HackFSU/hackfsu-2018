@@ -122,16 +122,20 @@ section.header
                         color: white
 
                     .logo
+                        transform: rotate(-5deg) scale(.7, .7)
 
+                        @include desktop
+                            transform-origin: bottom right
+                            margin-bottom: 16px
 
                         .presenting
-                            transform: rotate(-5deg)
                             font-weight: 500
-                            margin-bottom: 0
+                            margin-bottom: 12px
 
                         img.hackSymbol
-                            width: 75%
+                            // width: 75%
                             z-index: 1
+                            max-width: 300px
 
                 h1.title
                     @include Graphik(700)

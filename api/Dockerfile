@@ -24,11 +24,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-#
-#   Collect the static files
-#
-
-RUN python manage.py collectstatic --noinput
 
 #
 #   Port 8080 is for the Nginx server (prod)

@@ -1,0 +1,19 @@
+{
+  "name": "@hackfsu/profile-service",
+  "version": "0.1.0",
+  "description": "QR and Hacker ID generation service.",
+  "main": "index.js",
+  "author": "Andrew Sosa",
+  "license": "ISC",
+  "private": false,
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "method-override": "^2.3.10",
+    "mongoose": "^5.0.0-rc2",
+    "morgan": "^1.9.0",
+    "qrcode": "^1.2.0",
+    "randomatic": "^3.0.0"
+  }
+}

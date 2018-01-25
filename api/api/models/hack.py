@@ -15,6 +15,9 @@ class HackQuerySet(models.QuerySet):
             table_number__lte=expo.table_number_end
         )
 
+    def from_table_number(self, table: int):
+        return self.get(table_number=table)
+
     def with_active_judge(self, judge: JudgeInfo):
         return self.filter(current_judges=judge)
 

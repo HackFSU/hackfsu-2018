@@ -34,7 +34,12 @@ def on_pre_delete(**kwargs):
 class ActiveHacksInline(admin.TabularInline):
     from api.models.hack import Hack
     model = Hack.current_judges.through
+    verbose_name = "Currently assigned Hacks"
 
+class PastHacksInline(admin.TabularInline):
+    from api.models.hack import Hack
+    model = Hack.judges.through
+    verbose_name ="Previously judged Hacks"
 
 @admin.register(JudgeInfo, site=hackfsu_admin)
 class JudgeInfoAdmin(admin.ModelAdmin):
@@ -46,7 +51,7 @@ class JudgeInfoAdmin(admin.ModelAdmin):
     ordering = ('-created',)
     actions = ('approve_application', 'un_approve_application')
 
-    inlines = [ActiveHacksInline]
+    inlines = [ActiveHacksInline, PastHacksInline]
 
     @staticmethod
     def user_info(obj):

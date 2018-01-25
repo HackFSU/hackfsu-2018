@@ -42,5 +42,5 @@ EXPOSE 8000
 #   Launch the Nginx and Django
 #
 
-ENTRYPOINT ["./entrypoint.sh"]
+CMD ["./entrypoint.sh"]
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

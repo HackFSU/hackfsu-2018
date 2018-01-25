@@ -6,6 +6,10 @@
   "author": "Andrew Sosa",
   "license": "ISC",
   "private": false,
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",

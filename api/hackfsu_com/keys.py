@@ -23,6 +23,7 @@ MANDRILL_PORT = str()
 MANDRILL_SMTP_USERNAME = str()
 MANDRILL_SMTP_PASSWORD = str()
 ADMIN_EMAIL = str()
+QR_HOST = str()
 
 
 def load_secret_keys():
@@ -40,6 +41,7 @@ def load_secret_keys():
     global MANDRILL_SMTP_USERNAME
     global MANDRILL_SMTP_PASSWORD
     global ADMIN_EMAIL
+    global QR_HOST
 
     def load_key(key):
         val = os.getenv(key)
@@ -62,5 +64,6 @@ def load_secret_keys():
     MANDRILL_SMTP_USERNAME = load_key('MANDRILL_SMTP_USERNAME')
     MANDRILL_SMTP_PASSWORD = load_key('MANDRILL_SMTP_PASSWORD')
     ADMIN_EMAIL = load_key('ADMIN_EMAIL')
+    QR_HOST = load_key('QR_HOST')
 
 load_secret_keys()

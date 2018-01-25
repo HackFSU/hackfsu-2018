@@ -27,6 +27,7 @@ class UserInfo(models.Model):
     linkedin = models.CharField(max_length=100, default='', blank=True)
     last_hackathon = models.ForeignKey(to=Hackathon, on_delete=models.SET_NULL, default=None, null=True, blank=True)
     comments = models.CharField(max_length=1000, default='', blank=True)
+    hexcode = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
         return '[UserInfo {} {}]'.format(self.user.first_name, self.user.last_name)

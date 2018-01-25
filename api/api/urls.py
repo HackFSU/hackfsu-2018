@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'user/login$', views.user.LogInView.as_view(), name='user-login'),
     url(r'user/register$', views.user.RegisterView.as_view(), name='user-register'),
     url(r'user/get/profile$', views.user.get.ProfileView.as_view(), name='user-get-profile'),
+    url(r'user/get/profile/hexcode$', views.user.get.HexCodeView.as_view(), name='user-get-profile'),
     url(r'user/get/groups$', views.user.get.GroupsView.as_view(), name='user-get-groups'),
     url(r'user/password/reset/complete$', views.user.password.CompleteResetView.as_view()),
     url(r'user/password/reset/start$', views.user.password.StartResetView.as_view()),

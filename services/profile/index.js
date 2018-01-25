@@ -29,7 +29,7 @@ mongoose.connect(DB_URI).then(() => {
 
     // Routing
     const router = express.Router();
-    router.get('/:hackerID', require('./routes/hackerID'));
+    router.get('/hex/:hackerID', require('./routes/hackerID'));
 
 
     server.use(router);

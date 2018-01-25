@@ -60,4 +60,5 @@ services:
             - 127.0.0.1:8101:3000
         volumes:
             - ./services/profile:/usr/src/app
+        working_dir: /usr/src/app
         command: sh -c "yarn && yarn start"

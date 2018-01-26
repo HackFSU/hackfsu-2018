@@ -1,2 +1,2 @@
-from .profile import ProfileView, HexCodeView
+from .profile import ProfileView
 from .groups import GroupsView

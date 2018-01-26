@@ -53,6 +53,8 @@ services:
     #
 
     # [Express] QR Service
+    # This service name is depended upon by the .env
+    # file and the API's nginx.conf
     qr:
         image: "node:8"
         env_file: ".env"

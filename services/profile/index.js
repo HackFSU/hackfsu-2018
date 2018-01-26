@@ -21,7 +21,6 @@ console.log('Connecting to database on: ', DB_URI);
 mongoose.Promise = Promise;
 mongoose.connect(DB_URI).then(() => {
 
-
     const server = express();
     server.use(bodyParser.json());
     server.use(methodOverride());
@@ -29,8 +28,8 @@ mongoose.connect(DB_URI).then(() => {
 
     // Routing
     const router = express.Router();
-    router.get('/hex/:hackerID', require('./routes/hackerID'));
-
+    router.get('/hacker/:hackerID', require('./routes/hackerID'));
+    router.get('/qr/:url', require('./routes/image'));
 
     server.use(router);
     server.listen(3000, () => {

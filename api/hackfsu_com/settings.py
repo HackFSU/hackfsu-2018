@@ -170,7 +170,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 QR_HOST = keys.QR_HOST
 
 if not DEBUG:
-    HOSTNAME = 'https://hackfsu.com'
+    HOSTNAME = keys.HTTP_HOSTNAME
 else:
     HOSTNAME = 'http://localhost:8080'
 

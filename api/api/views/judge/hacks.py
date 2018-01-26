@@ -106,6 +106,9 @@ class PostHacksView(ApiView):
         if has_active_assignment:
             order = get_order(req)
 
+            logging.warn('incoming score submissions: ' + str(order.values()))
+            logging.warn('the assignment was: ' + str(judge_hack_assignment))
+
             # If the hacks they sent back match their assignment...
             if set(order.values()) == set(judge_hack_assignment):
 

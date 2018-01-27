@@ -112,15 +112,16 @@ class PostHacksView(ApiView):
                 # ... accept scores ...
                 for rank, table in order.items():
                     hack = Hack.objects.from_table_number(table)
-                    hack.total_judge_score += int(rank)
+                    hack.total_judge_score += (4 - int(rank))
                     hack.save()
 
                 # ... annotate superlatives ...
                 nominations = get_superlatives(req)
+                logging.info(nominations)
                 for table, superlative_names in nominations.items():
-                    hack = Hack.objects.filter(table_number=table).first()
+                    hack = Hack.objects.get(table_number=table)
                     for name in superlative_names:
-                        superlative = JudgingCriteria.objects.filter(name=name).first()
+                        superlative = JudgingCriteria.objects.get(name=name)
                         hack.nomination_set.create(superlative=superlative)
 
                 # ... and remove judge from assignments

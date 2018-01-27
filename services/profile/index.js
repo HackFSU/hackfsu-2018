@@ -6,25 +6,30 @@ const mongoose          = require('mongoose');
 const morgan            = require('morgan');
 const qr                = require('qrcode');
 
-const hackerID  = require('./routes/hackerID');
+//  When not launching production mode, we want to load our
+//  local .env file; otherwise Docker-Compose uses env_file.
+const env = process.env.NODE_ENV || 'development';
+if (env === 'development') {
+    dotenv.config();
+}
+const DB_URI = process.env.QR_DB;
 
-dotenv.config();
-console.log('Connecting to database on: ', process.env.DBURI);
+console.log('Starting in', env, 'mode.');
+console.log('Connecting to database on: ', DB_URI);
 
 // Connect to MongoDB
 mongoose.Promise = Promise;
-mongoose.connect(process.env.DBURI).then(() => {
-
+mongoose.connect(DB_URI).then(() => {
 
     const server = express();
     server.use(bodyParser.json());
     server.use(methodOverride());
-    server.use(morgan('common'));
+    server.use(morgan('dev'));
 
     // Routing
     const router = express.Router();
-    router.get('/:hackerID', hackerID);
-
+    router.get('/hacker/:hackerID', require('./routes/hackerID'));
+    router.get('/qr/:url', require('./routes/image'));
 
     server.use(router);
     server.listen(3000, () => {

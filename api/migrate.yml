@@ -1,0 +1,19 @@
+#   This configuration is for running migrations.
+
+version: '2'
+services:
+
+    postgres:
+        extends:
+            file: ../docker-compose.yml
+            service: postgres
+
+    api:
+        extends:
+            file: ../docker-compose.yml
+            service: api
+        volumes:
+            - ./:/usr/src/app
+        command: sh
+        # command: sh -c "./migrate.sh"
+

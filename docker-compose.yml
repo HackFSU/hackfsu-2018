@@ -46,3 +46,21 @@ services:
         ports:
             - "127.0.0.1:3000:3000"
         restart: always
+
+
+    #
+    #   Microservices
+    #
+
+    # [Express] QR Service
+    # This service name is depended upon by the .env
+    # file and the API's nginx.conf
+    qr:
+        image: "node:8"
+        env_file: ".env"
+        ports:
+            - 127.0.0.1:8101:3000
+        volumes:
+            - ./services/profile:/usr/src/app
+        working_dir: /usr/src/app
+        command: sh -c "yarn && yarn start"

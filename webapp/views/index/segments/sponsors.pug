@@ -1,12 +1,28 @@
+mixin row
+  .columns.is-centered
+    block
+
+mixin sponsor1(url)
+  .column.is-3
+    figure.image
+      img(src=url)
+
+mixin sponsor2(url)
+  .column.is-2
+    figure.image
+      img(src=url)
+
 block append content
   section.section.sponsors
     .container.has-text-centered
       h1.title.is-1 Sponsors
-      .columns.is-centered
-        .column.is-2
-          figure.image
-            img(src="/img/sponsors/domiLogo.png")
-        .column.is-1
-        .column.is-3
-          figure.image
-            img(src="https://2017.hackfsu.com/static/img/logos/fsu/college-of-arts-and-sciences.png")
+      +row
+        +sponsor1("/img/sponsors/DCI_Logo_RGB_Web_Large.png")
+        +sponsor1("/img/sponsors/dsc.png")
+        +sponsor1("/img/sponsors/ArtsSciences.png")
+      +row
+        +sponsor2("/img/sponsors/domiLogo.png")
+        +sponsor2("/img/sponsors/DO_Logo_Vertical_black.png")
+        +sponsor2("/img/sponsors/Linode.png")
+        +sponsor2("/img/sponsors/FCCU_horiz-3C_logotag.png")
+

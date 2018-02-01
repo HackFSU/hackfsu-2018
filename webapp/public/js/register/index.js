@@ -49,6 +49,9 @@ btn2.on('click', e => {
     $('html, body').animate({
         scrollTop: $('#part3').offset().top
     }, 400, 'swing');
+
+    $('#alert').show();
+
 });
 
 btn3.on('click', () => {

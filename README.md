@@ -1,58 +1,72 @@
 # `hackfsu.com` v5
+Welcome to the HackFSU Webapp & API repository. 
 
-## Installation
+### Table of Contents
+1. [Webapp Setup](#webapp)
+2. [API Setup](#api)
+3. [Docker Installation](#docker)
 
-These are some docs on how to set up this repository.
+## Webapp
 
-### Getting Started
+We don't recommend using Docker for webapp development. We _do_ recommend [Yarn](https://yarnpkg.com). 
 
-We utilize Docker to containerize our application so that whether you are using linux, macOS, or Windows, you run exactly the same as everyone else.
+Install the dependencies by typing `yarn` and then launch the Express app with `yarn dev`. This will use `nodemon` to automatically relaunch the app when you change things.
 
-There are many advantages to Docker, including automatic dependency installation, a simple deployment strategy, and increased security via sandboxed components.
+### PugJS and Sass
 
-1. [Get Docker](https://docs.docker.com/engine/getstarted/step_one/#/step-1-get-docker)
-2. [Get Docker Compose](https://docs.docker.com/compose/install/)
-3. Clone this repo: `git clone https://github.com/hackfsu/hackfsu_com`
+Our setup uses the [Pug](https://pugjs.org/) templating language in lieu of HTML, and [Sass](http://sass-lang.com/) instead of CSS. Express automatically complies these at runtime. The Pug files are in `webapp/views` and the Sass is in `webapp/public/sass`. 
 
-*Also see `/docs/Docker.md` for details on what to install and how to configure your Docker hosts.*
+### Javascript
 
-### Docker Compose Configs
-We provide several Compose configurations in the `.docker` folder. We recommend copying the `dev.yml` configuration into the project root as `docker-compose.yml`, so you may use the `docker-compose ...` commands without the `-f .docker/dev.yml` option. You also can customize the `docker-compose.yml` file to your liking as it will be ignored by git. 
+We have two kinds of Javascript in the webapp. The first are small scripts, some of which are inline, for UI things. 
 
-To reiterate; if you choose the use a `docker-compose.yml` file you can use `docker-compose [command]`, otherwise you will need `docker-compose -f <.docker/compose_file> [command]`. 
+We also use Webpack to handle the registration logic. If you want to edit the registration JS, use `webpack --watch --config webpack.dev.js` to pack up the files. 
 
-*Also see README.md in the `.docker` folder for a full list of pre-made configurations and details on environmental variable configuration.*
+## API 
+Also check out the Docker instructions in the next section.
 
-## Contributing
+### PyCharm Setup
+Setup Guides for **[PyCharm](https://www.jetbrains.com/pycharm/)**. We recommend PyCharm not only as a powerful Python IDE, but also as a robust Docker Deployment UI.
 
-Before starting, see `/docs/IDEs.md` for instructions on configuring Pycharm (API development) or Webstorm (Webapp development).
+#### JetBrains Student License
+JetBrains, the producers of PyCharm and Webstorm, offer free student licenses which are automatically approved with a `.edu` email. Create an account and apply for a student license before proceeding, as most of the features used in this guide rely on the *Professional* editions of the software. 
 
-### Webapp Development
+**Be sure to install the *Professional* editions of the software.**
 
-You can launch the webapp with the following commannd:
+#### Configure PyCharm with Docker
+1. Create a run configuration via the top-right dropdown menu option "Edit Configurations".
+    * Click the plus button in the top-right and select "Docker Deployment".
+    * Select "Server" as your Docker Host (see **Docker Host Setup** in `.docker/README.md`).
+    * Select "Deployment" as `docker-compose.yml` (see **Docker Compose Configs** above).
+    * Check "Single Instance Only".
+2. Add the Compose service as a remote project interpreter:
+    * Open Preferences > Project: HackFSU > Project Interpreter
+    * Click the options button next to the 'Project Interpreter' dropdown, select "Add Remote". 
+    * Select "Docker Compose" from the radio buttons.
+        * Choose your Docker host as the server (same as step 1).
+        * Make sure it automatically selected your `docker-compose.yml` file.
+        * Service should be "api", and interpreter should be "python". 
 
-```
-docker-compose up webapp
-```
-
-If you want to connect to use the local API, don't include the webapp tag. Also, see the **Database Migration** section under **API Development**.
-
-**Notes**:
-1. Windows users may need to type `docker-compose.exe`.
-2. Windows users will need to edit the launch commannd, see the `dev.yml` comment below the command tag in the webapp service.
-3. Use `up -d` to detach from the container.
-
-### API Development
-Be sure to setup Pycharm per `/docs/IDEs.md` before starting.
-
-#### Database Migration
-The first time the API launches, you need to apply the database migrations.
+### Database Migration
+The first time the API launches, you need to apply the database migrations. First, launch into the bash terminal using the API's migration file. 
 
 ```bash
-docker-compose [-f compose_file] run api python manage.py migrate
+docker-compose -f api/migrate.yml run api bash
+```
+Once in the terminal, you need to apply the migrations.
+
+```bash
+python manage.py migrate
 ```
 
-#### Setting current hackathon
+If you change the models at all, you'll need to make migrations and then apply them
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+### Setting current hackathon
 The core of the system requires a `hackathon` object to function. In order to set this up, you need to:
 1. Create and login with a superuser account
 2. Create a hackathon object
@@ -60,16 +74,33 @@ The core of the system requires a `hackathon` object to function. In order to se
 
 Create a superuser using an email address as the username.
 ```bash
-docker-compose [-f compose_file] run api python manage.py createsuperuser
+docker-compose run api python manage.py createsuperuser
 ```
 
 Then, log in at `<hostname>/login`. Then navigate to `<hostname>/admin/django`, and click on the `hackathon` class. Create a hackathon object and check the `current` checkbox.
 
-#### API v5+ and the v4 Webapp
+### API v5+ and the v4 Webapp
 HackFSU 4 hosted the website as static files served by Django. These files were built using Node.js + Gulp. 
 
-Currently the API/Dockerfile contains instructions for compatibility with the v4 webapp. However, the Docker Compose volumes directive to mount the API for development causes some sort of conflict with the build step and the templates are not rendered into pages. 
+The HackFSU API Dockerfile extends `hackfsu/api-base` image. We include the Dockerfile in the `api` folder as api-base.dockerfile. However, an `hackfsu/api-base` image is also hosted on the Docker Hub. 
 
-To use the legacy site, disable the volume flag in the Compose file. 
+All the legacy site comes prebuilt in base, and the Dockerfile file included in API is what actually gets used to build the modern API. 
 
-Eventually we will remove the legacy site from the API, and this notice should also be removed. 
+## Docker
+
+There are many advantages to Docker, including automatic dependency installation, a simple deployment strategy, and increased security via sandboxed components.
+
+We use Docker for deploying our apps on our servers. We also use it during development for our databases and the API. 
+
+1. [Get Docker](https://docs.docker.com/engine/getstarted/step_one/#/step-1-get-docker)
+2. [Get Docker Compose](https://docs.docker.com/compose/install/)
+3. Clone this repo: `git clone https://github.com/hackfsu/hackfsu_com`
+
+*Also see `.docs/Docker.md` for details on what to install and how to configure your Docker hosts.*
+
+### Docker Compose Configs
+`docker-compose.yml` is the default configuration for all components of our suite. If you want for ease of development, you can copy/edit/extend the Compose configuration to meet your needs. 
+
+You can find documentation on how to edit the Docker Compose file [here](https://docs.docker.com/compose/compose-file/compose-file-v2/). 
+
+If you choose the use a `docker-compose.yml` file you can use `docker-compose [command]`, otherwise you will need `docker-compose -f <.docker/compose_file> [command]`. 

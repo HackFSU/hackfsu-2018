@@ -1,7 +1,7 @@
 const express           = require('express');
 // const bodyParser        = require('body-parser');
 const cookieParser      = require('cookie-parser');
-const favicon           = require('serve-favicon');
+// const favicon           = require('serve-favicon');
 const logger            = require('morgan');
 const sassMiddleware    = require('node-sass-middleware');
 const path              = require('path');
@@ -27,7 +27,7 @@ app.set('view engine', 'pug');
 //  Middleware
 //
 
-app.use(favicon(path.join(__dirname, 'public', 'img/icon.png')));
+// app.use(favicon(path.join(__dirname, 'public', 'img/icon.png')));
 app.use(logger('dev'));
 // Disabled in favor of installing on individual routes??
 // app.use(bodyParser.json());

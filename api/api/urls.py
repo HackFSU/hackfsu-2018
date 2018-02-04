@@ -58,6 +58,9 @@ urlpatterns = [
     url(r'attendee/get/approved_full$', views.attendee.get.ApprovedFullView.as_view()),
 
     url(r'preview/register$', views.preview.RegisterView.as_view(), name='preview-register'),
+
+    url(r'events$', views.scan.ScanEventsView.as_view(), name='scan-events'),
+    url(r'events/scan$', views.scan.ScanUploadView.as_view(), name='scan-upload'),
 ]
 
 

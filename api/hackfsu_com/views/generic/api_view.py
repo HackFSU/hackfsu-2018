@@ -80,11 +80,8 @@ class ApiView(View):
                 raise InternalServerError(ValidationError(response_form.errors.as_data()))
             res = response_form.cleaned_data
 
-            # Extract status from res
-            status = res.get('status', 200)
-
             # Successful api call!
-            return JsonResponse(res, status=status)
+            return JsonResponse(res)
 
         except ExternalUserError as error:
             # if settings.DEBUG:

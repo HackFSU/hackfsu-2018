@@ -3,10 +3,13 @@
 """
 
 from django import forms
+from django.contrib.auth.models import User
+from django.utils import timezone
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util.forms import JsonField
 from hackfsu_com.util import acl
-from api.models import ScanEvent, ScanRecord, UserInfo
+from api.models import Hackathon, ScanEvent, ScanRecord, UserInfo
+from api.models.attendee_status import AttendeeStatusManager
 
 class ScanEventsView(ApiView):
     class ResponseForm(forms.Form):
@@ -36,6 +39,7 @@ class ScanUploadView(ApiView):
     class ResponseForm(forms.Form):
         message = forms.CharField()
         status = forms.IntegerField()
+        name = forms.CharField(required=False)
 
     request_form_class = RequestForm
     response_form_class = ResponseForm
@@ -46,6 +50,8 @@ class ScanUploadView(ApiView):
         # Make sure we recognize user
         try:
             hacker = UserInfo.objects.get(hexcode=req['hacker'])
+            user = User.objects.get(userinfo=hacker)
+            name = user.first_name + ' ' + user.last_name
         except:
             res['message'] = "User with hexcode {} not found.".format(req['hacker'])
             res['status'] = 404
@@ -60,18 +66,24 @@ class ScanUploadView(ApiView):
 
         # If record already exists, they did this already
         if len(records) > 0:
-            res['message'] = "User already did this event."
+            res['name'] = name
+            res['message'] = "{} already did this event.".format(name)
             res['status'] = 401
             return
 
         # Check if this is the special-case check-in event
-        # if event.is_check_in:
-            # do check in things
+        if event.is_check_in:
+            current_hackathon = Hackathon.objects.current()
+            attendee_info = AttendeeStatusManager.get_or_create(user, current_hackathon)
+
+            attendee_info.checked_in_at = timezone.now()
+            attendee_info.save()
 
 
         # Record hacker-scanevent relation
         event.scanrecord_set.create(user_info=hacker)
 
+        res['name'] = name
         res['message'] = "Scan OK!"
         res['status'] = 200
 

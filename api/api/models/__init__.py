@@ -39,6 +39,8 @@ from .judging_grade import JudgingGrade
 from .judging_assignment import JudgingAssignment
 from .preview_email import PreviewEmail
 from .nomination import Nomination
+from .scan_event import ScanEvent
+from .scan_record import ScanRecord
 
 # TODO OldParseUser
 # TODO OldParseHacker

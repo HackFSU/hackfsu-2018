@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from api.models import Hackathon
+from api.models import Hackathon, ScanRecord
 from django.contrib import admin
 from hackfsu_com.admin import hackfsu_admin
 
@@ -29,10 +29,15 @@ class UserInfo(models.Model):
     comments = models.CharField(max_length=1000, default='', blank=True)
     hexcode = models.CharField(max_length=10, blank=True, null=True)
     qr_url = models.CharField(max_length=100, blank=True, null=True)
+    events = models.ManyToManyField('api.ScanEvent', through=ScanRecord)
 
     def __str__(self):
         return '[UserInfo {} {}]'.format(self.user.first_name, self.user.last_name)
 
+class ScanRecordsInline(admin.TabularInline):
+    model = UserInfo.events.through
+    extra = 0
+    readonly_fields = ('scan_event', 'time')
 
 @admin.register(UserInfo, site=hackfsu_admin)
 class UserInfoAdmin(admin.ModelAdmin):
@@ -42,6 +47,8 @@ class UserInfoAdmin(admin.ModelAdmin):
     list_display_links = ('id',)
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'diet', 'github', 'linkedin')
     ordering = ('-created',)
+
+    inlines = [ScanRecordsInline]
 
     @staticmethod
     def user_info(obj):

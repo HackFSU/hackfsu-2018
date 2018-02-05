@@ -1,5 +1,4 @@
 from django.db import models
-from api.models import UserInfo, ScanEvent
 from django.contrib import admin
 from hackfsu_com.admin import hackfsu_admin
 
@@ -12,7 +11,7 @@ class ScanRecord(models.Model):
 @admin.register(ScanRecord, site=hackfsu_admin)
 class ScanRecordAdmin(admin.ModelAdmin):
     list_filter = ('scan_event__name',)
-    list_display = ('id', 'event_name', 'user_name')
+    list_display = ('id', 'event_name', 'user_name', 'time')
     list_display_links = ('id',)
     search_fields = ('user_name',)
 

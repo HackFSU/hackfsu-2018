@@ -22,6 +22,8 @@ from .attendee_status import AttendeeStatus
 from .schedule_item import ScheduleItem
 from .school import School
 from .anon_stat import AnonStat
+from .scan_event import ScanEvent
+from .scan_record import ScanRecord
 from .user_info import UserInfo
 from .hacker_info import HackerInfo
 from .judge_info import JudgeInfo
@@ -39,8 +41,6 @@ from .judging_grade import JudgingGrade
 from .judging_assignment import JudgingAssignment
 from .preview_email import PreviewEmail
 from .nomination import Nomination
-from .scan_event import ScanEvent
-from .scan_record import ScanRecord
 
 # TODO OldParseUser
 # TODO OldParseHacker

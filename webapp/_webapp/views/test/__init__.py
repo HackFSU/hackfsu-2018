@@ -1,1 +1,0 @@
-from .captcha import CaptchaTestPage

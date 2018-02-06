@@ -7,16 +7,42 @@ section.section.sponsors
         font-weight: 700
         margin-bottom: 5rem
 
-    @include touch
+    // @include touch
 
-        figure.image
+    .columns
+
+        @include desktop
+            margin-bottom: 4rem
+
+        .column
             display: flex
             justify-content: center
-            align-items: center
+            // padding: 8px
+            margin: 0 1rem
 
-            img
-                width: 66%
-                max-width: 300px
+            @include touch
+                margin-bottom: 2rem
+
+            figure.image
+                display: flex
+                justify-content: center
+                align-items: center
+
+                img
+                    // width: 75%
+                    // max-width: 300px
+                    width: auto
+
+                    @include touch
+                        max-width: 85%
+
+
+            &.is-3 img
+                max-height: 175px
+
+            &.is-2 img
+                max-height: 125px
+
 
     // figure.image > img
     //     max-height: 150px

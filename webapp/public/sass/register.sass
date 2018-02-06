@@ -8,6 +8,9 @@ $control-height: 48px
 html
     background-color: #8A35FB
 
+body
+    position: relative
+
 
 background
     position: absolute
@@ -155,3 +158,30 @@ form
 
                 .file-label
                     justify-content: center
+
+
+#alert
+    display: none
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 1000
+    // color: white;
+
+    @include mobile
+        border-radius: 0
+        position: relative
+        margin-bottom: 0 !important
+        margin-top: -4rem
+        // top: 0
+        // bottom: auto
+
+    @include tablet
+        left: 12px
+        right: 12px
+
+
+    @include desktop
+        right: 24px;
+        left: auto;

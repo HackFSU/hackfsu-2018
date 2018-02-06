@@ -1,23 +1,13 @@
-style.
-    #alert {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        border-radius: 0;
-    }
 
-#alert.notification.is-warning
-    button#close-alert-button.delete(type='button')
+
+#alert.notification.is-danger
+    button#close-alert-button.delete(type=button)
     span
-        | Hey! We've heard that some people are having trouble registering, so if you
-        | get to the end of the form and it won't submit, please email us at
+        | If you're having issues submitting, email us at
         |
         a(href="mailto:info@hackfsu.com") info@hackfsu.com
-        |
-        | and tell us more about the issue. Try to include your platform, browser, and
-        | a screenshot of the developer console if possible.
+        | .
+        //- | Please include your platform and browser.
 
 
 block append scripts

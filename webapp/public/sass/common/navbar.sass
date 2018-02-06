@@ -1,0 +1,41 @@
+$nav-bg: rgba(255, 255, 255, .9) !important
+
+nav.navbar
+  z-index: 5000 !important
+  font-family: $family-primary
+  // text-transform: lowercase
+  background-color: rgba(255, 255, 255, .9) !important
+
+  .navbar-brand
+    text-transform: uppercase
+    @include Graphik(700)
+    @include desktop
+      margin-left: 7.5vw
+
+    a.navbar-item
+      display: none
+
+      img
+        transform: rotate(-5deg)
+
+
+      @include desktop
+        display: flex
+
+    .navbar-burger
+      border: none !important
+      background: none
+      margin-left: 0
+
+  .navbar-menu
+    padding-right: 150px
+    // background-color: rgba(0,0,0,0)
+
+    a.navbar-item
+      font-weight: 700
+
+      &:hover
+        color: $black !important
+
+    .button
+        font-weight: 700

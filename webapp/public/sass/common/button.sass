@@ -1,10 +1,12 @@
-.button
-    &.hackfsu
-        border-width: 0px !important
-        height: 48px
-        margin-bottom: 16px
+button.hackfsu, a.button.hackfsu
+    @extend .button
+    @extend .is-rounded
 
-        font-weight: bold
-        font-family: $family-primary
+    border-width: 0px !important
+    height: 48px
+    // margin-bottom: 16px
 
-        min-width: 200px
+    font-weight: bold
+    font-family: $family-primary
+
+    min-width: 200px

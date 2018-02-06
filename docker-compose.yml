@@ -42,6 +42,7 @@ services:
     # [Express] Webapp
     webapp:
         image: "hackfsu/webapp"
+        env_file: ".env"
         build: "./webapp"
         ports:
             - "127.0.0.1:3000:3000"
@@ -56,11 +57,8 @@ services:
     # This service name is depended upon by the .env
     # file and the API's nginx.conf
     qr:
-        image: "node:8"
+        image: "hackfsu/qr-service"
+        build: "services/profile"
         env_file: ".env"
         ports:
             - 127.0.0.1:8101:3000
-        volumes:
-            - ./services/profile:/usr/src/app
-        working_dir: /usr/src/app
-        command: sh -c "yarn && yarn start"

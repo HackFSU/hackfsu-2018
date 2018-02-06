@@ -4,7 +4,7 @@ html
   head
 
     block title
-      title HackFSU 5
+      title=title
 
     block styles
       link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.0.4/css/all.css")
@@ -20,6 +20,9 @@ html
 
 
   body
+    include partials/mlh-badge.pug
+    include partials/navbar.pug
+
     block content
     block scripts
       //- script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js")

@@ -1,0 +1,41 @@
+extends ../layout
+
+
+block append styles
+  link(rel='stylesheet', href='/css/profile.css')
+
+block content
+  .animated-background
+  .background-overlay
+  section.section.login
+    .container
+      .columns.is-centered
+        .column.is-half-tablet.is-one-third-widescreen
+
+          .brand
+            .tilt
+              .presenting.is-5 FAMU & FSU PRESENTS
+              .logo
+                img.hackSymbol(src="/img/feather-2018-white.svg")
+            h1.title.is-1.name HACKFSU 5
+
+          form.loginForm
+            input.hackfsu.translucent(placeholder='Email', name='email', type='email')
+            input.hackfsu.translucent(placeholder='Password', name='password', type='password')
+            button.hackfsu.is-primary Log In
+            hr
+            a Forgot Your Password?
+
+  //- .modal.is-active
+    .modal-background
+    .modal-content
+      .box
+        //- button.delete
+        form.loginForm
+          h1.title LogIn
+          input.hackfsu.light(placeholder='Email', name='email', type='email')
+          input.hackfsu.light(placeholder='Password', name='password', type='password')
+          button.hackfsu.is-primary(type='button') Log In
+          hr
+          a Forgot Your Password?
+    .button.modal-close.is-large(aria-label="close")

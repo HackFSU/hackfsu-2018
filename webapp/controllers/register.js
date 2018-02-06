@@ -7,7 +7,7 @@ const express = require('express'),
 
 router.get('/', (req, res) => {
     res.render('register/register.pug', {
-        title: 'Register'
+        title: 'HackFSU 5 | Register'
     });
 });
 

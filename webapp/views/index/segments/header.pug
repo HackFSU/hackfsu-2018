@@ -22,16 +22,16 @@ block append scripts
       draggable: false
     });
 
-    var changeColor = function () {
-      window.setTimeout(
-          function(ev, slick, curr, next) {
-            colorIndex = (colorIndex + 1) % colors.length;
-            $('section.header').css("background-color", colors[colorIndex]);
-          },
-          100);
-    }
+    //- var changeColor = function () {
+    //-   window.setTimeout(
+    //-       function(ev, slick, curr, next) {
+    //-         colorIndex = (colorIndex + 1) % colors.length;
+    //-         $('section.header').css("background-color", colors[colorIndex]);
+    //-       },
+    //-       100);
+    //- }
 
-    $('.slider').on('beforeChange', changeColor);
+    //- $('.slider').on('beforeChange', changeColor);
 
 
 block append content
@@ -39,6 +39,7 @@ block append content
   section.section.header
 
     .background-wrapper
+      .animated-background
       .letters
         img(src="/img/index/header-background.svg")
       //- .shapes

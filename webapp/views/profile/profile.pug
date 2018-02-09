@@ -1,0 +1,60 @@
+extends ../layout
+
+mixin info(label, value)
+  div
+    strong #{label}:
+    |
+    |
+    span=value
+
+block append styles
+  link(rel='stylesheet', href='/css/profile.css')
+
+block append content
+  //- .animated-background
+  //- .background-overlay
+  //- section.hero
+    .animated-background
+    .background-overlay
+    .hero-body
+      //- .container
+        h1.title Hello, world
+        h2.subtitle Doot doot
+  .background
+
+  section.section.profile
+    .container
+      .columns.is-centered
+        .column.is-two-thirds
+          .content.is-medium.box
+
+            .qr
+              figure.image.is-128x128
+                img(src=profile.qr)
+
+            .name-wrap
+              h1.title.is-1=profile.name
+
+            .info
+              +info('Role', profile.groups.join(', '))
+              +info('Email', profile.email)
+              +info('Phone', profile.phone_number)
+              +info('Hexcode', '#' + profile.hexcode)
+
+            .status
+              h1.title.is-4
+                | Status:
+                |
+                span=profile.acceptance
+
+            if profile.show_rsvp
+              //- a.button.hackfsu.small RSVP Now
+              p Congratulations! You've been accepted.
+                |
+                |
+                a Click here to RSVP.
+
+            if profile.rsvp_confirmed
+              p.
+                Thanks for RSVP'ing. Be on the lookout for emails with
+                more details!

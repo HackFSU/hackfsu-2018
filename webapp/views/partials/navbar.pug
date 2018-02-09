@@ -45,5 +45,7 @@ block append content
           //- a.navbar-item(href="/#faqs") FAQs
           a.navbar-item(href="/#sponsors") Sponsors
           .navbar-item
-            a.button.is-primary.is-rounded(href="/login") Log In
-
+            if profile
+              a.button.is-primary.is-rounded(href="/logout") Log Out
+            else
+              a.button.is-primary.is-rounded(href="/login") Log In

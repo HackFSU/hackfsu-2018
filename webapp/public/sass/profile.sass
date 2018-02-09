@@ -1,4 +1,91 @@
 @import "base"
 
+body
+    display: flex
+    flex-direction: column
 
-@import "profile/login"
+section.hero
+    position: relative
+    overflow: hidden
+
+    .animated-background, .background-overlay
+        position: absolute
+        height: 100%
+
+.background
+    position: fixed
+    width: 100vw
+    height: 100vh
+    background-color: $white
+    background-image: url("/img/hackfsu5-shapes.svg")
+    background-repeat: repeat
+    // background-size: 50% 50%
+    background-size: 1000px auto
+
+section.section.profile
+    position: relative
+    background-color: rgba(255,255,255,0.8)
+    flex-grow: 1
+
+    .content.box
+        position: relative
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        border-radius: 0
+        padding: 1.5rem 3rem 5rem
+        color: $dark
+        // min-height: 50vh
+
+        .label
+            color: $cyan
+
+        .name-wrap
+            border-bottom: 6px $cyan solid
+            margin-bottom: 1rem
+            margin-right: 124px
+            display: flex
+            padding-right: 10%
+
+            h1.title
+                color: $cyan
+                font-family: $family-primary
+                font-weight: 700
+                // @include Graphik(500)
+                margin-bottom: .25rem
+
+        .info
+            text-transform: uppercase
+            letter-spacing: 1.1px
+            line-height: 1.6
+            margin-bottom: 1rem
+
+        .qr
+            position: absolute
+            top: 0
+            right: 0
+            // align-self: center
+            // text-align: center
+
+            figure
+                margin: 1rem
+                background-color: $primary
+
+        .status
+            border-bottom: 3px $cyan solid
+            // padding-bottom: 0.25rem
+            margin-bottom: 0.5rem
+
+            h1
+                margin-bottom: 0
+                color: $cyan
+                // text-transform: uppercase
+                @include Graphik(500)
+
+                span
+                    // text-transform: capitalize
+        a
+            // color: $primary
+            // margin: 1rem 0
+            // text-decoration: underline
+            // background-color: whitesmoke

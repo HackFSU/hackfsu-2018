@@ -16,7 +16,7 @@ class RequestForm(forms.Form):
 
 class RsvpView(ApiView):
     request_form_class = RequestForm
-    allowed_after_current_hackathon_ends = False
+    allowed_after_current_hackathon_ends = True
     access_manager = acl.AccessManager(acl_accept=[
         acl.group_hacker,
         acl.group_mentor,

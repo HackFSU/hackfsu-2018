@@ -37,7 +37,7 @@ class RsvpView(ApiView):
 
         status = AttendeeStatus.objects.get(hackathon=Hackathon.objects.current(), user=request.user)
 
-        status.rsvp_result = req['rsvp_answer']
+        status.rsvp_result = True
         status.rsvp_submitted_at = timezone.now()
         status.extra_info = req['extra_info']
         status.save()

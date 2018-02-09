@@ -120,5 +120,26 @@ profileRouter.get('/', (req, res) => {
 
 });
 
+profileRouter.post('/rsvp', (req, res, next) => {
+    let host = req.app.get('api-host');
+
+    req.body['rsvp_answer'] = true;
+
+    req.pipe(request.post(host + '/api/attendee/rsvp', {}, (err, resp) => {
+        if (err) {
+            console.log(err);
+            next(err);
+            return;
+        }
+
+        if (resp.statusCode == 200) {
+            res.redirect('/profile');
+        } else {
+            res.redirect('/oops');
+        }
+    }));
+
+});
+
 
 module.exports = authRouter;

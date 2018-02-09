@@ -49,10 +49,9 @@ block append content
 
             if profile.show_rsvp
               //- a.button.hackfsu.small RSVP Now
-              p Congratulations! You've been accepted.
-                |
-                |
-                a Click here to RSVP.
+              form(method='post' action='/profile/rsvp')
+                p Congratulations! You've been accepted.
+                button.button.hackfsu.is-primary Click here to RSVP.
 
             if profile.rsvp_confirmed
               p.

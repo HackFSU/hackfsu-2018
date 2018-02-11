@@ -38,6 +38,9 @@ services:
         ports:
             - "127.0.0.1:8080:8080"
         restart: always
+        depends_on:
+            - qr
+            - postgres
 
     # [Express] Webapp
     webapp:
@@ -62,3 +65,5 @@ services:
         env_file: ".env"
         ports:
             - 127.0.0.1:8101:3000
+        depends_on:
+            - mongodb

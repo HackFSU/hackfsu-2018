@@ -4,7 +4,9 @@ extends ../layout
 block append styles
   link(rel='stylesheet', href='/css/login.css')
 
-block content
+block badge
+
+block append content
   .animated-background
   .background-overlay
   section.section.login
@@ -19,21 +21,12 @@ block content
                 img.hackSymbol(src="/img/feather-2018-white.svg")
             h1.title.is-1.name HACKFSU 5
 
-          if locals.msg !== 'undefined'
-            .notification.is-danger#message
-              button.delete
-              span=locals.msg
-            script.
-              $('#message > button.delete').on('click', () => {
-                $('#message').hide();
-              });
-
           form.loginForm(method="post" action="/login")
             input.hackfsu.translucent(placeholder='Email', name='email', type='email')
             input.hackfsu.translucent(placeholder='Password', name='password', type='password')
             button.hackfsu.is-primary Log In
             hr
-            a Forgot Your Password?
+            a(href="/resetpassword") Forgot Your Password?
 
   //- .modal.is-active
     .modal-background

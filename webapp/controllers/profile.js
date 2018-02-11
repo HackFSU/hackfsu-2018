@@ -8,6 +8,8 @@ const cookieParser  = require('cookie-parser');
 const express       = require('express');
 const request       = require('request');
 
+const { passwordReset } = require('./auth');
+
 //
 //  Three routers:
 //      authRouter:     Primary router handling auth-related paths.
@@ -15,14 +17,12 @@ const request       = require('request');
 //      profileRouter:  These routes require user to be logged in.
 
 const authRouter = express.Router();
-const loginRouter = express.Router();
 const profileRouter = express.Router();
 
 authRouter.use(bodyParser.urlencoded({ extended: true }));
 authRouter.use(bodyParser.json());
 authRouter.use(cookieParser());
 authRouter.use('/profile', profileRouter);
-authRouter.use(loginRouter);
 
 profileRouter.use(require('../middleware/auth'));
 
@@ -30,7 +30,7 @@ profileRouter.use(require('../middleware/auth'));
 //
 //  Login
 
-loginRouter.get('/login', (req, res) => {
+authRouter.get('/login', (req, res) => {
 
     // TODO fix login redirect
     // if (req.profile) {
@@ -38,16 +38,12 @@ loginRouter.get('/login', (req, res) => {
     //     return;
     // }
 
-    let msg = decodeURIComponent(req.query.msg);
-    console.log('msg', msg);
-
     res.render('profile/login.pug', {
-        title: 'HackFSU 5 | Log In',
-        msg: msg
+        title: 'HackFSU 5 | Log In'
     });
 });
 
-loginRouter.post('/login', (req, res, next) => {
+authRouter.post('/login', (req, res, next) => {
     let host = req.app.get('api-host');
 
     // console.log(req.body.email);
@@ -72,18 +68,26 @@ loginRouter.post('/login', (req, res, next) => {
 
             // Bad login
             else {
-                let msg = encodeURIComponent('Incorrect username or password.');
-                res.redirect(`/login?msg=${msg}`);
+                req.flash('error', 'Incorrect username or password.');
+                res.redirect('/login');
             }
         });
 
 });
 
-loginRouter.get('/logout', (req, res) => {
+authRouter.get('/logout', (req, res) => {
     res.clearCookie('sessionid');
     res.clearCookie('csrftoken');
     res.redirect('/');
 });
+
+
+authRouter.get('/resetpassword', passwordReset.start.GET);
+authRouter.post('/resetpassword', passwordReset.start.POST);
+
+authRouter.get('/user/password/reset/:link_key', passwordReset.finish.GET);
+authRouter.post('/user/password/reset', passwordReset.finish.POST);
+
 
 //
 // Profile

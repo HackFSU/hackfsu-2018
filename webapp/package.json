@@ -1,12 +1,12 @@
 {
   "name": "webapp",
-  "version": "0.0.0",
+  "version": "5.2.0",
   "private": true,
   "scripts": {
     "start": "node app.js",
     "prestart": "npm run build",
     "build": "webpack",
-    "dev": "nodemon app.js"
+    "dev": "NODE_ENV=development nodemon app.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -14,8 +14,11 @@
     "bulma-extensions": "^0.7.1",
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.3",
+    "dotenv": "^5.0.0",
     "eslint": "^4.15.0",
     "express": "~4.15.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.15.6",
     "is-empty": "^1.2.0",
     "jquery": "^3.2.1",
     "materialize-css": "^0.100.2",
@@ -25,6 +28,7 @@
     "pug": "~2.0.0-beta11",
     "request": "^2.83.0",
     "serve-favicon": "~2.4.2",
+    "tough-cookie": "^2.3.3",
     "webpack": "^3.10.0"
   }
 }

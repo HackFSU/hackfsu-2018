@@ -1,0 +1,15 @@
+extends ../../layout
+
+block append styles
+  link(rel='stylesheet', href='/css/password_reset.css')
+
+block append content
+  .animated-background
+  .background-overlay
+
+  section.section.password-reset
+    .container
+      .columns.is-centered
+        .column.is-half-tablet
+          .box
+            block password-form

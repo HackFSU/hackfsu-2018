@@ -20,9 +20,10 @@ html
     script(src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous")
 
 
-
   body
-    include partials/mlh-badge.pug
+    block badge
+      include partials/mlh-badge.pug
+    include partials/flash.pug
     include partials/navbar.pug
 
     block content

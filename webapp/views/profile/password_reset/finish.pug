@@ -1,0 +1,36 @@
+extends ./base
+
+block password-form
+    h1.title Complete Password Reset
+    p
+        | Once you set your new password you will be redirected to the login screen.
+        br
+        strong Your password must be at least 8 characters long.
+
+    form(method="POST", action="/user/password/reset")
+        input.hackfsu.light(placeholder='Password', name='password', type='password')
+        input.hackfsu.light(placeholder='Confirm Password', name='password2', type='password')
+        button.hackfsu.is-primary Submit
+
+    hr
+    a(href="mailto:info@hackfsu.com") Still need help? Contact us.
+
+block append scripts
+    script.
+        $('form').on('submit', (event) => {
+            let p1 = $('input[name="password"]'),
+                p2 = $('input[name="password2"]');
+
+            if (p1.val().trim().length < 8) {
+                event.preventDefault();
+                alert('Passwords must be at least 8 characters long.');
+                return;
+            }
+
+            if (p1.val().trim() !== p2.val().trim()) {
+                event.preventDefault();
+                alert('Passwords are not the same.');
+                return;
+            }
+
+        });

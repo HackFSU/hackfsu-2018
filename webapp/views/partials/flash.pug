@@ -1,0 +1,21 @@
+block append content
+
+.flash
+  //- .notification.is-info
+  //-       button.delete
+  //-       span This is a flash!
+
+  - if (messages.info)
+    .notification.is-info
+      button.delete
+      span= messages.info
+
+  - if (messages.error)
+    .notification.is-danger
+      button.delete
+      span= messages.error
+
+  script.
+    $('.notification > button').on('click', () => {
+      $('.notification').hide();
+    });

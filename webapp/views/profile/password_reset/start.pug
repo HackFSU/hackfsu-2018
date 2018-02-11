@@ -1,0 +1,36 @@
+extends ./base
+
+block badge
+
+block password-form
+    h1.title Reset Password
+    p Forgot your password? It happens. Give us your email and we will send you a link to reset your password.
+
+
+    form#resetForm(method="POST", action="/resetpassword")
+        input.hackfsu.light(placeholder='Email', name='email', type='email')
+        .g-recaptcha(data-sitekey="6LcrLjYUAAAAAGXmRcU6IwQdiGeC_6uPPBCHuJau" data-size="compact")
+        button.hackfsu.is-primary Submit
+
+    hr
+    a(href="mailto:info@hackfsu.com") Still need help? Contact us.
+
+block append scripts
+    script(src='https://www.google.com/recaptcha/api.js')
+    script.
+        $('form').on('submit', (event) => {
+            let g_recaptcha_response = grecaptcha.getResponse();
+            let email = $('input[name="email"]').val().trim();
+
+            if (!g_recaptcha_response) {
+                event.preventDefault();
+                alert('Please complete the reCaptcha.');
+                return;
+            }
+
+            if (email.length === 0) {
+                event.preventDefault();
+                alert('Please enter your email.');
+                return;
+            }
+        });

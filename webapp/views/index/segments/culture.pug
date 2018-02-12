@@ -1,12 +1,18 @@
 block append content
 
-    section.section.culture
+    section.section.culture#culture
         .container
 
-            .columns
-                .column.is-8.picture
+            //- h1.title.is-1.is-hidden-tablet Hacking Culture
 
-                .column.is-4.content-wrap
+            .columns.is-centered.is-desktop
+                .column.is-7-desktop.picture
+                    figure.image
+                        img(src="/img/index/hacking-culture.jpg")
+                        h1.title.is-1.hacking hacking
+                        h1.title.is-1.culture CULTURE
+
+                .column.is-3-desktop.is-offset-1.content-wrap
                     .content.is-medium
                         p
                             | Each year, we set out to build a

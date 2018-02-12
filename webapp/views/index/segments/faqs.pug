@@ -1,0 +1,82 @@
+mixin box(title)
+  .box
+    h1.title.is-4=title
+    block
+
+mixin col
+  .column.is-one-third-desktop
+    block
+
+
+
+
+
+block append content
+  section.section.faqs#faqs
+    .container.content.is-medium
+      h1.title.is-1 FAQs
+
+      .columns.is-centered.is-desktop
+        +col
+          +box('When? Where?')
+            p.
+              HackFSU '17 will take place from March 2nd to the 4th at
+              Florida State University in Tallahassee, FL. in the Dirac
+              Science Library.
+          +box('Not a student?')
+            p.
+              Become a mentor! Give back to the community by helping hackers
+              learn and build something awesome.
+          +box('What can I build?')
+            p.
+              Whatever you can think up! We’ll have mentors to help you with
+              web, mobile, hardware, design, and any development in between!
+          +box('How does registration work?')
+            p.
+              After you apply, you will receive a confirmation email. Later,
+              you'll get an acceptance email and you can RSVP to reserve your
+              spot.
+        +col
+          +box('How long is it?')
+            p.
+              You will have 36 hours to build but we will also have opening and
+              closing ceremonies as well as the project expo. Prepare to spend
+              your weekend with us starting Friday night and we’ll have you out
+              around midday on Sunday. A more detailed scheduled will be released
+              closer to the event.
+          +box('Food?')
+            p.
+              Food. Enough free grub to keep you hacking for 30 hours. Dietary
+              restrictions? No problem, we got you.
+          +box('What if this is my first hackathon?')
+            p.
+              Awesome! We have prizes for newcomers, as the best way to learn
+              is by building. There will be mentors to help you every step of
+              the way. We all start somewhere, why not here?
+        +col
+          +box('Am I invited?')
+            p.
+              Anyone that is currently a college student or that has graduated
+              in the past year is invited. High schoolers can go ahead and
+              apply and we'll notify you if any problems come about.
+          +box('How do teams work?')
+            p.
+              Teams have a maximum of 4. If you don’t have a team, no sweat, we
+              will have a mixer for you to discuss ideas and meet other hackers
+              to join forces.
+          +box('What should I bring?')
+            p.
+              Bring your student ID, laptop, chargers, a change of clothes, your
+              resume, and toiletries. A pillow and sleeping bag may be useful
+              as well. You do not have to bring a team, idea, food, or any drinks.
+              Please leave anything illegal at home.
+          +box('Anything else?')
+            p
+              | Shoot us an
+              |
+              a(href="mailto:info@hackfsu.com") email
+              |
+              | or find us on
+              |
+              a(href="https://www.twitter.com/HackFSU") Twitter
+              | . We are happy to help!

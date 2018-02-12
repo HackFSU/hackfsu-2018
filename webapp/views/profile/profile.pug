@@ -26,19 +26,18 @@ block append content
     .container
       .columns.is-centered
         .column.is-two-thirds
-          .content.is-medium.box
+          .content.box
+
+            .name-wrap
+              h1.title.is-1=profile.name
 
             .qr
               figure.image.is-128x128
                 img(src=profile.qr)
 
-            .name-wrap
-              h1.title.is-1=profile.name
-
             .info
               +info('Role', profile.groups.join(', '))
               +info('Email', profile.email)
-              //- +info('Phone', profile.phone_number)
               +info('Hexcode', '#' + profile.hexcode)
 
             .status

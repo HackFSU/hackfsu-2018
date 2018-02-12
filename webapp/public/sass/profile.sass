@@ -33,9 +33,13 @@ section.section.profile
         flex-direction: column
         align-items: flex-start
         border-radius: 0
-        padding: 1.5rem 3rem 5rem
         color: $dark
         // min-height: 50vh
+
+        padding: 2rem
+
+        @include tablet
+            padding: 1.5rem 3rem 5rem
 
         .label
             color: $cyan
@@ -43,9 +47,11 @@ section.section.profile
         .name-wrap
             border-bottom: 6px $cyan solid
             margin-bottom: 1rem
-            margin-right: 124px
             display: flex
-            padding-right: 10%
+
+            @include desktop
+                margin-right: 124px
+                padding-right: 10%
 
             h1.title
                 color: $cyan
@@ -54,22 +60,26 @@ section.section.profile
                 // @include Graphik(500)
                 margin-bottom: .25rem
 
+
+        .qr
+            position: relative
+
+
+            margin: 0 auto
+
+            @include desktop
+                position: absolute
+                top: 0
+                right: 0
+
+            figure
+                margin: 1rem
+
         .info
             text-transform: uppercase
             letter-spacing: 1.1px
             line-height: 1.6
             margin-bottom: 1rem
-
-        .qr
-            position: absolute
-            top: 0
-            right: 0
-            // align-self: center
-            // text-align: center
-
-            figure
-                margin: 1rem
-                background-color: $primary
 
         .status
             border-bottom: 3px $cyan solid

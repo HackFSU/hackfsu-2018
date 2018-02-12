@@ -30,8 +30,8 @@ block content
         +header
           h1.title Create an Account
         +field('Email*', 'email')(name="email")
-        +field('Password*', 'password')(name="password")
-        +field('Confirm Password*', 'password')(name="confirmPassword")
+        +field('Password*', 'password', 'Your password must be at least 8 characters long.')(name="password")
+        +field('Confirm Password*', 'password', 'Your password must be at least 8 characters long.')(name="confirmPassword")
         +button('Next')
         //- p.signin: a Already have an account?
 

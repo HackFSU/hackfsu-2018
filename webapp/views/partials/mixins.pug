@@ -1,7 +1,9 @@
-mixin field(label, type)
+mixin field(label, type, help)
   .field
     .control
       input.input.is-rounded(type=type placeholder=label)&attributes(attributes)
+    if help
+      p.help= help
 
 mixin button(label)
   .control

@@ -11,15 +11,7 @@ block append styles
   link(rel='stylesheet', href='/css/profile.css')
 
 block append content
-  //- .animated-background
-  //- .background-overlay
-  //- section.hero
-    .animated-background
-    .background-overlay
-    .hero-body
-      //- .container
-        h1.title Hello, world
-        h2.subtitle Doot doot
+
   .background
 
   section.section.profile
@@ -47,7 +39,6 @@ block append content
                 span=profile.acceptance
 
             if profile.show_rsvp
-              //- a.button.hackfsu.small RSVP Now
               form(method='post' action='/profile/rsvp')
                 p Congratulations! You've been accepted.
                 button.button.hackfsu.is-primary Click here to RSVP.

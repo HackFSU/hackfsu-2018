@@ -5,14 +5,14 @@ section.section.sponsors
     .container > h1.title
         color: $cyan
         font-weight: 700
-        margin-bottom: 5rem
+        margin-bottom: 4rem
 
     // @include touch
 
     .columns
 
         @include desktop
-            margin-bottom: 4rem
+            margin-bottom: 5rem
 
         .column
             display: flex
@@ -35,14 +35,20 @@ section.section.sponsors
 
                     @include touch
                         max-width: 85%
-
-
-            &.is-3 img
+        &.tier-1
+            @include desktop
+                margin-bottom: 3rem
+            img
                 max-height: 175px
 
-            &.is-2 img
-                max-height: 125px
+        &.tier-2 img
+            max-height: 150px
 
+        &.tier-3 img
+            max-height: 125px
+
+        &.tier-4 img
+            max-height: 100px
 
     // figure.image > img
     //     max-height: 150px

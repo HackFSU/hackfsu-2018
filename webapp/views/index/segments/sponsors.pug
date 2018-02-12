@@ -1,14 +1,9 @@
-mixin row
-  .columns.is-centered
+mixin row(tier)
+  .columns.is-centered(class="tier-" + tier)
     block
 
-mixin sponsor1(url)
-  .column.is-3
-    figure.image
-      img(src=url)
-
-mixin sponsor2(url)
-  .column.is-2
+mixin sponsor(size, url)
+  div(class="column is-multiline is-" + (size))
     figure.image
       img(src=url)
 
@@ -16,13 +11,17 @@ block append content
   section.section.sponsors#sponsors
     .container.has-text-centered
       h1.title.is-1 Sponsors
-      +row
-        +sponsor1("/img/sponsors/DCI_Logo_RGB_Web_Large.png")
-        +sponsor1("/img/sponsors/dsc.png")
-        +sponsor1("/img/sponsors/ArtsSciences.png")
-      +row
-        +sponsor2("/img/sponsors/domiLogo.png")
-        +sponsor2("/img/sponsors/DO_Logo_Vertical_Black.png")
-        +sponsor2("/img/sponsors/Linode.png")
-        +sponsor2("/img/sponsors/FCCU_horiz-3C_logotag.png")
-
+      +row(1)
+        +sponsor(4, "/img/sponsors/github/GitHub_Logo.png")
+      +row(2)
+        +sponsor(3, "/img/sponsors/scicomp/dsc.png")
+        +sponsor(3, "/img/sponsors/coas/ArtsSciences.png")
+      +row(3)
+        +sponsor(3, "/img/sponsors/statefarm/state_farm_logo.png")
+        +sponsor(3, "/img/sponsors/diversecomputing/DCI_Logo_RGB_Web_Large.png")
+        +sponsor(3, "/img/sponsors/jimmorgan/jms-stacked.png")
+      +row(4)
+        +sponsor(2, "/img/sponsors/linode/Linode.png")
+        +sponsor(2, "/img/sponsors/domistation/domiLogo.png")
+        +sponsor(2, "/img/sponsors/digitalocean/DO_Logo_Vertical_Black.png")
+        +sponsor(2, "/img/sponsors/fccu/FCCU_horiz-3C_logotag.png")

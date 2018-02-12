@@ -7,8 +7,6 @@ section.section.sponsors
         font-weight: 700
         margin-bottom: 4rem
 
-    // @include touch
-
     .columns
 
         @include desktop
@@ -17,7 +15,6 @@ section.section.sponsors
         .column
             display: flex
             justify-content: center
-            // padding: 8px
             margin: 0 1rem
 
             @include touch
@@ -29,12 +26,10 @@ section.section.sponsors
                 align-items: center
 
                 img
-                    // width: 75%
-                    // max-width: 300px
                     width: auto
 
                     @include touch
-                        max-width: 85%
+                        max-width: 50vw
         &.tier-1
             @include desktop
                 margin-bottom: 3rem
@@ -49,8 +44,3 @@ section.section.sponsors
 
         &.tier-4 img
             max-height: 100px
-
-    // figure.image > img
-    //     max-height: 150px
-    // .column
-    //     max-height: 200px

@@ -4,7 +4,7 @@ const cookieParser      = require('cookie-parser');
 const favicon           = require('serve-favicon');
 const logger            = require('morgan');
 const sassMiddleware    = require('node-sass-middleware');
-const session           = require('express-session');
+const session           = require('cookie-session');
 const path              = require('path');
 
 const app = express();
@@ -42,9 +42,8 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(session({
     cookie: { maxAge: 60000 },
-    resave: false,
     secret: process.env.APP_SECRET,
-    saveUninitialized: false
+    maxAge: 24 * 60 * 60 * 1000 * 7 // 24 hours
 }));
 app.use(flash());
 

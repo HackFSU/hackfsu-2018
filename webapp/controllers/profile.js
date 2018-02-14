@@ -52,7 +52,7 @@ authRouter.post('/login', (req, res, next) => {
 
     request.post(host + '/api/user/login',
         { json: { email, password }},
-        (err, resp) => {
+        (err, resp, body) => {
 
             if (err) {
                 console.log(err);
@@ -68,6 +68,7 @@ authRouter.post('/login', (req, res, next) => {
 
             // Bad login
             else {
+                console.log('problem', body);
                 req.flash('error', 'Incorrect username or password.');
                 res.redirect('/login');
             }

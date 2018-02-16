@@ -12,7 +12,10 @@ block append content
     .container.has-text-centered
       h1.title.is-1 Sponsors
       +row(1)
-        +sponsor(4, "/img/sponsors/github/GitHub_Logo.png")
+        div(class="column is-4 github-col")
+          .madewith made with <3 from
+          figure.image
+            img(src="/img/sponsors/github/GitHub_Logo.png")
       +row(2)
         +sponsor(3, "/img/sponsors/scicomp/dsc.png")
         +sponsor(3, "/img/sponsors/coas/ArtsSciences.png")

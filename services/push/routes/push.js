@@ -9,20 +9,23 @@ const platform = {
 
 const generatePayload = async function (title, message) {
 
-    let androidTokens = await getDevicesByPlatform(platform.android);
     return {
         notifications: [
             {
-                tokens: androidTokens,
+                tokens: await getDevicesByPlatform(platform.android),
                 platform: platform.android,
                 message: message,
                 title: title
             },
-            // {
-            //     tokens: await getDevicesByPlatform(platform.ios),
-            //     platform: platform.ios,
-            //     message: message
-            // }
+            {
+                tokens: await getDevicesByPlatform(platform.ios),
+                platform: platform.ios,
+                message: message,
+                'alert': {
+                    'title': title,
+                    'body': message,
+                }
+            }
         ]
     };
 };
@@ -32,10 +35,6 @@ module.exports = async function (req, res) {
         message = req.body.message;
     let payload = await generatePayload(title, message);
     let gorush = process.env.GORUSH_HOST;
-
-    console.log(req.body);
-    console.log(title, message);
-    console.log(payload);
 
     request.post(`${gorush}/api/push`,
         { json: payload },

@@ -36,3 +36,5 @@ webapp/public/js/register.js
 #
 
 **/.env
+services/gorush/config.yml
+.vscode/

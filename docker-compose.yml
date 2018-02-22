@@ -40,6 +40,7 @@ services:
         restart: always
         depends_on:
             - qr
+            - push
             - postgres
 
     # [Express] Webapp
@@ -67,3 +68,26 @@ services:
             - 127.0.0.1:8101:3000
         depends_on:
             - mongodb
+
+    # [gorush] FCM/APN Push Server
+    # This service actually sends the notifications.
+    gorush:
+        image: "appleboy/gorush"
+        ports:
+            - 127.0.0.1:8102:8088
+        volumes:
+            - ./services/gorush/config.yml:/config.yml
+
+    # [Express] Device ID Push Server
+    # This service tracks uploaded device IDs and their platform.
+    # When pushing notifactions, the notification is routed through
+    # this server.
+    push:
+        image: "hackfsu/push-service"
+        build: "services/push"
+        env_file: ".env"
+        ports:
+            - 127.0.0.1:8103:3000
+        depends_on:
+            - mongodb
+            - gorush

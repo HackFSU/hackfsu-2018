@@ -9,3 +9,4 @@ from . import school
 from . import attendee
 from . import preview
 from . import scan
+from . import push

@@ -168,6 +168,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # Misc. settings
 QR_HOST = keys.QR_HOST
+PUSH_HOST = keys.PUSH_HOST
 
 if not DEBUG:
     HOSTNAME = keys.HTTP_HOSTNAME

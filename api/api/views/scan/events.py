@@ -8,7 +8,7 @@ from django.utils import timezone
 from hackfsu_com.views.generic import ApiView
 from hackfsu_com.util.forms import JsonField
 from hackfsu_com.util import acl
-from api.models import Hackathon, ScanEvent, ScanRecord, UserInfo
+from api.models import Hackathon, ScanEvent, ScanRecord, UserInfo, HackerInfo
 from api.models.attendee_status import AttendeeStatusManager
 
 class ScanEventsView(ApiView):
@@ -75,6 +75,18 @@ class ScanUploadView(ApiView):
         if event.is_check_in:
             current_hackathon = Hackathon.objects.current()
             attendee_info = AttendeeStatusManager.get_or_create(user, current_hackathon)
+
+            # If hacker, make sure they are approved
+            try:
+                hacker_info = HackerInfo.objects.get(hackathon=current_hackathon, user=user)
+                if not hacker_info.approved:
+                    res['name'] = name
+                    res['message'] = "{} was not accepted.".format(name)
+                    res['status'] = 401
+                    return
+            except:
+                pass
+
 
             attendee_info.checked_in_at = timezone.now()
             attendee_info.save()

@@ -51,7 +51,7 @@ class ProfileView(ApiView):
         code, qr = user_info.hexcode, user_info.qr_url
 
         if not code or not qr:
-            url = "http://{}/hacker/{}".format(settings.QR_HOST, request.user.email)
+            url = "{}/hacker/{}".format(settings.QR_HOST, request.user.email)
             resp = requests.get(url)
 
             if resp.status_code in (200, 201):

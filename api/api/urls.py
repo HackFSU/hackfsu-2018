@@ -62,6 +62,8 @@ urlpatterns = [
 
     url(r'events$', views.scan.ScanEventsView.as_view(), name='scan-events'),
     url(r'events/scan$', views.scan.ScanUploadView.as_view(), name='scan-upload'),
+
+    url(r'push/new$', views.push.CreatePushView.as_view(), name='push-new'),
 ]
 
 

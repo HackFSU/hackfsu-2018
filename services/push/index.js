@@ -29,12 +29,12 @@ mongoose.connect(DB_URI).then(() => {
 
     // Routing
     const router = express.Router();
-    router.get('/hacker/:hackerID', require('./routes/hackerID'));
-    router.get('/qr/:url', require('./routes/image'));
+    router.post('/push/register', require('./routes/register'));
+    router.post('/push/new', require('./routes/push'));
 
     server.use(router);
     server.listen(3000, () => {
-        console.log('Express Code/QR service listening on port 3000');
+        console.log('Express Push Device ID service listening on port 3000');
     });
 
 }).catch(console.error.bind(console, 'connection error:'));

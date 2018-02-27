@@ -9,25 +9,34 @@ const platform = {
 
 const generatePayload = async function (title, message) {
 
-    return {
-        notifications: [
-            {
-                tokens: await getDevicesByPlatform(platform.android),
-                platform: platform.android,
-                message: message,
-                title: title
-            },
-            {
-                tokens: await getDevicesByPlatform(platform.ios),
-                platform: platform.ios,
-                message: message,
-                'alert': {
-                    'title': title,
-                    'body': message,
-                }
+    let notifications = [];
+
+    let iosTokens = await getDevicesByPlatform(platform.ios),
+        androidTokens = await getDevicesByPlatform(platform.android);
+
+    if (androidTokens.length > 0) {
+        notifications.push({
+            tokens: androidTokens,
+            platform: platform.android,
+            message: message,
+            title: title
+        });
+    }
+
+    if (iosTokens.length > 0) {
+        notifications.push({
+            tokens: iosTokens,
+            platform: platform.ios,
+            topic: 'com.hackfsu.ios',
+            message: message,
+            'alert': {
+                'title': title,
+                'body': message,
             }
-        ]
-    };
+        })
+    }
+
+    return { notifications };
 };
 
 module.exports = async function (req, res) {

@@ -1,5 +1,50 @@
+mixin item(time, name)
+    tr
+        th=time
+        td=name
+
 block append content
 
     section.section.schedule#schedule
-        .content.has-text-centered
-            h1.title.is-1 SCHEDULE COMING SOON!
+
+
+        .container
+            h1.title.is-1 Schedule
+            .columns.is-centered
+                .column
+                    h1.title.is-4 Friday
+                    table.table
+                        thead
+                            +item("Time", "Event")
+                        tbody
+                            +item("5:30 PM", "Check In")
+                            +item("6:00 PM", "Dinner")
+                            +item("6:00 PM", "Sponsor Expo")
+                            +item("7:30 PM", "Opening Ceremony")
+                            +item("9:00 PM", "Hacking Begins")
+                            +item("9:30 PM", "Workshops Start")
+
+                .column
+                    h1.title.is-4 Saturday
+                    table.table
+                        thead
+                            +item("Time", "Event")
+                        tbody
+                            +item("12:00 AM", "Midnight Snack")
+                            +item("7:00 AM", "Breakfast")
+                            +item("12:00 PM", "Lunch")
+                            +item("6:00 PM", "Dinner")
+                            +item("8:45 PM", "T-Shirts")
+
+                .column
+                    h1.title.is-4 Sunday
+                    table.table
+                        thead
+                            +item("Time", "Event")
+                        tbody
+                            +item("12:00 AM", "Midnight Snack")
+                            +item("7:00 AM", "Breakfast")
+                            +item("9:00 AM", "Hacking Ends")
+                            +item("10:00 AM", "Expo 1")
+                            +item("11:10 PM", "Expo 2")
+                            +item("1:00 PM", "Closing Ceremony")

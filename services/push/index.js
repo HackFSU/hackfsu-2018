@@ -25,7 +25,7 @@ mongoose.connect(DB_URI).then(() => {
     server.set('env', env);
     server.use(bodyParser.json());
     server.use(methodOverride());
-    server.use(morgan('dev'));
+    server.use(morgan('common'));
 
     // Routing
     const router = express.Router();

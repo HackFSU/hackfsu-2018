@@ -11,6 +11,8 @@ from hackfsu_com.util import acl
 from api.models import Hackathon, ScanEvent, ScanRecord, UserInfo, HackerInfo
 from api.models.attendee_status import AttendeeStatusManager
 
+import logging
+
 class ScanEventsView(ApiView):
     class ResponseForm(forms.Form):
         events = JsonField()
@@ -84,9 +86,8 @@ class ScanUploadView(ApiView):
                     res['message'] = "{} was not accepted.".format(name)
                     res['status'] = 401
                     return
-            except:
-                pass
-
+            except Exception as e:
+                logging.error(str(e))
 
             attendee_info.checked_in_at = timezone.now()
             attendee_info.save()

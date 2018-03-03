@@ -5,10 +5,14 @@
 
 from django.conf import settings
 from api.models import Hackathon, Hack, JudgingCriteria
-import os
+import os, sys
 import csv
 
-INPUT_FILE_PATH = os.path.join(settings.BASE_DIR, './scripts/data/devpost_submissions.csv')
+if len(sys.argv != 2):
+    print('please supply file path')
+    exit()
+
+INPUT_FILE_PATH = os.path.join(settings.BASE_DIR, sys.argv[1])
 
 H = Hackathon.objects.current()
 
@@ -70,8 +74,9 @@ def save_hack_if_new(hackDict: Hack) -> bool:
         description=hackDict['description'],
         table_number=Hack.objects.get_next_table_number()
     )
-    for criteria in parse_opt_in_list(hackDict['opt_in_list']):
-            hack.extra_judging_criteria.add(criteria)
+
+    # for criteria in parse_opt_in_list(hackDict['opt_in_list']):
+    #         hack.extra_judging_criteria.add(criteria)
 
     hack.save()
     return True

@@ -40,4 +40,3 @@ services/gorush/config.yml
 services/gorush/*.pem
 services/gorush/*.p12
 .vscode/
-./media

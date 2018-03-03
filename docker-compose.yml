@@ -38,6 +38,8 @@ services:
         ports:
             - "127.0.0.1:8080:8080"
         restart: always
+        volumes:
+            - /media:/usr/src/app/media
         depends_on:
             - qr
             - push

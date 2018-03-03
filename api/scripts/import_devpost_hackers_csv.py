@@ -8,11 +8,7 @@ from api.models import Hackathon, Hack, JudgingCriteria
 import os, sys
 import csv
 
-if len(sys.argv != 2):
-    print('please supply file path')
-    exit()
-
-INPUT_FILE_PATH = os.path.join(settings.BASE_DIR, sys.argv[1])
+INPUT_FILE_PATH = os.path.join(settings.BASE_DIR, './scripts/data/devpost_submissions.csv')
 
 H = Hackathon.objects.current()
 

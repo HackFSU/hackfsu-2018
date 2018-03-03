@@ -34,7 +34,7 @@ class SuperlativeNameFilter(admin.SimpleListFilter):
 @admin.register(Nomination, site=hackfsu_admin)
 class NominationAdmin(admin.ModelAdmin):
     list_filter = (SuperlativeNameFilter, )
-    list_display = ('id', 'hack_name', 'superlative_name')
+    list_display = ('id', 'hack_name', 'superlative_name', 'hack_superlative_total')
     list_display_links = ('id',)
     search_fields = ('hack_name', 'superlative_name')
 
@@ -43,7 +43,8 @@ class NominationAdmin(admin.ModelAdmin):
 
     hack_name.admin_order_field = "hack__name"
 
-    @staticmethod
-    def superlative_name(obj: Nomination):
+    def superlative_name(self, obj: Nomination):
         return obj.superlative.name
 
+    def hack_superlative_total(self, obj: Nomination):
+        return len(Nomination.objects.filter(hack=obj.hack, superlative=obj.superlative))

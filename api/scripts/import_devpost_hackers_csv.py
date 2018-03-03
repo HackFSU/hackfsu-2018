@@ -1,5 +1,7 @@
 """
     Uploads hackers teams into system. Does not insert if team name already in db (can update by re-running script!)
+
+    ./manage.py runscript scripts.import_devpost_hackers_csv
 """
 
 

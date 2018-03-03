@@ -14,10 +14,11 @@ class AttendeesCheckedInCsv(StreamedCsvView):
     @staticmethod
     def row_generator(request):
         h = Hackathon.objects.current()
-        yield ['First Name', 'Last Name']
+        yield ['First Name', 'Last Name', 'Groups']
 
         for status in AttendeeStatus.objects.filter(hackathon=h, checked_in_at__isnull=False):
             yield [
                 status.user.first_name,
-                status.user.last_name
+                status.user.last_name,
+                ' '.join(status.user.groups.values_list('name', flat=True))
             ]

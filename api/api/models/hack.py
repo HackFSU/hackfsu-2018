@@ -90,4 +90,7 @@ class HackAdmin(admin.ModelAdmin):
         return obj.get_criteria_names()
 
     def average_score(self, obj: Hack):
-        return obj.total_judge_score / len(obj.judges)
+        try:
+            return obj.total_judge_score / len(obj.judges)
+        except:
+            return 0

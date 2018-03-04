@@ -75,7 +75,7 @@ class Hack(models.Model):
 @admin.register(Hack, site=hackfsu_admin)
 class HackAdmin(admin.ModelAdmin):
     list_filter = ('hackathon',)
-    list_display = ('id', 'name', 'expo', 'table_number', 'total_judge_score')
+    list_display = ('id', 'name', 'expo', 'table_number', 'total_judge_score', 'average_score')
     list_editable = ('table_number',)
     list_display_links = ('id', 'name')
     search_fields = ('name', 'table_number')
@@ -88,3 +88,6 @@ class HackAdmin(admin.ModelAdmin):
     @staticmethod
     def extra_criteria(obj: Hack) -> str:
         return obj.get_criteria_names()
+
+    def average_score(self, obj: Hack):
+        return obj.total_judge_score / len(obj.judges)

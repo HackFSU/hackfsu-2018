@@ -5,7 +5,7 @@
 from hackfsu_com.views.generic import StreamedCsvView
 from hackfsu_com.util import acl, files
 from django.conf import settings
-from api.models import Hackathon, HackerInfo
+from api.models import Hackathon, HackerInfo, UserInfo
 
 
 class ResumeLinksCsv(StreamedCsvView):
@@ -21,6 +21,8 @@ class ResumeLinksCsv(StreamedCsvView):
             'Last Name',
             'Email',
             'School',
+            'Github',
+            'LinkedIn',
             'Attended',
             'Resume File Name',
             'Resume URL'
@@ -30,11 +32,14 @@ class ResumeLinksCsv(StreamedCsvView):
             hackathon=h,
             approved=True
         ):
+            user_info = UserInfo.objects.get(user=hacker.user)
             row = [
                 hacker.user.first_name,
                 hacker.user.last_name,
                 hacker.user.email,
                 str(hacker.school),
+                user_info.github,
+                user_info.linkedin,
                 hacker.attendee_status.checked_in_at is not None
             ]
 

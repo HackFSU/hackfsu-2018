@@ -313,8 +313,8 @@ kareem@2.0.0-rc5:
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.0.0-rc5.tgz#9899c745f65f97559c26288cf269a9f30823af86"
 
 kind-of@^6.0.0:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
 
 lcid@^1.0.0:
   version "1.0.0"

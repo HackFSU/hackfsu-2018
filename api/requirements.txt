@@ -1,5 +1,5 @@
 astroid==1.4.9
-Django==1.10.4
+Django==2.2.24
 django-cors-headers==2.1.0
 django-extensions==1.7.5
 docopt==0.4.0
